@@ -1,27 +1,27 @@
 # Script Loader
 
 
-## API
-### :rage:Render
+## :mag_right: API :mag:
+###:movie_camera: Render
 
-### :rage:Color
+###:rainbow: Color
 
-### Window
+###:computer: Window
 
-### Keyboard
+###:wrench: Keyboard
 
-### Mouse
+###:mouse2: Mouse
 
-### Cursor
+###:video_game: Cursor
 
-### View
+###:camera: View
 
-### Sound
+###:musical_note: Sound
 
-### File
+###:file_folder: File
 
-### CMath
+###:heavy_division_sign: CMath
 
-### GlobalVars
+###:mag: GlobalVars
 
-### Misc
+###:speech_balloon: Misc
