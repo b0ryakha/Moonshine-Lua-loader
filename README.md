@@ -2,7 +2,7 @@
 
 
 ## :mag_right: API :mag:
-:movie_camera: ###Render
+### :movie_camera: Render
 
 ### :rainbow: Color
 
