@@ -55,6 +55,51 @@
     <Filter Include="Header Files\API\Window">
       <UniqueIdentifier>{8f9e37c7-8af7-4d57-a37e-e15c515ad4fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Lua Extensions">
+      <UniqueIdentifier>{89296a1a-98e8-4de8-b1e9-628ab5235808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lua Extensions">
+      <UniqueIdentifier>{ada1343e-25d8-455e-afa9-27c64c60ee7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\File">
+      <UniqueIdentifier>{2425b817-f826-4916-a4ed-1ae9fe6d4f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\GlobalVars">
+      <UniqueIdentifier>{7d334b4a-e7d0-4563-83c5-2d4892e94b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Keyboard">
+      <UniqueIdentifier>{c2d107a7-6f8f-4b99-ba47-ad38f63c580c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Mouse">
+      <UniqueIdentifier>{0590ac62-95aa-4804-9042-f8e853988432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Render">
+      <UniqueIdentifier>{22cfa1c4-88be-4765-b7cd-94b1e16d9b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Sound">
+      <UniqueIdentifier>{4bf4e086-f18e-48e2-b77e-2b7166cc5db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\View">
+      <UniqueIdentifier>{f0dabc27-1f49-4a0a-b791-f337813e7b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Window">
+      <UniqueIdentifier>{d72e13e7-6a43-4a12-a74f-a1fb4a80aa8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Color">
+      <UniqueIdentifier>{74308896-17f9-4350-9dc8-390f24be0a49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\CMath">
+      <UniqueIdentifier>{70edd48c-442d-42f8-87e8-a700a9db9c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Cursor">
+      <UniqueIdentifier>{d27ac676-52a8-41fa-a85e-270748930b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Misc">
+      <UniqueIdentifier>{234822af-afdb-49a4-b17a-8ea32a5bce3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lua Extensions\Lua">
+      <UniqueIdentifier>{9f6035f0-6805-489f-9074-29bcc0ddb4d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -69,19 +114,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lua\include\lauxlib.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Lua Extensions\Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\include\lua.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Lua Extensions\Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\include\lua.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Lua Extensions\Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\include\luaconf.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Lua Extensions\Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\include\lualib.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Lua Extensions\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\lua_extensions.h">
+      <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\sources;$(ProjectDir)\headers;$(ProjectDir)\lua\include;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\CMath;$(ProjectDir)\headers\API\Color;$(ProjectDir)\headers\API\Cursor;$(ProjectDir)\headers\API\File;$(ProjectDir)\headers\API\GlobalVars;$(ProjectDir)\headers\API\Keyboard;$(ProjectDir)\headers\API\Misc;$(ProjectDir)\headers\API\Mouse;$(ProjectDir)\headers\API\Render;$(ProjectDir)\headers\API\Sound;$(ProjectDir)\headers\API\View;$(ProjectDir)\headers\API\Window;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,6 +147,7 @@
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Lua Extensions\lua_extensions.h" />
     <ClInclude Include="headers\Script.h" />
     <ClInclude Include="lua\include\lauxlib.h" />
     <ClInclude Include="lua\include\lua.h" />
