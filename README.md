@@ -1,27 +1,27 @@
 # Script Loader
 
 
-## :mag_right: API :mag:
-###:movie_camera: Render
+:mag_right: ##API :mag:
+:movie_camera: ###Render
 
-###:rainbow: Color
+:rainbow: ###Color
 
-###:computer: Window
+:computer: ###Window
 
-###:wrench: Keyboard
+:wrench: ###Keyboard
 
-###:mouse2: Mouse
+:mouse2: ###Mouse
 
-###:video_game: Cursor
+:video_game: ###Cursor
 
-###:camera: View
+:camera: ###View
 
-###:musical_note: Sound
+:musical_note: ###Sound
 
-###:file_folder: File
+:file_folder: ###File
 
-###:heavy_division_sign: CMath
+:heavy_division_sign: ###CMath
 
-###:mag: GlobalVars
+:mag: ###GlobalVars
 
-###:speech_balloon: Misc
+:speech_balloon: ###Misc
