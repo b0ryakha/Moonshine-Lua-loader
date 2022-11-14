@@ -1,10 +1,10 @@
 # Script Loader
 
 
-## API:
-### Render
+## API
+### :rage:Render
 
-### Color
+### :rage:Color
 
 ### Window
 
