@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\API">
+      <UniqueIdentifier>{c3c1ce47-85e4-4c8f-a684-fb434c009894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API">
+      <UniqueIdentifier>{93785d96-ee06-44db-86ae-59d4226ee68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\CMath">
+      <UniqueIdentifier>{72742ea0-10d3-49d7-a922-1a7a4062f1c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Color">
+      <UniqueIdentifier>{95ecb9ef-18f1-4dcf-9b84-bf4988f2ccfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Cursor">
+      <UniqueIdentifier>{c8317e1e-f0ad-4de8-8dea-5228691cacda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\File">
+      <UniqueIdentifier>{86e40838-4eac-4d51-a350-01794a025f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\GlobalVars">
+      <UniqueIdentifier>{486ea450-a912-46bd-8eaf-4bb485662ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Keyboard">
+      <UniqueIdentifier>{33b939d5-1ece-4c99-86e7-8ee437d9b76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Misc">
+      <UniqueIdentifier>{228c6fe1-757d-4cd0-9af7-91d670301453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Mouse">
+      <UniqueIdentifier>{76cc5c1b-5e43-40ee-ba93-b7b8c4997d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Render">
+      <UniqueIdentifier>{f81ea818-bf22-45e1-980c-5b446759b13b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Sound">
+      <UniqueIdentifier>{5466f4e7-edd5-4229-9221-f9a5e46569cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\View">
+      <UniqueIdentifier>{7abc16d8-85de-48b3-9d1a-cd4989acb26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API\Window">
+      <UniqueIdentifier>{8f9e37c7-8af7-4d57-a37e-e15c515ad4fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\Script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\include\lauxlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\include\lua.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\include\lua.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\include\luaconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\include\lualib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
