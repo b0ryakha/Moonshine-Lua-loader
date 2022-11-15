@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\CMath;$(ProjectDir)\headers\API\Color;$(ProjectDir)\headers\API\Cursor;$(ProjectDir)\headers\API\File;$(ProjectDir)\headers\API\GlobalVars;$(ProjectDir)\headers\API\Keyboard;$(ProjectDir)\headers\API\Misc;$(ProjectDir)\headers\API\Mouse;$(ProjectDir)\headers\API\Render;$(ProjectDir)\headers\API\Sound;$(ProjectDir)\headers\API\View;$(ProjectDir)\headers\API\Window;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,10 +143,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\API\cmath.cpp" />
+    <ClCompile Include="sources\API\color.cpp" />
+    <ClCompile Include="sources\API\cursor.cpp" />
+    <ClCompile Include="sources\API\file.cpp" />
+    <ClCompile Include="sources\API\global_vars.cpp" />
+    <ClCompile Include="sources\API\keyboard.cpp" />
+    <ClCompile Include="sources\API\misc.cpp" />
+    <ClCompile Include="sources\API\mouse.cpp" />
+    <ClCompile Include="sources\API\render.cpp" />
+    <ClCompile Include="sources\API\sound.cpp" />
+    <ClCompile Include="sources\API\view.cpp" />
+    <ClCompile Include="sources\API\window.cpp" />
     <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\API\cmath.h" />
+    <ClInclude Include="headers\API\color.h" />
+    <ClInclude Include="headers\API\cursor.h" />
+    <ClInclude Include="headers\API\file.h" />
+    <ClInclude Include="headers\API\global_vars.h" />
+    <ClInclude Include="headers\API\keyboard.h" />
+    <ClInclude Include="headers\API\misc.h" />
+    <ClInclude Include="headers\API\mouse.h" />
+    <ClInclude Include="headers\API\render.h" />
+    <ClInclude Include="headers\API\sound.h" />
+    <ClInclude Include="headers\API\view.h" />
+    <ClInclude Include="headers\API\window.h" />
     <ClInclude Include="headers\Lua Extensions\lua_extensions.h" />
     <ClInclude Include="headers\Script.h" />
     <ClInclude Include="lua\include\lauxlib.h" />
