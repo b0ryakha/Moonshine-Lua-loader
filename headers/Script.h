@@ -6,6 +6,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "lua_extensions.h"
+#include "API.h"
+
+extern sf::RenderWindow window;
 
 class Script {
 private:
@@ -13,8 +16,12 @@ private:
 	std::thread* main_thread = nullptr;
 
 	__forceinline void open_API();
+
 public:
-	Script(sf::RenderWindow& window, const std::string& path);
+	Script();
+	Script(const std::string& path);
 	~Script();
 
+	void open(const std::string& path);
+	void close();
 };

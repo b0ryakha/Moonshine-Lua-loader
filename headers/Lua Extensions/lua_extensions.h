@@ -42,10 +42,10 @@ __forceinline sf::Color lua_get_color(lua_State* L, int arg_count) {
 	lua_getfield(L, arg_count, "b");
 	lua_getfield(L, arg_count, "a");
 
-	int r = luaL_checkinteger(L, -4);
-	int g = luaL_checkinteger(L, -3);
-	int b = luaL_checkinteger(L, -2);
-	int a = luaL_checkinteger(L, -1);
+	int r = static_cast<int>(luaL_checkinteger(L, -4));
+	int g = static_cast<int>(luaL_checkinteger(L, -3));
+	int b = static_cast<int>(luaL_checkinteger(L, -2));
+	int a = static_cast<int>(luaL_checkinteger(L, -1));
 
 	return sf::Color(r, g, b, a);
 }

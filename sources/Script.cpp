@@ -1,72 +1,90 @@
 #include "Script.h"
 
-Script::Script(sf::RenderWindow& window, const std::string& path) {
-    lua_state = luaL_newstate();
+Script::Script() {}
 
-    if (lua_state == 0) {
-        // Failed to create Lua state
-        return;
-    }
-
-    luaL_openlibs(lua_state);
-    open_API();
-
-    window.setActive(false);
-
-    main_thread = new std::thread([&] {
-        window.setActive(true);
-
-        if (luaL_dofile(lua_state, path.c_str()) != 0) {
-            // Failed to load script
-        }
-        else {
-            lua_pcall(lua_state, 0, 0, 0);
-        }
-
-        window.setActive(false);
-    });
-
-    main_thread->detach();
+Script::Script(const std::string& path) {
+    open(path);
 }
 
 Script::~Script() {
-	delete main_thread;
-	main_thread = nullptr;
+    close();
+}
 
-    lua_close(lua_state);
+void Script::close() {
+    if (main_thread != nullptr) {
+        delete main_thread;
+        main_thread = nullptr;
+    }
+
+    if (lua_state != nullptr)
+        lua_close(lua_state);
+
+    window.setActive(true);
+}
+
+void Script::open(const std::string& path) {
+    if (main_thread != nullptr) {
+        // Error: Script runing
+        return;
+    }
+
+    lua_state = luaL_newstate();
+
+    if (lua_state == 0) {
+        // Error: Failed to create Lua state
+        return;
+    }
+    
+    luaL_openlibs(lua_state);
+    open_API();
+
+    if (luaL_dofile(lua_state, path.c_str()) != 0) {
+        // Error: Failed to load script
+    }
+    else {
+        window.setActive(false);
+
+        main_thread = new std::thread([&] {
+            window.setActive(true);
+            lua_pcall(lua_state, 0, 0, 0);
+            window.setActive(false);
+        });
+
+        main_thread->detach();
+    }
 }
 
 __forceinline void Script::open_API() {
     lua_register_table(lua_state, "render", {
-        //std::make_pair("text", lua_render_text),
-        //std::make_pair("measure_text", lua_render_measure_text),
-        //std::make_pair("circle", lua_render_circle),
-        //std::make_pair("outline_circle", lua_render_outline_circle),
-        //std::make_pair("textured_circle", lua_render_textured_circle),
-        //std::make_pair("rectangle", lua_render_rectangle),
-        //std::make_pair("polygon", lua_render_polygon),
-        //std::make_pair("convex", lua_render_convex),
-        //std::make_pair("line", lua_render_line),
-        //std::make_pair("ellipse", lua_render_ellipse),
-        //std::make_pair("image", lua_render_image),
-        //std::make_pair("image_ex", lua_render_image_ex),
-        //std::make_pair("sprite", lua_render_sprite),
-        //std::make_pair("sprite_ex", lua_render_sprite_ex),
+        //std::make_pair("text", lua::render_text),
+        //std::make_pair("measure_text", lua::render_measure_text),
+        //std::make_pair("circle", lua::render_circle),
+        //std::make_pair("outline_circle", lua::render_outline_circle),
+        //std::make_pair("textured_circle", lua::render_textured_circle),
+        //std::make_pair("rectangle", lua::render_rectangle),
+        //std::make_pair("polygon", lua::render_polygon),
+        //std::make_pair("convex", lua::render_convex),
+        //std::make_pair("line", lua::render_line),
+        //std::make_pair("ellipse", lua::render_ellipse),
+        //std::make_pair("image", lua::render_image),
+        //std::make_pair("image_ex", lua::render_image_ex),
+        //std::make_pair("sprite", lua::render_sprite),
+        //std::make_pair("sprite_ex", lua::render_sprite_ex),
     });
 
     lua_register_table(lua_state, "color", {
-        //std::make_pair("new", lua_color_new),
+        //std::make_pair("new", lua::color_new),
     });
 
     lua_register_table(lua_state, "window", {
-        //std::make_pair("get_width", lua_get_screen_width),
-        //std::make_pair("get_height", lua_get_screen_height),
-        //std::make_pair("refresh", lua_screen_refresh),
-        //std::make_pair("clear", lua_clear_screen),
-        //std::make_pair("close", lua_close_screen),
-        //std::make_pair("sleep", lua_wait),
-        //std::make_pair("set_icon", lua_set_icon),
-        //std::make_pair("set_title", lua_set_title),
+        //std::make_pair("get_width", lua::get_screen_width),
+        //std::make_pair("get_height", lua::get_screen_height),
+        std::make_pair("refresh", lua::refresh),
+        std::make_pair("clear", lua::clear),
+        std::make_pair("close", lua::close),
+        //std::make_pair("sleep", lua::wait),
+        //std::make_pair("set_icon", lua::set_icon),
+        //std::make_pair("set_title", lua::set_title),
     });
 
     std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_KEYS;
@@ -85,8 +103,8 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "key", SFML_KEYS);
 
     lua_register_table(lua_state, "keyboard", {
-        //std::make_pair("get_ch", lua_get_ch),
-        //std::make_pair("is_pressed", lua_is_key_pressed),
+        //std::make_pair("get_ch", lua::get_ch),
+        //std::make_pair("is_pressed", lua::is_key_pressed),
     });
 
     std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_BUTTONS;
@@ -99,36 +117,36 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "button", SFML_BUTTONS);
 
     lua_register_table(lua_state, "mouse", {
-        //std::make_pair("is_pressed", lua_is_button_pressed),
-        ////std::make_pair("is_scrolling_up", lua_is_scrolling_up),
-        ////std::make_pair("is_scrolling_down", lua_is_scrolling_down),
+        //std::make_pair("is_pressed", lua::is_button_pressed),
+        ////std::make_pair("is_scrolling_up", lua::is_scrolling_up),
+        ////std::make_pair("is_scrolling_down", lua::is_scrolling_down),
     });
 
     lua_register_table(lua_state, "cursor", {
-        //std::make_pair("get_x", lua_cursor_get_x),
-        //std::make_pair("get_y", lua_cursor_get_y),
-        //std::make_pair("set_pos", lua_cursor_set_pos),
-        //std::make_pair("in_bounds", lua_cursor_in_bounds),
+        //std::make_pair("get_x", lua::cursor_get_x),
+        //std::make_pair("get_y", lua::cursor_get_y),
+        //std::make_pair("set_pos", lua::cursor_set_pos),
+        //std::make_pair("in_bounds", lua::cursor_in_bounds),
     });
 
     lua_register_table(lua_state, "view", {
-        //std::make_pair("set", lua_view_set),
-        //std::make_pair("set_ported", lua_view_set_ported),
-        //std::make_pair("get_x", lua_view_get_x),
-        //std::make_pair("get_y", lua_view_get_y),
+        //std::make_pair("set", lua::view_set),
+        //std::make_pair("set_ported", lua::view_set_ported),
+        //std::make_pair("get_x", lua::view_get_x),
+        //std::make_pair("get_y", lua::view_get_y),
     });
 
     lua_register_table(lua_state, "sound", {
-        //std::make_pair("play", lua_sound_play),
+        //std::make_pair("play", lua::sound_play),
         ////std::make_pair("set_active", ),
     });
 
     lua_register_table(lua_state, "file", {
-        //std::make_pair("exists", lua_file_exists),
-        //std::make_pair("create", lua_file_create),
-        //std::make_pair("remove", lua_file_remove),
-        //std::make_pair("push", lua_file_push),
-        //std::make_pair("pop", lua_file_pop),
+        //std::make_pair("exists", lua::file_exists),
+        //std::make_pair("create", lua::file_create),
+        //std::make_pair("remove", lua::file_remove),
+        //std::make_pair("push", lua::file_push),
+        //std::make_pair("pop", lua::file_pop),
         ////std::make_pair("get_line", ),
         ////std::make_pair("set_line", ),
         ////std::make_pair("get", ),
@@ -139,13 +157,13 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "cmath", {
-        //std::make_pair("rand", lua_rand_number),
-        //std::make_pair("lerp", lua_lerp),
+        //std::make_pair("rand", lua::rand_number),
+        //std::make_pair("lerp", lua::lerp),
     });
 
     lua_register_table(lua_state, "globalvars", {
-        //std::make_pair("get_frametime", lua_get_frametime),
+        //std::make_pair("get_frametime", lua::get_frametime),
     });
 
-    //lua_register(lua_state, "print", lua_print);
+    lua_register(lua_state, "print", lua::print);
 }

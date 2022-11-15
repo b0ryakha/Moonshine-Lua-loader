@@ -159,6 +159,7 @@
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\API\API.h" />
     <ClInclude Include="headers\API\cmath.h" />
     <ClInclude Include="headers\API\color.h" />
     <ClInclude Include="headers\API\cursor.h" />

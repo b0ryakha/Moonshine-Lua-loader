@@ -1,16 +1,25 @@
 #include "Script.h"
 #include <SFML/Graphics.hpp>
 
+sf::RenderWindow window;
+
 __forceinline void start_program() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
 
-    sf::RenderWindow window(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
+    window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
     window.setFramerateLimit(100);
 
-    Script lua(window, "C:/Users/tosha/OneDrive/Desktop/test.lua");
+    sf::Event events;
 
-    while (window.isOpen()) {};
+    Script lua("C:/Users/tosha/OneDrive/Desktop/test1.lua");
+
+    while (window.isOpen()) {
+        while (window.pollEvent(events)) {
+            if (events.type == sf::Event::Closed)
+                window.close();
+        }
+    }
 }
 
 #ifdef _WIN32

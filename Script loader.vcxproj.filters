@@ -54,9 +54,6 @@
     <ClCompile Include="sources\API\keyboard.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="sources\API\misc.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
     <ClCompile Include="sources\API\mouse.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
       <Filter>Source Files\API</Filter>
     </ClCompile>
     <ClCompile Include="sources\API\window.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\API\misc.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +129,9 @@
       <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\window.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\API.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
