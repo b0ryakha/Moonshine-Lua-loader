@@ -15,7 +15,7 @@ __forceinline void start_program() {
 
     sf::Event events;
 
-    Script lua("C:/Users/a.marchenko/Desktop/main.lua");
+    Script lua("C:/Users/tosha/OneDrive/Desktop/main.lua");
 
     while (window.isOpen()) {
         while (window.pollEvent(events)) {
