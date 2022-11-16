@@ -1,12 +1,13 @@
 #pragma once
 
 #include <thread>
+#include <chrono>
 #include <string>
 #include <array>
 #include <SFML/Graphics.hpp>
 
 #include "lua_extensions.h"
-#include "API.h"
+#include "API.hpp"
 
 extern sf::RenderWindow window;
 
@@ -16,6 +17,7 @@ private:
 	std::thread* main_thread = nullptr;
 
 	__forceinline void open_API();
+	__forceinline void throw_exception(const std::string& exception, bool without_closure = false) const;
 
 public:
 	Script();

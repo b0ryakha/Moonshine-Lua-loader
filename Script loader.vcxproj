@@ -103,14 +103,14 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;C:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;D:\SFML\lib x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;C:\SFML\lib x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -143,35 +143,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="sources\API\cmath.cpp" />
-    <ClCompile Include="sources\API\color.cpp" />
-    <ClCompile Include="sources\API\cursor.cpp" />
-    <ClCompile Include="sources\API\file.cpp" />
-    <ClCompile Include="sources\API\global_vars.cpp" />
-    <ClCompile Include="sources\API\keyboard.cpp" />
-    <ClCompile Include="sources\API\misc.cpp" />
-    <ClCompile Include="sources\API\mouse.cpp" />
-    <ClCompile Include="sources\API\render.cpp" />
-    <ClCompile Include="sources\API\sound.cpp" />
-    <ClCompile Include="sources\API\view.cpp" />
-    <ClCompile Include="sources\API\window.cpp" />
     <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\API\API.h" />
-    <ClInclude Include="headers\API\cmath.h" />
-    <ClInclude Include="headers\API\color.h" />
-    <ClInclude Include="headers\API\cursor.h" />
-    <ClInclude Include="headers\API\file.h" />
-    <ClInclude Include="headers\API\global_vars.h" />
-    <ClInclude Include="headers\API\keyboard.h" />
-    <ClInclude Include="headers\API\misc.h" />
-    <ClInclude Include="headers\API\mouse.h" />
-    <ClInclude Include="headers\API\render.h" />
-    <ClInclude Include="headers\API\sound.h" />
-    <ClInclude Include="headers\API\view.h" />
-    <ClInclude Include="headers\API\window.h" />
+    <ClInclude Include="headers\API\API.hpp" />
+    <ClInclude Include="headers\API\cmath.hpp" />
+    <ClInclude Include="headers\API\color.hpp" />
+    <ClInclude Include="headers\API\cursor.hpp" />
+    <ClInclude Include="headers\API\file.hpp" />
+    <ClInclude Include="headers\API\global_vars.hpp" />
+    <ClInclude Include="headers\API\keyboard.hpp" />
+    <ClInclude Include="headers\API\misc.hpp" />
+    <ClInclude Include="headers\API\mouse.hpp" />
+    <ClInclude Include="headers\API\render.hpp" />
+    <ClInclude Include="headers\API\sound.hpp" />
+    <ClInclude Include="headers\API\view.hpp" />
+    <ClInclude Include="headers\API\window.hpp" />
     <ClInclude Include="headers\Lua Extensions\lua_extensions.h" />
     <ClInclude Include="headers\Script.h" />
     <ClInclude Include="lua\include\lauxlib.h" />

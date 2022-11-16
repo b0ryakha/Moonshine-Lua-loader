@@ -1,7 +1,10 @@
-#include "Script.h"
 #include <SFML/Graphics.hpp>
+#include <string>
+
+#include "Script.h"
 
 sf::RenderWindow window;
+std::string FONTS_PATH;
 
 __forceinline void start_program() {
     sf::ContextSettings settings;
@@ -12,7 +15,7 @@ __forceinline void start_program() {
 
     sf::Event events;
 
-    Script lua("C:/Users/tosha/OneDrive/Desktop/test1.lua");
+    Script lua("C:/Users/a.marchenko/Desktop/main.lua");
 
     while (window.isOpen()) {
         while (window.pollEvent(events)) {
@@ -26,6 +29,8 @@ __forceinline void start_program() {
 #include <windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
+    FONTS_PATH = "C:/WINDOWS/Fonts/";
+
     start_program();
     return 0;
 }
@@ -33,6 +38,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 #ifdef linux
 int main() {
+    FONTS_PATH = "";
+
     start_program();
     return 0;
 }

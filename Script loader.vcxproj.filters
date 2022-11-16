@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\API">
-      <UniqueIdentifier>{c3c1ce47-85e4-4c8f-a684-fb434c009894}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\API">
       <UniqueIdentifier>{93785d96-ee06-44db-86ae-59d4226ee68a}</UniqueIdentifier>
     </Filter>
@@ -35,42 +32,6 @@
     </ClCompile>
     <ClCompile Include="sources\Script.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\cmath.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\color.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\cursor.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\file.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\global_vars.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\keyboard.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\mouse.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\render.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\sound.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\view.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\window.cpp">
-      <Filter>Source Files\API</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\API\misc.cpp">
-      <Filter>Source Files\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,43 +56,43 @@
     <ClInclude Include="headers\Lua Extensions\lua_extensions.h">
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\cmath.h">
+    <ClInclude Include="headers\API\API.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\color.h">
+    <ClInclude Include="headers\API\cmath.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\cursor.h">
+    <ClInclude Include="headers\API\color.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\file.h">
+    <ClInclude Include="headers\API\cursor.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\global_vars.h">
+    <ClInclude Include="headers\API\file.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\keyboard.h">
+    <ClInclude Include="headers\API\global_vars.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\misc.h">
+    <ClInclude Include="headers\API\keyboard.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\mouse.h">
+    <ClInclude Include="headers\API\misc.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\render.h">
+    <ClInclude Include="headers\API\mouse.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\sound.h">
+    <ClInclude Include="headers\API\render.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\view.h">
+    <ClInclude Include="headers\API\sound.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\window.h">
+    <ClInclude Include="headers\API\view.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\API.h">
+    <ClInclude Include="headers\API\window.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>

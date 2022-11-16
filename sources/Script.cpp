@@ -24,34 +24,34 @@ void Script::close() {
 
 void Script::open(const std::string& path) {
     if (main_thread != nullptr) {
-        // Error: Script runing
-        return;
+        throw_exception("Script is already running.");
     }
 
     lua_state = luaL_newstate();
 
-    if (lua_state == 0) {
-        // Error: Failed to create Lua state
-        return;
+    if (lua_state == nullptr) {
+        throw_exception("Failed to create lua state.");
     }
     
     luaL_openlibs(lua_state);
     open_API();
 
-    if (luaL_dofile(lua_state, path.c_str()) != 0) {
-        // Error: Failed to load script
-    }
-    else {
-        window.setActive(false);
+    window.setActive(false);
 
-        main_thread = new std::thread([&] {
-            window.setActive(true);
+    main_thread = new std::thread([&] {
+        window.setActive(true);
+
+        if (luaL_dofile(lua_state, path.c_str()) != 0) {
+            throw_exception("Failed to load script.");
+        }
+        else {
             lua_pcall(lua_state, 0, 0, 0);
-            window.setActive(false);
-        });
+        }
 
-        main_thread->detach();
-    }
+        window.setActive(false);
+    });
+
+    main_thread->join();
 }
 
 __forceinline void Script::open_API() {
@@ -166,4 +166,22 @@ __forceinline void Script::open_API() {
     });
 
     lua_register(lua_state, "print", lua::print);
+}
+
+__forceinline void Script::throw_exception(const std::string& exception, bool without_closure) const {
+    sf::Font font;
+    font.loadFromFile(FONTS_PATH + "arial.ttf");
+
+    sf::Text text(exception, font, 20);
+    text.setPosition(sf::Vector2f((window.getSize().x / 2) - (exception.length() * 16) / 2, window.getSize().y / 2)); 
+    text.setFillColor(sf::Color::Red);
+
+    window.clear();
+    window.draw(text);
+    window.display();
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+    
+    if (!without_closure)
+        window.close();
 }
