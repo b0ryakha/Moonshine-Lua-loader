@@ -1,4 +1,4 @@
-#include "Script.h"
+#include "Script.hpp"
 
 Script::Script() {}
 
@@ -70,10 +70,11 @@ __forceinline void Script::open_API() {
         //std::make_pair("image_ex", lua::render_image_ex),
         //std::make_pair("sprite", lua::render_sprite),
         //std::make_pair("sprite_ex", lua::render_sprite_ex),
+        std::make_pair("new_sprite", lua::render_new_sprite),
     });
 
     lua_register_table(lua_state, "color", {
-        //std::make_pair("new", lua::color_new),
+        std::make_pair("new", lua::color_new),
     });
 
     lua_register_table(lua_state, "window", {
@@ -90,7 +91,7 @@ __forceinline void Script::open_API() {
     std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_KEYS;
     std::array<std::string, 101> SFML_KEYS_NAME { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
 
-    for (int i = 0; i < SFML_KEYS_NAME.size(); ++i) {
+    for (size_t i = 0; i < SFML_KEYS_NAME.size(); ++i) {
         SFML_KEYS.push_back(std::make_pair(SFML_KEYS_NAME[i], i));
     }
 
@@ -110,7 +111,7 @@ __forceinline void Script::open_API() {
     std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_BUTTONS;
     std::array<std::string, 5> SFML_BUTTONS_NAME { "Left", "Right", "Middle", "XButton1", "XButton2" };
 
-    for (int i = 0; i < SFML_BUTTONS_NAME.size(); ++i) {
+    for (size_t i = 0; i < SFML_BUTTONS_NAME.size(); ++i) {
         SFML_BUTTONS.push_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
     }
 
@@ -166,22 +167,4 @@ __forceinline void Script::open_API() {
     });
 
     lua_register(lua_state, "print", lua::print);
-}
-
-__forceinline void Script::throw_exception(const std::string& exception, bool without_closure) const {
-    sf::Font font;
-    font.loadFromFile(FONTS_PATH + "arial.ttf");
-
-    sf::Text text(exception, font, 20);
-    text.setPosition(sf::Vector2f((window.getSize().x / 2) - (exception.length() * 16) / 2, window.getSize().y / 2)); 
-    text.setFillColor(sf::Color::Red);
-
-    window.clear();
-    window.draw(text);
-    window.display();
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
-    
-    if (!without_closure)
-        window.close();
 }

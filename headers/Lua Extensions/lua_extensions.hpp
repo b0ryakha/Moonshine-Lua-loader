@@ -5,8 +5,9 @@
 #include <variant>
 #include <SFML/Graphics.hpp>
 
+#include "lua.hpp"
+
 extern "C" {
-	#include "lua.hpp"
 	#pragma comment(lib, "lua54.lib")
 }
 
@@ -63,10 +64,12 @@ __forceinline int lua_get_value<int>(lua_State* L) {
 
 template<>
 __forceinline size_t lua_get_value<size_t>(lua_State* L) {
-	size_t result = static_cast<size_t>(luaL_checknumber(L, lua_gettop(L)));
+	int result = static_cast<int>(luaL_checknumber(L, lua_gettop(L)));
+	if (result < 0) result = 0;
+
 	lua_pop(L, 1);
 
-	return result;
+	return static_cast<size_t>(result);
 }
 
 template<>

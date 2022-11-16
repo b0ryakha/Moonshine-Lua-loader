@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.h"
+#include "lua_extensions.hpp"
 #include <SFML/Graphics.hpp>
 
 extern sf::RenderWindow window;

@@ -1,21 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <vector>
 
-#include "Script.h"
+#include "Script.hpp"
 
 sf::RenderWindow window;
 std::string FONTS_PATH;
 
-__forceinline void start_program() {
+std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
+
+__forceinline void start_program(char* cmd_line) {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
 
     window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
     window.setFramerateLimit(100);
 
-    sf::Event events;
+    std::string script_path = cmd_line[0] ? cmd_line : "";
+    Script lua(script_path);
 
-    Script lua("C:/Users/tosha/OneDrive/Desktop/main.lua");
+    sf::Event events;
 
     while (window.isOpen()) {
         while (window.pollEvent(events)) {
@@ -31,16 +35,16 @@ __forceinline void start_program() {
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
     FONTS_PATH = "C:/WINDOWS/Fonts/";
 
-    start_program();
+    start_program(lpCmdLine);
     return 0;
 }
 #endif
 
 #ifdef linux
-int main() {
+int main(int argc, char** argv) {
     FONTS_PATH = "";
 
-    start_program();
+    start_program(argv[0]);
     return 0;
 }
 #endif
