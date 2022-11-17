@@ -11,12 +11,12 @@ extern std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
 namespace lua
 {
     static int render_new_sprite(lua_State* L) {
-        int arg_count = lua_gettop(L);
-        if (arg_count != 3) return 0;
+        LuaStack args(L);
+        if (args.size() != 3) return 0;
 
-        float h = lua_get_value<float>(L);
-        float w = lua_get_value<float>(L);
-        std::string path = lua_get_value<std::string>(L);
+        std::string path = args.get<std::string>(0);
+        float w = args.get<float>(1);
+        float h = args.get<float>(2);
 
         const std::string ID = "0x" + std::to_string(rand_number(100000000, 999999999));
 

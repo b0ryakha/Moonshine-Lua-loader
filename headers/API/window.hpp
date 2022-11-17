@@ -12,13 +12,13 @@ namespace lua
     }
 
     static int clear(lua_State* L) {
-        int arg_count = lua_gettop(L);
+        LuaStack args(L);
 
-        if (arg_count == 0) {
+        if (args.empty()) {
             window.clear();
         }
-        else if (arg_count == 1) {
-            window.clear(lua_get_color(L, arg_count));
+        else if (args.size() == 1) {
+            //window.clear(lua_get_color(L, arg_count));
         }
 
         return 0;

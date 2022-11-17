@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Lua Extensions\Lua">
       <UniqueIdentifier>{9f6035f0-6805-489f-9074-29bcc0ddb4d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Lua Extensions">
+      <UniqueIdentifier>{54353dc8-3fe5-47b3-9b0c-b3ec239fe2b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="sources\misc_functions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\LuaStack.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="headers\misc_functions.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\LuaStack.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

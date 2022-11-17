@@ -24,13 +24,13 @@ void Script::close() {
 
 void Script::open(const std::string& path) {
     if (main_thread != nullptr) {
-        throw_exception("Script is already running.");
+        throw_error("Script is already running.");
     }
 
     lua_state = luaL_newstate();
 
     if (lua_state == nullptr) {
-        throw_exception("Failed to create lua state.");
+        throw_error("Failed to create lua state.");
     }
     
     luaL_openlibs(lua_state);
@@ -42,7 +42,7 @@ void Script::open(const std::string& path) {
         window.setActive(true);
 
         if (luaL_dofile(lua_state, path.c_str()) != 0) {
-            throw_exception("Failed to load script.");
+            throw_error("Failed to load script.");
         }
         else {
             lua_pcall(lua_state, 0, 0, 0);
@@ -88,7 +88,7 @@ __forceinline void Script::open_API() {
         //std::make_pair("set_title", lua::set_title),
     });
 
-    std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_KEYS;
+    std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
     std::array<std::string, 101> SFML_KEYS_NAME { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
 
     for (size_t i = 0; i < SFML_KEYS_NAME.size(); ++i) {
@@ -108,7 +108,7 @@ __forceinline void Script::open_API() {
         //std::make_pair("is_pressed", lua::is_key_pressed),
     });
 
-    std::vector<std::pair<std::string, std::variant<lua_Number, lua_CFunction, std::string>>> SFML_BUTTONS;
+    std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
     std::array<std::string, 5> SFML_BUTTONS_NAME { "Left", "Right", "Middle", "XButton1", "XButton2" };
 
     for (size_t i = 0; i < SFML_BUTTONS_NAME.size(); ++i) {

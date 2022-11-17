@@ -16,8 +16,8 @@ __forceinline void start_program(char* cmd_line) {
     window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
     window.setFramerateLimit(100);
 
-    std::string script_path = cmd_line[0] ? cmd_line : "";
-    Script lua(script_path);
+    //std::string script_path = cmd_line[0] ? cmd_line : "";
+    Script lua("C:/Users/tosha/OneDrive/Desktop/test.lua");
 
     sf::Event events;
 

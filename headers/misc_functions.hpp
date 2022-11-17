@@ -10,7 +10,7 @@ extern std::string FONTS_PATH;
 
 int rand_number(int min, int max);
 
-__forceinline void throw_exception(const std::string& exception, bool close_window = true) {
+__forceinline void throw_error(const std::string& exception, bool close_window = true) {
     sf::Font font;
     font.loadFromFile(FONTS_PATH + "arial.ttf");
 
