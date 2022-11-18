@@ -28,7 +28,7 @@ color.new(r: int, g: int, b: int[, a: int]): Color
 | b     | ```int``` | Blue [0 - 255]               |
 | a     | ```int``` | Alpha [0 - 255], default 255 |
 
-Returns the Color struct.
+Returns the Color struct or nil on failure.
 
 ### :computer: Window
 #### ```refresh```
