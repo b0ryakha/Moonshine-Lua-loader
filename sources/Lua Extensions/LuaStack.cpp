@@ -1,6 +1,8 @@
 #include "LuaStack.hpp"
 
 LuaStack::LuaStack(lua_State* lua_state) {
+    elements.reserve(lua_gettop(lua_state));
+
     for (int i = 1; i <= lua_gettop(lua_state); ++i) {
         switch (lua_type(lua_state, i)) {
             case LUA_TSTRING:

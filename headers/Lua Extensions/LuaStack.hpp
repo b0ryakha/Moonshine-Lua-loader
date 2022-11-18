@@ -60,4 +60,9 @@ public:
     bool get<bool>(size_t index) {
         return static_cast<bool>(std::get<LuaBoolean>(elements.at(index)).state);
     }
+
+    template<>
+    LuaNil get<LuaNil>(size_t index) {
+        return static_cast<LuaNil>(std::get<LuaNil>(elements.at(index)));
+    }
 };
