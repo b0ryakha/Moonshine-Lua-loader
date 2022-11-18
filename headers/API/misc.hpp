@@ -16,7 +16,23 @@ namespace lua
         const size_t size = 20;
 
         for (int i = 0; i < args.size(); ++i) {
-            result = args.get<std::string>(i) + "   " + result;
+            std::string value;
+
+            switch (args.get_type(i)) {
+                case LuaMultiValueType::Number:
+                    value = std::to_string(args.get<float>(i));
+                    break;
+                case LuaMultiValueType::String:
+                    value = args.get<std::string>(i);
+                    break;
+                case LuaMultiValueType::Boolean:
+                    value = args.get<bool>(i) ? "true" : "false";
+                    break;
+                default:
+                    value = "nil";
+            }
+
+            result += value + '\t';
         }
 
         sf::Font font;

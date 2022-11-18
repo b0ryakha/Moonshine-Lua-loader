@@ -5,6 +5,9 @@ LuaStack::LuaStack(lua_State* lua_state) {
 
     for (int i = 1; i <= lua_gettop(lua_state); ++i) {
         switch (lua_type(lua_state, i)) {
+            case LUA_TTABLE:
+                elements.push_back(LuaTable(lua_state, i));
+                break;
             case LUA_TSTRING:
                 elements.push_back(static_cast<std::string>(lua_tostring(lua_state, i)));
                 break;
@@ -20,6 +23,23 @@ LuaStack::LuaStack(lua_State* lua_state) {
             default:
                 elements.push_back(LuaNil());
         }
+    }
+}
+
+LuaMultiValueType LuaStack::get_type(size_t index) const {
+    switch (elements.at(index).index()) {
+        case 0:
+            return LuaMultiValueType::Number;
+        case 1:
+            return LuaMultiValueType::Function;
+        case 2:
+            return LuaMultiValueType::String;
+        case 3:
+            return LuaMultiValueType::Boolean;
+        case 4:
+            return LuaMultiValueType::Table;
+        default:
+            return LuaMultiValueType::Nil;
     }
 }
 

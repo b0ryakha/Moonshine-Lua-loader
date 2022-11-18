@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
+    <ClCompile Include="sources\Lua Extensions\lua_types.cpp" />
     <ClCompile Include="sources\misc_functions.cpp" />
     <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\main.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="headers\API\window.hpp" />
     <ClInclude Include="headers\Lua Extensions\LuaStack.hpp" />
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp" />
+    <ClInclude Include="headers\Lua Extensions\lua_types.hpp" />
     <ClInclude Include="headers\misc_functions.hpp" />
     <ClInclude Include="headers\Script.hpp" />
     <ClInclude Include="lua\include\lauxlib.h" />

@@ -1,26 +1,11 @@
 #pragma once
 
 #include <vector>
-#include <variant>
 #include <string>
 #include <iterator>
 
 #include "misc_functions.hpp"
-#include "LuaStack.hpp"
-
-#include "lua.hpp"
-extern "C" {
-	#pragma comment(lib, "lua54.lib")
-}
-
-struct LuaNil {};
-
-struct LuaBoolean {
-    bool state = false;
-    LuaBoolean(bool state) : state(state) {}
-};
-
-using LuaMultiValue = std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>;
+#include "lua_types.hpp"
 
 class LuaStack {
 private:
@@ -31,6 +16,7 @@ public:
 	
 	size_t size() const noexcept;
     size_t empty() const noexcept;
+    LuaMultiValueType get_type(size_t index) const;
 
     template<typename T>
     T get(size_t index) { throw_error("Unknown Type!"); }
@@ -64,5 +50,10 @@ public:
     template<>
     LuaNil get<LuaNil>(size_t index) {
         return static_cast<LuaNil>(std::get<LuaNil>(elements.at(index)));
+    }
+
+    template<>
+    LuaTable get<LuaTable>(size_t index) {
+        return static_cast<LuaTable>(std::get<LuaTable>(elements.at(index)));
     }
 };

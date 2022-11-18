@@ -41,12 +41,10 @@ void Script::open(const std::string& path) {
     main_thread = new std::thread([&] {
         window.setActive(true);
 
-        if (luaL_dofile(lua_state, path.c_str()) != 0) {
-            throw_error("Failed to load script.");
-        }
-        else {
-            lua_pcall(lua_state, 0, 0, 0);
-        }
+        if (luaL_dofile(lua_state, path.c_str()) != 0)
+            throw_error(static_cast<std::string>(lua_tostring(lua_state, -1)) + ".");
+
+        lua_pcall(lua_state, 0, 0, 0);
 
         window.setActive(false);
     });

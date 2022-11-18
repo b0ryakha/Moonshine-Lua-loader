@@ -12,14 +12,17 @@ namespace lua
 {
     static int render_new_sprite(lua_State* L) {
         LuaStack args(L);
-        if (args.size() != 3) return 0;
+
+        if (args.size() != 3) {
+            lua_pushnil(L);
+            return 1;
+        }
 
         std::string path = args.get<std::string>(0);
         float w = args.get<float>(1);
         float h = args.get<float>(2);
 
-        const std::string ID = "0x" + std::to_string(rand_number(100000000, 999999999));
-
+        const std::string ID{ "0x" + std::to_string(rand_number(100000000, 999999999)) };
         sf::Texture texture;
 
         if (!texture.loadFromFile(path)) {
@@ -30,7 +33,6 @@ namespace lua
         sprite_buffer[ID] = std::make_pair(sf::Sprite(texture), texture);
 
         lua_pushstring(L, ID.c_str());
-        
         return 1;
     }
 }

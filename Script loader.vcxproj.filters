@@ -39,6 +39,9 @@
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\lua_types.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\Lua Extensions\LuaStack.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\lua_types.hpp">
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
   </ItemGroup>
