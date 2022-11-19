@@ -14,6 +14,20 @@ render.new_sprite(path: string, w: float, h: float): Sprite
 | h     | ```float``` | Height of image          |
 
 Returns the Sprite struct or nil on failure.
+#### ```text```
+```lua
+render.text(x: float, y: float, text: string, font_name: string, size: size_t, color: Color)
+```
+| Name      | Type        | Description        |
+| :---:     | :---:       | :---:              |
+| x         | ```float``` | X coordinate       |
+| y         | ```float``` | Y coordinate       |
+| text      | ```string```| Text for render    |
+| font_name | ```string```| Font name for text |
+| size      | ```size_t```| Size for text      |
+| color     | ```Color``` | Color for text     |
+
+Render text in the specified coordinates or return nil on failure.
 
 
 ### :rainbow: Color
