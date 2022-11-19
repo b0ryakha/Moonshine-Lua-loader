@@ -89,7 +89,7 @@ cmath.lerp(start: float, end: float, time: float): float
 | end   | ```float```| End value   |
 | time  | ```float```| Step value  |
 
-Returns the random integer number [min, max] or nil on failure.
+Returns the linear interpolation or nil on failure.
 
 ### :mag: GlobalVars
 
