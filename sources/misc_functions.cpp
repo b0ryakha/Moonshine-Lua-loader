@@ -6,3 +6,16 @@ int rand_number(int min, int max) {
 
     return dist(gen);
 }
+
+std::string correct_font(const std::string& font) {
+    if (font.length() > 4) {
+        if (std::string(font.end() - 4, font.end()) != ".ttf") {
+            return font + ".ttf";
+        }
+    }
+    else {
+        return font + ".ttf";
+    }
+
+    return font;
+}

@@ -54,7 +54,7 @@ void Script::open(const std::string& path) {
 
 __forceinline void Script::open_API() {
     lua_register_table(lua_state, "render", {
-        //std::make_pair("text", lua::render_text),
+        std::make_pair("text", lua::render_text),
         //std::make_pair("measure_text", lua::render_measure_text),
         //std::make_pair("circle", lua::render_circle),
         //std::make_pair("outline_circle", lua::render_outline_circle),
@@ -156,8 +156,8 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "cmath", {
-        //std::make_pair("rand", lua::rand_number),
-        //std::make_pair("lerp", lua::lerp),
+        std::make_pair("rand", lua::rand_int),
+        std::make_pair("lerp", lua::lerp),
     });
 
     lua_register_table(lua_state, "globalvars", {

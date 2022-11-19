@@ -65,3 +65,8 @@ __forceinline void lua_pushtable(lua_State* L, const std::vector<std::pair<std::
 		lua_setfield(L, -2, element.first.c_str());
 	}
 }
+
+__forceinline sf::Color lua_get_color(const LuaStack& stack, int index) {
+	LuaTable color = stack.get<LuaTable>(index);
+	return sf::Color(color.get<int>("r"), color.get<int>("g"), color.get<int>("b"), color.get<int>("a"));
+}
