@@ -69,7 +69,27 @@ Closes the screen.
 
 
 ### :heavy_division_sign: CMath
+#### ```rand```
+```lua
+cmath.rand(min: int, max: int): int
+```
+| Name  | Type     | Description          |
+| :---: | :---:    | :---:                |
+| min   | ```int```| Minimum random value |
+| max   | ```int```| Maximum random value |
 
+Returns the random integer number [min, max] or nil on failure.
+#### ```lerp```
+```lua
+cmath.lerp(start: float, end: float, time: float): float
+```
+| Name  | Type       | Description |
+| :---: | :---:      | :---:       |
+| start | ```float```| Start value |
+| end   | ```float```| End value   |
+| time  | ```float```| Step value  |
+
+Returns the random integer number [min, max] or nil on failure.
 
 ### :mag: GlobalVars
 
