@@ -119,10 +119,10 @@ Returns the linear interpolation or nil on failure.
 ### :speech_balloon: Misc
 #### ```print```
 ```lua
-print(text: string)
+print(text: string, ...)
 ```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| text  | ```string```| Text        |
+| Name  | Type     | Description |
+| :---: | :---:    | :---:       |
+| text  | ```any```| Text        |
 
 Printing text on screen.
