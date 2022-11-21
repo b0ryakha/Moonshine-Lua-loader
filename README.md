@@ -28,6 +28,17 @@ render.text(x: float, y: float, text: string, font_name: string, size: size_t, c
 | color     | ```Color``` | Color for text     |
 
 Render text in the specified coordinates or return nil on failure.
+#### ```measure_text```
+```lua
+render.measure_text(font_name: string, size: size_t, text: string): Sprite
+```
+| Name      | Type         | Description                |
+| :---:     | :---:        | :---:                      |
+| font_name | ```string``` | Font name                  |
+| size      | ```size_t``` | Size of text               |
+| text      | ```string``` | Text that will be measured |
+
+Returns the measured size of the text.
 
 
 ### :rainbow: Color
