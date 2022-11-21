@@ -10,7 +10,6 @@ extern sf::RenderWindow window;
 extern std::string FONTS_PATH;
 
 int rand_number(int min, int max);
-std::string correct_font(const std::string& font);
 
 __forceinline void throw_error(const std::string& exception, bool close_window = true) {
     sf::Font font;

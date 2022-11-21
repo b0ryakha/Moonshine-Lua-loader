@@ -36,7 +36,7 @@ namespace lua
         }
 
         sf::Font font;
-        if (!font.loadFromFile(FONTS_PATH + "arial.ttf"));
+        if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
             throw_error("Failed to create the font face.");
 
         sf::Text text(sf::String::fromUtf8(result.begin(), result.end()), font, size);

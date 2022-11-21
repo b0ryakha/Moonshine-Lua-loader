@@ -8,6 +8,7 @@ sf::RenderWindow window;
 std::string FONTS_PATH;
 
 std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
+std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
 __forceinline void start_program(char* cmd_line) {
     sf::ContextSettings settings;
@@ -17,7 +18,7 @@ __forceinline void start_program(char* cmd_line) {
     window.setFramerateLimit(100);
 
     //std::string script_path = cmd_line[0] ? cmd_line : "";
-    Script lua("C:/Users/a.marchenko/Desktop/test.lua");
+    Script lua("C:/Users/tosha/OneDrive/Desktop/main.lua");
 
     sf::Event events;
 

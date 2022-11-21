@@ -55,7 +55,7 @@ void Script::open(const std::string& path) {
 __forceinline void Script::open_API() {
     lua_register_table(lua_state, "render", {
         std::make_pair("text", lua::render_text),
-        //std::make_pair("measure_text", lua::render_measure_text),
+        std::make_pair("measure_text", lua::render_measure_text),
         //std::make_pair("circle", lua::render_circle),
         //std::make_pair("outline_circle", lua::render_outline_circle),
         //std::make_pair("textured_circle", lua::render_textured_circle),
@@ -64,11 +64,9 @@ __forceinline void Script::open_API() {
         //std::make_pair("convex", lua::render_convex),
         //std::make_pair("line", lua::render_line),
         //std::make_pair("ellipse", lua::render_ellipse),
-        //std::make_pair("image", lua::render_image),
-        //std::make_pair("image_ex", lua::render_image_ex),
-        //std::make_pair("sprite", lua::render_sprite),
-        //std::make_pair("sprite_ex", lua::render_sprite_ex),
+        std::make_pair("sprite", lua::render_sprite),
         std::make_pair("new_sprite", lua::render_new_sprite),
+        std::make_pair("load_font", lua::render_load_font),
     });
 
     lua_register_table(lua_state, "color", {
