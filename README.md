@@ -5,40 +5,64 @@
 ### :movie_camera: Render
 #### ```new_sprite```
 ```lua
-render.new_sprite(path: string, w: float, h: float): Sprite
+render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: float, t_h: float]): Sprite
 ```
-| Name  | Type        | Description              |
-| :---: | :---:       | :---:                    |
-| path  | ```string```| Image location directory |
-| w     | ```float``` | Weight of image          |
-| h     | ```float``` | Height of image          |
+| Name  | Type        | Description                                     |
+| :---: | :---:       | :---:                                           |
+| path  | ```string```| Image location directory                        |
+| w     | ```float``` | Weight of image                                 |
+| h     | ```float``` | Height of image                                 |
+| t_x   | ```float``` | X coordinate of areas in the image, default = 0 |
+| t_y   | ```float``` | Y coordinate of areas in the image, default = 0 |
+| t_w   | ```float``` | Weight of areas in the image, default = w       |
+| t_h   | ```float``` | Height of areas in the image, default = h       |
 
 Returns the Sprite struct or nil on failure.
+#### ```load_font```
+```lua
+render.load_font(font_name: string, size: size_t): Font
+```
+| Name      | Type         | Description  |
+| :---:     | :---:        | :---:        |
+| font_name | ```string``` | Name of font |
+| size      | ```size_t``` | Size of font |
+
+Returns the Font struct or nil on failure.
 #### ```text```
 ```lua
-render.text(x: float, y: float, text: string, font_name: string, size: size_t, color: Color)
+render.text(x: float, y: float, font: Font, text: string, color: Color)
 ```
 | Name      | Type        | Description        |
 | :---:     | :---:       | :---:              |
 | x         | ```float``` | X coordinate       |
 | y         | ```float``` | Y coordinate       |
+| font      | ```Font```  | Font for text      |
 | text      | ```string```| Text for render    |
-| font_name | ```string```| Font name for text |
-| size      | ```size_t```| Size for text      |
 | color     | ```Color``` | Color for text     |
 
-Render text in the specified coordinates or return nil on failure.
+Render text in the specified coordinates.
 #### ```measure_text```
 ```lua
-render.measure_text(font_name: string, size: size_t, text: string): Measure
+render.measure_text(font: Font, text: string): Measure
 ```
 | Name      | Type         | Description                |
 | :---:     | :---:        | :---:                      |
-| font_name | ```string``` | Font name                  |
-| size      | ```size_t``` | Size of text               |
+| font      | ```Font```   | Font for text              |
 | text      | ```string``` | Text that will be measured |
 
 Returns the measured size of the text.
+#### ```sprite```
+```lua
+render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
+```
+| Name      | Type        | Description        |
+| :---:     | :---:       | :---:              |
+| sprite    | ```Sprite```| Sprite for render  |
+| x         | ```float``` | X coordinate       |
+| y         | ```float``` | Y coordinate       |
+| color     | ```Color``` | Color for sprite   |
+
+Render sprite in the specified coordinates.
 
 
 ### :rainbow: Color
