@@ -30,7 +30,7 @@ render.text(x: float, y: float, text: string, font_name: string, size: size_t, c
 Render text in the specified coordinates or return nil on failure.
 #### ```measure_text```
 ```lua
-render.measure_text(font_name: string, size: size_t, text: string): Sprite
+render.measure_text(font_name: string, size: size_t, text: string): Measure
 ```
 | Name      | Type         | Description                |
 | :---:     | :---:        | :---:                      |
