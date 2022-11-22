@@ -104,12 +104,12 @@ Returns the hex str or nil on failure.
 
 
 ## :computer: Window
-#### ```refresh```
+#### ```display```
 ```lua
-window.refresh()
+window.display()
 ```
 
-Refreshes the screen.
+Display on screen what has been rendered to the window so far.
 #### ```clear```
 ```lua
 window.clear([color: Color])
@@ -118,13 +118,13 @@ window.clear([color: Color])
 | :---: | :---:       | :---:                                     |
 | color | ```Color``` | Color for screen filling, default = Black |
 
-Clears the screen.
+Clears the screen with a color.
 #### ```close```
 ```lua
 window.close()
 ```
 
-Closes the screen.
+Closes the window and destroy all the attached resources.
 
 ## :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
