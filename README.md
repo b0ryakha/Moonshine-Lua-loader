@@ -174,6 +174,17 @@ cmath.lerp(start: float, end: float, time: float): float
 | time  | ```float```| Step value  |
 
 Returns the linear interpolation or nil on failure.
+#### ```clamp```
+```lua
+cmath.clamp(number: float, lower: float, upper: float): float
+```
+| Name   | Type       | Description    |
+| :---:  | :---:      | :---:          |
+| number | ```float```| Value to clamp |
+| lower  | ```float```| Lower bound    |
+| upper  | ```float```| Upper bound    |
+
+Returns the clumped value or nil on failure.
 
 ## :mag: GlobalVars
 
