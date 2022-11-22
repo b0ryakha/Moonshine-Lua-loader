@@ -5,11 +5,10 @@
 
 extern sf::RenderWindow window;
 extern std::string FONTS_PATH;
+extern size_t print_offset;
 
 namespace lua
 {
-	static size_t offset_y = 0;
-
 	static int print(lua_State* L) {
         LuaStack args(L);
         std::string result;
@@ -40,15 +39,15 @@ namespace lua
             throw_error("Failed to create the font face.");
 
         sf::Text text(sf::String::fromUtf8(result.begin(), result.end()), font, size);
-        text.setPosition(sf::Vector2f(0, offset_y));
+        text.setPosition(sf::Vector2f(0, print_offset));
         text.setFillColor(sf::Color::White);
 
         window.draw(text);
 
-        offset_y += size;
+        print_offset += size;
 
-        if (offset_y >= window.getSize().y)
-            offset_y = 0;
+        if (print_offset >= window.getSize().y)
+            print_offset = 0;
 
         return 0;
     }

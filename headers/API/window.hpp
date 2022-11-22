@@ -3,11 +3,13 @@
 #include "lua_extensions.hpp"
 
 extern sf::RenderWindow window;
+extern size_t print_offset;
 
 namespace lua
 {
     static int close(lua_State* L) {
         window.close();
+        print_offset = 0;
         return 0;
     }
 

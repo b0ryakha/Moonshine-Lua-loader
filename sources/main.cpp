@@ -6,6 +6,7 @@
 
 sf::RenderWindow window;
 std::string FONTS_PATH;
+size_t print_offset = 0;
 
 std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
 std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
