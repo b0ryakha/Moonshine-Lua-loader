@@ -125,6 +125,12 @@ window.close()
 ```
 
 Closes the window and destroy all the attached resources.
+#### ```size```
+```lua
+window.size(): Size
+```
+
+Returns the window size or nil on failure.
 
 ## :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
