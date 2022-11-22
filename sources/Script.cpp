@@ -83,7 +83,7 @@ __forceinline void Script::open_API() {
         std::make_pair("display", lua::display),
         std::make_pair("clear", lua::clear),
         std::make_pair("close", lua::close),
-        //std::make_pair("sleep", lua::wait),
+        std::make_pair("sleep", lua::sleep),
         //std::make_pair("set_icon", lua::set_icon),
         //std::make_pair("set_title", lua::set_title),
     });

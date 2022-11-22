@@ -1,5 +1,8 @@
 #pragma once
 
+#include <thread>
+#include <chrono>
+
 #include "lua_extensions.hpp"
 
 extern sf::RenderWindow window;
@@ -40,5 +43,16 @@ namespace lua
         });
 
         return 1;
+    }
+
+    static int sleep(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1)
+            throw_error("Incorrect number of arguments!");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(args.get<size_t>(0)));
+
+        return 0;
     }
 }
