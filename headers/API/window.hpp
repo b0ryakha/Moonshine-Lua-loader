@@ -24,7 +24,7 @@ namespace lua
         return 0;
     }
 
-    static int refresh(lua_State* L) {
+    static int display(lua_State* L) {
         window.display();
         return 0;
     }

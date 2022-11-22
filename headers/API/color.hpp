@@ -30,7 +30,7 @@ namespace lua
                 unsigned result = 0;
 
                 for (size_t i = 0; i < hex.length(); ++i) {
-                    char tmp = hex[hex.length() - 1 - i];
+                    char tmp = hex[hex.size() - i];
                     result += ((tmp >= 'A' && tmp <= 'F') ? tmp - 'A' + 10 : tmp - '0') * pow(16, i);
                 }
 

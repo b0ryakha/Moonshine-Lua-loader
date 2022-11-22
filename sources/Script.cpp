@@ -41,6 +41,9 @@ void Script::open(const std::string& path) {
     main_thread = new std::thread([&] {
         window.setActive(true);
 
+        window.clear();
+        window.display();
+
         if (luaL_dofile(lua_state, path.c_str()) != 0)
             throw_error(static_cast<std::string>(lua_tostring(lua_state, -1)) + ".");
 
@@ -78,7 +81,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "window", {
         //std::make_pair("get_width", lua::get_screen_width),
         //std::make_pair("get_height", lua::get_screen_height),
-        std::make_pair("refresh", lua::refresh),
+        std::make_pair("display", lua::display),
         std::make_pair("clear", lua::clear),
         std::make_pair("close", lua::close),
         //std::make_pair("sleep", lua::wait),
@@ -158,6 +161,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "cmath", {
         std::make_pair("rand", lua::rand_int),
         std::make_pair("lerp", lua::lerp),
+        std::make_pair("clamp", lua::clamp),
     });
 
     lua_register_table(lua_state, "globalvars", {
