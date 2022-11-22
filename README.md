@@ -2,7 +2,7 @@
 
 
 ## :mag_right: API :mag:
-### :movie_camera: Render
+## :movie_camera: Render
 #### ```new_sprite```
 ```lua
 render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: float, t_h: float]): Sprite
@@ -65,7 +65,7 @@ render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 Render sprite in the specified coordinates.
 
 
-### :rainbow: Color
+## :rainbow: Color
 #### ```new```
 ```lua
 color.new(r: int, g: int, b: int[, a: int]): Color
@@ -78,8 +78,18 @@ color.new(r: int, g: int, b: int[, a: int]): Color
 | a     | ```int``` | Alpha [0 - 255], default 255 |
 
 Returns the Color struct or nil on failure.
+#### ```unpack```
+```lua
+color.unpack(color: Color): int, int, int, int
+```
+| Name  | Type        | Description         |
+| :---: | :---:       | :---:               |
+| color | ```Color``` | Color for unpacking |
 
-### :computer: Window
+Returns the integer r, g, b, a values of color or nil on failure.
+
+
+## :computer: Window
 #### ```refresh```
 ```lua
 window.refresh()
@@ -88,8 +98,11 @@ window.refresh()
 Refreshes the screen.
 #### ```clear```
 ```lua
-window.clear()
+window.clear([color: Color])
 ```
+| Name  | Type        | Description                               |
+| :---: | :---:       | :---:                                     |
+| color | ```Color``` | Color for screen filling, default = Black |
 
 Clears the screen.
 #### ```close```
@@ -99,33 +112,33 @@ window.close()
 
 Closes the screen.
 
-### :wrench: Keyboard
+## :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
 button.Left
 ```
 
 
-### :mouse2: Mouse
+## :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
 key.W
 ```
 
 
-### :video_game: Cursor
+## :video_game: Cursor
 
 
-### :camera: View
+## :camera: View
 
 
-### :musical_note: Sound
+## :musical_note: Sound
 
 
-### :file_folder: File
+## :file_folder: File
 
 
-### :heavy_division_sign: CMath
+## :heavy_division_sign: CMath
 #### ```rand```
 ```lua
 cmath.rand(min: int, max: int): int
@@ -148,10 +161,10 @@ cmath.lerp(start: float, end: float, time: float): float
 
 Returns the linear interpolation or nil on failure.
 
-### :mag: GlobalVars
+## :mag: GlobalVars
 
 
-### :speech_balloon: Misc
+## :speech_balloon: Misc
 #### ```print```
 ```lua
 print(text: string, ...)
