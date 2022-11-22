@@ -69,13 +69,18 @@ Render sprite in the specified coordinates.
 #### ```new```
 ```lua
 color.new(r: int, g: int, b: int[, a: int]): Color
+color.new(hex: string): Color
 ```
-| Name  | Type      | Description                  |
-| :---: | :---:     | :---:                        |
-| r     | ```int``` | Red [0 - 255]                |
-| g     | ```int``` | Green [0 - 255]              |
-| b     | ```int``` | Blue [0 - 255]               |
-| a     | ```int``` | Alpha [0 - 255], default 255 |
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| r     | ```int```    | Red [0 - 255]                |
+| g     | ```int```    | Green [0 - 255]              |
+| b     | ```int```    | Blue [0 - 255]               |
+| a     | ```int```    | Alpha [0 - 255], default 255 |
+
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| hex   | ```string``` | Hex string                   |
 
 Returns the Color struct or nil on failure.
 #### ```unpack```
@@ -87,6 +92,15 @@ color.unpack(color: Color): int, int, int, int
 | color | ```Color``` | Color for unpacking |
 
 Returns the integer r, g, b, a values of color or nil on failure.
+#### ```to_hex```
+```lua
+color.to_hex(color: Color): string
+```
+| Name  | Type        | Description              |
+| :---: | :---:       | :---:                    |
+| color | ```Color``` | Color for casting to hex |
+
+Returns the hex str or nil on failure.
 
 
 ## :computer: Window
