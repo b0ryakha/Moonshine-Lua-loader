@@ -28,4 +28,15 @@ namespace lua
         window.display();
         return 0;
     }
+
+    static int get_size(lua_State* L) {
+        LuaStack args(L);
+
+        lua_pushtable(L, {
+            std::make_pair("w", window.getSize().x),
+            std::make_pair("h", window.getSize().y)
+        });
+
+        return 1;
+    }
 }

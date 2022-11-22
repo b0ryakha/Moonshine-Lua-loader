@@ -79,8 +79,7 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "window", {
-        //std::make_pair("get_width", lua::get_screen_width),
-        //std::make_pair("get_height", lua::get_screen_height),
+        std::make_pair("get_size", lua::get_size),
         std::make_pair("display", lua::display),
         std::make_pair("clear", lua::clear),
         std::make_pair("close", lua::close),
