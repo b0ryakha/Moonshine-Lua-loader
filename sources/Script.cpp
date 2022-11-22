@@ -72,6 +72,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "color", {
         std::make_pair("new", lua::color_new),
         std::make_pair("unpack", lua::color_unpack),
+        std::make_pair("to_hex", lua::color_to_hex),
     });
 
     lua_register_table(lua_state, "window", {
