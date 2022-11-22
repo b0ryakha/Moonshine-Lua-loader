@@ -125,9 +125,9 @@ window.close()
 ```
 
 Closes the window and destroy all the attached resources.
-#### ```size```
+#### ```get_size```
 ```lua
-window.size(): Size
+window.get_size(): Size
 ```
 
 Returns the window size or nil on failure.
