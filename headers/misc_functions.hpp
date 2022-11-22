@@ -16,7 +16,7 @@ __forceinline void throw_error(const std::string& exception, bool close_window =
     font.loadFromFile(FONTS_PATH + "arial.ttf");
 
     sf::Text text(exception, font, 20);
-    text.setPosition(sf::Vector2f((window.getSize().x / 2) - (exception.length() * 16) / 2, window.getSize().y / 2));
+    text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
     text.setFillColor(sf::Color::Red);
 
     window.clear();

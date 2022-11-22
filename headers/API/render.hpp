@@ -125,7 +125,7 @@ namespace lua
         float y = args.get<float>(1);
         std::string font_id = args.get<std::string>(2);
         std::string text = args.get<std::string>(3);
-        sf::Color color = lua_get_color(args, 4);
+        sf::Color color = lua_getcolor(args, 4);
 
         sf::Font* font = nullptr;
         size_t* size = nullptr;
@@ -156,7 +156,7 @@ namespace lua
         std::string sprite_id = args.get<std::string>(0);
         float x = args.get<float>(1);
         float y = args.get<float>(2);
-        sf::Color color = (args.size() == 4 ? lua_get_color(args, 3) : sf::Color());
+        sf::Color color = (args.size() == 4 ? lua_getcolor(args, 3) : sf::Color());
 
         sf::Sprite* sprite = nullptr;
         sf::Texture* texture = nullptr;

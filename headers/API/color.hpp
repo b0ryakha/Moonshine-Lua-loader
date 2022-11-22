@@ -31,4 +31,21 @@ namespace lua
 
         return 1;
     }
+
+    static int color_unpack(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1) {
+            lua_pushnil(L);
+            return 1;
+        }
+
+        sf::Color color = lua_getcolor(L, 0);
+
+        lua_pushnumber(L, color.r);
+        lua_pushnumber(L, color.g);
+        lua_pushnumber(L, color.b);
+        lua_pushnumber(L, color.a);
+        return 4;
+    }
 }

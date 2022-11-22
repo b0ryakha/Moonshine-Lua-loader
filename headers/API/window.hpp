@@ -18,7 +18,7 @@ namespace lua
             window.clear();
         }
         else if (args.size() == 1) {
-            //window.clear(lua_get_color(L, arg_count));
+            window.clear(lua_getcolor(L, 0));
         }
 
         return 0;
