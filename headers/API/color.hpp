@@ -21,16 +21,16 @@ namespace lua
         if (args.size() == 1) {
             std::string tmp = args.get<std::string>(0);
 
-            if ((tmp.length() != 7 && tmp.length() != 9) || tmp.at(0) != '#') {
+            if ((tmp.length() != 7 && tmp.length() != 9) || tmp[0] != '#') {
                 lua_pushnil(L);
                 return 1;
             }
 
-            constexpr auto hex_to_number = [](const std::string& hex) -> size_t {
+            auto hex_to_number = [](const std::string& hex) -> size_t {
                 unsigned result = 0;
 
                 for (size_t i = 0; i < hex.length(); ++i) {
-                    char tmp = hex[hex.size() - i];
+                    char tmp = hex[hex.length() - 1 - i];
                     result += ((tmp >= 'A' && tmp <= 'F') ? tmp - 'A' + 10 : tmp - '0') * pow(16, i);
                 }
 
