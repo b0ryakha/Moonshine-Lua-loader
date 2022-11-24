@@ -89,17 +89,16 @@ __forceinline void Script::open_API() {
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
-    std::array<std::string, 101> SFML_KEYS_NAME { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
+    const std::array<std::string_view, 101> SFML_KEYS_NAME = { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
 
-    for (size_t i = 0; i < SFML_KEYS_NAME.size(); ++i) {
-        SFML_KEYS.push_back(std::make_pair(SFML_KEYS_NAME[i], i));
-    }
+    for (size_t i = 0; i < SFML_KEYS_NAME.size(); ++i)
+        SFML_KEYS.emplace_back(std::make_pair(SFML_KEYS_NAME[i], i));
 
-    SFML_KEYS.push_back(std::make_pair("Dash", 56));
-    SFML_KEYS.push_back(std::make_pair("BackSpace", 59));
-    SFML_KEYS.push_back(std::make_pair("BackSlash", 53));
-    SFML_KEYS.push_back(std::make_pair("Semicolon", 48));
-    SFML_KEYS.push_back(std::make_pair("Return", 58));
+    SFML_KEYS.emplace_back(std::make_pair("Dash", 56));
+    SFML_KEYS.emplace_back(std::make_pair("BackSpace", 59));
+    SFML_KEYS.emplace_back(std::make_pair("BackSlash", 53));
+    SFML_KEYS.emplace_back(std::make_pair("Semicolon", 48));
+    SFML_KEYS.emplace_back(std::make_pair("Return", 58));
 
     lua_register_table(lua_state, "key", SFML_KEYS);
 
@@ -109,11 +108,10 @@ __forceinline void Script::open_API() {
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
-    std::array<std::string, 5> SFML_BUTTONS_NAME { "Left", "Right", "Middle", "XButton1", "XButton2" };
+    const std::array<std::string_view, 5> SFML_BUTTONS_NAME = { "Left", "Right", "Middle", "XButton1", "XButton2" };
 
-    for (size_t i = 0; i < SFML_BUTTONS_NAME.size(); ++i) {
-        SFML_BUTTONS.push_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
-    }
+    for (size_t i = 0; i < SFML_BUTTONS_NAME.size(); ++i)
+        SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
 
     lua_register_table(lua_state, "button", SFML_BUTTONS);
 

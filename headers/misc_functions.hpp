@@ -25,6 +25,25 @@ __forceinline void throw_error(const std::string& exception, bool close_window =
 
     std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 
+    /*sf::Event event;
+    bool exit = false;
+
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::MouseButtonPressed:
+                case sf::Event::KeyPressed:
+                    exit = true;
+                    break;
+
+                case sf::Event::Closed:
+                    window.close();
+            }
+        }
+
+        if (exit) break;
+    }*/
+
     if (close_window)
         window.close();
 }

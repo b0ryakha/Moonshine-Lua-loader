@@ -42,6 +42,9 @@
     <ClCompile Include="sources\Lua Extensions\lua_types.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
