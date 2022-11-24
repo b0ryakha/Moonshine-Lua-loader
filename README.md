@@ -131,6 +131,15 @@ window.get_size(): Size
 ```
 
 Returns the window size or nil on failure.
+#### ```sleep```
+```lua
+window.sleep(milliseconds: size_t)
+```
+| Name         | Type         | Description                    |
+| :---:        | :---:        | :---:                          |
+| milliseconds | ```size_t``` | Time for delay in milliseconds |
+
+Freezes the process for the specified time.
 
 ## :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
