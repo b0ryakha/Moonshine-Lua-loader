@@ -80,13 +80,18 @@ __forceinline void Script::open_API() {
 
     lua_register_table(lua_state, "window", {
         std::make_pair("get_size", lua::get_size),
+        std::make_pair("set_size", lua::set_size),
         std::make_pair("display", lua::display),
         std::make_pair("clear", lua::clear),
         std::make_pair("close", lua::close),
         std::make_pair("sleep", lua::sleep),
         std::make_pair("await", lua::await),
+        std::make_pair("get_pos", lua::get_pos),
+        std::make_pair("set_pos", lua::set_pos),
+        std::make_pair("set_title", lua::set_title),
+        std::make_pair("set_vsync", lua::set_vsync),
+        std::make_pair("set_frame_limit", lua::set_frame_limit),
         //std::make_pair("set_icon", lua::set_icon),
-        //std::make_pair("set_title", lua::set_title),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
