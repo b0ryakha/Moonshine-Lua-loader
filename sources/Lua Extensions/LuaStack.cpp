@@ -29,7 +29,11 @@ LuaStack::LuaStack(lua_State* lua_state) {
 }
 
 LuaMultiValueType LuaStack::get_type(size_t index) const {
-    switch (elements.at(index).index()) {
+    if (index < 0 || index >= elements.size()) {
+        throw_error("[Stack] Attempt to get an element under index " + std::to_string(index) + ", but size = " + std::to_string(elements.size()) + ".");
+    }
+
+    switch (elements[index].index()) {
         case 0:
             return LuaMultiValueType::Number;
         case 1:

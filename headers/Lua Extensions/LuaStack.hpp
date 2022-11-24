@@ -13,11 +13,15 @@ private:
     std::vector<LuaMultiValue> elements;
     mutable size_t get_counter = 1;
 
-    __forceinline void check_type(LuaMultiValueType expected_type, size_t index) const {
+    __forceinline void check_errors(LuaMultiValueType expected_type, size_t index) const {
+        if (index < 0 || index >= elements.size()) {
+            throw_error("[Stack] Attempt to get an element under index " + std::to_string(index) + ", but size = " + std::to_string(elements.size()) + ".");
+        }
+
         static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
-        if (elements.at(index).index() != static_cast<size_t>(expected_type)) {
-            throw_error("Incorrect type, received " + TYPE_NAME[elements.at(index).index()] + ", but expected " + TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+        if (elements[index].index() != static_cast<size_t>(expected_type)) {
+            throw_error("Incorrect type, received " + TYPE_NAME[elements[index].index()] + ", but expected " + TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
         }
     }
 
@@ -33,52 +37,52 @@ public:
 
     template<>
     int get<int>(size_t index) const {
-        check_type(LuaMultiValueType::Number, index);
+        check_errors(LuaMultiValueType::Number, index);
 
-        return static_cast<int>(std::get<lua_Number>(elements.at(index)));
+        return static_cast<int>(std::get<lua_Number>(elements[index]));
     }
 
     template<>
     size_t get<size_t>(size_t index) const {
-        check_type(LuaMultiValueType::Number, index);
+        check_errors(LuaMultiValueType::Number, index);
 
-        int result = static_cast<int>(std::get<lua_Number>(elements.at(index)));
+        int result = static_cast<int>(std::get<lua_Number>(elements[index]));
         return static_cast<size_t>(result > 0 ? result : 0);
     }
 
     template<>
     float get<float>(size_t index) const {
-        check_type(LuaMultiValueType::Number, index);
+        check_errors(LuaMultiValueType::Number, index);
 
-        return static_cast<float>(std::get<lua_Number>(elements.at(index)));
+        return static_cast<float>(std::get<lua_Number>(elements[index]));
     }
 
     template<>
     std::string get<std::string>(size_t index) const {
-        check_type(LuaMultiValueType::String, index);
+        check_errors(LuaMultiValueType::String, index);
 
-        return static_cast<std::string>(std::get<std::string>(elements.at(index)));
+        return static_cast<std::string>(std::get<std::string>(elements[index]));
     }
 
     template<>
     bool get<bool>(size_t index) const {
-        check_type(LuaMultiValueType::Boolean, index);
+        check_errors(LuaMultiValueType::Boolean, index);
 
-        return static_cast<bool>(std::get<LuaBoolean>(elements.at(index)).state);
+        return static_cast<bool>(std::get<LuaBoolean>(elements[index]).state);
     }
 
     template<>
     LuaNil get<LuaNil>(size_t index) const {
-        check_type(LuaMultiValueType::Nil, index);
+        check_errors(LuaMultiValueType::Nil, index);
 
-        return static_cast<LuaNil>(std::get<LuaNil>(elements.at(index)));
+        return static_cast<LuaNil>(std::get<LuaNil>(elements[index]));
     }
 
     template<>
     LuaTable get<LuaTable>(size_t index) const {
-        check_type(LuaMultiValueType::Table, index);
+        check_errors(LuaMultiValueType::Table, index);
 
-        return static_cast<LuaTable>(std::get<LuaTable>(elements.at(index)));
+        return static_cast<LuaTable>(std::get<LuaTable>(elements[index]));
     }
 
     template<typename T>

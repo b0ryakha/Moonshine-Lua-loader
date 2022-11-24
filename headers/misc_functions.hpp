@@ -7,6 +7,7 @@
 #include <string>
 
 extern sf::RenderWindow window;
+extern sf::Event main_event;
 extern std::string FONTS_PATH;
 
 int rand_number(int min, int max);
@@ -23,26 +24,17 @@ __forceinline void throw_error(const std::string& error, bool close_window = tru
     window.draw(text);
     window.display();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
-
-    /*sf::Event event;
-    bool exit = false;
-
     while (window.isOpen()) {
-        while (window.pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::MouseButtonPressed:
-                case sf::Event::KeyPressed:
-                    exit = true;
-                    break;
+        switch (main_event.type) {
+            case sf::Event::MouseButtonPressed:
+            case sf::Event::KeyPressed:
+                goto loop_break;
 
-                case sf::Event::Closed:
-                    window.close();
-            }
+            case sf::Event::Closed:
+                window.close();
         }
-
-        if (exit) break;
-    }*/
+    }
+    loop_break:
 
     if (close_window)
         window.close();

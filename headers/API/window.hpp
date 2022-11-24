@@ -6,6 +6,7 @@
 #include "lua_extensions.hpp"
 
 extern sf::RenderWindow window;
+extern sf::Event main_event;
 extern size_t print_offset;
 
 namespace lua
@@ -52,6 +53,22 @@ namespace lua
             throw_error("Incorrect number of arguments!");
 
         std::this_thread::sleep_for(std::chrono::milliseconds(args.get<size_t>()));
+
+        return 0;
+    }
+
+    static int await(lua_State* L) {
+        while (window.isOpen()) {
+            switch (main_event.type) {
+                case sf::Event::MouseButtonPressed:
+                case sf::Event::KeyPressed:
+                    goto loop_break;
+
+                case sf::Event::Closed:
+                    window.close();
+            }
+        }
+        loop_break:
 
         return 0;
     }

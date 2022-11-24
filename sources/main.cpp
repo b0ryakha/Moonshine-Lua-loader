@@ -5,6 +5,8 @@
 #include "Script.hpp"
 
 sf::RenderWindow window;
+sf::Event main_event;
+
 std::string FONTS_PATH;
 size_t print_offset = 0;
 
@@ -23,11 +25,9 @@ __forceinline void start_program(char* cmd_line) {
     //std::string script_path = cmd_line[0] ? cmd_line : "";
     Script lua("C:/Users/tosha/OneDrive/Desktop/main.lua");
 
-    sf::Event event;
-
     while (window.isOpen()) {
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+        while (window.pollEvent(main_event)) {
+            if (main_event.type == sf::Event::Closed)
                 window.close();
         }
     }

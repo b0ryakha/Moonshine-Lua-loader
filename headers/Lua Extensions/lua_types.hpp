@@ -27,7 +27,11 @@ class LuaTable {
 private:
     std::map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
 
-    __forceinline void check_type(LuaMultiValueType expected_type, std::string key) const {
+    __forceinline void check_errors(LuaMultiValueType expected_type, std::string key) const {
+        if (elements.find(key) == elements.end()) {
+            throw_error("[Table] Attempt to get an element under key " + key + ".");
+        }
+
         static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
@@ -43,14 +47,14 @@ public:
 
     template<>
     int get<int>(const std::string& key) const {
-        check_type(LuaMultiValueType::Number, key);
+        check_errors(LuaMultiValueType::Number, key);
 
         return static_cast<int>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
     size_t get<size_t>(const std::string& key) const {
-        check_type(LuaMultiValueType::Number, key);
+        check_errors(LuaMultiValueType::Number, key);
 
         int result = static_cast<int>(std::get<lua_Number>(elements.at(key)));
         return static_cast<size_t>(result > 0 ? result : 0);
@@ -58,28 +62,28 @@ public:
 
     template<>
     float get<float>(const std::string& key) const {
-        check_type(LuaMultiValueType::Number, key);
+        check_errors(LuaMultiValueType::Number, key);
 
         return static_cast<float>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
     std::string get<std::string>(const std::string& key) const {
-        check_type(LuaMultiValueType::String, key);
+        check_errors(LuaMultiValueType::String, key);
 
         return static_cast<std::string>(std::get<std::string>(elements.at(key)));
     }
 
     template<>
     bool get<bool>(const std::string& key) const {
-        check_type(LuaMultiValueType::Boolean, key);
+        check_errors(LuaMultiValueType::Boolean, key);
 
         return static_cast<bool>(std::get<LuaBoolean>(elements.at(key)).state);
     }
 
     template<>
     LuaNil get<LuaNil>(const std::string& key) const {
-        check_type(LuaMultiValueType::Nil, key);
+        check_errors(LuaMultiValueType::Nil, key);
 
         return static_cast<LuaNil>(std::get<LuaNil>(elements.at(key)));
     }
