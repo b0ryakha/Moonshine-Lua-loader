@@ -131,6 +131,59 @@ window.get_size(): Size
 ```
 
 Returns the window size or nil on failure.
+#### ```set_size```
+```lua
+window.set_size(width: size_t, height: size_t)
+```
+| Name   | Type         | Description       |
+| :---:  | :---:        | :---:             |
+| width  | ```size_t``` | New window width  |
+| height | ```size_t``` | New window height |
+
+Sets the window a new size.
+#### ```get_pos```
+```lua
+window.get_pos(): Size
+```
+
+Returns the window position.
+#### ```set_pos```
+```lua
+window.set_pos(x: int, y: int)
+```
+| Name  | Type      | Description           |
+| :---: | :---:     | :---:                 |
+| x     | ```int``` | New window x position |
+| y     | ```int``` | New window y position |
+
+Sets the window a new position.
+#### ```set_title```
+```lua
+window.set_title(title: string)
+```
+| Name  | Type         | Description      |
+| :---: | :---:        | :---:            |
+| title | ```string``` | New window title |
+
+Sets the window a new title.
+#### ```set_vsync```
+```lua
+window.set_vsync(state: bool)
+```
+| Name  | Type       | Description                               |
+| :---: | :---:      | :---:                                     |
+| state | ```bool``` | Enable / disable vertical synchronization |
+
+Enables or disables the window's vsync.
+#### ```set_frame_limit```
+```lua
+window.set_frame_limit(fps_max: size_t)
+```
+| Name    | Type         | Description       |
+| :---:   | :---:        | :---:             |
+| fps_max | ```size_t``` | Frames per second |
+
+Sets the window frame limit.
 #### ```sleep```
 ```lua
 window.sleep(milliseconds: size_t)
