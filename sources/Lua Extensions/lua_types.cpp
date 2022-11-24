@@ -7,7 +7,7 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
     while (lua_next(lua_state, -2)) {
         lua_pushvalue(lua_state, -2);
 
-        const std::string_view key = static_cast<std::string>(lua_tostring(lua_state, -1));
+        const std::string_view key = static_cast<std::string_view>(lua_tostring(lua_state, -1));
 
         switch (lua_type(lua_state, -2)) {
             case LUA_TSTRING:

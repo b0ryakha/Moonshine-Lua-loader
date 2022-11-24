@@ -2,7 +2,7 @@
 
 Script::Script() {}
 
-Script::Script(const std::string& path) {
+Script::Script(const char* path) : lua_path(path) {
     open(path);
 }
 
@@ -22,7 +22,7 @@ void Script::close() {
     window.setActive(true);
 }
 
-void Script::open(const std::string& path) {
+void Script::open(const char* path) {
     if (main_thread != nullptr) {
         throw_error("Script is already running.");
     }
@@ -32,6 +32,10 @@ void Script::open(const std::string& path) {
     if (lua_state == nullptr) {
         throw_error("Failed to create lua state.");
     }
+
+    if (lua_path == nullptr) {
+        lua_path = path;
+    }
     
     luaL_openlibs(lua_state);
     open_API();
@@ -39,20 +43,16 @@ void Script::open(const std::string& path) {
     window.setActive(false);
 
     main_thread = new std::thread([&] {
-        window.setActive(true);
-
         window.clear();
         window.display();
 
-        if (luaL_dofile(lua_state, path.c_str()) != 0)
+        if (luaL_dofile(lua_state, lua_path) != 0)
             throw_error(static_cast<std::string>(lua_tostring(lua_state, -1)) + ".");
 
         lua_pcall(lua_state, 0, 0, 0);
-
-        window.setActive(false);
     });
 
-    main_thread->join();
+    main_thread->detach();
 }
 
 __forceinline void Script::open_API() {

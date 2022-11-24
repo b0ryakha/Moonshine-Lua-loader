@@ -11,11 +11,11 @@ extern std::string FONTS_PATH;
 
 int rand_number(int min, int max);
 
-__forceinline void throw_error(const std::string& exception, bool close_window = true) {
+__forceinline void throw_error(const std::string& error, bool close_window = true) noexcept {
     sf::Font font;
     font.loadFromFile(FONTS_PATH + "arial.ttf");
 
-    sf::Text text(exception, font, 20);
+    sf::Text text(error, font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
     text.setFillColor(sf::Color::Red);
 

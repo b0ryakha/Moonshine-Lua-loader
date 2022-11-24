@@ -15,14 +15,15 @@ class Script {
 private:
 	lua_State* lua_state = nullptr;
 	std::thread* main_thread = nullptr;
+	const char* lua_path = nullptr;
 
 	__forceinline void open_API();
 
 public:
 	Script();
-	Script(const std::string& path);
+	Script(const char* path);
 	~Script();
 
-	void open(const std::string& path);
+	void open(const char* path);
 	void close();
 };
