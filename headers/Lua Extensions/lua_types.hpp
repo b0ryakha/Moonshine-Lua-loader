@@ -25,7 +25,7 @@ struct LuaBoolean {
 
 class LuaTable {
 private:
-    mutable std::map<std::string, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
+    std::map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
 
     __forceinline void check_type(LuaMultiValueType expected_type, std::string key) const {
         static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
