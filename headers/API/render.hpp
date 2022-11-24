@@ -19,13 +19,13 @@ namespace lua
             return 1;
         }
 
-        std::string path = args.get<std::string>(0);
-        float w = args.get<float>(1);
-        float h = args.get<float>(2);
-        float t_x = (args.size() == 7 ? args.get<float>(3) : 0);
-        float t_y = (args.size() == 7 ? args.get<float>(4) : 0);
-        float t_w = (args.size() == 7 ? args.get<float>(5) : w);
-        float t_h = (args.size() == 7 ? args.get<float>(6) : h);
+        std::string path = args.get<std::string>();
+        float w = args.get<float>();
+        float h = args.get<float>();
+        float t_x = (args.size() == 7 ? args.get<float>() : 0);
+        float t_y = (args.size() == 7 ? args.get<float>() : 0);
+        float t_w = (args.size() == 7 ? args.get<float>() : w);
+        float t_h = (args.size() == 7 ? args.get<float>() : h);
 
         const std::string ID = "0x0" + std::to_string(sprite_buffer.size());
 
@@ -56,8 +56,8 @@ namespace lua
             return 1;
         }
 
-        std::string font_name = args.get<std::string>(0);
-        size_t size = args.get<size_t>(1);
+        std::string font_name = args.get<std::string>();
+        size_t size = args.get<size_t>();
 
         if (font_name.length() > 4) {
             if (std::string(font_name.end() - 4, font_name.end()) != ".ttf") {
@@ -90,8 +90,8 @@ namespace lua
             return 1;
         }
 
-        std::string font_id = args.get<std::string>(0);
-        std::string text = args.get<std::string>(1);
+        std::string font_id = args.get<std::string>();
+        std::string text = args.get<std::string>();
 
         sf::Font* font = nullptr;
         size_t* size = nullptr;
@@ -121,11 +121,11 @@ namespace lua
         if (args.size() != 5)
             throw_error("Incorrect number of arguments!");
 
-        float x = args.get<float>(0);
-        float y = args.get<float>(1);
-        std::string font_id = args.get<std::string>(2);
-        std::string text = args.get<std::string>(3);
-        sf::Color color = lua_getcolor(args, 4);
+        float x = args.get<float>();
+        float y = args.get<float>();
+        std::string font_id = args.get<std::string>();
+        std::string text = args.get<std::string>();
+        sf::Color color = lua_getcolor(args);
 
         sf::Font* font = nullptr;
         size_t* size = nullptr;
@@ -153,10 +153,10 @@ namespace lua
         if (args.size() != 3 && args.size() != 4)
             throw_error("Incorrect number of arguments!");
 
-        std::string sprite_id = args.get<std::string>(0);
-        float x = args.get<float>(1);
-        float y = args.get<float>(2);
-        sf::Color color = (args.size() == 4 ? lua_getcolor(args, 3) : sf::Color());
+        std::string sprite_id = args.get<std::string>();
+        float x = args.get<float>();
+        float y = args.get<float>();
+        sf::Color color = (args.size() == 4 ? lua_getcolor(args) : sf::Color());
 
         sf::Sprite* sprite = nullptr;
         sf::Texture* texture = nullptr;

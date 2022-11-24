@@ -19,3 +19,8 @@ __forceinline sf::Color lua_getcolor(const LuaStack& stack, int index) {
 	LuaTable color = stack.get<LuaTable>(index);
 	return sf::Color(color.get<int>("r"), color.get<int>("g"), color.get<int>("b"), color.get<int>("a"));
 }
+
+__forceinline sf::Color lua_getcolor(const LuaStack& stack) {
+	LuaTable color = stack.get<LuaTable>();
+	return sf::Color(color.get<int>("r"), color.get<int>("g"), color.get<int>("b"), color.get<int>("a"));
+}

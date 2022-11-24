@@ -23,7 +23,7 @@ namespace lua
             window.clear();
         }
         else if (args.size() == 1) {
-            window.clear(lua_getcolor(L, 0));
+            window.clear(lua_getcolor(args));
         }
 
         return 0;
@@ -51,7 +51,7 @@ namespace lua
         if (args.size() != 1)
             throw_error("Incorrect number of arguments!");
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(args.get<size_t>(0)));
+        std::this_thread::sleep_for(std::chrono::milliseconds(args.get<size_t>()));
 
         return 0;
     }

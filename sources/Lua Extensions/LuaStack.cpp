@@ -24,6 +24,8 @@ LuaStack::LuaStack(lua_State* lua_state) {
                 elements.push_back(std::move(LuaNil()));
         }
     }
+
+    get_counter = elements.size();
 }
 
 LuaMultiValueType LuaStack::get_type(size_t index) const {

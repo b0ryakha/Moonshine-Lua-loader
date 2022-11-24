@@ -13,8 +13,8 @@ namespace lua
             return 1;
         }
 
-        const int min = args.get<int>(0);
-        const int max = args.get<int>(1);
+        const int min = args.get<int>();
+        const int max = args.get<int>();
 
         lua_pushinteger(L, rand_number(min, max));
         return 1;
@@ -28,9 +28,9 @@ namespace lua
             return 1;
         }
 
-        const float start = args.get<float>(0);
-        const float end = args.get<float>(1);
-        const float time = args.get<float>(2);
+        const float start = args.get<float>();
+        const float end = args.get<float>();
+        const float time = args.get<float>();
 
         lua_pushnumber(L, (start + time * (end - start)));
         return 1;
@@ -44,9 +44,9 @@ namespace lua
             return 1;
         }
 
-        const float number = args.get<float>(0);
-        const float lower = args.get<float>(1);
-        const float upper = args.get<float>(2);
+        const float number = args.get<float>();
+        const float lower = args.get<float>();
+        const float upper = args.get<float>();
         
         lua_pushnumber(L, std::clamp(number, lower, upper));
         return 1;

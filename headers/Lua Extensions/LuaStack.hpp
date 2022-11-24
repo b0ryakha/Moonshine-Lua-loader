@@ -11,6 +11,7 @@
 class LuaStack {
 private:
     std::vector<LuaMultiValue> elements;
+    mutable size_t get_counter = 1;
 
     __forceinline void check_type(LuaMultiValueType expected_type, size_t index) const {
         static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
@@ -78,5 +79,10 @@ public:
         check_type(LuaMultiValueType::Table, index);
 
         return static_cast<LuaTable>(std::get<LuaTable>(elements.at(index)));
+    }
+
+    template<typename T>
+    T get() const {
+        return get<T>(elements.size() - get_counter--);
     }
 };

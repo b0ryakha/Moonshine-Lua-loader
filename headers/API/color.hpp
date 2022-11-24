@@ -12,11 +12,11 @@ namespace lua
             lua_pushnil(L);
             return 1;
         }
-
-        size_t r = (args.size() > 1) ? args.get<size_t>(0) : 0;
-        size_t g = (args.size() > 1) ? args.get<size_t>(1) : 0;
-        size_t b = (args.size() > 1) ? args.get<size_t>(2) : 0;
-        size_t a = (args.size() == 4) ? args.get<size_t>(3) : 255;
+        
+        size_t r = (args.size() > 1) ? args.get<size_t>() : 0;
+        size_t g = (args.size() > 1) ? args.get<size_t>() : 0;
+        size_t b = (args.size() > 1) ? args.get<size_t>() : 0;
+        size_t a = (args.size() == 4) ? args.get<size_t>() : 255;
         
         if (args.size() == 1) {
             std::string tmp = args.get<std::string>(0);
@@ -26,7 +26,7 @@ namespace lua
                 return 1;
             }
 
-            auto hex_to_number = [](const std::string& hex) -> size_t {
+            constexpr auto hex_to_number = [](const std::string& hex) -> size_t {
                 unsigned result = 0;
 
                 for (size_t i = 0; i < hex.length(); ++i) {
@@ -66,7 +66,7 @@ namespace lua
             return 1;
         }
 
-        sf::Color color = lua_getcolor(L, 0);
+        sf::Color color = lua_getcolor(args);
 
         lua_pushnumber(L, color.r);
         lua_pushnumber(L, color.g);
@@ -83,7 +83,7 @@ namespace lua
             return 1;
         }
 
-        sf::Color color = lua_getcolor(L, 0);
+        sf::Color color = lua_getcolor(args);
         std::stringstream ss;
 
         ss << '#' << std::hex << (color.r << 24 | color.g << 16 | color.b << 8 | color.a);
