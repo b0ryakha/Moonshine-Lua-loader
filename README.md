@@ -37,6 +37,7 @@
   
 + [:wrench: Keyboard](#Keyboard)<details><summary>***...***</summary>
 
+  - [get_pressed()](#keyboard.get_pressed)
   </details>
   
 + [:mouse: Mouse](#Mouse)<details><summary>***...***</summary>
@@ -335,6 +336,16 @@ Freezes the process until any key is pressed.
 ```lua
 button.Left
 ```
+
+#### <a name="keyboard.get_pressed"></a> ```get_pressed```
+```lua
+keyboard.get_pressed([is_key_code: bool]): string / size_t
+```
+| Name        | Type       | Description                             |
+| :---:       | :---:      | :---:                                   |
+| is_key_code | ```bool``` | Return a key code flag, default = false |
+
+Awaiting for pressing key and return his key code / symbol or nil on failure.
 
 
 ### <a name="Mouse"></a> :mouse2: Mouse
