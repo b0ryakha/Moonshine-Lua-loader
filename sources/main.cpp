@@ -23,7 +23,7 @@ __forceinline void start_program(char* cmd_line) {
     window.setFramerateLimit(100);
     
     //std::string script_path = cmd_line[0] ? cmd_line : "";
-    Script lua("C:/Users/tosha/OneDrive/Desktop/main.lua");
+    Script lua("D:/Users/A.Marchenko/Desktop/1.lua");
 
     while (window.isOpen()) {
         while (window.pollEvent(main_event)) {

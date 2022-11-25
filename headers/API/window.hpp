@@ -125,9 +125,6 @@ namespace lua
                 case sf::Event::MouseButtonPressed:
                 case sf::Event::KeyPressed:
                     goto loop_break;
-
-                case sf::Event::Closed:
-                    window.close();
             }
         }
         loop_break:
