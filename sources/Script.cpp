@@ -22,13 +22,13 @@ void Script::close() {
     window.setActive(true);
 }
 
-void Script::open(const char* path) {
+void Script::open(const std::string& path) {
     if (main_thread != nullptr) {
         throw_error("Script is already running.");
     }
 
     lua_state = luaL_newstate();
-    lua_path = path;
+    lua_path = std::move(path);
 
     if (lua_state == nullptr) {
         throw_error("Failed to create lua state.");
@@ -43,7 +43,7 @@ void Script::open(const char* path) {
         window.clear();
         window.display();
 
-        if (luaL_dofile(lua_state, lua_path) != 0)
+        if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(static_cast<std::string>(lua_tostring(lua_state, -1)) + ".");
 
         lua_pcall(lua_state, 0, 0, 0);

@@ -15,7 +15,7 @@ class Script {
 private:
 	lua_State* lua_state = nullptr;
 	std::thread* main_thread = nullptr;
-	const char* lua_path = nullptr;
+	std::string lua_path;
 
 	__forceinline void open_API();
 
@@ -24,6 +24,6 @@ public:
 	Script(const char* path);
 	~Script();
 
-	void open(const char* path);
+	void open(const std::string& path);
 	void close();
 };
