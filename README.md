@@ -3,7 +3,7 @@
 
 ## :mag_right: API :mag:
 ### :dash: Navigation:
-+ [:movie_camera: Render](#Render)<details><summary>***...***</summary>
++ <details><summary>:movie_camera: Render</summary>
 
   - [load_sprite()](#render.load_sprite)
   - [load_font()](#render.load_font)
@@ -12,14 +12,14 @@
   - [sprite()](#render.sprite)
   </details>
 
-+ [:rainbow: Color](#Color)<details><summary>***...***</summary>
++ <details><summary>:rainbow: Color</summary>
 
   - [new()](#color.new)
   - [unpack()](#color.unpack)
   - [to_hex()](#color.to_hex)
   </details>
   
-+ [:computer: Window](#Window)<details><summary>***...***</summary>
++ <details><summary>:computer: Window</summary>
 
   - [display()](#window.display)
   - [clear()](#window.clear)
@@ -35,43 +35,43 @@
   - [await()](#window.await)
   </details>
   
-+ [:wrench: Keyboard](#Keyboard)<details><summary>***...***</summary>
++ <details><summary>:wrench: Keyboard</summary>
 
   - [get_pressed()](#keyboard.get_pressed)
   </details>
   
-+ [:mouse: Mouse](#Mouse)<details><summary>***...***</summary>
++ <details><summary>:mouse: Mouse</summary>
 
   </details>
   
-+ [:video_game: Cursor](#Cursor)<details><summary>***...***</summary>
++ <details><summary>:video_game: Cursor</summary>
 
   </details>
   
-+ [:camera: View](#View)<details><summary>***...***</summary>
++ <details><summary>:camera: View</summary>
 
   </details>
   
-+ [:musical_note: Sound](#Sound)<details><summary>***...***</summary>
++ <details><summary>:musical_note: Sound</summary>
 
   </details>
   
-+ [:file_folder: File](#File)<details><summary>***...***</summary>
++ <details><summary>:file_folder: File</summary>
 
   </details>
   
-+ [:heavy_division_sign: CMath](#CMath)<details><summary>***...***</summary>
++ <details><summary>:heavy_division_sign: CMath</summary>
 
   - [rand()](#cmath.rand)
   - [lerp()](#cmath.lerp)
   - [clamp()](#cmath.clamp)
   </details>
   
-+ [:mag: GlobalVars](#GlobalVars)<details><summary>***...***</summary>
++ <details><summary>:mag: GlobalVars</summary>
 
   </details>
   
-+ [:speech_balloon: Misc](#Misc)<details><summary>***...***</summary>
++ <details><summary>:speech_balloon: Misc</summary>
 
   - [print()](#print)
   </details>
@@ -125,7 +125,7 @@ print(font)
 
 ### :triangular_ruler: Functions:
 
-### <a name="Render"></a> :movie_camera: Render
+### :movie_camera: Render
 
 #### <a name="render.load_sprite"></a> ```load_sprite```
 ```lua
@@ -191,17 +191,17 @@ Returns the measured [size](#Size) of the text.
 ```lua
 render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 ```
-| Name      | Type        | Description        |
-| :---:     | :---:       | :---:              |
-| sprite    | ```Sprite```| Sprite for render  |
-| x         | ```float``` | X coordinate       |
-| y         | ```float``` | Y coordinate       |
-| color     | ```Color``` | Color for sprite   |
+| Name      | Type        | Description                     |
+| :---:     | :---:       | :---:                           |
+| sprite    | ```Sprite```| Sprite for render               |
+| x         | ```float``` | X coordinate                    |
+| y         | ```float``` | Y coordinate                    |
+| color     | ```Color``` | Color for sprite, default = nil |
 
 Render [sprite](#Sprite) in the specified coordinates.
 
 
-### <a name="Color"></a> :rainbow: Color
+### :rainbow: Color
 
 #### <a name="color.new"></a> ```new```
 ```lua
@@ -246,7 +246,7 @@ color.to_hex(color: Color): string
 Returns the hex str or nil on failure.
 
 
-### <a name="Window"></a> :computer: Window
+### :computer: Window
 
 #### <a name="window.display"></a> ```display```
 ```lua
@@ -395,26 +395,26 @@ keyboard.get_pressed([is_key_code: bool]): string / size_t
 Awaiting for pressing key and return his key code / symbol or nil on failure.
 
 
-### <a name="Mouse"></a> :mouse2: Mouse
+### :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
 local key_id = key.W
 ```
 
 
-### <a name="Cursor"></a> :video_game: Cursor
+### :video_game: Cursor
 
 
-### <a name="View"></a> :camera: View
+### :camera: View
 
 
-### <a name="Sound"></a> :musical_note: Sound
+### :musical_note: Sound
 
 
-### <a name="File"></a> :file_folder: File
+### :file_folder: File
 
 
-### <a name="CMath"></a> :heavy_division_sign: CMath
+### :heavy_division_sign: CMath
 
 #### <a name="cmath.rand"></a> ```rand```
 ```lua
@@ -456,10 +456,10 @@ cmath.clamp(number: float, lower: float, upper: float): float
 Returns the clumped value or nil on failure.
 
 
-### <a name="GlobalVars"></a> :mag: GlobalVars
+### :mag: GlobalVars
 
 
-### <a name="Misc"></a> :speech_balloon: Misc
+### :speech_balloon: Misc
 #### <a name="print"></a> ```print```
 ```lua
 print(text: string, ...)
