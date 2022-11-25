@@ -127,9 +127,9 @@ print(font)
 
 ### <a name="Render"></a> :movie_camera: Render
 
-#### <a name="render.new_sprite"></a> ```new_sprite```
+#### <a name="render.load_sprite"></a> ```load_sprite```
 ```lua
-render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: float, t_h: float]): Sprite
+render.load_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: float, t_h: float]): Sprite
 ```
 | Name  | Type        | Description                                     |
 | :---: | :---:       | :---:                                           |
@@ -141,7 +141,7 @@ render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w
 | t_w   | ```float``` | Width of areas in the image, default = w        |
 | t_h   | ```float``` | Height of areas in the image, default = h       |
 
-Returns the [sprite](#Sprite) struct or nil on failure.
+Returns the [sprite](#Sprite) or nil on failure.
 
 ---
 
