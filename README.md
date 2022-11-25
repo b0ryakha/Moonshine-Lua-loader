@@ -70,6 +70,7 @@
   
 + <details><summary>:mag: GlobalVars</summary>
 
+  - [get_frametime()](#globalvars.get_frametime)
   </details>
   
 + <details><summary>:speech_balloon: Misc</summary>
@@ -470,6 +471,12 @@ Returns the clumped value or nil on failure.
 
 
 ### :mag: GlobalVars
+#### <a name="globalvars.get_frametime"></a> ```get_frametime```
+```lua
+globalvars.get_frametime(): double
+```
+
+Returns the update frame time.
 
 
 ### :speech_balloon: Misc
