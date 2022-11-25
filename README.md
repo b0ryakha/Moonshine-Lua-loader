@@ -401,9 +401,9 @@ Awaiting for pressing key and return his key code / symbol or nil on failure.
 ```lua
 keyboard.is_pressed(key_code: SFML_enum): bool
 ```
-| Name     | Type         | Description          |
-| :---:    | :---:        | :---:                |
-| key_code | SFML_enum``` | SFML Enum - key code |
+| Name     | Type            | Description          |
+| :---:    | :---:           | :---:                |
+| key_code | ```SFML_enum``` | SFML Enum - key code |
 
 Returns true if the key is pressed, else false or nil on failure.
 
