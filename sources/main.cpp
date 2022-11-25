@@ -14,16 +14,13 @@ std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
 std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
 __forceinline void start_program(char* cmd_line) {
-    FONTS_PATH = "C:/WINDOWS/Fonts/";
-
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
 
     window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
     window.setFramerateLimit(100);
     
-    //std::string script_path = cmd_line[0] ? cmd_line : "";
-    Script lua("D:/Users/A.Marchenko/Desktop/1.lua");
+    Script lua(cmd_line[0] ? cmd_line : "");
 
     while (window.isOpen()) {
         while (window.pollEvent(main_event)) {

@@ -11,7 +11,7 @@ extern std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
 namespace lua
 {
-    static int render_new_sprite(lua_State* L) {
+    static int render_load_sprite(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 3 && args.size() != 7) {
@@ -24,8 +24,8 @@ namespace lua
         float h = args.get<float>();
         float t_x = (args.size() == 7 ? args.get<float>() : 0);
         float t_y = (args.size() == 7 ? args.get<float>() : 0);
-        float t_w = (args.size() == 7 ? args.get<float>() : w);
-        float t_h = (args.size() == 7 ? args.get<float>() : h);
+        float t_w = (args.size() == 7 ? args.get<float>() : 0);
+        float t_h = (args.size() == 7 ? args.get<float>() : 0);
 
         const std::string ID = "0x0" + std::to_string(sprite_buffer.size());
 
@@ -33,6 +33,11 @@ namespace lua
         if (!texture.loadFromFile(path)) {
             lua_pushnil(L);
             return 1;
+        }
+
+        if (args.size() == 3) {
+            t_w = texture.getSize().x;
+            t_h = texture.getSize().y;
         }
 
         sf::Sprite sprite(texture);

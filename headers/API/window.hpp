@@ -13,7 +13,6 @@ namespace lua
 {
     static int close(lua_State* L) {
         window.close();
-        print_offset = 0;
         return 0;
     }
 
@@ -26,6 +25,8 @@ namespace lua
         else if (args.size() == 1) {
             window.clear(lua_getcolor(args));
         }
+
+        print_offset = 0;
 
         return 0;
     }

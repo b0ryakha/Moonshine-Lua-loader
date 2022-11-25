@@ -65,7 +65,7 @@ __forceinline void Script::open_API() {
         //std::make_pair("line", lua::render_line),
         //std::make_pair("ellipse", lua::render_ellipse),
         std::make_pair("sprite", lua::render_sprite),
-        std::make_pair("new_sprite", lua::render_new_sprite),
+        std::make_pair("load_sprite", lua::render_load_sprite),
         std::make_pair("load_font", lua::render_load_font),
     });
 
