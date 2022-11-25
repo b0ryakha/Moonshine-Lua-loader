@@ -2,8 +2,84 @@
 
 
 ## :mag_right: API :mag:
-## :movie_camera: Render
-#### ```new_sprite```
+### :dash: Navigation
++ [:movie_camera: Render](#Render)<details><summary>***...***</summary>
+
+  - [new_sprite()](#render.new_sprite)
+  - [load_font()](#render.load_font)
+  - [text()](#render.text)
+  - [measure_text()](#render.measure_text)
+  - [sprite()](#render.sprite)
+  </details>
+
++ [:rainbow: Color](#Color)<details><summary>***...***</summary>
+
+  - [new()](#color.new)
+  - [unpack()](#color.unpack)
+  - [to_hex()](#color.to_hex)
+  </details>
+  
++ [:computer: Window](#Window)<details><summary>***...***</summary>
+
+  - [display()](#window.display)
+  - [clear()](#window.clear)
+  - [close()](#window.close)
+  - [get_size()](#window.get_size)
+  - [set_size()](#window.set_size)
+  - [get_pos()](#window.get_pos)
+  - [set_pos()](#window.set_pos)
+  - [set_title()](#window.set_title)
+  - [set_vsync()](#window.set_vsync)
+  - [set_frame_limit()](#window.set_frame_limit)
+  - [sleep()](#window.sleep)
+  - [await()](#window.await)
+  </details>
+  
++ [:wrench: Keyboard](#Keyboard)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:mouse: Mouse](#Mouse)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:video_game: Cursor](#Cursor)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:camera: View](#View)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:musical_note: Sound](#Sound)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:file_folder: File](#File)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:heavy_division_sign: CMath](#CMath)<details><summary>***...***</summary>
+
+  - [rand()](#cmath.rand)
+  - [lerp()](#cmath.lerp)
+  - [clamp()](#cmath.clamp)
+  </details>
+  
++ [:mag: GlobalVars](#GlobalVars)<details><summary>***...***</summary>
+
+  </details>
+  
++ [:speech_balloon: Misc](#Misc)<details><summary>***...***</summary>
+
+  - [print()](#print)
+  </details>
+
+---
+
+### <a name="Render"></a> :movie_camera: Render
+
+#### <a name="render.new_sprite"></a> ```new_sprite```
 ```lua
 render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: float, t_h: float]): Sprite
 ```
@@ -18,7 +94,10 @@ render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w
 | t_h   | ```float``` | Height of areas in the image, default = h       |
 
 Returns the Sprite struct or nil on failure.
-#### ```load_font```
+
+---
+
+#### <a name="render.load_font"></a> ```load_font```
 ```lua
 render.load_font(font_name: string, size: size_t): Font
 ```
@@ -28,7 +107,10 @@ render.load_font(font_name: string, size: size_t): Font
 | size      | ```size_t``` | Size of font |
 
 Returns the Font struct or nil on failure.
-#### ```text```
+
+---
+
+#### <a name="render.text"></a> ```text```
 ```lua
 render.text(x: float, y: float, font: Font, text: string, color: Color)
 ```
@@ -41,7 +123,10 @@ render.text(x: float, y: float, font: Font, text: string, color: Color)
 | color     | ```Color``` | Color for text     |
 
 Render text in the specified coordinates.
-#### ```measure_text```
+
+---
+
+#### <a name="render.measure_text"></a> ```measure_text```
 ```lua
 render.measure_text(font: Font, text: string): Measure
 ```
@@ -51,7 +136,10 @@ render.measure_text(font: Font, text: string): Measure
 | text      | ```string``` | Text that will be measured |
 
 Returns the measured size of the text.
-#### ```sprite```
+
+---
+
+#### <a name="render.sprite"></a> ```sprite```
 ```lua
 render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 ```
@@ -65,8 +153,9 @@ render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 Render sprite in the specified coordinates.
 
 
-## :rainbow: Color
-#### ```new```
+### <a name="Color"></a> :rainbow: Color
+
+#### <a name="color.new"></a> ```new```
 ```lua
 color.new(r: int, g: int, b: int[, a: int]): Color
 color.new(hex: string): Color
@@ -83,7 +172,10 @@ color.new(hex: string): Color
 | hex   | ```string``` | Hex string                   |
 
 Returns the Color struct or nil on failure.
-#### ```unpack```
+
+---
+
+#### <a name="color.unpack"></a> ```unpack```
 ```lua
 color.unpack(color: Color): int, int, int, int
 ```
@@ -92,7 +184,10 @@ color.unpack(color: Color): int, int, int, int
 | color | ```Color``` | Color for unpacking |
 
 Returns the integer r, g, b, a values of color or nil on failure.
-#### ```to_hex```
+
+---
+
+#### <a name="color.to_hex"></a> ```to_hex```
 ```lua
 color.to_hex(color: Color): string
 ```
@@ -103,14 +198,18 @@ color.to_hex(color: Color): string
 Returns the hex str or nil on failure.
 
 
-## :computer: Window
-#### ```display```
+### <a name="Window"></a> :computer: Window
+
+#### <a name="window.display"></a> ```display```
 ```lua
 window.display()
 ```
 
 Display on screen what has been rendered to the window so far.
-#### ```clear```
+
+---
+
+#### <a name="window.clear"></a> ```clear```
 ```lua
 window.clear([color: Color])
 ```
@@ -119,19 +218,28 @@ window.clear([color: Color])
 | color | ```Color``` | Color for screen filling, default = Black |
 
 Clears the screen with a color.
-#### ```close```
+
+---
+
+#### <a name="window.close"></a> ```close```
 ```lua
 window.close()
 ```
 
 Closes the window and destroy all the attached resources.
-#### ```get_size```
+
+---
+
+#### <a name="window.get_size"></a> ```get_size```
 ```lua
 window.get_size(): Size
 ```
 
 Returns the window size or nil on failure.
-#### ```set_size```
+
+---
+
+#### <a name="window.set_size"></a> ```set_size```
 ```lua
 window.set_size(width: size_t, height: size_t)
 ```
@@ -141,13 +249,19 @@ window.set_size(width: size_t, height: size_t)
 | height | ```size_t``` | New window height |
 
 Sets the window a new size.
-#### ```get_pos```
+
+---
+
+#### <a name="window.get_pos"></a> ```get_pos```
 ```lua
 window.get_pos(): Size
 ```
 
 Returns the window position.
-#### ```set_pos```
+
+---
+
+#### <a name="window.set_pos"></a> ```set_pos```
 ```lua
 window.set_pos(x: int, y: int)
 ```
@@ -157,7 +271,10 @@ window.set_pos(x: int, y: int)
 | y     | ```int``` | New window y position |
 
 Sets the window a new position.
-#### ```set_title```
+
+---
+
+#### <a name="window.set_title"></a> ```set_title```
 ```lua
 window.set_title(title: string)
 ```
@@ -166,7 +283,10 @@ window.set_title(title: string)
 | title | ```string``` | New window title |
 
 Sets the window a new title.
-#### ```set_vsync```
+
+---
+
+#### <a name="window.set_vsync"></a> ```set_vsync```
 ```lua
 window.set_vsync(state: bool)
 ```
@@ -175,7 +295,10 @@ window.set_vsync(state: bool)
 | state | ```bool``` | Enable / disable vertical synchronization |
 
 Enables or disables the window's vsync.
-#### ```set_frame_limit```
+
+---
+
+#### <a name="window.set_frame_limit"></a> ```set_frame_limit```
 ```lua
 window.set_frame_limit(fps_max: size_t)
 ```
@@ -184,7 +307,10 @@ window.set_frame_limit(fps_max: size_t)
 | fps_max | ```size_t``` | Frames per second |
 
 Sets the window frame limit.
-#### ```sleep```
+
+---
+
+#### <a name="window.sleep"></a> ```sleep```
 ```lua
 window.sleep(milliseconds: size_t)
 ```
@@ -193,41 +319,46 @@ window.sleep(milliseconds: size_t)
 | milliseconds | ```size_t``` | Time for delay in milliseconds |
 
 Freezes the process for the specified time.
-#### ```await```
+
+---
+
+#### <a name="window.await"></a> ```await```
 ```lua
 window.await()
 ```
 
 Freezes the process until any key is pressed.
 
-## :wrench: Keyboard
+
+### <a name="Keyboard"></a> :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
 button.Left
 ```
 
 
-## :mouse2: Mouse
+### <a name="Mouse"></a> :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
 key.W
 ```
 
 
-## :video_game: Cursor
+### <a name="Cursor"></a> :video_game: Cursor
 
 
-## :camera: View
+### <a name="View"></a> :camera: View
 
 
-## :musical_note: Sound
+### <a name="Sound"></a> :musical_note: Sound
 
 
-## :file_folder: File
+### <a name="File"></a> :file_folder: File
 
 
-## :heavy_division_sign: CMath
-#### ```rand```
+### <a name="CMath"></a> :heavy_division_sign: CMath
+
+#### <a name="cmath.rand"></a> ```rand```
 ```lua
 cmath.rand(min: int, max: int): int
 ```
@@ -237,7 +368,10 @@ cmath.rand(min: int, max: int): int
 | max   | ```int```| Maximum random value |
 
 Returns the random integer number [min, max] or nil on failure.
-#### ```lerp```
+
+---
+
+#### <a name="cmath.lerp"></a> ```lerp```
 ```lua
 cmath.lerp(start: float, end: float, time: float): float
 ```
@@ -248,7 +382,10 @@ cmath.lerp(start: float, end: float, time: float): float
 | time  | ```float```| Step value  |
 
 Returns the linear interpolation or nil on failure.
-#### ```clamp```
+
+---
+
+#### <a name="cmath.clamp"></a> ```clamp```
 ```lua
 cmath.clamp(number: float, lower: float, upper: float): float
 ```
@@ -260,11 +397,12 @@ cmath.clamp(number: float, lower: float, upper: float): float
 
 Returns the clumped value or nil on failure.
 
-## :mag: GlobalVars
+
+### <a name="GlobalVars"></a> :mag: GlobalVars
 
 
-## :speech_balloon: Misc
-#### ```print```
+### <a name="Misc"></a> :speech_balloon: Misc
+#### <a name="print"></a> ```print```
 ```lua
 print(text: string, ...)
 ```
