@@ -6,3 +6,38 @@ int rand_number(int min, int max) {
 
     return dist(gen);
 }
+
+void throw_error(const std::string& error, bool close_window) noexcept {
+    sf::Font font;
+
+    if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+        window.close();
+
+    sf::Text text(error, font, 20);
+    text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
+    text.setFillColor(sf::Color::Red);
+
+    sf::Text info("Press any key to continue...", font, 20);
+    info.setPosition(sf::Vector2f(window.getSize().x / 2 - info.getGlobalBounds().width / 2, window.getSize().y / 2 + text.getGlobalBounds().height + 10));
+    info.setFillColor(sf::Color::Red);
+
+    window.clear();
+    window.draw(text);
+    window.draw(info);
+    window.display();
+
+    while (window.isOpen()) {
+        switch (main_event.type) {
+        case sf::Event::MouseButtonPressed:
+        case sf::Event::KeyPressed:
+            goto loop_break;
+
+        case sf::Event::Closed:
+            window.close();
+        }
+    }
+    loop_break:
+
+    if (close_window)
+        window.close();
+}

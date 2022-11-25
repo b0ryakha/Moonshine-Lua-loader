@@ -2,7 +2,6 @@
 
 #include <string>
 #include <map>
-#include <SFML/Graphics.hpp>
 
 #include "lua_extensions.hpp"
 

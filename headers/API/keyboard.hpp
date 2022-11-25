@@ -38,4 +38,16 @@ namespace lua
             }
         }
     }
+
+    static int is_key_pressed(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1) {
+            lua_pushnil(L);
+            return 1;
+        }
+
+        lua_pushboolean(L, sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(args.get<int>())));
+        return 1;
+    }
 }

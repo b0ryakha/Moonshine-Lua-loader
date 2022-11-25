@@ -107,7 +107,7 @@ __forceinline void Script::open_API() {
 
     lua_register_table(lua_state, "keyboard", {
         std::make_pair("get_pressed", lua::get_pressed),
-        //std::make_pair("is_pressed", lua::is_key_pressed),
+        std::make_pair("is_pressed", lua::is_key_pressed),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
@@ -165,7 +165,7 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "globalvars", {
-        //std::make_pair("get_frametime", lua::get_frametime),
+        std::make_pair("get_frametime", lua::get_frametime),
     });
 
     lua_register(lua_state, "print", lua::print);

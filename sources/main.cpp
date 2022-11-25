@@ -1,11 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
+#include <mutex>
 
 #include "Script.hpp"
 
 sf::RenderWindow window;
 sf::Event main_event;
+
+double main_time = 0;
+std::mutex time_m;
 
 std::string FONTS_PATH;
 size_t print_offset = 0;
@@ -17,12 +21,20 @@ __forceinline void start_program(char* cmd_line) {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
 
+    sf::Clock clock;
+
     window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
     window.setFramerateLimit(100);
     
     Script lua(cmd_line[0] ? cmd_line : "");
 
     while (window.isOpen()) {
+        time_m.lock();
+        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800;
+        time_m.unlock();
+
+        clock.restart();
+
         while (window.pollEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
                 window.close();
