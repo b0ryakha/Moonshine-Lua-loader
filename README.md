@@ -381,7 +381,7 @@ Freezes the process until any key is pressed.
 ### <a name="Keyboard"></a> :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
-button.Left
+local button_id = button.Left
 ```
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
@@ -398,7 +398,7 @@ Awaiting for pressing key and return his key code / symbol or nil on failure.
 ### <a name="Mouse"></a> :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
-key.W
+local key_id = key.W
 ```
 
 
