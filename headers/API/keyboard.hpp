@@ -20,24 +20,21 @@ namespace lua
         const bool key_code = (args.size() == 1 ? args.get<bool>() : false);
 
         while (window.isOpen()) {
-            switch (main_event.type) {
-                case sf::Event::TextEntered:
-                    if (main_event.text.unicode < 128) {
-                        if (key_code) {
-                            lua_pushnumber(L, main_event.text.unicode);
-                            return 1;
-                        }
-                        else {
-                            std::string result;
-                            result = static_cast<char>(main_event.text.unicode);
-
-                            lua_pushstring(L, result.c_str());
-                            return 1;
-                        }
-                    }
-
-                    lua_pushnil(L);
+            if (main_event.type == sf::Event::TextEntered) {
+                if (key_code) {
+                    lua_pushnumber(L, main_event.text.unicode);
                     return 1;
+                }
+                else if (main_event.text.unicode < 128) {
+                    std::string result;
+                    result = static_cast<char>(main_event.text.unicode);
+
+                    lua_pushstring(L, result.c_str());
+                    return 1;
+                }
+
+                lua_pushnil(L);
+                return 1;
             }
         }
     }
