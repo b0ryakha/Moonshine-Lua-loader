@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\API">
-      <UniqueIdentifier>{93785d96-ee06-44db-86ae-59d4226ee68a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Lua Extensions">
       <UniqueIdentifier>{89296a1a-98e8-4de8-b1e9-628ab5235808}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="Source Files\Lua Extensions">
       <UniqueIdentifier>{54353dc8-3fe5-47b3-9b0c-b3ec239fe2b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API">
+      <UniqueIdentifier>{93785d96-ee06-44db-86ae-59d4226ee68a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,43 +69,43 @@
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\API.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\cmath.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\color.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\cursor.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\file.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\global_vars.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\keyboard.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\misc.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\mouse.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\render.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\sound.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\view.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\window.hpp">
-      <Filter>Header Files\API</Filter>
+      <Filter>API</Filter>
     </ClInclude>
     <ClInclude Include="headers\misc_functions.hpp">
       <Filter>Header Files</Filter>
