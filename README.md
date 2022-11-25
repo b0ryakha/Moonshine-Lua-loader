@@ -33,6 +33,7 @@
   - [set_frame_limit()](#window.set_frame_limit)
   - [sleep()](#window.sleep)
   - [await()](#window.await)
+  - [set_icon()](#window.set_icon)
   </details>
   
 + <details><summary>:wrench: Keyboard</summary>
@@ -378,6 +379,18 @@ window.await()
 ```
 
 Freezes the process until any key is pressed.
+
+---
+
+#### <a name="window.set_icon"></a> ```set_icon```
+```lua
+window.set_icon(icon: Sprite)
+```
+| Name | Type         | Description     |
+| :---:| :---:        | :---:           |
+| icon | ```Sprite``` | Icon for window |
+
+Sets a new icon for window.
 
 
 ### <a name="Keyboard"></a> :wrench: Keyboard
