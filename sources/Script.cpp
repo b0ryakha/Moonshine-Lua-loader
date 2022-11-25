@@ -2,7 +2,7 @@
 
 Script::Script() {}
 
-Script::Script(const char* path) : lua_path(path) {
+Script::Script(const char* path) {
     open(path);
 }
 
@@ -28,13 +28,10 @@ void Script::open(const char* path) {
     }
 
     lua_state = luaL_newstate();
+    lua_path = path;
 
     if (lua_state == nullptr) {
         throw_error("Failed to create lua state.");
-    }
-
-    if (lua_path == nullptr) {
-        lua_path = path;
     }
     
     luaL_openlibs(lua_state);
@@ -109,7 +106,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "key", SFML_KEYS);
 
     lua_register_table(lua_state, "keyboard", {
-        //std::make_pair("get_ch", lua::get_ch),
+        std::make_pair("get_pressed", lua::get_pressed),
         //std::make_pair("is_pressed", lua::is_key_pressed),
     });
 
