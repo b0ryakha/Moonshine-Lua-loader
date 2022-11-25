@@ -38,6 +38,7 @@
 + <details><summary>:wrench: Keyboard</summary>
 
   - [get_pressed()](#keyboard.get_pressed)
+  - [is_pressed()](#keyboard.is_pressed)
   </details>
   
 + <details><summary>:mouse: Mouse</summary>
@@ -393,6 +394,18 @@ keyboard.get_pressed([is_key_code: bool]): string / size_t
 | is_key_code | ```bool``` | Return a key code flag, default = false |
 
 Awaiting for pressing key and return his key code / symbol or nil on failure.
+
+---
+
+#### <a name="keyboard.is_pressed"></a> ```is_pressed```
+```lua
+keyboard.is_pressed(key_code: SFML_enum): bool
+```
+| Name     | Type         | Description          |
+| :---:    | :---:        | :---:                |
+| key_code | SFML_enum``` | SFML Enum - key code |
+
+Returns true if the key is pressed, else false or nil on failure.
 
 
 ### :mouse2: Mouse
