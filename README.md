@@ -471,7 +471,7 @@ Returns the clumped value or nil on failure.
 
 
 ### :mag: GlobalVars
-#### <a name="get_frametime"></a> ```get_frametime```
+#### <a name="globalvars.get_frametime"></a> ```get_frametime```
 ```lua
 globalvars.get_frametime(): double
 ```
