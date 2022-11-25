@@ -2,7 +2,7 @@
 
 
 ## :mag_right: API :mag:
-### :dash: Navigation
+### :dash: Navigation:
 + [:movie_camera: Render](#Render)<details><summary>***...***</summary>
 
   - [new_sprite()](#render.new_sprite)
@@ -78,6 +78,53 @@
 
 ---
 
+### :paperclip: Objects:
+
+#### <a name="Size"></a> ```Size```
+```lua
+local size = ...
+
+-- width, height
+print(size.w, size.h)
+```
+
+#### <a name="Pos"></a> ```Pos```
+```lua
+local position = ...
+
+-- x, y coords
+print(pos.x, pos.y)
+```
+
+#### <a name="Sprite"></a> ```Sprite```
+```lua
+local sprite = ...
+
+-- sprite address
+print(sprite)
+```
+
+#### <a name="Color"></a> ```Color```
+```lua
+local color = ...
+
+-- red, green, blue, alpha values of color
+print(color.r, color.g, color.b, color.a)
+```
+
+#### <a name="Font"></a> ```Font```
+```lua
+local font = ...
+
+-- font address
+print(font)
+```
+
+---
+
+
+### :triangular_ruler: Functions:
+
 ### <a name="Render"></a> :movie_camera: Render
 
 #### <a name="render.new_sprite"></a> ```new_sprite```
@@ -94,7 +141,7 @@ render.new_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w
 | t_w   | ```float``` | Width of areas in the image, default = w        |
 | t_h   | ```float``` | Height of areas in the image, default = h       |
 
-Returns the Sprite struct or nil on failure.
+Returns the [sprite](#Sprite) struct or nil on failure.
 
 ---
 
@@ -107,7 +154,7 @@ render.load_font(font_name: string, size: size_t): Font
 | font_name | ```string``` | Name of font |
 | size      | ```size_t``` | Size of font |
 
-Returns the Font struct or nil on failure.
+Returns the [font](#Font) struct or nil on failure.
 
 ---
 
@@ -129,14 +176,14 @@ Render text in the specified coordinates.
 
 #### <a name="render.measure_text"></a> ```measure_text```
 ```lua
-render.measure_text(font: Font, text: string): Measure
+render.measure_text(font: Font, text: string): Size
 ```
 | Name      | Type         | Description                |
 | :---:     | :---:        | :---:                      |
 | font      | ```Font```   | Font for text              |
 | text      | ```string``` | Text that will be measured |
 
-Returns the measured size of the text.
+Returns the measured [size](#Size) of the text.
 
 ---
 
@@ -151,7 +198,7 @@ render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 | y         | ```float``` | Y coordinate       |
 | color     | ```Color``` | Color for sprite   |
 
-Render sprite in the specified coordinates.
+Render [sprite](#Sprite) in the specified coordinates.
 
 
 ### <a name="Color"></a> :rainbow: Color
@@ -172,7 +219,7 @@ color.new(hex: string): Color
 | :---: | :---:        | :---:                        |
 | hex   | ```string``` | Hex string                   |
 
-Returns the Color struct or nil on failure.
+Returns the [color](#Color) struct or nil on failure.
 
 ---
 
@@ -184,7 +231,7 @@ color.unpack(color: Color): int, int, int, int
 | :---: | :---:       | :---:               |
 | color | ```Color``` | Color for unpacking |
 
-Returns the integer r, g, b, a values of color or nil on failure.
+Returns the integer r, g, b, a values of [color](#Color) or nil on failure.
 
 ---
 
@@ -218,7 +265,7 @@ window.clear([color: Color])
 | :---: | :---:       | :---:                                     |
 | color | ```Color``` | Color for screen filling, default = Black |
 
-Clears the screen with a color.
+Clears the screen with a [color](#Color).
 
 ---
 
@@ -236,7 +283,7 @@ Closes the window and destroy all the attached resources.
 window.get_size(): Size
 ```
 
-Returns the window size or nil on failure.
+Returns the window [size](#Size) or nil on failure.
 
 ---
 
@@ -249,16 +296,16 @@ window.set_size(width: size_t, height: size_t)
 | width  | ```size_t``` | New window width  |
 | height | ```size_t``` | New window height |
 
-Sets the window a new size.
+Sets the window a new [size](#Size).
 
 ---
 
 #### <a name="window.get_pos"></a> ```get_pos```
 ```lua
-window.get_pos(): Size
+window.get_pos(): Pos
 ```
 
-Returns the window position.
+Returns the window [pos](#Pos).
 
 ---
 
@@ -271,7 +318,7 @@ window.set_pos(x: int, y: int)
 | x     | ```int``` | New window x position |
 | y     | ```int``` | New window y position |
 
-Sets the window a new position.
+Sets the window a new [pos](#Pos).
 
 ---
 
