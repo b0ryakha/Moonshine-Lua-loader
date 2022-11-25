@@ -5,7 +5,7 @@
 ### :dash: Navigation:
 + [:movie_camera: Render](#Render)<details><summary>***...***</summary>
 
-  - [new_sprite()](#render.new_sprite)
+  - [load_sprite()](#render.load_sprite)
   - [load_font()](#render.load_font)
   - [text()](#render.text)
   - [measure_text()](#render.measure_text)
