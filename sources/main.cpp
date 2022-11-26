@@ -28,7 +28,12 @@ __forceinline void start_program(char* cmd_line) {
     window.setFramerateLimit(100);
     
     Script lua;
-    volatile bool script_loaded = false;
+    bool script_loaded = false;
+
+    if (cmd_line[0] != '\0') {
+        script_loaded = true;
+        lua.open(cmd_line);
+    }
 
     sf::Font font;
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
@@ -39,7 +44,6 @@ __forceinline void start_program(char* cmd_line) {
 
     sf::Text entered_text("", font, 20);
     std::string entered_tmp;
-    constexpr std::array<size_t, 5> block_list = { 1, 2, 3, 4, 5 };
 
     while (window.isOpen()) {
         time_m.lock();
@@ -77,7 +81,7 @@ __forceinline void start_program(char* cmd_line) {
             if (main_event.type == sf::Event::KeyPressed) {
                 if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty()) {
                     script_loaded = true;
-                    lua.open(cmd_line[0] ? cmd_line : entered_tmp);
+                    lua.open(entered_tmp);
                 }
             }
         }

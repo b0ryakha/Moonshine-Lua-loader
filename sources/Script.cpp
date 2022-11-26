@@ -90,7 +90,7 @@ __forceinline void Script::open_API() {
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
-    const std::array<std::string_view, 101> SFML_KEYS_NAME = { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
+    constexpr std::array<std::string_view, 101> SFML_KEYS_NAME = { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
 
     for (size_t i = 0; i < SFML_KEYS_NAME.size(); ++i)
         SFML_KEYS.emplace_back(std::make_pair(SFML_KEYS_NAME[i], i));
@@ -109,7 +109,7 @@ __forceinline void Script::open_API() {
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
-    const std::array<std::string_view, 5> SFML_BUTTONS_NAME = { "Left", "Right", "Middle", "XButton1", "XButton2" };
+    constexpr std::array<std::string_view, 5> SFML_BUTTONS_NAME = { "Left", "Right", "Middle", "XButton1", "XButton2" };
 
     for (size_t i = 0; i < SFML_BUTTONS_NAME.size(); ++i)
         SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
