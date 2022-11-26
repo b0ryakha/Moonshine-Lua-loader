@@ -27,7 +27,7 @@ __forceinline void start_program(char* cmd_line) {
     window.setFramerateLimit(100);
     
     Script lua;
-    bool load_script = false;
+    volatile bool script_loaded = false;
 
     sf::Font font;
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
@@ -46,11 +46,7 @@ __forceinline void start_program(char* cmd_line) {
 
         clock.restart();
 
-        if (load_script) {
-            lua.open(cmd_line[0] ? cmd_line : "");
-            load_script = false;
-        }
-        else {
+        if (!script_loaded) {
             window.clear();
             entered_text.setString(entered_tmp);
             entered_text.setPosition(sf::Vector2f(label_text.getPosition().x + label_text.getGlobalBounds().width + 10, label_text.getPosition().y));
@@ -62,6 +58,8 @@ __forceinline void start_program(char* cmd_line) {
         while (window.pollEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
                 window.close();
+
+            if (script_loaded) continue;
 
             if (main_event.type == sf::Event::TextEntered) {
                 if (main_event.key.code == 22) // 22 = Ctrl + V
@@ -75,8 +73,10 @@ __forceinline void start_program(char* cmd_line) {
             }
 
             if (main_event.type == sf::Event::KeyPressed) {
-                if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty())
-                    load_script = true;
+                if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty()) {
+                    script_loaded = true;
+                    lua.open(cmd_line[0] ? cmd_line : entered_tmp);
+                }
             }
         }
     }

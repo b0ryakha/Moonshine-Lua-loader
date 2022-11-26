@@ -28,12 +28,8 @@ void throw_error(const std::string& error, bool close_window) noexcept {
 
     while (window.isOpen()) {
         switch (main_event.type) {
-        case sf::Event::MouseButtonPressed:
-        case sf::Event::KeyPressed:
-            goto loop_break;
-
-        case sf::Event::Closed:
-            window.close();
+            case sf::Event::KeyPressed:
+                goto loop_break;
         }
     }
     loop_break:
