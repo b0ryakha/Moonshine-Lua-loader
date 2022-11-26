@@ -1,7 +1,5 @@
 #include "Script.hpp"
 
-Script::Script() {}
-
 Script::Script(const char* path) {
     open(path);
 }

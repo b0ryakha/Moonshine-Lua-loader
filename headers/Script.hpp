@@ -20,7 +20,7 @@ private:
 	__forceinline void open_API();
 
 public:
-	Script();
+	Script() = default;
 	Script(const char* path);
 	~Script();
 
