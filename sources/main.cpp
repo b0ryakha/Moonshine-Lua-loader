@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
+#include <array>
 #include <mutex>
 
 #include "Script.hpp"
@@ -38,6 +39,7 @@ __forceinline void start_program(char* cmd_line) {
 
     sf::Text entered_text("", font, 20);
     std::string entered_tmp;
+    constexpr std::array<size_t, 5> block_list = { 1, 2, 3, 4, 5 };
 
     while (window.isOpen()) {
         time_m.lock();
@@ -62,13 +64,13 @@ __forceinline void start_program(char* cmd_line) {
             if (script_loaded) continue;
 
             if (main_event.type == sf::Event::TextEntered) {
-                if (main_event.key.code == 22) // 22 = Ctrl + V
+                if (main_event.key.code == 22)                           // 22 = Ctrl + V
                     entered_tmp += std::move(sf::Clipboard::getString());
 
-                else if (main_event.key.code == 8 && !entered_tmp.empty()) // 8 = Backspace
+                if (main_event.key.code == 8 && !entered_tmp.empty())    // 8 = Backspace
                     entered_tmp.pop_back();
 
-                else if (main_event.key.code != 8 && main_event.text.unicode < 128)
+                if (main_event.text.unicode > 31 && main_event.text.unicode < 128)
                     entered_tmp += static_cast<char>(main_event.text.unicode);
             }
 
