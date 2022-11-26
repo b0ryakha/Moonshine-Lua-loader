@@ -3,7 +3,7 @@
 
 ## :mag_right: API :mag:
 ### :dash: Navigation:
-+ <details><summary>:movie_camera: Render</summary>
+<details><summary>:movie_camera: Render</summary>
 
   - [load_sprite()](#render.load_sprite)
   - [load_font()](#render.load_font)
@@ -12,14 +12,14 @@
   - [sprite()](#render.sprite)
   </details>
 
-+ <details><summary>:rainbow: Color</summary>
+<details><summary>:rainbow: Color</summary>
 
   - [new()](#color.new)
   - [unpack()](#color.unpack)
   - [to_hex()](#color.to_hex)
   </details>
   
-+ <details><summary>:computer: Window</summary>
+<details><summary>:computer: Window</summary>
 
   - [display()](#window.display)
   - [clear()](#window.clear)
@@ -36,45 +36,45 @@
   - [set_icon()](#window.set_icon)
   </details>
   
-+ <details><summary>:wrench: Keyboard</summary>
+<details><summary>:wrench: Keyboard</summary>
 
   - [get_pressed()](#keyboard.get_pressed)
   - [is_pressed()](#keyboard.is_pressed)
   </details>
   
-+ <details><summary>:mouse: Mouse</summary>
+<details><summary>:mouse: Mouse</summary>
 
   </details>
   
-+ <details><summary>:video_game: Cursor</summary>
+<details><summary>:video_game: Cursor</summary>
 
   </details>
   
-+ <details><summary>:camera: View</summary>
+<details><summary>:camera: View</summary>
 
   </details>
   
-+ <details><summary>:musical_note: Sound</summary>
+<details><summary>:musical_note: Sound</summary>
 
   </details>
   
-+ <details><summary>:file_folder: File</summary>
+<details><summary>:file_folder: File</summary>
 
   </details>
   
-+ <details><summary>:heavy_division_sign: CMath</summary>
+<details><summary>:heavy_division_sign: CMath</summary>
 
   - [rand()](#cmath.rand)
   - [lerp()](#cmath.lerp)
   - [clamp()](#cmath.clamp)
   </details>
   
-+ <details><summary>:mag: GlobalVars</summary>
+<details><summary>:mag: GlobalVars</summary>
 
   - [get_frametime()](#globalvars.get_frametime)
   </details>
   
-+ <details><summary>:speech_balloon: Misc</summary>
+<details><summary>:speech_balloon: Misc</summary>
 
   - [print()](#print)
   </details>
