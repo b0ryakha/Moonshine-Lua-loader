@@ -44,6 +44,7 @@
   
 <details><summary>:mouse: Mouse</summary>
 
+  - [get_pressed()](#mouse.get_pressed)
   - [is_pressed()](#mouse.is_pressed)
   </details>
   
