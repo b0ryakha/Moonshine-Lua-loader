@@ -44,6 +44,7 @@
   
 <details><summary>:mouse: Mouse</summary>
 
+  - [is_pressed()](#mouse.is_pressed)
   </details>
   
 <details><summary>:video_game: Cursor</summary>
@@ -401,11 +402,11 @@ local button_id = button.Left
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
 ```lua
-keyboard.get_pressed([is_key_code: bool]): string / size_t
+keyboard.get_pressed([return_code: bool]): string / size_t
 ```
 | Name        | Type       | Description                             |
 | :---:       | :---:      | :---:                                   |
-| is_key_code | ```bool``` | Return a key code flag, default = false |
+| return_code | ```bool``` | Return a key code flag, default = false |
 
 Awaiting for pressing key and return his key code / symbol or nil on failure.
 
@@ -427,6 +428,25 @@ Returns true if the key is pressed, else false or nil on failure.
 ```lua
 local key_id = key.W
 ```
+
+#### <a name="mouse.get_pressed"></a> ```get_pressed```
+```lua
+mouse.get_pressed(): string
+```
+
+Awaiting for pressing button and return his name or nil on failure.
+
+---
+
+#### <a name="mouse.is_pressed"></a> ```is_pressed```
+```lua
+mouse.is_pressed(button_code: SFML_enum): bool
+```
+| Name        | Type            | Description             |
+| :---:       | :---:           | :---:                   |
+| button_code | ```SFML_enum``` | SFML Enum - button code |
+
+Returns true if the button is pressed, else false or nil on failure.
 
 
 ### :video_game: Cursor
