@@ -117,7 +117,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "button", SFML_BUTTONS);
 
     lua_register_table(lua_state, "mouse", {
-        //std::make_pair("is_pressed", lua::is_button_pressed),
+        std::make_pair("is_pressed", lua::is_button_pressed),
         ////std::make_pair("is_scrolling_up", lua::is_scrolling_up),
         ////std::make_pair("is_scrolling_down", lua::is_scrolling_down),
     });
