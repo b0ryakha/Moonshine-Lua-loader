@@ -9,7 +9,7 @@ extern sf::Event main_event;
 
 namespace lua
 {
-    static int get_pressed(lua_State* L) {
+    static int get_key_pressed(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() > 1) {
