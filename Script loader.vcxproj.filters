@@ -22,8 +22,14 @@
     <Filter Include="Source Files\Lua Extensions">
       <UniqueIdentifier>{54353dc8-3fe5-47b3-9b0c-b3ec239fe2b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="API">
+    <Filter Include="Header Files\API">
       <UniqueIdentifier>{93785d96-ee06-44db-86ae-59d4226ee68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Custom Shapes">
+      <UniqueIdentifier>{5d1eae09-3a2c-4443-9b49-220923f2f1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Custom Shapes">
+      <UniqueIdentifier>{ead63052-4c31-40e1-922a-1711c48e26db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp">
+      <Filter>Source Files\Custom Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,43 +78,43 @@
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\API.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\cmath.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\color.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\cursor.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\file.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\global_vars.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\keyboard.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\misc.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\mouse.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\render.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\sound.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\view.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\window.hpp">
-      <Filter>API</Filter>
+      <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="headers\misc_functions.hpp">
       <Filter>Header Files</Filter>
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="headers\Lua Extensions\lua_types.hpp">
       <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp">
+      <Filter>Header Files\Custom Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

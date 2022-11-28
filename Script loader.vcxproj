@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\Boost;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\Boost;D:\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
     <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp" />
     <ClCompile Include="sources\Lua Extensions\lua_types.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="headers\API\sound.hpp" />
     <ClInclude Include="headers\API\view.hpp" />
     <ClInclude Include="headers\API\window.hpp" />
+    <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp" />
     <ClInclude Include="headers\Lua Extensions\LuaStack.hpp" />
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp" />
     <ClInclude Include="headers\Lua Extensions\lua_types.hpp" />

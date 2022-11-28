@@ -27,11 +27,11 @@ namespace lua
             }
 
             auto hex_to_number = [](const std::string& hex) -> size_t {
-                unsigned result = 0;
+                size_t result = 0;
 
                 for (size_t i = 0; i < hex.length(); ++i) {
                     char tmp = hex[hex.length() - 1 - i];
-                    result += ((tmp >= 'A' && tmp <= 'F') ? tmp - 'A' + 10 : tmp - '0') * pow(16, i);
+                    result += static_cast<size_t>((tmp >= 'A' && tmp <= 'F') ? tmp - 'A' + 10 : tmp - '0') * pow(16, i);
                 }
 
                 return result;

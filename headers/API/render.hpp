@@ -23,8 +23,8 @@ namespace lua
         float h = args.get<float>();
         float t_x = (args.size() == 7 ? args.get<float>() : 0);
         float t_y = (args.size() == 7 ? args.get<float>() : 0);
-        float t_w = (args.size() == 7 ? args.get<float>() : 0);
-        float t_h = (args.size() == 7 ? args.get<float>() : 0);
+        size_t t_w = (args.size() == 7 ? args.get<size_t>() : 0);
+        size_t t_h = (args.size() == 7 ? args.get<size_t>() : 0);
 
         const std::string ID = "0x0" + std::to_string(sprite_buffer.size());
 
@@ -41,7 +41,7 @@ namespace lua
 
         sf::Sprite sprite(texture);
 
-        sprite.setScale(sf::Vector2f(w / t_w, h / t_h));
+        sprite.setScale(sf::Vector2(w / t_w, h / t_h));
 
         if (args.size() == 7)
             sprite.setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));

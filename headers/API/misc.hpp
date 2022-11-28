@@ -13,7 +13,7 @@ namespace lua
         std::string result;
         const size_t size = 20;
 
-        for (int i = 0; i < args.size(); ++i) {
+        for (size_t i = 0; i < args.size(); ++i) {
             std::string value;
 
             switch (args.get_type(i)) {
