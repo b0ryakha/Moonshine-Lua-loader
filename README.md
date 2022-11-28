@@ -46,6 +46,8 @@
 
   - [get_pressed()](#mouse.get_pressed)
   - [is_pressed()](#mouse.is_pressed)
+  - [is_scrolling_up()](#mouse.is_scrolling_up)
+  - [is_scrolling_down()](#mouse.is_scrolling_down)
   </details>
   
 <details><summary>:video_game: Cursor</summary>
@@ -449,6 +451,23 @@ mouse.is_pressed(button_code: SFML_enum): bool
 
 Returns true if the button is pressed, else false or nil on failure.
 
+---
+
+#### <a name="mouse.is_scrolling_up"></a> ```is_scrolling_up```
+```lua
+mouse.is_scrolling_up(): bool
+```
+
+Returns true if scrolling up, else false.
+
+---
+
+#### <a name="mouse.is_scrolling_down"></a> ```is_scrolling_down```
+```lua
+mouse.is_scrolling_down(): bool
+```
+
+Returns true if scrolling down, else false.
 
 ### :video_game: Cursor
 
