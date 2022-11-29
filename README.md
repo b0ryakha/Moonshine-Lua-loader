@@ -398,20 +398,17 @@ Sets a new icon for window.
 
 
 ### <a name="Keyboard"></a> :wrench: Keyboard
-#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
+#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
 local button_id = button.Left
 ```
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
 ```lua
-keyboard.get_pressed([return_code: bool]): string / size_t
+keyboard.get_pressed(): SFML_enum
 ```
-| Name        | Type       | Description                             |
-| :---:       | :---:      | :---:                                   |
-| return_code | ```bool``` | Return a key code flag, default = false |
 
-Awaiting for pressing key and return his key code / symbol or nil on failure.
+Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) or nil on failure.
 
 ---
 
@@ -427,17 +424,17 @@ Returns true if the key is pressed, else false or nil on failure.
 
 
 ### :mouse2: Mouse
-#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
+#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
 local key_id = key.W
 ```
 
 #### <a name="mouse.get_pressed"></a> ```get_pressed```
 ```lua
-mouse.get_pressed(): string
+mouse.get_pressed(): SFML_enum
 ```
 
-Awaiting for pressing button and return his name or nil on failure.
+Awaiting for pressing button and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90) or nil on failure.
 
 ---
 
