@@ -22,10 +22,7 @@ namespace lua
         while (window.isOpen()) {
             if (is_symbol) {
                 if (main_event.type == sf::Event::TextEntered && main_event.text.unicode > 31 && main_event.text.unicode < 128) {
-                    std::string result;
-                    result = static_cast<char>(main_event.text.unicode);
-
-                    lua_pushstring(L, result.c_str());
+                    lua_pushstring(L, reinterpret_cast<char*>(main_event.text.unicode));
                     return 1;
                 }
             }
@@ -33,9 +30,6 @@ namespace lua
                 lua_pushnumber(L, static_cast<int>(main_event.key.code));
                 return 1;
             }
-
-            lua_pushnil(L);
-            return 1;
         }
     }
 
