@@ -52,6 +52,10 @@
   
 <details><summary>:video_game: Cursor</summary>
 
+  - [get_pos()](#cursor.get_pos)
+  - [set_pos()](#cursor.set_pos)
+  - [in_bounds()](#cursor.in_bounds)
+  - [in_window()](#cursor.in_window)
   </details>
   
 <details><summary>:camera: View</summary>
@@ -471,7 +475,53 @@ Returns true if scrolling down, else false.
 
 
 ### :video_game: Cursor
+#### <a name="cursor.get_pos"></a> ```get_pos```
+```lua
+cursor.get_pos([regarding_window: bool]): Pos
+```
+| Name             | Type       | Description                                                          |
+| :---:            | :---:      | :---:                                                                |
+| regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
+Returns the cursor [pos](#Pos) or nil on failure.
+
+---
+
+#### <a name="cursor.set_pos"></a> ```set_pos```
+```lua
+cursor.set_pos(x: int, y: int[, regarding_window: bool])
+```
+| Name             | Type       | Description                                                            |
+| :---:            | :---:      | :---:                                                                  |
+| x                | ```int```  | New cursor x position                                                  |
+| y                | ```int```  | New cursor y position                                                  |
+| regarding_window | ```bool``` | Is true then function return position regarding window, default = true |
+
+Sets the cursor a new [pos](#Pos).
+
+---
+
+#### <a name="cursor.in_window"></a> ```in_window```
+```lua
+cursor.in_window(): bool
+```
+
+Returns true if cursor in window, else false or nil on failure.
+
+---
+
+#### <a name="cursor.in_bounds"></a> ```in_bounds```
+```lua
+cursor.in_bounds(x: float, y: float, w: float, h: float)
+```
+| Name             | Type         | Description |
+| :---:            | :---:        | :---:       |
+| x                | ```float```  | X position  |
+| y                | ```float```  | Y position  |
+| w                | ```float```  | Width       |
+| h                | ```float```  | Height      |
+
+Returns true if cursor in bounds, else false or nil on failure.
 
 ### :camera: View
 
