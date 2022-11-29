@@ -10,7 +10,7 @@ extern std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
 namespace lua
 {
-    static int render_load_sprite(lua_State* L) {
+    static int render_create_sprite(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 3 && args.size() != 7) {
@@ -52,7 +52,7 @@ namespace lua
         return 1;
     }
 
-    static int render_load_font(lua_State* L) {
+    static int render_create_font(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 2) {

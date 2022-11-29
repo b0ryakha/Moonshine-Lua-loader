@@ -29,11 +29,9 @@ namespace lua
     }
 
     static int is_scrolling_up(lua_State* L) {
-        while (window.pollEvent(main_event)) {
-            if (main_event.type == sf::Event::MouseWheelScrolled) {
-                lua_pushboolean(L, main_event.mouseWheelScroll.delta > 0);
-                return 1;
-            }
+        if (main_event.type == sf::Event::MouseWheelScrolled) {
+            lua_pushboolean(L, main_event.mouseWheelScroll.delta > 0);
+            return 1;
         }
 
         lua_pushboolean(L, false);
@@ -41,11 +39,9 @@ namespace lua
     }
 
     static int is_scrolling_down(lua_State* L) {
-        while (window.pollEvent(main_event)) {
-            if (main_event.type == sf::Event::MouseWheelScrolled) {
-                lua_pushboolean(L, main_event.mouseWheelScroll.delta < 0);
-                return 1;
-            }
+        if (main_event.type == sf::Event::MouseWheelScrolled) {
+            lua_pushboolean(L, main_event.mouseWheelScroll.delta < 0);
+            return 1;
         }
 
         lua_pushboolean(L, false);
