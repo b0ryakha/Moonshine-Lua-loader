@@ -45,6 +45,10 @@ __forceinline void start_program(char* cmd_line) {
     sf::Text entered_text("", font, 20);
     std::string entered_tmp;
 
+    sf::Text cursor("_", font, 20);
+    bool cursor_visible = true;
+    int cursor_timer = 0;
+
     while (window.isOpen()) {
         time_m.lock();
         main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800;
@@ -54,10 +58,22 @@ __forceinline void start_program(char* cmd_line) {
 
         if (!script_loaded) {
             window.clear();
+
             entered_text.setString(entered_tmp);
             entered_text.setPosition(sf::Vector2f(label_text.getPosition().x + label_text.getGlobalBounds().width + 10, label_text.getPosition().y));
             window.draw(entered_text);
             window.draw(label_text);
+
+            cursor.setPosition(sf::Vector2f(entered_text.getPosition().x + entered_text.getGlobalBounds().width + 5, entered_text.getPosition().y));
+            if (cursor_visible) window.draw(cursor);
+
+            if (cursor_timer >= 600) {
+                cursor_visible = !cursor_visible;
+                cursor_timer = 0;
+            }
+            
+            cursor_timer += main_time;
+
             window.display();
         }
 
