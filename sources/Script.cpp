@@ -74,19 +74,19 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "window", {
-        std::make_pair("get_size", lua::get_size),
-        std::make_pair("set_size", lua::set_size),
-        std::make_pair("display", lua::display),
-        std::make_pair("clear", lua::clear),
-        std::make_pair("close", lua::close),
-        std::make_pair("sleep", lua::sleep),
-        std::make_pair("await", lua::await),
-        std::make_pair("get_pos", lua::get_pos),
-        std::make_pair("set_pos", lua::set_pos),
-        std::make_pair("set_title", lua::set_title),
-        std::make_pair("set_vsync", lua::set_vsync),
-        std::make_pair("set_frame_limit", lua::set_frame_limit),
-        std::make_pair("set_icon", lua::set_icon),
+        std::make_pair("get_size", lua::window_get_size),
+        std::make_pair("set_size", lua::window_set_size),
+        std::make_pair("display", lua::window_display),
+        std::make_pair("clear", lua::window_clear),
+        std::make_pair("close", lua::window_close),
+        std::make_pair("sleep", lua::window_sleep),
+        std::make_pair("await", lua::window_await),
+        std::make_pair("get_pos", lua::window_get_pos),
+        std::make_pair("set_pos", lua::window_set_pos),
+        std::make_pair("set_title", lua::window_set_title),
+        std::make_pair("set_vsync", lua::window_set_vsync),
+        std::make_pair("set_frame_limit", lua::window_set_frame_limit),
+        std::make_pair("set_icon", lua::window_set_icon),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
@@ -104,8 +104,8 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "key", SFML_KEYS);
 
     lua_register_table(lua_state, "keyboard", {
-        std::make_pair("get_pressed", lua::get_key_pressed),
-        std::make_pair("is_pressed", lua::is_key_pressed),
+        std::make_pair("get_pressed", lua::keyboard_get_pressed),
+        std::make_pair("is_pressed", lua::keyboard_is_pressed),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
@@ -117,17 +117,17 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "button", SFML_BUTTONS);
 
     lua_register_table(lua_state, "mouse", {
-        std::make_pair("get_pressed", lua::get_button_pressed),
-        std::make_pair("is_pressed", lua::is_button_pressed),
-        std::make_pair("is_scrolling_up", lua::is_scrolling_up),
-        std::make_pair("is_scrolling_down", lua::is_scrolling_down),
+        std::make_pair("get_pressed", lua::mouse_get_pressed),
+        std::make_pair("is_pressed", lua::mouse_is_pressed),
+        std::make_pair("is_scrolling_up", lua::mouse_is_scrolling_up),
+        std::make_pair("is_scrolling_down", lua::mouse_is_scrolling_down),
     });
 
     lua_register_table(lua_state, "cursor", {
-        //std::make_pair("get_x", lua::cursor_get_x),
-        //std::make_pair("get_y", lua::cursor_get_y),
-        //std::make_pair("set_pos", lua::cursor_set_pos),
-        //std::make_pair("in_bounds", lua::cursor_in_bounds),
+        std::make_pair("get_pos", lua::cursor_get_pos),
+        std::make_pair("set_pos", lua::cursor_set_pos),
+        std::make_pair("in_bounds", lua::cursor_in_bounds),
+        std::make_pair("in_window", lua::cursor_in_window),
     });
 
     lua_register_table(lua_state, "view", {

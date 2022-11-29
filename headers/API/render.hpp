@@ -5,8 +5,10 @@
 
 #include "lua_extensions.hpp"
 
-extern std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-extern std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
+inline std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
+inline std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
+
+extern size_t print_offset;
 
 namespace lua
 {

@@ -11,12 +11,12 @@ extern size_t print_offset;
 
 namespace lua
 {
-    static int close(lua_State* L) {
+    static int window_close(lua_State* L) {
         window.close();
         return 0;
     }
 
-    static int clear(lua_State* L) {
+    static int window_clear(lua_State* L) {
         LuaStack args(L);
 
         if (args.empty()) {
@@ -31,12 +31,12 @@ namespace lua
         return 0;
     }
 
-    static int display(lua_State* L) {
+    static int window_display(lua_State* L) {
         window.display();
         return 0;
     }
 
-    static int get_size(lua_State* L) {
+    static int window_get_size(lua_State* L) {
         lua_pushtable(L, {
             std::make_pair("w", window.getSize().x),
             std::make_pair("h", window.getSize().y)
@@ -45,7 +45,7 @@ namespace lua
         return 1;
     }
 
-    static int set_size(lua_State* L) {
+    static int window_set_size(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 2)
@@ -56,7 +56,7 @@ namespace lua
         return 0;
     }
 
-    static int get_pos(lua_State* L) {
+    static int window_get_pos(lua_State* L) {
         lua_pushtable(L, {
             std::make_pair("x", window.getPosition().x),
             std::make_pair("y", window.getPosition().y)
@@ -65,7 +65,7 @@ namespace lua
         return 1;
     }
 
-    static int set_pos(lua_State* L) {
+    static int window_set_pos(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 2)
@@ -76,7 +76,7 @@ namespace lua
         return 0;
     }
 
-    static int set_title(lua_State* L) {
+    static int window_set_title(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1)
@@ -87,7 +87,7 @@ namespace lua
         return 0;
     }
 
-    static int set_vsync(lua_State* L) {
+    static int window_set_vsync(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1)
@@ -98,7 +98,7 @@ namespace lua
         return 0;
     }
 
-    static int set_frame_limit(lua_State* L) {
+    static int window_set_frame_limit(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1)
@@ -109,7 +109,7 @@ namespace lua
         return 0;
     }
 
-    static int sleep(lua_State* L) {
+    static int window_sleep(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1)
@@ -120,7 +120,7 @@ namespace lua
         return 0;
     }
 
-    static int await(lua_State* L) {
+    static int window_await(lua_State* L) {
         while (window.isOpen()) {
             switch (main_event.type) {
                 case sf::Event::MouseButtonPressed:
@@ -133,7 +133,7 @@ namespace lua
         return 0;
     }
 
-    static int set_icon(lua_State* L) {
+    static int window_set_icon(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1)

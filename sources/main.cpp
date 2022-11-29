@@ -8,15 +8,12 @@
 
 sf::RenderWindow window;
 sf::Event main_event;
+size_t print_offset = 0;
 
 double main_time = 0;
 std::mutex time_m;
 
 std::string FONTS_PATH;
-size_t print_offset = 0;
-
-std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
 __forceinline void start_program(char* cmd_line) {
     sf::ContextSettings settings;
@@ -80,6 +77,18 @@ __forceinline void start_program(char* cmd_line) {
         while (window.pollEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
                 window.close();
+
+            if (main_event.type == sf::Event::MouseEntered) {
+                cursor_in_window_m.lock();
+                f_cursor_in_window = true;
+                cursor_in_window_m.unlock();
+            }
+
+            if (main_event.type == sf::Event::MouseLeft) {
+                cursor_in_window_m.lock();
+                f_cursor_in_window = false;
+                cursor_in_window_m.unlock();
+            }
 
             if (script_loaded) continue;
 

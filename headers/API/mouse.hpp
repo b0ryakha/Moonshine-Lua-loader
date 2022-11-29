@@ -5,7 +5,7 @@
 
 namespace lua
 {
-    static int get_button_pressed(lua_State* L) {
+    static int mouse_get_pressed(lua_State* L) {
         while (window.isOpen()) {
             if (main_event.type == sf::Event::MouseButtonPressed) {
                 lua_pushnumber(L, static_cast<int>(main_event.mouseButton.button));
@@ -14,7 +14,7 @@ namespace lua
         }
     }
 
-    static int is_button_pressed(lua_State* L) {
+    static int mouse_is_pressed(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1) {
@@ -28,7 +28,7 @@ namespace lua
         return 1;
     }
 
-    static int is_scrolling_up(lua_State* L) {
+    static int mouse_is_scrolling_up(lua_State* L) {
         if (main_event.type == sf::Event::MouseWheelScrolled) {
             lua_pushboolean(L, main_event.mouseWheelScroll.delta > 0);
             return 1;
@@ -38,7 +38,7 @@ namespace lua
         return 1;
     }
 
-    static int is_scrolling_down(lua_State* L) {
+    static int mouse_is_scrolling_down(lua_State* L) {
         if (main_event.type == sf::Event::MouseWheelScrolled) {
             lua_pushboolean(L, main_event.mouseWheelScroll.delta < 0);
             return 1;

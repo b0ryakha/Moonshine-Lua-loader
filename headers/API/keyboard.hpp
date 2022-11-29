@@ -9,7 +9,7 @@ extern sf::Event main_event;
 
 namespace lua
 {
-    static int get_key_pressed(lua_State* L) {
+    static int keyboard_get_pressed(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() > 1) {
@@ -36,7 +36,7 @@ namespace lua
         }
     }
 
-    static int is_key_pressed(lua_State* L) {
+    static int keyboard_is_pressed(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 1) {
