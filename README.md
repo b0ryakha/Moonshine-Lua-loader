@@ -5,8 +5,8 @@
 ### :dash: Navigation:
 <details><summary>:movie_camera: Render</summary>
 
-  - [load_sprite()](#render.load_sprite)
-  - [load_font()](#render.load_font)
+  - [create_sprite()](#render.create_sprite)
+  - [create_font()](#render.create_font)
   - [text()](#render.text)
   - [measure_text()](#render.measure_text)
   - [sprite()](#render.sprite)
@@ -134,9 +134,9 @@ print(font)
 
 ### :movie_camera: Render
 
-#### <a name="render.load_sprite"></a> ```load_sprite```
+#### <a name="render.create_sprite"></a> ```create_sprite```
 ```lua
-render.load_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: size_t, t_h: size_t]): Sprite
+render.create_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: size_t, t_h: size_t]): Sprite
 ```
 | Name  | Type         | Description                                     |
 | :---: | :---:        | :---:                                           |
@@ -152,9 +152,9 @@ Returns the [sprite](#Sprite) or nil on failure.
 
 ---
 
-#### <a name="render.load_font"></a> ```load_font```
+#### <a name="render.create_font"></a> ```create_font```
 ```lua
-render.load_font(font_name: string, size: size_t): Font
+render.create_font(font_name: string, size: size_t): Font
 ```
 | Name      | Type         | Description  |
 | :---:     | :---:        | :---:        |
@@ -468,6 +468,7 @@ mouse.is_scrolling_down(): bool
 ```
 
 Returns true if scrolling down, else false.
+
 
 ### :video_game: Cursor
 
