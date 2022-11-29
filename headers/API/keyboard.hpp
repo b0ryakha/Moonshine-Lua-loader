@@ -17,25 +17,25 @@ namespace lua
             return 1;
         }
 
-        const bool key_code = (args.size() == 1 ? args.get<bool>() : false);
+        const bool is_symbol = (args.size() == 1 ? args.get<bool>() : false);
 
         while (window.isOpen()) {
-            if (main_event.type == sf::Event::TextEntered) {
-                if (key_code) {
-                    lua_pushnumber(L, main_event.text.unicode);
-                    return 1;
-                }
-                else if (main_event.text.unicode < 128) {
+            if (is_symbol) {
+                if (main_event.type == sf::Event::TextEntered && main_event.text.unicode > 31 && main_event.text.unicode < 128) {
                     std::string result;
                     result = static_cast<char>(main_event.text.unicode);
 
                     lua_pushstring(L, result.c_str());
                     return 1;
                 }
-
-                lua_pushnil(L);
+            }
+            else if (main_event.type == sf::Event::KeyPressed) {
+                lua_pushnumber(L, static_cast<int>(main_event.key.code));
                 return 1;
             }
+
+            lua_pushnil(L);
+            return 1;
         }
     }
 

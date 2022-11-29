@@ -8,27 +8,7 @@ namespace lua
     static int get_button_pressed(lua_State* L) {
         while (window.isOpen()) {
             if (main_event.type == sf::Event::MouseButtonPressed) {
-                std::string button_name("None");
- 
-                switch (main_event.mouseButton.button) {
-                    case sf::Mouse::Left:
-                        button_name = "Left";
-                        break;
-                    case sf::Mouse::Right:
-                        button_name = "Right";
-                        break;
-                    case sf::Mouse::Middle:
-                        button_name = "Middle";
-                        break;
-                    case sf::Mouse::XButton1:
-                        button_name = "XButton1";
-                        break;
-                    case sf::Mouse::XButton2:
-                        button_name = "XButton2";
-                        break;
-                }
-
-                lua_pushstring(L, button_name.c_str());
+                lua_pushnumber(L, main_event.key);
                 return 1;
             }
         }
