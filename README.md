@@ -405,10 +405,13 @@ local button_id = button.Left
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
 ```lua
-keyboard.get_pressed(): SFML_enum
+keyboard.get_pressed([return_symbol]): SFML_enum / char
 ```
+| Name          | Type       | Description                                        |
+| :---:         | :---:      | :---:                                              |
+| return_symbol | ```bool``` | If true then function return char, default = false |
 
-Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) or nil on failure.
+Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) / char or nil on failure.
 
 ---
 
