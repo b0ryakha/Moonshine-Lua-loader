@@ -140,6 +140,7 @@ __forceinline void Script::open_API() {
     lua_register_table(lua_state, "sound", {
         std::make_pair("new", lua::sound_new),
         std::make_pair("play", lua::sound_play),
+        std::make_pair("stop", lua::sound_play),
         std::make_pair("set_volume", lua::sound_set_volume),
         std::make_pair("set_loop", lua::sound_set_loop),
     });

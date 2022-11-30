@@ -69,6 +69,24 @@ namespace lua
         return 0;
     }
 
+    static int sound_stop(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1)
+            throw_error("Incorrect number of arguments!");
+
+        std::string sound_id = args.get<std::string>();
+
+        try {
+            sound_buffer[sound_id].first.stop();
+        }
+        catch (const std::out_of_range& exception) {
+            throw_error(exception.what());
+        }
+
+        return 0;
+    }
+
     static int sound_set_volume(lua_State* L) {
         LuaStack args(L);
 
