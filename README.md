@@ -64,6 +64,11 @@
   
 <details><summary>:musical_note: Sound</summary>
 
+  - [new()](#sound.new)
+  - [play()](#sound.play)
+  - [stop()](#sound.stop)
+  - [set_volume()](#sound.set_volume)
+  - [set_loop()](#sound.set_loop)
   </details>
   
 <details><summary>:file_folder: File</summary>
@@ -117,18 +122,26 @@ print(sprite)
 
 #### <a name="Color"></a> ```Color```
 ```lua
-local color = ...
+local color_obj = ...
 
 -- red, green, blue, alpha values of color
-print(color.r, color.g, color.b, color.a)
+print(color_obj.r, color_obj.g, color_obj.b, color_obj.a)
 ```
 
 #### <a name="Font"></a> ```Font```
 ```lua
-local font = ...
+local font_obj = ...
 
 -- font address
-print(font)
+print(font_obj)
+```
+
+#### <a name="Sound"></a> ```Sound```
+```lua
+local sound_obj = ...
+
+-- sound address
+print(sound_obj)
 ```
 
 ---
@@ -512,14 +525,15 @@ Returns true if cursor in window, else false or nil on failure.
 
 #### <a name="cursor.in_bounds"></a> ```in_bounds```
 ```lua
-cursor.in_bounds(x: float, y: float, w: float, h: float)
+cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool])
 ```
-| Name             | Type         | Description |
-| :---:            | :---:        | :---:       |
-| x                | ```float```  | X position  |
-| y                | ```float```  | Y position  |
-| w                | ```float```  | Width       |
-| h                | ```float```  | Height      |
+| Name             | Type         | Description                                                            |
+| :---:            | :---:        | :---:                                                                  |
+| x                | ```float```  | X position                                                             |
+| y                | ```float```  | Y position                                                             |
+| w                | ```float```  | Width                                                                  |
+| h                | ```float```  | Height                                                                 |
+| regarding_window | ```bool```   | Is true then function return position regarding window, default = true |
 
 Returns true if cursor in bounds, else false or nil on failure.
 
@@ -527,6 +541,69 @@ Returns true if cursor in bounds, else false or nil on failure.
 
 
 ### :musical_note: Sound
+
+#### <a name="sound.new"></a> ```new```
+```lua
+sound.new(path: string, volume: size_t[, is_repeat: bool]): Sound
+```
+| Name      | Type         | Description                                        |
+| :---:     | :---:        | :---:                                              |
+| path      | ```string``` | Path to sound file [WAV, OGG, FLAC]                |
+| volume    | ```size_t``` | Volume of sound [0 - 100]                          |
+| is_repeat | ```bool```   | If true then sound will be looped, default = false |
+
+Returns the [sound](#Sound) or nil on failure.
+
+---
+
+#### <a name="sound.play"></a> ```play```
+```lua
+sound.play(sound: Sound[, is_reset: bool])
+```
+| Name     | Type        | Description                                                                      |
+| :---:    | :---:       | :---:                                                                            |
+| sound    | ```Sound``` | Sound object                                                                     |
+| is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
+
+Plays [sound](#Sound).
+
+---
+
+#### <a name="sound.stop"></a> ```stop```
+```lua
+sound.stop(sound: Sound)
+```
+| Name     | Type        | Description                                                                      |
+| :---:    | :---:       | :---:                                                                            |
+| sound    | ```Sound``` | Sound object                                                                     |
+
+Stops [sound](#Sound).
+
+---
+
+#### <a name="sound.set_volume"></a> ```set_volume```
+```lua
+sound.set_volume(sound: Sound, volume: size_t)
+```
+| Name   | Type         | Description               |
+| :---:  | :---:        | :---:                     |
+| sound  | ```Sound```  | Sound object              |
+| volume | ```size_t``` | Volume of sound [0 - 100] |
+
+Sets the [sound](#Sound) a new volume.
+
+---
+
+#### <a name="sound.set_loop"></a> ```set_loop```
+```lua
+sound.set_loop(sound: Sound, is_repeat: bool)
+```
+| Name      | Type        | Description                           |
+| :---:     | :---:       | :---:                                 |
+| sound     | ```Sound``` | Sound object                          |
+| is_repeat | ```bool```  | If true then the sound will be looped |
+
+Sets the [sound](#Sound) a new loop.
 
 
 ### :file_folder: File
