@@ -5,13 +5,13 @@
 
 #include "lua_extensions.hpp"
 
-inline std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-inline std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
-
 extern size_t print_offset;
 
 namespace lua
 {
+    static std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
+    static std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
+
     static int render_create_sprite(lua_State* L) {
         LuaStack args(L);
 
@@ -28,7 +28,7 @@ namespace lua
         size_t t_w = (args.size() == 7 ? args.get<size_t>() : 0);
         size_t t_h = (args.size() == 7 ? args.get<size_t>() : 0);
 
-        const std::string ID = "0x0" + std::to_string(sprite_buffer.size());
+        const std::string ID = "0x115112114105116101" + std::to_string(sprite_buffer.size());
 
         sf::Texture texture;
         if (!texture.loadFromFile(path)) {
@@ -80,7 +80,7 @@ namespace lua
             return 1;
         }
 
-        const std::string ID = "0x1" + std::to_string(font_buffer.size());
+        const std::string ID = "0x102111110116" + std::to_string(font_buffer.size());
 
         font_buffer[ID] = std::make_pair(font, size);
 

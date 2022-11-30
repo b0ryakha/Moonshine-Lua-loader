@@ -2,16 +2,12 @@
 #include <string>
 #include <vector>
 #include <array>
-#include <mutex>
 
 #include "Script.hpp"
 
 sf::RenderWindow window;
 sf::Event main_event;
 size_t print_offset = 0;
-
-double main_time = 0;
-std::mutex time_m;
 
 std::string FONTS_PATH;
 

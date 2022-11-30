@@ -2,7 +2,10 @@
 
 #include "lua_extensions.hpp"
 
-extern double main_time;
+#include <mutex>
+
+inline double main_time = 0;
+inline std::mutex time_m;
 
 namespace lua
 {
