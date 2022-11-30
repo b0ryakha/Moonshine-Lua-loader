@@ -43,46 +43,46 @@ public:
     LuaTable(lua_State* lua_state, int index);
 
     template<typename T>
-    T const& get(const std::string& key) const { throw_error("Unknown Type!"); }
+    T get(const std::string& key) const { throw_error("Unknown Type!"); }
 
     template<>
-    int const& get<int>(const std::string& key) const {
+    int get<int>(const std::string& key) const {
         check_errors(LuaMultiValueType::Number, key);
 
         return static_cast<int>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    size_t const& get<size_t>(const std::string& key) const {
+    size_t get<size_t>(const std::string& key) const {
         check_errors(LuaMultiValueType::Number, key);
 
-        int result = static_cast<int>(std::get<lua_Number>(elements.at(key)));
-        return static_cast<size_t>(result > 0 ? result : 0);
+        const lua_Number tmp = std::get<lua_Number>(elements.at(key));
+        return static_cast<size_t>((tmp > 0) ? tmp : 0);
     }
 
     template<>
-    float const& get<float>(const std::string& key) const {
+    float get<float>(const std::string& key) const {
         check_errors(LuaMultiValueType::Number, key);
 
         return static_cast<float>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    std::string const& get<std::string>(const std::string& key) const {
+    std::string get<std::string>(const std::string& key) const {
         check_errors(LuaMultiValueType::String, key);
 
         return static_cast<std::string>(std::get<std::string>(elements.at(key)));
     }
 
     template<>
-    bool const& get<bool>(const std::string& key) const {
+    bool get<bool>(const std::string& key) const {
         check_errors(LuaMultiValueType::Boolean, key);
 
         return static_cast<bool>(std::get<LuaBoolean>(elements.at(key)).state);
     }
 
     template<>
-    LuaNil const& get<LuaNil>(const std::string& key) const {
+    LuaNil get<LuaNil>(const std::string& key) const {
         check_errors(LuaMultiValueType::Nil, key);
 
         return static_cast<LuaNil>(std::get<LuaNil>(elements.at(key)));

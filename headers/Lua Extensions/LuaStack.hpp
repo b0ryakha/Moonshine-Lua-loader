@@ -33,60 +33,60 @@ public:
     LuaMultiValueType get_type(size_t index) const;
 
     template<typename T>
-    T const& get(size_t index) const { throw_error("Unknown Type!"); }
+    T get(size_t index) const { throw_error("Unknown Type!"); }
 
     template<>
-    int const& get<int>(size_t index) const {
+    int get<int>(size_t index) const {
         check_errors(LuaMultiValueType::Number, index);
 
         return static_cast<int>(std::get<lua_Number>(elements[index]));
     }
 
     template<>
-    size_t const& get<size_t>(size_t index) const {
+    size_t get<size_t>(size_t index) const {
         check_errors(LuaMultiValueType::Number, index);
 
-        int result = static_cast<int>(std::get<lua_Number>(elements[index]));
-        return static_cast<size_t>(result > 0 ? result : 0);
+        const lua_Number tmp = std::get<lua_Number>(elements[index]);
+        return static_cast<size_t>((tmp > 0) ? tmp : 0);
     }
 
     template<>
-    float const& get<float>(size_t index) const {
+    float get<float>(size_t index) const {
         check_errors(LuaMultiValueType::Number, index);
 
         return static_cast<float>(std::get<lua_Number>(elements[index]));
     }
 
     template<>
-    std::string const& get<std::string>(size_t index) const {
+    std::string get<std::string>(size_t index) const {
         check_errors(LuaMultiValueType::String, index);
 
         return static_cast<std::string>(std::get<std::string>(elements[index]));
     }
 
     template<>
-    bool const& get<bool>(size_t index) const {
+    bool get<bool>(size_t index) const {
         check_errors(LuaMultiValueType::Boolean, index);
 
         return static_cast<bool>(std::get<LuaBoolean>(elements[index]).state);
     }
 
     template<>
-    LuaNil const& get<LuaNil>(size_t index) const {
+    LuaNil get<LuaNil>(size_t index) const {
         check_errors(LuaMultiValueType::Nil, index);
 
         return static_cast<LuaNil>(std::get<LuaNil>(elements[index]));
     }
 
     template<>
-    LuaTable const& get<LuaTable>(size_t index) const {
+    LuaTable get<LuaTable>(size_t index) const {
         check_errors(LuaMultiValueType::Table, index);
 
         return static_cast<LuaTable>(std::get<LuaTable>(elements[index]));
     }
 
     template<typename T>
-    T const& get() const {
+    T get() const {
         return get<T>(elements.size() - get_counter--);
     }
 };

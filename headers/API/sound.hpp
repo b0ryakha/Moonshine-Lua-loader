@@ -19,7 +19,7 @@ namespace lua
         }
 
         std::string path = args.get<std::string>();
-        size_t volume = args.get<std::size_t>();
+        size_t volume = args.get<size_t>();
         bool is_repeat = (args.size() == 3) ? args.get<bool>() : false;
 
         const std::string ID = "0x115111117110100" + std::to_string(sound_buffer.size());
@@ -76,7 +76,7 @@ namespace lua
             throw_error("Incorrect number of arguments!");
 
         std::string sound_id = args.get<std::string>();
-        size_t volume = args.get<std::size_t>();
+        size_t volume = args.get<size_t>();
 
         try {
             sound_buffer[sound_id].first.setVolume((volume > 100) ? 100 : volume);
