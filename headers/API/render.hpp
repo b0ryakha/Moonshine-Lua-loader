@@ -4,6 +4,7 @@
 #include <map>
 
 #include "lua_extensions.hpp"
+#include "SuperEllipse.hpp"
 
 extern size_t print_offset;
 
@@ -149,6 +150,26 @@ namespace lua
         _text.setFillColor(color);
 
         window.draw(_text);
+
+        return 0;
+    }
+
+    static int render_rectangle(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 5 && args.size() != 6)
+            throw_error("Incorrect number of arguments!");
+
+        float x = args.get<float>();
+        float y = args.get<float>();
+        float w = args.get<float>();
+        float h = args.get<float>();
+        sf::Color color = lua_getcolor(args);
+        float rounding = (args.size() == 6) ? args.get<float>() : 0;
+
+        SuperEllipse rectangle(sf::Rect<float>(x, y, w, h), rounding, color);
+
+        window.draw(rectangle);
 
         return 0;
     }
