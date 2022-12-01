@@ -174,6 +174,34 @@ namespace lua
         return 0;
     }
 
+    static int render_circle(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 4 && args.size() != 6)
+            throw_error("Incorrect number of arguments!");
+
+        float x = args.get<float>();
+        float y = args.get<float>();
+        float radius = args.get<float>();
+        sf::Color color = lua_getcolor(args);
+        float thickness = (args.size() == 6) ? args.get<float>() : 0;
+        sf::Color* outline_color = (args.size() == 6) ? &lua_getcolor(args) : nullptr;
+
+        sf::CircleShape circle(radius);
+
+        circle.setPosition(sf::Vector2f(x, y));
+        circle.setFillColor(color);
+
+        if (args.size() == 6) {
+            circle.setOutlineThickness(thickness);
+            circle.setOutlineColor(*outline_color);
+        }
+
+        window.draw(circle);
+
+        return 0;
+    }
+
     static int render_sprite(lua_State* L) {
         LuaStack args(L);
 
