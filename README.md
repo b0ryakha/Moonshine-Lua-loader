@@ -62,6 +62,15 @@
   
 <details><summary>:camera: View</summary>
 
+  - [new()](#view.new)
+  - [active()](#view.active)
+  - [set_port()](#view.set_port)
+  - [set_center()](#view.set_center)
+  - [get_size()](#view.get_size)
+  - [set_size()](#view.set_size)
+  - [set_zoom()](#view.set_zoom)
+  - [get_rotation()](#view.get_rotation)
+  - [set_rotation()](#view.set_rotation)
   </details>
   
 <details><summary>:musical_note: Sound</summary>
@@ -97,6 +106,14 @@
 ---
 
 ### :paperclip: Objects:
+
+#### <a name="View"></a> ```View```
+```lua
+local view_obj = ...
+
+-- view address
+print(view_obj)
+```
 
 #### <a name="Size"></a> ```Size```
 ```lua
@@ -574,6 +591,126 @@ cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool
 Returns true if cursor in bounds, else false or nil on failure.
 
 ### :camera: View
+
+#### <a name="view.new"></a> ```new```
+```lua
+view.new([x: float, y: float, w: float, h: float]): View
+```
+| Name   | Type        | Description |
+| :---:  | :---:       | :---:       |
+| x      | ```float``` | X position  |
+| y      | ```float``` | Y position  |
+| w      | ```float``` | Width       |
+| h      | ```float``` | Height      |
+
+Returns the [view](#View) or nil on failure.
+
+---
+
+#### <a name="view.active"></a> ```active```
+```lua
+view.active(view: View)
+```
+| Name  | Type       | Description |
+| :---: | :---:      | :---:       |
+| view  | ```View``` | View object |
+
+Activates the [view](#View).
+
+---
+
+
+#### <a name="view.set_port"></a> ```set_port```
+```lua
+view.set_port(view: View, x: float, y: float, w: float, h: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| x     | ```float``` | X position  |
+| y     | ```float``` | Y position  |
+| w     | ```float``` | Width       |
+| h     | ```float``` | Height      |
+
+Sets the [view](#View) a new view port.
+
+---
+
+#### <a name="view.set_center"></a> ```set_center```
+```lua
+view.set_center(view: View, x: float, y: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| x     | ```float``` | X position  |
+| y     | ```float``` | Y position  |
+
+Sets the [view](#View) a new center position.
+
+---
+
+#### <a name="view.get_size"></a> ```get_size```
+```lua
+view.get_size(view: View): Size
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+
+Returns [size](#Size) of [view](#View).
+
+---
+
+#### <a name="view.set_size"></a> ```set_size```
+```lua
+view.set_size(view: View, w: float, h: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| w     | ```float``` | Width       |
+| h     | ```float``` | Height      |
+
+Sets the [view](#View) a new [size](#Size).
+
+---
+
+#### <a name="view.set_zoom"></a> ```set_zoom```
+```lua
+view.set_zoom(view: View, zoom_factor: float)
+```
+| Name        | Type        | Description |
+| :---:       | :---:       | :---:       |
+| view        | ```View```  | View object |
+| zoom_factor | ```float``` | Zoom degree |
+
+Zooms [view](#View).
+
+---
+
+#### <a name="view.get_rotation"></a> ```get_rotation```
+```lua
+view.get_rotation(view: View): float
+```
+| Name        | Type        | Description |
+| :---:       | :---:       | :---:       |
+| view        | ```View```  | View object |
+
+Returns a [view](#View) rotation.
+
+---
+
+#### <a name="view.set_rotation"></a> ```set_rotation```
+```lua
+view.set_rotation(view: View, angle: float)
+```
+| Name  | Type        | Description              |
+| :---: | :---:       | :---:                    |
+| view  | ```View```  | View object              |
+| angle | ```float``` | Rotation angle [0 - 360] |
+
+Sets the [view](#View) a new rotation angle.
 
 
 ### :musical_note: Sound
