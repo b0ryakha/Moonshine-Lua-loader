@@ -1,5 +1,3 @@
-<h3 align="center">:mag_right: API :mag:</h3>
-
 ### :dash: Navigation:
 <details><summary>:movie_camera: Render</summary>
 
