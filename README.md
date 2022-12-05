@@ -6,3 +6,16 @@
 The API includes the ability to render, interact with files, window, math, sound, etc.
 
 ---
+
+## Application programming interface
+For information about the API, see [API.md](API.md) file for detailed information
+
+## Compiling
+- Choose x86 architecture
+- Choose Release build
+- Include libs [SFML, BOOST]
+- Don't forget about openal32.dll
+
+## Built With
+- [SFML](https://www.sfml-dev.org/) - Graphics and sound engine.
+- [Boost](https://www.boost.org/) - For math (random).
