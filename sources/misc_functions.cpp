@@ -7,11 +7,16 @@ int rand_number(int min, int max) {
     return dist(gen);
 }
 
-void throw_error(const std::string& error, bool close_window) noexcept {
+void throw_error(const std::string& error, bool is_close_window) noexcept {
     sf::Font font;
 
-    if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+    auto close_window = [&] {
+        std::lock_guard<std::mutex> lock(closing_window_m);
         window.close();
+    };
+
+    if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+        close_window();
 
     sf::Text text(error, font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
@@ -34,6 +39,6 @@ void throw_error(const std::string& error, bool close_window) noexcept {
     }
     loop_break:
 
-    if (close_window)
-        window.close();
+    if (is_close_window)
+        close_window();
 }

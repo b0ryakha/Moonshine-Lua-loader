@@ -129,10 +129,15 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "view", {
-        //std::make_pair("set", lua::view_set),
-        //std::make_pair("set_ported", lua::view_set_ported),
-        //std::make_pair("get_x", lua::view_get_x),
-        //std::make_pair("get_y", lua::view_get_y),
+        std::make_pair("new", lua::view_new),
+        std::make_pair("active", lua::view_active),
+        std::make_pair("set_port", lua::view_set_port),
+        std::make_pair("set_center", lua::view_set_center),
+        std::make_pair("get_size", lua::view_get_size),
+        std::make_pair("set_size", lua::view_set_size),
+        std::make_pair("set_zoom", lua::view_set_zoom),
+        std::make_pair("get_rotation", lua::view_get_rotation),
+        std::make_pair("set_rotation", lua::view_set_rotation),
     });
 
     lua_register_table(lua_state, "sound", {

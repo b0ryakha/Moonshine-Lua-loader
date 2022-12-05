@@ -68,6 +68,8 @@ __forceinline void start_program(char* cmd_line) {
             window.display();
         }
 
+        closing_window_m.lock();
+
         while (window.pollEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
                 window.close();
@@ -104,6 +106,8 @@ __forceinline void start_program(char* cmd_line) {
                 }
             }
         }
+
+        closing_window_m.unlock();
     }
 }
 
