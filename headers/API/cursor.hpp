@@ -79,6 +79,11 @@ namespace lua
         float h = args.get<float>();
         bool is_regarding_window = (args.size() == 5 ? args.get<bool>() : true);
 
+        if (is_regarding_window and !f_cursor_in_window) {
+            lua_pushboolean(L, false);
+            return 1;
+        }
+
         int m_x = (is_regarding_window ? sf::Mouse::getPosition(window).x : sf::Mouse::getPosition().x);
         int m_y = (is_regarding_window ? sf::Mouse::getPosition(window).y : sf::Mouse::getPosition().y);
 
