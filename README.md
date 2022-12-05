@@ -10,6 +10,8 @@
   - [text()](#render.text)
   - [measure_text()](#render.measure_text)
   - [sprite()](#render.sprite)
+  - [rectangle()](#render.rectangle)
+  - [circle()](#render.circle)
   </details>
 
 <details><summary>:rainbow: Color</summary>
@@ -223,6 +225,40 @@ render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
 | color     | ```Color``` | Color for sprite, default = nil |
 
 Render [sprite](#Sprite) in the specified coordinates.
+
+---
+
+#### <a name="render.rectangle"></a> ```rectangle```
+```lua
+render.rectangle(x: float, y: float, w: float, h: float, color: Color[, rounding: float])
+```
+| Name     | Type        | Description                       |
+| :---:    | :---:       | :---:                             |
+| x        | ```float``` | X coordinate                      |
+| y        | ```float``` | Y coordinate                      |
+| w        | ```float``` | Width                             |
+| h        | ```float``` | Height                            |
+| color    | ```Color``` | Color for filling the rectangle   |
+| rounding | ```float``` | Edge rounding factor, default = 0 |
+
+Render rectangle on the screen.
+
+---
+
+#### <a name="render.circle"></a> ```circle```
+```lua
+render.circle(x: float, y: float, radius: float, color: Color[, thickness: float, outline_color: Color])
+```
+| Name          | Type        | Description                                 |
+| :---:         | :---:       | :---:                                       |
+| x             | ```float``` | X coordinate                                |
+| y             | ```float``` | Y coordinate                                |
+| radius        | ```float``` | Circle radius                               |
+| color         | ```Color``` | Color for filling the circle                |
+| thickness     | ```float``` | Thickness of outline line, default = 0      |
+| outline_color | ```Color``` | Color for filling the circle, default = nil |
+
+Render circle on the screen.
 
 
 ### :rainbow: Color
