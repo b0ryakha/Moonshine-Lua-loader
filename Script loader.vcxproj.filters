@@ -125,5 +125,18 @@
     <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp">
       <Filter>Header Files\Custom Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="resources\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources\Script loader.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

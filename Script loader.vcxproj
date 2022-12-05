@@ -175,6 +175,13 @@
     <ClInclude Include="lua\include\lua.hpp" />
     <ClInclude Include="lua\include\luaconf.h" />
     <ClInclude Include="lua\include\lualib.h" />
+    <ClInclude Include="resources\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources\Script loader.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
