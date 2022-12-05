@@ -77,9 +77,6 @@
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp">
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\API.hpp">
-      <Filter>Header Files\API</Filter>
-    </ClInclude>
     <ClInclude Include="headers\API\cmath.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>

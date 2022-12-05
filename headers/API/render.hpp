@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <unordered_map>
 
 #include "lua_extensions.hpp"
 #include "SuperEllipse.hpp"
@@ -10,8 +10,8 @@ extern size_t print_offset;
 
 namespace lua
 {
-    static std::map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-    static std::map<std::string, std::pair<sf::Font, size_t>> font_buffer;
+    static std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
+    static std::unordered_map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
     static int render_create_sprite(lua_State* L) {
         LuaStack args(L);
@@ -49,7 +49,7 @@ namespace lua
         if (args.size() == 7)
             sprite.setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));
 
-        sprite_buffer[ID] = std::make_pair(sprite, texture);
+        sprite_buffer[ID] = std::move(std::make_pair(sprite, texture));
 
         lua_pushstring(L, ID.c_str());
         return 1;
@@ -83,7 +83,7 @@ namespace lua
 
         const std::string ID = "0x102111110116" + std::to_string(font_buffer.size());
 
-        font_buffer[ID] = std::make_pair(font, size);
+        font_buffer[ID] = std::move(std::make_pair(font, size));
 
         lua_pushstring(L, ID.c_str());
         return 1;
@@ -157,8 +157,10 @@ namespace lua
     static int render_rectangle(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 5 && args.size() != 6)
-            throw_error("Incorrect number of arguments!");
+        if (args.size() != 5 && args.size() != 6) {
+            lua_pushnil(L);
+            return 1;
+        }
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -177,24 +179,25 @@ namespace lua
     static int render_circle(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 4 && args.size() != 6)
-            throw_error("Incorrect number of arguments!");
+        if (args.size() != 4 && args.size() != 6) {
+            lua_pushnil(L);
+            return 1;
+        }
 
         float x = args.get<float>();
         float y = args.get<float>();
         float radius = args.get<float>();
         sf::Color color = lua_getcolor(args);
         float thickness = (args.size() == 6) ? args.get<float>() : 0;
-        sf::Color* outline_color = (args.size() == 6) ? &lua_getcolor(args) : nullptr;
+        sf::Color outline_color = (args.size() == 6) ? lua_getcolor(args) : sf::Color();
 
         sf::CircleShape circle(radius);
 
-        circle.setPosition(sf::Vector2f(x, y));
         circle.setFillColor(color);
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
-            circle.setOutlineColor(*outline_color);
+            circle.setOutlineColor(outline_color);
         }
 
         window.draw(circle);

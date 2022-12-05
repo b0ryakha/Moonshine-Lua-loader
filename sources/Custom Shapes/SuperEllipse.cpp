@@ -25,6 +25,8 @@ void SuperEllipse::init() {
         m_points.push_back(std::move(sf::Vector2f(WIDTH2 + point.x, m_radius - point.y)));
 }
 
+SuperEllipse::SuperEllipse() {};
+
 SuperEllipse::SuperEllipse(const sf::Rect<float>& rect, float radius, const sf::Color& color) : m_rect(rect), m_radius(radius) {
     init();
     setPosition(rect.left, rect.top);

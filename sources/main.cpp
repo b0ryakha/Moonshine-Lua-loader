@@ -1,15 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <vector>
-#include <array>
 
 #include "Script.hpp"
 
 sf::RenderWindow window;
 sf::Event main_event;
-size_t print_offset = 0;
-
 std::string FONTS_PATH;
+
+size_t print_offset = 0;
 
 __forceinline void start_program(char* cmd_line) {
     sf::ContextSettings settings;
@@ -40,7 +38,7 @@ __forceinline void start_program(char* cmd_line) {
 
     sf::Text cursor("_", font, 20);
     bool cursor_visible = true;
-    int cursor_timer = 0;
+    double cursor_timer = 0;
 
     while (window.isOpen()) {
         time_m.lock();

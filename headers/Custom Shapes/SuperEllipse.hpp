@@ -17,6 +17,7 @@ private:
     void init();
 
 public:
+    SuperEllipse();
     SuperEllipse(const sf::Rect<float>& rect, float radius, const sf::Color& color = sf::Color::White);
 
     virtual size_t getPointCount() const;

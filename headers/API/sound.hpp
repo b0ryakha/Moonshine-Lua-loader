@@ -4,11 +4,11 @@
 
 #include <SFML/Audio.hpp>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 namespace lua
 {
-    static std::map<std::string, std::pair<sf::Sound, sf::SoundBuffer>> sound_buffer;
+    static std::unordered_map<std::string, std::pair<sf::Sound, sf::SoundBuffer>> sound_buffer;
 
     static int sound_new(lua_State* L) {
         LuaStack args(L);

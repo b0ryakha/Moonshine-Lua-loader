@@ -3,7 +3,7 @@
 #include <variant>
 #include <string>
 #include <array>
-#include <map>
+#include <unordered_map>
 
 #include "lua.hpp"
 extern "C" {
@@ -12,9 +12,9 @@ extern "C" {
 
 #include "misc_functions.hpp"
 
-enum class LuaMultiValueType : size_t {
-    Number = 0, Function, String, Boolean, Table, Nil
-};
+enum class LuaMultiValueType : size_t { Number = 0, Function, String, Boolean, Table, Nil };
+
+inline const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
 struct LuaNil {};
 
@@ -25,14 +25,12 @@ struct LuaBoolean {
 
 class LuaTable {
 private:
-    std::map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
+    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
 
     __forceinline void check_errors(LuaMultiValueType expected_type, std::string key) const {
         if (elements.find(key) == elements.end()) {
             throw_error("[Table] Attempt to get an element under key " + key + ".");
         }
-
-        static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
             throw_error("Incorrect type, received " + TYPE_NAME[elements.at(key).index()] + ", but expected " + TYPE_NAME[static_cast<size_t>(expected_type)] + ".");

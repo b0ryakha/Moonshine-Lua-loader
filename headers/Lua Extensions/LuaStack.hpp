@@ -11,14 +11,12 @@
 class LuaStack {
 private:
     std::vector<LuaMultiValue> elements;
-    mutable size_t get_counter = 1;
+    mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValueType expected_type, size_t index) const {
         if (index < 0 || index >= elements.size()) {
             throw_error("[Stack] Attempt to get an element under index " + std::to_string(index) + ", but size = " + std::to_string(elements.size()) + ".");
         }
-
-        static const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
         if (elements[index].index() != static_cast<size_t>(expected_type)) {
             throw_error("Incorrect type, received " + TYPE_NAME[elements[index].index()] + ", but expected " + TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
@@ -87,6 +85,6 @@ public:
 
     template<typename T>
     T get() const {
-        return get<T>(elements.size() - get_counter--);
+        return get<T>(elements.size() - counter_of_get--);
     }
 };
