@@ -1,4 +1,4 @@
-<img src="resources/icon.ico" align="right" />
+<img src="resources/icon.ico" align="right" width="150" />
 
 ## Script Loader ![BETA](https://img.shields.io/static/v1?label=STAGE&message=BETA&color=orange)
 > A loader for lua scripts with custom API.
