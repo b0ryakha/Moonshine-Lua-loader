@@ -13,9 +13,12 @@ For information about the API, see [API.md](API.md) file for detailed informatio
 ## Compiling
 - Choose x86 architecture
 - Choose Release build
-- Include libs [SFML, BOOST]
+- Include libs [[SFML](https://www.sfml-dev.org/), [Boost](https://www.boost.org/)]
 - Don't forget about openal32.dll
 
 ## Built With
 - [SFML](https://www.sfml-dev.org/) - Graphics and sound engine.
 - [Boost](https://www.boost.org/) - For math (random).
+
+## Authors
+- **[b0ryakha](https://github.com/b0ryakha)**
