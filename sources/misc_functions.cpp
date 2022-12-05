@@ -32,10 +32,8 @@ void throw_error(const std::string& error, bool is_close_window) noexcept {
     window.display();
 
     while (window.isOpen()) {
-        switch (main_event.type) {
-            case sf::Event::KeyPressed:
-                goto loop_break;
-        }
+        if (main_event.type == sf::Event::KeyPressed)
+            goto loop_break;
     }
     loop_break:
 
