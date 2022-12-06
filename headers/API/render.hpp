@@ -157,10 +157,8 @@ namespace lua
     static int render_rectangle(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 5 && args.size() != 6) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 5 && args.size() != 6)
+            throw_error("Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -179,10 +177,8 @@ namespace lua
     static int render_circle(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 4 && args.size() != 6) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 4 && args.size() != 6)
+            throw_error("Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -194,7 +190,7 @@ namespace lua
         sf::CircleShape circle(radius);
 
         circle.setFillColor(color);
-        circle.setPosition(sf::Vector2f(x, y));
+        circle.setPosition(sf::Vector2f(x - radius, y - radius));
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
@@ -202,6 +198,40 @@ namespace lua
         }
 
         window.draw(circle);
+
+        return 0;
+    }
+
+    static int render_line(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 6)
+            throw_error("Incorrect number of arguments!");
+
+        float x1 = args.get<float>();
+        float y1 = args.get<float>();
+        float x2 = args.get<float>();
+        float y2 = args.get<float>();
+        float thickness = args.get<float>();
+        sf::Color color = lua_getcolor(args);
+
+        sf::Vertex line[2];
+
+        auto draw_line = [&](const sf::Vector2f& start, const sf::Vector2f& end) {
+            line[0].position = start;
+            line[0].color = color;
+
+            line[1].position = end;
+            line[1].color = color;
+
+            window.draw(line, 2, sf::Lines);
+        };
+
+        for (float i = 0; i < thickness / 2; ++i)
+            draw_line(sf::Vector2f(x1, y1 - i), sf::Vector2f(x2, y2 - i));
+
+        for (float i = 0; i < thickness / 2; ++i)
+            draw_line(sf::Vector2f(x1, y1 + i), sf::Vector2f(x2, y2 + i));
 
         return 0;
     }
