@@ -194,6 +194,7 @@ namespace lua
         sf::CircleShape circle(radius);
 
         circle.setFillColor(color);
+        circle.setPosition(sf::Vector2f(x, y));
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
