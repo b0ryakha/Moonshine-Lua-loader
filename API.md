@@ -8,6 +8,7 @@
   - [sprite()](#render.sprite)
   - [rectangle()](#render.rectangle)
   - [circle()](#render.circle)
+  - [line()](#render.line)
   </details>
 
 <details><summary>:rainbow: Color</summary>
@@ -272,6 +273,23 @@ render.circle(x: float, y: float, radius: float, color: Color[, thickness: float
 | outline_color | ```Color``` | Color for filling the circle, default = nil |
 
 Render circle on the screen.
+
+---
+
+#### <a name="render.line"></a> ```line```
+```lua
+render.line(x1: float, y1: float, x2: float, y2: float, thickness: float, color: Color)
+```
+| Name      | Type        | Description          |
+| :---:     | :---:       | :---:                |
+| x1        | ```float``` | Initial X coordinate |
+| y1        | ```float``` | Initial Y coordinate |
+| x2        | ```float``` | Finite X coordinate  |
+| y2        | ```float``` | Finite Y coordinate  |
+| color     | ```Color``` | Color for line       |
+| thickness | ```float``` | Thickness of line    |
+
+Render line on the screen.
 
 
 ### :rainbow: Color
