@@ -298,10 +298,10 @@ Render line on the screen.
 ```lua
 render.polygon(points: vector<array<float, 2>>, color: Color)
 ```
-| Name   | Type                          | Description                                               |
-| :---:  | :---:                         | :---:                                                     |
-| points | ```vector<array<float, 2>>``` | Table of coords pairs, example: {{ x, y }, { x, y }, ...} |
-| color  | ```Color```                   | Color for polygon                                         |
+| Name   | Type                          | Description                                                 |
+| :---:  | :---:                         | :---:                                                       |
+| points | ```vector<array<float, 2>>``` | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
+| color  | ```Color```                   | Color for polygon                                           |
 
 Render polygon on the screen.
 
