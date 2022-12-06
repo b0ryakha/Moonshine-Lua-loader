@@ -236,6 +236,30 @@ namespace lua
         return 0;
     }
 
+    static int render_polygon(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 2)
+            throw_error("Incorrect number of arguments!");
+
+        LuaTable points = args.get<LuaTable>();
+        sf::Color color = lua_getcolor(args);
+
+        sf::ConvexShape polygon;
+
+        polygon.setFillColor(color);
+        polygon.setPointCount(points.size());
+
+        for (size_t i = 0; i < points.size(); ++i) {
+            LuaTable point = points.get<LuaTable>();
+            polygon.setPoint(i, sf::Vector2f(point.get<float>(), point.get<float>()));
+        }
+
+        window.draw(polygon);
+
+        return 0;
+    }
+
     static int render_sprite(lua_State* L) {
         LuaStack args(L);
 

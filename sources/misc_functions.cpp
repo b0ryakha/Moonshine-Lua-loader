@@ -34,6 +34,8 @@ void throw_error(const std::string& error, bool is_close_window) noexcept {
     while (window.isOpen()) {
         if (main_event.type == sf::Event::KeyPressed)
             goto loop_break;
+
+        // anim "... .. ." logic
     }
     loop_break:
 

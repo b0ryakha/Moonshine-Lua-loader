@@ -57,7 +57,7 @@ __forceinline void Script::open_API() {
         std::make_pair("rectangle", lua::render_rectangle),
         std::make_pair("circle", lua::render_circle),
         std::make_pair("line", lua::render_line),
-        //std::make_pair("polygon", lua::render_polygon),
+        std::make_pair("polygon", lua::render_polygon),
         //std::make_pair("blur", lua::render_blur),
         //std::make_pair("shadow", lua::render_shadow),
         std::make_pair("sprite", lua::render_sprite),

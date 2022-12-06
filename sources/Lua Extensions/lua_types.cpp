@@ -10,6 +10,9 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
         const std::string_view key = static_cast<std::string_view>(lua_tostring(lua_state, -1));
 
         switch (lua_type(lua_state, -2)) {
+            case LUA_TTABLE:
+                elements[key] = std::move(new LuaTable(lua_state, -2));
+                break;
             case LUA_TSTRING:
                 elements[key] = std::move(static_cast<std::string>(lua_tostring(lua_state, -2)));
                 break;
@@ -30,4 +33,14 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
     }
 
     lua_pop(lua_state, 1);
+
+    counter_of_get = elements.size();
+}
+
+size_t LuaTable::size() const noexcept {
+    return elements.size();
+}
+
+size_t LuaTable::empty() const noexcept {
+    return elements.empty();
 }

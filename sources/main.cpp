@@ -124,7 +124,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 #ifdef linux
 int main(int argc, char** argv) {
-    FONTS_PATH = "";
+    FONTS_PATH = "/usr/share/fonts/";
 
     start_program(argv[0]);
     return 0;

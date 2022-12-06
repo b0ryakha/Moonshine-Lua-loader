@@ -14,7 +14,7 @@ extern "C" {
 
 enum class LuaMultiValueType : size_t { Number = 0, Function, String, Boolean, Table, Nil };
 
-inline const std::array<std::string, 6> TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
+inline const std::array<std::string, 6> S_TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
 
 struct LuaNil {};
 
@@ -25,20 +25,24 @@ struct LuaBoolean {
 
 class LuaTable {
 private:
-    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaNil>> elements;
+    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaTable*, LuaNil>> elements;
+    mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValueType expected_type, std::string key) const {
         if (elements.find(key) == elements.end()) {
-            throw_error("[Table] Attempt to get an element under key " + key + ".");
+            throw_error("[Table] Attempt to get element under key '" + key + "'.");
         }
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
-            throw_error("Incorrect type, received " + TYPE_NAME[elements.at(key).index()] + ", but expected " + TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+            throw_error("Incorrect type, received " + S_TYPE_NAME[elements.at(key).index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
         }
     }
 
 public:
     LuaTable(lua_State* lua_state, int index);
+
+    size_t size() const noexcept;
+    size_t empty() const noexcept;
 
     template<typename T>
     T get(const std::string& key) const { throw_error("Unknown Type!"); }
@@ -69,7 +73,7 @@ public:
     std::string get<std::string>(const std::string& key) const {
         check_errors(LuaMultiValueType::String, key);
 
-        return static_cast<std::string>(std::get<std::string>(elements.at(key)));
+        return std::get<std::string>(elements.at(key));
     }
 
     template<>
@@ -83,7 +87,19 @@ public:
     LuaNil get<LuaNil>(const std::string& key) const {
         check_errors(LuaMultiValueType::Nil, key);
 
-        return static_cast<LuaNil>(std::get<LuaNil>(elements.at(key)));
+        return std::get<LuaNil>(elements.at(key));
+    }
+
+    template<>
+    LuaTable get<LuaTable>(const std::string& key) const {
+        check_errors(LuaMultiValueType::Table, key);
+
+        return *(std::get<LuaTable*>(elements.at(key)));
+    }
+
+    template<typename T>
+    T get() const {
+        return get<T>(std::to_string(1 + elements.size() - counter_of_get--));
     }
 };
 
