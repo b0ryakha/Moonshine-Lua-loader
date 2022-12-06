@@ -16,3 +16,6 @@ For information about the API, see [API.md](API.md) file.
 
 ## Author
 - **[b0ryakha](https://github.com/b0ryakha)**
+
+## License
+This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
