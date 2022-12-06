@@ -252,6 +252,10 @@ namespace lua
 
         for (size_t i = 0; i < points.size(); ++i) {
             LuaTable point = points.get<LuaTable>();
+
+            if (point.size() != 2)
+                throw_error("[point] Incorrect number of values!");
+
             polygon.setPoint(i, sf::Vector2f(point.get<float>(), point.get<float>()));
         }
 
