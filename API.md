@@ -9,6 +9,7 @@
   - [rectangle()](#render.rectangle)
   - [circle()](#render.circle)
   - [line()](#render.line)
+  - [polygon()](#render.polygon)
   </details>
 
 <details><summary>:rainbow: Color</summary>
@@ -290,6 +291,19 @@ render.line(x1: float, y1: float, x2: float, y2: float, thickness: float, color:
 | thickness | ```float``` | Thickness of line    |
 
 Render line on the screen.
+
+---
+
+#### <a name="render.polygon"></a> ```polygon```
+```lua
+render.polygon(points: vector<array<float, 2>>, color: Color)
+```
+| Name   | Type                          | Description                                               |
+| :---:  | :---:                         | :---:                                                     |
+| points | ```vector<array<float, 2>>``` | Table of coords pairs, example: {{ x, y }, { x, y }, ...} |
+| color  | ```Color```                   | Color for polygon                                         |
+
+Render polygon on the screen.
 
 
 ### :rainbow: Color
