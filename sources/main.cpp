@@ -7,24 +7,19 @@ sf::RenderWindow window;
 sf::Event main_event;
 std::string FONTS_PATH;
 
+double main_time = 0;
+std::mutex time_m;
+
 size_t print_offset = 0;
 
 __forceinline void start_program(char* cmd_line) {
-    sf::ContextSettings settings;
-    settings.antialiasingLevel = 16;
-
-    sf::Clock clock;
-
-    window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, settings);
-    window.setFramerateLimit(100);
+    window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
     
+    sf::Clock clock;
     Script lua;
-    bool script_loaded = false;
 
-    if (cmd_line[0] != '\0') {
-        script_loaded = true;
+    if (cmd_line[0] != '\0')
         lua.open(cmd_line);
-    }
 
     sf::Font font;
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
@@ -42,12 +37,12 @@ __forceinline void start_program(char* cmd_line) {
 
     while (window.isOpen()) {
         time_m.lock();
-        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800;
+        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800.f;
         time_m.unlock();
 
         clock.restart();
 
-        if (!script_loaded) {
+        if (!lua.is_open()) {
             window.clear();
 
             entered_text.setString(entered_tmp);
@@ -86,7 +81,7 @@ __forceinline void start_program(char* cmd_line) {
                 cursor_in_window_m.unlock();
             }
 
-            if (script_loaded) continue;
+            if (lua.is_open()) continue;
 
             if (main_event.type == sf::Event::TextEntered) {
                 if (main_event.key.code == 22)                           // 22 = Ctrl + V
@@ -100,10 +95,8 @@ __forceinline void start_program(char* cmd_line) {
             }
 
             if (main_event.type == sf::Event::KeyPressed) {
-                if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty()) {
-                    script_loaded = true;
+                if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty())
                     lua.open(entered_tmp);
-                }
             }
         }
 

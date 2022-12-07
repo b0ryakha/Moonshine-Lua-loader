@@ -30,23 +30,10 @@ LuaStack::LuaStack(lua_State* lua_state) {
 
 LuaMultiValueType LuaStack::get_type(size_t index) const {
     if (index < 0 || index >= elements.size()) {
-        throw_error("[Stack] Attempt to get an element under index " + std::to_string(index) + ", but size = " + std::to_string(elements.size()) + ".");
+        throw_error("[Stack] Attempt to get element under index '" + std::to_string(index) + "', size = " + std::to_string(elements.size()) + ".");
     }
 
-    switch (elements[index].index()) {
-        case 0:
-            return LuaMultiValueType::Number;
-        case 1:
-            return LuaMultiValueType::Function;
-        case 2:
-            return LuaMultiValueType::String;
-        case 3:
-            return LuaMultiValueType::Boolean;
-        case 4:
-            return LuaMultiValueType::Table;
-        default:
-            return LuaMultiValueType::Nil;
-    }
+    return static_cast<LuaMultiValueType>(elements[index].index());
 }
 
 size_t LuaStack::size() const noexcept {

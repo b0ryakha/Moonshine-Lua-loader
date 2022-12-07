@@ -4,6 +4,7 @@
 #include <string>
 #include <array>
 #include <unordered_map>
+#include <memory>
 
 #include "lua.hpp"
 extern "C" {
@@ -25,7 +26,7 @@ struct LuaBoolean {
 
 class LuaTable {
 private:
-    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaTable*, LuaNil>> elements;
+    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaNil>> elements;
     mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValueType expected_type, std::string key) const {
@@ -94,7 +95,7 @@ public:
     LuaTable get<LuaTable>(const std::string& key) const {
         check_errors(LuaMultiValueType::Table, key);
 
-        return *(std::get<LuaTable*>(elements.at(key)));
+        return *(std::get<std::shared_ptr<LuaTable>>(elements.at(key)));
     }
 
     template<typename T>

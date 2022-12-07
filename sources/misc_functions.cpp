@@ -18,13 +18,15 @@ void throw_error(const std::string& error, bool is_close_window) noexcept {
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
         close_window();
 
+    sf::Color color = is_close_window ? sf::Color::Red : sf::Color(255, 205, 0);
+
     sf::Text text(error, font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
-    text.setFillColor(sf::Color::Red);
+    text.setFillColor(color);
 
     sf::Text info("Press any key to continue...", font, 20);
     info.setPosition(sf::Vector2f(window.getSize().x / 2 - info.getGlobalBounds().width / 2, window.getSize().y / 2 + text.getGlobalBounds().height + 10));
-    info.setFillColor(sf::Color::Red);
+    info.setFillColor(color);
 
     window.clear();
     window.draw(text);
@@ -33,11 +35,8 @@ void throw_error(const std::string& error, bool is_close_window) noexcept {
 
     while (window.isOpen()) {
         if (main_event.type == sf::Event::KeyPressed)
-            goto loop_break;
-
-        // anim "... .. ." logic
+            break;
     }
-    loop_break:
 
     if (is_close_window)
         close_window();

@@ -8,8 +8,8 @@ Script::~Script() {
     close();
 }
 
-void Script::close() {
-    if (main_thread != nullptr) {
+void Script::close() const {
+    if (is_open()) {
         delete main_thread;
         main_thread = nullptr;
     }
@@ -20,17 +20,17 @@ void Script::close() {
     window.setActive(true);
 }
 
-void Script::open(const std::string& path) {
-    if (main_thread != nullptr) {
-        throw_error("Script is already running.");
+void Script::open(const std::string& path) const {
+    if (is_open()) {
+        throw_error("Script is already running.", false);
+        return;
     }
 
     lua_state = luaL_newstate();
     lua_path = std::move(path);
 
-    if (lua_state == nullptr) {
+    if (lua_state == nullptr)
         throw_error("Failed to create lua state.");
-    }
     
     luaL_openlibs(lua_state);
     open_API();
@@ -50,7 +50,7 @@ void Script::open(const std::string& path) {
     main_thread->detach();
 }
 
-__forceinline void Script::open_API() {
+__forceinline void Script::open_API() const {
     lua_register_table(lua_state, "render", {
         std::make_pair("text", lua::render_text),
         std::make_pair("measure_text", lua::render_measure_text),
@@ -154,13 +154,13 @@ __forceinline void Script::open_API() {
         //std::make_pair("remove", lua::file_remove),
         //std::make_pair("push", lua::file_push),
         //std::make_pair("pop", lua::file_pop),
-        ////std::make_pair("file_get_line", ),
-        ////std::make_pair("file_set_line", ),
-        ////std::make_pair("file_get", ),
-        ////std::make_pair("file_set", ),
-        ////std::make_pair("file_line_count", ),
-        ////std::make_pair("file_clear", ),
-        ////std::make_pair("file_rename", ),
+        //std::make_pair("get_line", ),
+        //std::make_pair("set_line", ),
+        //std::make_pair("get", ),
+        //std::make_pair("set", ),
+        //std::make_pair("line_count", ),
+        //std::make_pair("clear", ),
+        //std::make_pair("rename", ),
     });
 
     lua_register_table(lua_state, "cmath", {
@@ -174,4 +174,8 @@ __forceinline void Script::open_API() {
     });
 
     lua_register(lua_state, "print", lua::print);
+}
+
+bool Script::is_open() const {
+    return (main_thread != nullptr);
 }

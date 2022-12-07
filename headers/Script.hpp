@@ -25,17 +25,18 @@ extern sf::RenderWindow window;
 
 class Script {
 private:
-	lua_State* lua_state = nullptr;
-	std::thread* main_thread = nullptr;
-	std::string lua_path;
+	mutable lua_State* lua_state = nullptr;
+	mutable std::thread* main_thread = nullptr;
+	mutable std::string lua_path;
 
-	__forceinline void open_API();
+	__forceinline void open_API() const;
 
 public:
 	Script() = default;
 	Script(const char* path);
 	~Script();
 
-	void open(const std::string& path);
-	void close();
+	void open(const std::string& path) const;
+	void close() const;
+	bool is_open() const;
 };

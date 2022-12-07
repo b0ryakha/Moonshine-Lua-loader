@@ -11,7 +11,7 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
 
         switch (lua_type(lua_state, -2)) {
             case LUA_TTABLE:
-                elements[key] = std::move(new LuaTable(lua_state, -2));
+                elements[key] = std::move(std::make_shared<LuaTable>(lua_state, -2));
                 break;
             case LUA_TSTRING:
                 elements[key] = std::move(static_cast<std::string>(lua_tostring(lua_state, -2)));
