@@ -13,7 +13,9 @@ extern "C" {
 }
 
 void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
+
 void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
+void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements);
 
 __forceinline sf::Color lua_getcolor(const LuaStack& stack, int index) {
 	LuaTable color = stack.get<LuaTable>(index);

@@ -8,7 +8,7 @@
 
 extern size_t print_offset;
 
-namespace lua
+namespace API
 {
     static std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
     static std::unordered_map<std::string, std::pair<sf::Font, size_t>> font_buffer;

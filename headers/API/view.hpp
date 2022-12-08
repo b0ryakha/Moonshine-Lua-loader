@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace lua
+namespace API
 {
     static std::unordered_map<std::string, sf::View> view_buffer;
 

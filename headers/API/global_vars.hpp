@@ -4,7 +4,7 @@
 
 extern double main_time;
 
-namespace lua
+namespace API
 {
 	static int get_frametime(lua_State* L) {
 		lua_pushnumber(L, main_time);

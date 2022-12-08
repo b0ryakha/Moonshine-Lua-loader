@@ -7,7 +7,7 @@
 extern sf::RenderWindow window;
 extern sf::Event main_event;
 
-namespace lua
+namespace API
 {
     static int keyboard_get_pressed(lua_State* L) {
         LuaStack args(L);

@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace lua
+namespace API
 {
     static std::unordered_map<std::string, std::pair<sf::Sound, sf::SoundBuffer>> sound_buffer;
 

@@ -3,7 +3,7 @@
 #include "lua_extensions.hpp"
 #include <sstream>
 
-namespace lua
+namespace API
 {
     static int color_new(lua_State* L) {
         LuaStack args(L);

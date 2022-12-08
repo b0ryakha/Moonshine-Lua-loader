@@ -7,7 +7,7 @@
 inline bool f_cursor_in_window = false;
 inline std::mutex cursor_in_window_m;
 
-namespace lua
+namespace API
 {
 	static int cursor_get_pos(lua_State* L) {
         LuaStack args(L);

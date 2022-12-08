@@ -9,7 +9,7 @@ extern sf::RenderWindow window;
 extern sf::Event main_event;
 extern size_t print_offset;
 
-namespace lua
+namespace API
 {
     static int window_close(lua_State* L) {
         window.close();

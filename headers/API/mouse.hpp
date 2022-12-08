@@ -3,7 +3,7 @@
 #include "lua_extensions.hpp"
 #include <string>
 
-namespace lua
+namespace API
 {
     static int mouse_get_pressed(lua_State* L) {
         while (window.isOpen()) {

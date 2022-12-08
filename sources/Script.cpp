@@ -52,39 +52,39 @@ void Script::open(const std::string& path) const {
 
 __forceinline void Script::open_API() const {
     lua_register_table(lua_state, "render", {
-        std::make_pair("text", lua::render_text),
-        std::make_pair("measure_text", lua::render_measure_text),
-        std::make_pair("rectangle", lua::render_rectangle),
-        std::make_pair("circle", lua::render_circle),
-        std::make_pair("line", lua::render_line),
-        std::make_pair("polygon", lua::render_polygon),
-        //std::make_pair("blur", lua::render_blur),
-        //std::make_pair("shadow", lua::render_shadow),
-        std::make_pair("sprite", lua::render_sprite),
-        std::make_pair("create_sprite", lua::render_create_sprite),
-        std::make_pair("create_font", lua::render_create_font),
+        std::make_pair("text", API::render_text),
+        std::make_pair("measure_text", API::render_measure_text),
+        std::make_pair("rectangle", API::render_rectangle),
+        std::make_pair("circle", API::render_circle),
+        std::make_pair("line", API::render_line),
+        std::make_pair("polygon", API::render_polygon),
+        //std::make_pair("blur", API::render_blur),
+        //std::make_pair("shadow", API::render_shadow),
+        std::make_pair("sprite", API::render_sprite),
+        std::make_pair("create_sprite", API::render_create_sprite),
+        std::make_pair("create_font", API::render_create_font),
     });
 
     lua_register_table(lua_state, "color", {
-        std::make_pair("new", lua::color_new),
-        std::make_pair("unpack", lua::color_unpack),
-        std::make_pair("to_hex", lua::color_to_hex),
+        std::make_pair("new", API::color_new),
+        std::make_pair("unpack", API::color_unpack),
+        std::make_pair("to_hex", API::color_to_hex),
     });
 
     lua_register_table(lua_state, "window", {
-        std::make_pair("get_size", lua::window_get_size),
-        std::make_pair("set_size", lua::window_set_size),
-        std::make_pair("display", lua::window_display),
-        std::make_pair("clear", lua::window_clear),
-        std::make_pair("close", lua::window_close),
-        std::make_pair("sleep", lua::window_sleep),
-        std::make_pair("await", lua::window_await),
-        std::make_pair("get_pos", lua::window_get_pos),
-        std::make_pair("set_pos", lua::window_set_pos),
-        std::make_pair("set_title", lua::window_set_title),
-        std::make_pair("set_vsync", lua::window_set_vsync),
-        std::make_pair("set_frame_limit", lua::window_set_frame_limit),
-        std::make_pair("set_icon", lua::window_set_icon),
+        std::make_pair("get_size", API::window_get_size),
+        std::make_pair("set_size", API::window_set_size),
+        std::make_pair("display", API::window_display),
+        std::make_pair("clear", API::window_clear),
+        std::make_pair("close", API::window_close),
+        std::make_pair("sleep", API::window_sleep),
+        std::make_pair("await", API::window_await),
+        std::make_pair("get_pos", API::window_get_pos),
+        std::make_pair("set_pos", API::window_set_pos),
+        std::make_pair("set_title", API::window_set_title),
+        std::make_pair("set_vsync", API::window_set_vsync),
+        std::make_pair("set_frame_limit", API::window_set_frame_limit),
+        std::make_pair("set_icon", API::window_set_icon),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_KEYS;
@@ -102,8 +102,8 @@ __forceinline void Script::open_API() const {
     lua_register_table(lua_state, "key", SFML_KEYS);
 
     lua_register_table(lua_state, "keyboard", {
-        std::make_pair("get_pressed", lua::keyboard_get_pressed),
-        std::make_pair("is_pressed", lua::keyboard_is_pressed),
+        std::make_pair("get_pressed", API::keyboard_get_pressed),
+        std::make_pair("is_pressed", API::keyboard_is_pressed),
     });
 
     std::vector<std::pair<std::string, LuaMultiValue>> SFML_BUTTONS;
@@ -115,65 +115,65 @@ __forceinline void Script::open_API() const {
     lua_register_table(lua_state, "button", SFML_BUTTONS);
 
     lua_register_table(lua_state, "mouse", {
-        std::make_pair("get_pressed", lua::mouse_get_pressed),
-        std::make_pair("is_pressed", lua::mouse_is_pressed),
-        std::make_pair("is_scrolling_up", lua::mouse_is_scrolling_up),
-        std::make_pair("is_scrolling_down", lua::mouse_is_scrolling_down),
+        std::make_pair("get_pressed", API::mouse_get_pressed),
+        std::make_pair("is_pressed", API::mouse_is_pressed),
+        std::make_pair("is_scrolling_up", API::mouse_is_scrolling_up),
+        std::make_pair("is_scrolling_down", API::mouse_is_scrolling_down),
     });
 
     lua_register_table(lua_state, "cursor", {
-        std::make_pair("get_pos", lua::cursor_get_pos),
-        std::make_pair("set_pos", lua::cursor_set_pos),
-        std::make_pair("in_bounds", lua::cursor_in_bounds),
-        std::make_pair("in_window", lua::cursor_in_window),
+        std::make_pair("get_pos", API::cursor_get_pos),
+        std::make_pair("set_pos", API::cursor_set_pos),
+        std::make_pair("in_bounds", API::cursor_in_bounds),
+        std::make_pair("in_window", API::cursor_in_window),
     });
 
     lua_register_table(lua_state, "view", {
-        std::make_pair("new", lua::view_new),
-        std::make_pair("active", lua::view_active),
-        std::make_pair("set_port", lua::view_set_port),
-        std::make_pair("set_center", lua::view_set_center),
-        std::make_pair("get_size", lua::view_get_size),
-        std::make_pair("set_size", lua::view_set_size),
-        std::make_pair("set_zoom", lua::view_set_zoom),
-        std::make_pair("get_rotation", lua::view_get_rotation),
-        std::make_pair("set_rotation", lua::view_set_rotation),
+        std::make_pair("new", API::view_new),
+        std::make_pair("active", API::view_active),
+        std::make_pair("set_port", API::view_set_port),
+        std::make_pair("set_center", API::view_set_center),
+        std::make_pair("get_size", API::view_get_size),
+        std::make_pair("set_size", API::view_set_size),
+        std::make_pair("set_zoom", API::view_set_zoom),
+        std::make_pair("get_rotation", API::view_get_rotation),
+        std::make_pair("set_rotation", API::view_set_rotation),
     });
 
     lua_register_table(lua_state, "sound", {
-        std::make_pair("new", lua::sound_new),
-        std::make_pair("play", lua::sound_play),
-        std::make_pair("stop", lua::sound_play),
-        std::make_pair("set_volume", lua::sound_set_volume),
-        std::make_pair("set_loop", lua::sound_set_loop),
+        std::make_pair("new", API::sound_new),
+        std::make_pair("play", API::sound_play),
+        std::make_pair("stop", API::sound_play),
+        std::make_pair("set_volume", API::sound_set_volume),
+        std::make_pair("set_loop", API::sound_set_loop),
     });
 
     lua_register_table(lua_state, "file", {
-        //std::make_pair("exists", lua::file_exists),
-        //std::make_pair("create", lua::file_create),
-        //std::make_pair("remove", lua::file_remove),
-        //std::make_pair("push", lua::file_push),
-        //std::make_pair("pop", lua::file_pop),
-        //std::make_pair("get_line", ),
-        //std::make_pair("set_line", ),
-        //std::make_pair("get", ),
-        //std::make_pair("set", ),
+        std::make_pair("read", API::file_read),
+        //std::make_pair("write", API::file_write),
+        //std::make_pair("exists", API::file_exists),
+        //std::make_pair("create", API::file_create),
+        //std::make_pair("remove", API::file_remove),
+        //std::make_pair("push_line", API::file_push_line),
+        //std::make_pair("pop_line", API::file_pop_line),
         //std::make_pair("line_count", ),
         //std::make_pair("clear", ),
         //std::make_pair("rename", ),
     });
 
     lua_register_table(lua_state, "cmath", {
-        std::make_pair("rand", lua::rand_int),
-        std::make_pair("lerp", lua::lerp),
-        std::make_pair("clamp", lua::clamp),
+        std::make_pair("rand", API::rand_int),
+        std::make_pair("lerp", API::lerp),
+        std::make_pair("clamp", API::clamp),
     });
 
     lua_register_table(lua_state, "globalvars", {
-        std::make_pair("get_frametime", lua::get_frametime),
+        std::make_pair("get_frametime", API::get_frametime),
     });
 
-    lua_register(lua_state, "print", lua::print);
+    lua_register(lua_state, "print", API::print);
+
+    lua_register(lua_state, "Object", API::object_new);
 }
 
 bool Script::is_open() const {

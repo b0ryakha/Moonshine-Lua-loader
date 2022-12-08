@@ -3,7 +3,7 @@
 #include "lua_extensions.hpp"
 #include "misc_functions.hpp"
 
-namespace lua
+namespace API
 {
     static int rand_int(lua_State* L) {
         LuaStack args(L);

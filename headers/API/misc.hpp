@@ -6,8 +6,54 @@ extern sf::RenderWindow window;
 extern std::string FONTS_PATH;
 extern size_t print_offset;
 
-namespace lua
+namespace API
 {
+    struct Object {
+        int number = 0;
+        Object(int number): number(number) {}
+    };
+
+    static int object_new(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1) {
+            lua_pushnil(L);
+            return 1;
+        }
+
+        int number = args.get<int>();
+        
+        *static_cast<Object**>(lua_newuserdata(L, sizeof(Object*))) = new Object(number);
+
+        static auto destructor = [](lua_State* L) {
+            delete *static_cast<Object**>(luaL_checkudata(L, 1, "Object"));
+            return 0;
+        };
+
+        static auto get_number = [](lua_State* L) {
+            Object* dummy = *static_cast<Object**>(luaL_checkudata(L, 1, "Object"));
+
+            lua_pushnumber(L, dummy->number);
+            return 1;
+        };
+
+        if (luaL_newmetatable(L, "Object")) {
+            static const luaL_Reg functions[] = {
+                { "get_number", get_number },
+                { "__gc", destructor },
+            };
+
+            luaL_setfuncs(L, functions, 0);
+            lua_pushvalue(L, -1);
+            lua_setfield(L, -2, "__index");
+        }
+        
+        lua_setmetatable(L, -2);
+        return 1;
+    }
+
+
+
 	static int print(lua_State* L) {
         LuaStack args(L);
         std::string result;
