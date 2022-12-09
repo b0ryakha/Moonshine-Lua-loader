@@ -182,7 +182,7 @@ render.create_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, 
 | t_w   | ```size_t``` | Width of areas in the image, default = w        |
 | t_h   | ```size_t``` | Height of areas in the image, default = h       |
 
-Returns the [sprite](#Sprite) or nil on failure.
+Returns the [sprite](#Sprite).
 
 ---
 
@@ -195,7 +195,7 @@ render.create_font(font_name: string, size: size_t): Font
 | font_name | ```string``` | Name of font |
 | size      | ```size_t``` | Size of font |
 
-Returns the [font](#Font) struct or nil on failure.
+Returns the [font](#Font) struct.
 
 ---
 
@@ -324,7 +324,7 @@ color.new(hex: string): Color
 | :---: | :---:        | :---:                        |
 | hex   | ```string``` | Hex string                   |
 
-Returns the [color](#Color) struct or nil on failure.
+Returns the [color](#Color) struct.
 
 ---
 
@@ -336,7 +336,7 @@ color.unpack(color: Color): int, int, int, int
 | :---: | :---:       | :---:               |
 | color | ```Color``` | Color for unpacking |
 
-Returns the integer r, g, b, a values of [color](#Color) or nil on failure.
+Returns the integer r, g, b, a values of [color](#Color).
 
 ---
 
@@ -348,7 +348,7 @@ color.to_hex(color: Color): string
 | :---: | :---:       | :---:                    |
 | color | ```Color``` | Color for casting to hex |
 
-Returns the hex str or nil on failure.
+Returns the hex str.
 
 
 ### :computer: Window
@@ -388,7 +388,7 @@ Closes the window and destroy all the attached resources.
 window.get_size(): Size
 ```
 
-Returns the window [size](#Size) or nil on failure.
+Returns the window [size](#Size).
 
 ---
 
@@ -509,7 +509,7 @@ keyboard.get_pressed([return_symbol]): SFML_enum / char
 | :---:         | :---:      | :---:                                              |
 | return_symbol | ```bool``` | If true then function return char, default = false |
 
-Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) / char or nil on failure.
+Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) / char.
 
 ---
 
@@ -521,7 +521,7 @@ keyboard.is_pressed(key_code: SFML_enum): bool
 | :---:    | :---:           | :---:                |
 | key_code | ```SFML_enum``` | SFML Enum - key code |
 
-Returns true if the key is pressed, else false or nil on failure.
+Returns true if the key is pressed, else false.
 
 
 ### :mouse2: Mouse
@@ -535,7 +535,7 @@ local key_id = key.W
 mouse.get_pressed(): SFML_enum
 ```
 
-Awaiting for pressing button and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90) or nil on failure.
+Awaiting for pressing button and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90).
 
 ---
 
@@ -547,7 +547,7 @@ mouse.is_pressed(button_code: SFML_enum): bool
 | :---:       | :---:           | :---:                   |
 | button_code | ```SFML_enum``` | SFML Enum - button code |
 
-Returns true if the button is pressed, else false or nil on failure.
+Returns true if the button is pressed, else false.
 
 ---
 
@@ -577,7 +577,7 @@ cursor.get_pos([regarding_window: bool]): Pos
 | :---:            | :---:      | :---:                                                                |
 | regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
-Returns the cursor [pos](#Pos) or nil on failure.
+Returns the cursor [pos](#Pos).
 
 ---
 
@@ -600,7 +600,7 @@ Sets the cursor a new [pos](#Pos).
 cursor.in_window(): bool
 ```
 
-Returns true if cursor in window, else false or nil on failure.
+Returns true if cursor in window, else false.
 
 ---
 
@@ -616,7 +616,7 @@ cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool
 | h                | ```float```  | Height                                                                 |
 | regarding_window | ```bool```   | Is true then function return position regarding window, default = true |
 
-Returns true if cursor in bounds, else false or nil on failure.
+Returns true if cursor in bounds, else false.
 
 ### :camera: View
 
@@ -631,7 +631,7 @@ view.new([x: float, y: float, w: float, h: float]): View
 | w      | ```float``` | Width       |
 | h      | ```float``` | Height      |
 
-Returns the [view](#View) or nil on failure.
+Returns the [view](#View).
 
 ---
 
@@ -753,7 +753,7 @@ sound.new(path: string, volume: size_t[, is_repeat: bool]): Sound
 | volume    | ```size_t``` | Volume of sound [0 - 100]                          |
 | is_repeat | ```bool```   | If true then sound will be looped, default = false |
 
-Returns the [sound](#Sound) or nil on failure.
+Returns the [sound](#Sound).
 
 ---
 
@@ -821,7 +821,7 @@ cmath.rand(min: int, max: int): int
 | min   | ```int```| Minimum random value |
 | max   | ```int```| Maximum random value |
 
-Returns the random integer number [min, max] or nil on failure.
+Returns the random integer number [min, max].
 
 ---
 
@@ -835,7 +835,7 @@ cmath.lerp(start: float, end: float, time: float): float
 | end   | ```float```| End value   |
 | time  | ```float```| Step value  |
 
-Returns the linear interpolation or nil on failure.
+Returns the linear interpolation.
 
 ---
 
@@ -849,7 +849,7 @@ cmath.clamp(number: float, lower: float, upper: float): float
 | lower  | ```float```| Lower bound    |
 | upper  | ```float```| Upper bound    |
 
-Returns the clumped value or nil on failure.
+Returns the clumped value.
 
 
 ### :mag: GlobalVars
