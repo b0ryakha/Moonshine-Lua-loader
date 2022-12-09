@@ -8,8 +8,12 @@ extern size_t print_offset;
 
 namespace API
 {
-    struct Object {
+    class Object {
+    private:
         int number = 0;
+
+    public:
+        int get_number() { return number; }
         Object(int number): number(number) {}
     };
 
@@ -19,34 +23,23 @@ namespace API
         if (args.size() != 1)
             throw_error("[Object.new] Incorrect number of arguments!");
 
-        int number = args.get<int>();
-        
-        *static_cast<Object**>(lua_newuserdata(L, sizeof(Object*))) = new Object(number);
+        lua_pushclass<Object>(L, new Object(args.get<int>()));
 
         static auto destructor = [](lua_State* L) {
-            delete *static_cast<Object**>(luaL_checkudata(L, 1, "Object"));
+            delete lua_getself<Object>(L, "Object");
             return 0;
         };
 
         static auto get_number = [](lua_State* L) {
-            Object* dummy = *static_cast<Object**>(luaL_checkudata(L, 1, "Object"));
-
-            lua_pushnumber(L, dummy->number);
+            lua_pushnumber(L, lua_getself<Object>(L, "Object")->get_number());
             return 1;
         };
 
-        if (luaL_newmetatable(L, "Object")) {
-            static const luaL_Reg functions[] = {
-                { "get_number", get_number },
-                { "__gc", destructor },
-            };
+        lua_setmethods(L, "Object", {
+            { "get_number", get_number },
+            { "__gc", destructor }
+        });
 
-            luaL_setfuncs(L, functions, 0);
-            lua_pushvalue(L, -1);
-            lua_setfield(L, -2, "__index");
-        }
-        
-        lua_setmetatable(L, -2);
         return 1;
     }
 
