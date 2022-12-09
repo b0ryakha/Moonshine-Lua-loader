@@ -195,7 +195,7 @@ render.create_font(font_name: string, size: size_t): Font
 | font_name | ```string``` | Name of font |
 | size      | ```size_t``` | Size of font |
 
-Returns the [font](#Font) struct.
+Returns the [font](#Font) structure.
 
 ---
 
@@ -324,7 +324,7 @@ color.new(hex: string): Color
 | :---: | :---:        | :---:                        |
 | hex   | ```string``` | Hex string                   |
 
-Returns the [color](#Color) struct.
+Returns the [color](#Color) structure.
 
 ---
 
