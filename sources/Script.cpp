@@ -21,10 +21,8 @@ void Script::close() const {
 }
 
 void Script::open(const std::string& path) const {
-    if (is_open()) {
-        throw_error("Script is already running.", false);
+    if (is_open())
         return;
-    }
 
     lua_state = luaL_newstate();
     lua_path = std::move(path);

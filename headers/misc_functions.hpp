@@ -14,4 +14,4 @@ extern std::string FONTS_PATH;
 inline std::mutex closing_window_m;
 
 int rand_number(int min, int max);
-void throw_error(const std::string& error, bool is_close_window = true) noexcept;
+void throw_error(const std::string& error) noexcept;

@@ -12,10 +12,8 @@ namespace API
     static int view_new(lua_State* L) {
         LuaStack args(L);
 
-        if (!args.empty() && args.size() != 4) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (!args.empty() && args.size() != 4)
+            throw_error("[view.new] Incorrect number of arguments!");
 
         float x = (args.size() == 4) ? args.get<float>() : 0;
         float y = (args.size() == 4) ? args.get<float>() : 0;

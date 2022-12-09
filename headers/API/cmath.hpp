@@ -8,10 +8,8 @@ namespace API
     static int rand_int(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 2) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 2)
+            throw_error("[cmath.rand] Incorrect number of arguments!");
 
         const int min = args.get<int>();
         const int max = args.get<int>();
@@ -23,10 +21,8 @@ namespace API
     static int lerp(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 3) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 3)
+            throw_error("[cmath.lerp] Incorrect number of arguments!");
 
         const float start = args.get<float>();
         const float end = args.get<float>();
@@ -39,10 +35,8 @@ namespace API
     static int clamp(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 3) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 3)
+            throw_error("[cmath.clamp] Incorrect number of arguments!");
 
         const float number = args.get<float>();
         const float lower = args.get<float>();

@@ -8,10 +8,8 @@ namespace API
     static int color_new(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1 && args.size() != 3 && args.size() != 4) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 1 && args.size() != 3 && args.size() != 4)
+            throw_error("[color.new] Incorrect number of arguments!");
         
         size_t r = (args.size() > 1) ? args.get<size_t>() : 0;
         size_t g = (args.size() > 1) ? args.get<size_t>() : 0;
@@ -21,10 +19,8 @@ namespace API
         if (args.size() == 1) {
             std::string tmp = args.get<std::string>(0);
 
-            if ((tmp.length() != 7 && tmp.length() != 9) || tmp[0] != '#') {
-                lua_pushnil(L);
-                return 1;
-            }
+            if ((tmp.length() != 7 && tmp.length() != 9) || tmp[0] != '#')
+                throw_error("[color.new] Incorrect number of arguments!");
 
             auto hex_to_number = [](const std::string& hex) -> size_t {
                 size_t result = 0;
@@ -61,10 +57,8 @@ namespace API
     static int color_unpack(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 1)
+            throw_error("[color.unpack] Incorrect number of arguments!");
 
         sf::Color color = lua_getcolor(args);
 
@@ -78,10 +72,8 @@ namespace API
     static int color_to_hex(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 1)
+            throw_error("[color.to_hex] Incorrect number of arguments!");
 
         sf::Color color = lua_getcolor(args);
         std::stringstream ss;

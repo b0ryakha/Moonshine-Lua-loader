@@ -13,10 +13,8 @@ namespace API
     static int sound_new(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 2 && args.size() != 3) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 2 && args.size() != 3)
+            throw_error("[sound.new] Incorrect number of arguments!");
 
         std::string path = args.get<std::string>();
         size_t volume = args.get<size_t>();
@@ -25,10 +23,8 @@ namespace API
         const std::string ID = "0x115111117110100" + std::to_string(sound_buffer.size());
 
         sf::SoundBuffer buffer;
-        if (!buffer.loadFromFile(path)) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (!buffer.loadFromFile(path))
+            throw_error("[sound.new] The sound cannot be found in the path '" + path + "'!");
         
         sf::Sound sound(buffer);
 

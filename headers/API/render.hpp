@@ -16,10 +16,8 @@ namespace API
     static int render_create_sprite(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 3 && args.size() != 7) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 3 && args.size() != 7)
+            throw_error("[render.create_sprite] Incorrect number of arguments!");
 
         std::string path = args.get<std::string>();
         float w = args.get<float>();
@@ -32,10 +30,8 @@ namespace API
         const std::string ID = "0x115112114105116101" + std::to_string(sprite_buffer.size());
 
         sf::Texture texture;
-        if (!texture.loadFromFile(path)) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (!texture.loadFromFile(path))
+            throw_error("[render.create_sprite] The texture cannot be found in the path '" + path + "'!");
 
         if (args.size() == 3) {
             t_w = texture.getSize().x;
@@ -58,10 +54,8 @@ namespace API
     static int render_create_font(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 2) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 2)
+            throw_error("[render.create_font] Incorrect number of arguments!");
 
         std::string font_name = args.get<std::string>();
         size_t size = args.get<size_t>();
@@ -76,10 +70,8 @@ namespace API
         }
 
         sf::Font font;
-        if (!font.loadFromFile(FONTS_PATH + font_name)) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (!font.loadFromFile(FONTS_PATH + font_name))
+            throw_error("[render.create_font] Font '" + font_name + "' not found!");
 
         const std::string ID = "0x102111110116" + std::to_string(font_buffer.size());
 
@@ -92,10 +84,8 @@ namespace API
     static int render_measure_text(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 2) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 2)
+            throw_error("[render.measure_text] Incorrect number of arguments!");
 
         std::string font_id = args.get<std::string>();
         std::string text = args.get<std::string>();
@@ -108,8 +98,7 @@ namespace API
             size = &font_buffer[font_id].second;
         }
         catch (...) {
-            lua_pushnil(L);
-            return 1;
+            throw_error("[render.measure_text] Font object not found!");
         }
 
         sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, *size);

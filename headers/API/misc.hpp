@@ -16,10 +16,8 @@ namespace API
     static int object_new(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 1)
+            throw_error("[Object.new] Incorrect number of arguments!");
 
         int number = args.get<int>();
         

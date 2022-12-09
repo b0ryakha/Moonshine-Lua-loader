@@ -17,10 +17,8 @@ namespace API
     static int mouse_is_pressed(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 1)
+            throw_error("[mouse.is_pressed] Incorrect number of arguments!");
 
         const int key_code = args.get<int>();
 

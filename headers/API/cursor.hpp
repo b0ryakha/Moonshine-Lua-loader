@@ -12,10 +12,8 @@ namespace API
 	static int cursor_get_pos(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() > 1) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() > 1)
+            throw_error("[cursor.get_pos] Incorrect number of arguments!");
 
         bool is_regarding_window = (args.size() == 1 ? args.get<bool>() : true);
         int x = (is_regarding_window ? sf::Mouse::getPosition(window).x : sf::Mouse::getPosition().x);
@@ -68,10 +66,8 @@ namespace API
     static int cursor_in_bounds(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 4 && args.size() != 5) {
-            lua_pushnil(L);
-            return 1;
-        }
+        if (args.size() != 4 && args.size() != 5)
+            throw_error("[cursor.in_bounds] Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();

@@ -14,18 +14,14 @@ namespace API
 	static int file_read(lua_State* L) {
 		LuaStack args(L);
 
-		if (args.size() != 1 && args.size() != 2) {
-			lua_pushnil(L);
-			return 1;
-		}
+		if (args.size() != 1 && args.size() != 2)
+			throw_error("[file.read] Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		size_t line_number = (args.size() == 2) ? args.get<size_t>() : 0;
 
-		if (!fs::exists(path)) {
-			lua_pushnil(L);
-			return 1;
-		}
+		if (!fs::exists(path))
+			throw_error("[file.read] The file does not exist!");
 
 		std::ifstream file(path);
 		std::vector<std::string> file_content;
@@ -42,7 +38,7 @@ namespace API
 				lua_pushstring(L, file_content.at(line_number - 1).c_str());
 			}
 			catch (...) {
-				lua_pushnil(L);
+				throw_error("[file.read] There is no line under this number!");
 			}
 		}
 
