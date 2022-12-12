@@ -27,8 +27,10 @@ namespace API
     }
 
     static int mouse_is_scrolling_up(lua_State* L) {
-        if (main_event.type == sf::Event::MouseWheelScrolled) {
-            lua_pushboolean(L, main_event.mouseWheelScroll.delta > 0);
+        if (main_event.type == sf::Event::MouseWheelScrolled && main_event.mouseWheelScroll.delta > 0.f) {
+            main_event.mouseWheelScroll.delta = 0.f;
+
+            lua_pushboolean(L, true);
             return 1;
         }
 
@@ -37,8 +39,10 @@ namespace API
     }
 
     static int mouse_is_scrolling_down(lua_State* L) {
-        if (main_event.type == sf::Event::MouseWheelScrolled) {
-            lua_pushboolean(L, main_event.mouseWheelScroll.delta < 0);
+        if (main_event.type == sf::Event::MouseWheelScrolled && main_event.mouseWheelScroll.delta < 0.f) {
+            main_event.mouseWheelScroll.delta = 0.f;
+
+            lua_pushboolean(L, true);
             return 1;
         }
 
