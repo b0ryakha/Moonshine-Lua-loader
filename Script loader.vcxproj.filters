@@ -31,6 +31,15 @@
     <Filter Include="Source Files\Custom Shapes">
       <UniqueIdentifier>{ead63052-4c31-40e1-922a-1711c48e26db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\API\Objects">
+      <UniqueIdentifier>{4d9aaa95-d4ea-4c79-a74e-81eb649cfed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API">
+      <UniqueIdentifier>{f15e8474-e9a2-4319-856a-ceedffd202c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API\Objects">
+      <UniqueIdentifier>{0f02cd13-eff1-4cb6-88a5-1479edfa61ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -53,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp">
       <Filter>Source Files\Custom Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\API\Objects\Vector2.cpp">
+      <Filter>Source Files\API\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="resources\resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\Objects\Vector2.hpp">
+      <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

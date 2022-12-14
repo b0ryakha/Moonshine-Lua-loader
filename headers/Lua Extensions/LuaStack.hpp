@@ -19,7 +19,7 @@ private:
         }
 
         if (elements[index].index() != static_cast<size_t>(expected_type)) {
-            throw_error("Incorrect type, received " + S_TYPE_NAME[elements[index].index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+            throw_error("[Stack] Incorrect type. Received " + S_TYPE_NAME[elements[index].index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
         }
     }
 
@@ -31,7 +31,7 @@ public:
     LuaMultiValueType get_type(size_t index) const;
 
     template<typename T>
-    T get(size_t index) const { throw_error("Unknown Type!"); }
+    T get(size_t index) const { throw_error("[Stack] Unknown type for get<T>!"); }
 
     template<>
     int get<int>(size_t index) const {
@@ -46,6 +46,13 @@ public:
 
         const lua_Number tmp = std::get<lua_Number>(elements[index]);
         return static_cast<size_t>((tmp > 0) ? tmp : 0);
+    }
+
+    template<>
+    double get<double>(size_t index) const {
+        check_errors(LuaMultiValueType::Number, index);
+
+        return std::get<lua_Number>(elements[index]);
     }
 
     template<>

@@ -171,7 +171,7 @@ __forceinline void Script::open_API() const {
 
     lua_register(lua_state, "print", API::print);
 
-    lua_register(lua_state, "Object", API::object_new);
+    lua_register(lua_state, "Vector2", API::Vector2_new);
 }
 
 bool Script::is_open() const {

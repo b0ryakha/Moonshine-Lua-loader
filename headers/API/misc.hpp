@@ -8,43 +8,6 @@ extern size_t print_offset;
 
 namespace API
 {
-    class Object {
-    private:
-        int number = 0;
-
-    public:
-        int get_number() { return number; }
-        Object(int number): number(number) {}
-    };
-
-    static int object_new(lua_State* L) {
-        LuaStack args(L);
-
-        if (args.size() != 1)
-            throw_error("[Object.new] Incorrect number of arguments!");
-
-        lua_pushclass<Object>(L, new Object(args.get<int>()));
-
-        static auto destructor = [](lua_State* L) {
-            delete lua_getself<Object>(L, "Object");
-            return 0;
-        };
-
-        static auto get_number = [](lua_State* L) {
-            lua_pushnumber(L, lua_getself<Object>(L, "Object")->get_number());
-            return 1;
-        };
-
-        lua_setmethods(L, "Object", {
-            { "get_number", get_number },
-            { "__gc", destructor }
-        });
-
-        return 1;
-    }
-
-
-
 	static int print(lua_State* L) {
         LuaStack args(L);
         std::string result;

@@ -23,8 +23,8 @@ __forceinline Class* lua_getself(lua_State* L, const std::string& class_name) {
 };
 
 template<typename Class>
-__forceinline void lua_pushclass(lua_State* L, void* allocation) {
-	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = static_cast<Class*>(allocation);
+__forceinline void lua_newclass(lua_State* L) {
+	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(LuaStack(L));
 };
 
 __forceinline void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<luaL_Reg>& methods) {
@@ -33,8 +33,6 @@ __forceinline void lua_setmethods(lua_State* L, const std::string& name, static 
         lua_pushvalue(L, -1);
         lua_setfield(L, -2, "__index");
     }
-
-    lua_setmetatable(L, -2);
 }
 
 __forceinline sf::Color lua_getcolor(const LuaStack& stack, int index) {

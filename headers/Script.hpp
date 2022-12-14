@@ -8,6 +8,7 @@
 #include "lua_extensions.hpp"
 #include "misc_functions.hpp"
 
+#include "Vector2.hpp"
 #include "cmath.hpp"
 #include "color.hpp"
 #include "cursor.hpp"

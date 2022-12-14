@@ -35,7 +35,7 @@ private:
         }
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
-            throw_error("Incorrect type, received " + S_TYPE_NAME[elements.at(key).index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+            throw_error("[Table] Incorrect type. Received " + S_TYPE_NAME[elements.at(key).index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
         }
     }
 
@@ -46,7 +46,7 @@ public:
     size_t empty() const noexcept;
 
     template<typename T>
-    T get(const std::string& key) const { throw_error("Unknown Type!"); }
+    T get(const std::string& key) const { throw_error("[Table] Unknown type for get<T>!"); }
 
     template<>
     int get<int>(const std::string& key) const {
@@ -61,6 +61,13 @@ public:
 
         const lua_Number tmp = std::get<lua_Number>(elements.at(key));
         return static_cast<size_t>((tmp > 0) ? tmp : 0);
+    }
+
+    template<>
+    double get<double>(const std::string& key) const {
+        check_errors(LuaMultiValueType::Number, key);
+
+        return std::get<lua_Number>(elements.at(key));
     }
 
     template<>

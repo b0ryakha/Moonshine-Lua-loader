@@ -104,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\C++ Libs\Boost;D:\C++ Libs\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\Objects;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\C++ Libs\Boost;D:\C++ Libs\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\API\Objects\Vector2.cpp" />
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
     <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="headers\API\keyboard.hpp" />
     <ClInclude Include="headers\API\misc.hpp" />
     <ClInclude Include="headers\API\mouse.hpp" />
+    <ClInclude Include="headers\API\Objects\Vector2.hpp" />
     <ClInclude Include="headers\API\render.hpp" />
     <ClInclude Include="headers\API\sound.hpp" />
     <ClInclude Include="headers\API\view.hpp" />
