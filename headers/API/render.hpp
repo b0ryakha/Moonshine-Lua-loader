@@ -5,6 +5,7 @@
 
 #include "lua_extensions.hpp"
 #include "SuperEllipse.hpp"
+#include "Vector2.hpp"
 
 extern size_t print_offset;
 

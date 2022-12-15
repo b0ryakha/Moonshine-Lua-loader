@@ -4,6 +4,7 @@
 #include <chrono>
 
 #include "lua_extensions.hpp"
+#include "Vector2.hpp"
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;

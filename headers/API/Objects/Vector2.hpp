@@ -24,6 +24,16 @@ namespace API
             return 1;
         };
 
+        static auto to_string = [](lua_State* L) {
+            const auto self = lua_getself<Vector2>(L, "Vector2");
+
+            std::string result;
+            result = "{ " + std::to_string(self->x) + ", " + std::to_string(self->y) + " }";
+
+            lua_pushstring(L, result.c_str());
+            return 1;
+        };
+
         static auto index_get = [](lua_State* L) {
             const auto self = lua_getself<Vector2>(L, "Vector2");
 
@@ -78,7 +88,8 @@ namespace API
             { "__gc", destructor },
             { "__len", get_len },
             { "__index", index_get },
-            { "__newindex", index_set }
+            { "__newindex", index_set },
+            { "__tostring", to_string },
         });
 
         return 1;
