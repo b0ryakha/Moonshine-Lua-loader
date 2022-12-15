@@ -126,7 +126,7 @@ print(size.w, size.h)
 local position = ...
 
 -- x, y coords
-print(pos.x, pos.y)
+print(position.x, position.y)
 ```
 
 #### <a name="Sprite"></a> ```Sprite```
@@ -410,7 +410,7 @@ Sets the window a new [size](#Size).
 window.get_pos(): Pos
 ```
 
-Returns the window [pos](#Pos).
+Returns the window [position](#Pos).
 
 ---
 
@@ -423,7 +423,7 @@ window.set_pos(x: int, y: int)
 | x     | ```int``` | New window x position |
 | y     | ```int``` | New window y position |
 
-Sets the window a new [pos](#Pos).
+Sets the window a new [position](#Pos).
 
 ---
 
@@ -498,7 +498,7 @@ Sets a new icon for window.
 ### <a name="Keyboard"></a> :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
-local button_id = button.Left
+local key_id = key.Left
 ```
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
@@ -527,7 +527,7 @@ Returns true if the key is pressed, else false.
 ### :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
-local key_id = key.W
+local button_id = button.W
 ```
 
 #### <a name="mouse.get_pressed"></a> ```get_pressed```
@@ -577,7 +577,7 @@ cursor.get_pos([regarding_window: bool]): Pos
 | :---:            | :---:      | :---:                                                                |
 | regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
-Returns the cursor [pos](#Pos).
+Returns the cursor [position](#Pos).
 
 ---
 
@@ -591,7 +591,7 @@ cursor.set_pos(x: int, y: int[, regarding_window: bool])
 | y                | ```int```  | New cursor y position                                                  |
 | regarding_window | ```bool``` | Is true then function return position regarding window, default = true |
 
-Sets the cursor a new [pos](#Pos).
+Sets the cursor a new [position](#Pos).
 
 ---
 
