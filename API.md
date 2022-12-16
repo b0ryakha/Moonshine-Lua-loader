@@ -217,14 +217,14 @@ Render text in the specified coordinates.
 
 #### <a name="render.measure_text"></a> ```measure_text```
 ```lua
-render.measure_text(font: Font, text: string): Size
+render.measure_text(font: Font, text: string): Vector2
 ```
 | Name      | Type         | Description                |
 | :---:     | :---:        | :---:                      |
 | font      | ```Font```   | Font for text              |
 | text      | ```string``` | Text that will be measured |
 
-Returns the measured [size](#Size) of the text.
+Returns the measured [size](#Vector2) of the text.
 
 ---
 
@@ -385,10 +385,10 @@ Closes the window and destroy all the attached resources.
 
 #### <a name="window.get_size"></a> ```get_size```
 ```lua
-window.get_size(): Size
+window.get_size(): Vector2
 ```
 
-Returns the window [size](#Size).
+Returns the window [size](#Vector2).
 
 ---
 
@@ -407,10 +407,10 @@ Sets the window a new [size](#Size).
 
 #### <a name="window.get_pos"></a> ```get_pos```
 ```lua
-window.get_pos(): Pos
+window.get_pos(): Vector2
 ```
 
-Returns the window [position](#Pos).
+Returns the window [position](#Vector2).
 
 ---
 
@@ -571,13 +571,13 @@ Returns true if scrolling down, else false.
 ### :video_game: Cursor
 #### <a name="cursor.get_pos"></a> ```get_pos```
 ```lua
-cursor.get_pos([regarding_window: bool]): Pos
+cursor.get_pos([regarding_window: bool]): Vector2
 ```
 | Name             | Type       | Description                                                          |
 | :---:            | :---:      | :---:                                                                |
 | regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
-Returns the cursor [position](#Pos).
+Returns the cursor [position](#Vector2).
 
 ---
 
@@ -680,13 +680,13 @@ Sets the [view](#View) a new center position.
 
 #### <a name="view.get_size"></a> ```get_size```
 ```lua
-view.get_size(view: View): Size
+view.get_size(view: View): Vector2
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
 | view  | ```View```  | View object |
 
-Returns [size](#Size) of [view](#View).
+Returns [size](#Vector2) of [view](#View).
 
 ---
 
