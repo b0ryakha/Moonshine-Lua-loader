@@ -415,7 +415,7 @@ window.set_pos(x: int, y: int)
 | x     | ```int``` | New window x position |
 | y     | ```int``` | New window y position |
 
-Sets the window a new [position](#Pos).
+Sets the window a new position.
 
 ---
 
@@ -583,7 +583,7 @@ cursor.set_pos(x: int, y: int[, regarding_window: bool])
 | y                | ```int```  | New cursor y position                                                  |
 | regarding_window | ```bool``` | Is true then function return position regarding window, default = true |
 
-Sets the cursor a new [position](#Pos).
+Sets the cursor a new position.
 
 ---
 
@@ -692,7 +692,7 @@ view.set_size(view: View, w: float, h: float)
 | w     | ```float``` | Width       |
 | h     | ```float``` | Height      |
 
-Sets the [view](#View) a new [size](#Size).
+Sets the [view](#View) a new size.
 
 ---
 
