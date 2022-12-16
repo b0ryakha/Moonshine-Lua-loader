@@ -15,10 +15,13 @@ LuaStack::LuaStack(lua_State* lua_state) {
                 elements.push_back(std::move(LuaBoolean(lua_toboolean(lua_state, i))));
                 break;
             case LUA_TNUMBER:
-                elements.push_back(std::move(static_cast<lua_Number>(lua_tonumber(lua_state, i))));
+                elements.push_back(std::move(lua_tonumber(lua_state, i)));
                 break;
             case LUA_TFUNCTION:
-                elements.push_back(std::move(static_cast<lua_CFunction>(lua_tocfunction(lua_state, i))));
+                elements.push_back(std::move(lua_tocfunction(lua_state, i)));
+                break;
+            case LUA_TUSERDATA:
+                elements.push_back(std::move(LuaUserdata(lua_touserdata(lua_state, i))));
                 break;
             default:
                 elements.push_back(std::move(LuaNil()));

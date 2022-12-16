@@ -31,7 +31,7 @@ public:
     LuaMultiValueType get_type(size_t index) const;
 
     template<typename T>
-    T get(size_t index) const { throw_error("[Stack] Unknown type for get<T>!"); }
+    T get(size_t index) const { throw_error("[Stack] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
 
     template<>
     int get<int>(size_t index) const {
@@ -73,7 +73,7 @@ public:
     bool get<bool>(size_t index) const {
         check_errors(LuaMultiValueType::Boolean, index);
 
-        return static_cast<bool>(std::get<LuaBoolean>(elements[index]).state);
+        return static_cast<bool>(std::get<LuaBoolean>(elements[index]));
     }
 
     template<>
@@ -93,5 +93,17 @@ public:
     template<typename T>
     T get() const {
         return get<T>(elements.size() - counter_of_get--);
+    }
+
+    template<typename T, typename Class>
+    Class* get(size_t index) const {
+        check_errors(LuaMultiValueType::Userdata, index);
+
+        return *static_cast<Class**>(std::get<LuaUserdata>(elements[index]));
+    }
+
+    template<typename T, typename Class>
+    Class* get() const {
+        return get<T, Class>(elements.size() - counter_of_get--);
     }
 };

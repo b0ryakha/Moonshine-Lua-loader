@@ -20,10 +20,13 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
                 elements[key] = std::move(LuaBoolean(lua_toboolean(lua_state, -2)));
                 break;
             case LUA_TNUMBER:
-                elements[key] = std::move(static_cast<lua_Number>(lua_tonumber(lua_state, -2)));
+                elements[key] = std::move(lua_tonumber(lua_state, -2));
                 break;
             case LUA_TFUNCTION:
-                elements[key] = std::move(static_cast<lua_CFunction>(lua_tocfunction(lua_state, -2)));
+                elements[key] = std::move(lua_tocfunction(lua_state, -2));
+                break;
+            case LUA_TUSERDATA:
+                elements[key] = std::move(LuaUserdata(lua_touserdata(lua_state, -2)));
                 break;
             default:
                 elements[key] = std::move(LuaNil());

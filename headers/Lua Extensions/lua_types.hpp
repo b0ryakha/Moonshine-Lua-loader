@@ -13,20 +13,27 @@ extern "C" {
 
 #include "misc_functions.hpp"
 
-enum class LuaMultiValueType : size_t { Number = 0, Function, String, Boolean, Table, Nil };
+enum class LuaMultiValueType : size_t { Number = 0, Function, String, Boolean, Table, Userdata, Nil };
 
-inline const std::array<std::string, 6> S_TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Nil" };
+inline const std::array<std::string, 7> S_TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Userdata", "Nil" };
 
 struct LuaNil {};
+
+struct LuaUserdata {
+    void* self = nullptr;
+    LuaUserdata(void* userdata) : self(userdata) {}
+    operator void*() const { return self; };
+};
 
 struct LuaBoolean {
     bool state = false;
     LuaBoolean(bool state) : state(state) {}
+    operator bool () const { return state; };
 };
 
 class LuaTable {
 private:
-    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaNil>> elements;
+    std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaUserdata, LuaNil>> elements;
     mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValueType expected_type, std::string key) const {
@@ -46,7 +53,7 @@ public:
     size_t empty() const noexcept;
 
     template<typename T>
-    T get(const std::string& key) const { throw_error("[Table] Unknown type for get<T>!"); }
+    T get(const std::string& key) const { throw_error("[Table] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
 
     template<>
     int get<int>(const std::string& key) const {
@@ -109,6 +116,18 @@ public:
     T get() const {
         return get<T>(std::to_string(1 + elements.size() - counter_of_get--));
     }
+
+    template<typename T, typename Class>
+    Class* get(const std::string& key) const {
+        check_errors(LuaMultiValueType::Userdata, key);
+
+        return *static_cast<Class**>(std::get<LuaUserdata>(elements.at(key)).self);
+    }
+
+    template<typename T, typename Class>
+    Class* get() const {
+        return get<T, Class>(std::to_string(1 + elements.size() - counter_of_get--));
+    }
 };
 
-using LuaMultiValue = std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaTable, LuaNil>;
+using LuaMultiValue = std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, LuaTable, LuaUserdata, LuaNil>;
