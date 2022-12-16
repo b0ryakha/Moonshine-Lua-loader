@@ -31,10 +31,7 @@ void throw_error(const std::string& error) noexcept {
     window.draw(info);
     window.display();
 
-    while (window.isOpen()) {
-        if (main_event.type == sf::Event::KeyPressed)
-            break;
-    }
+    while (window.isOpen() && main_event.type != sf::Event::KeyPressed) {}
 
     close_window();
 }

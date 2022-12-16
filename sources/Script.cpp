@@ -1,6 +1,6 @@
 #include "Script.hpp"
 
-Script::Script(const char* path) {
+Script::Script(const std::string& path) {
     open(path);
 }
 

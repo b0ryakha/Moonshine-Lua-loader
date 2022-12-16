@@ -34,7 +34,7 @@ private:
 
 public:
 	Script() = default;
-	Script(const char* path);
+	Script(const std::string& path);
 	~Script();
 
 	void open(const std::string& path) const;
