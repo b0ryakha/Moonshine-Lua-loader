@@ -113,20 +113,12 @@ local view_obj = ...
 print(view_obj)
 ```
 
-#### <a name="Size"></a> ```Size```
+#### <a name="Vector2"></a> ```Vector2```
 ```lua
-local size = ...
+local vec = Vector2(x: double, y: double)
 
--- width, height
-print(size.w, size.h)
-```
-
-#### <a name="Pos"></a> ```Pos```
-```lua
-local position = ...
-
--- x, y coords
-print(position.x, position.y)
+print(vec.x, vec.y)  -- output: x, y
+print(tostring(vec)) -- output: { x, y }
 ```
 
 #### <a name="Sprite"></a> ```Sprite```
