@@ -18,13 +18,13 @@ void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMul
 void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements);
 
 template<typename Class>
-__forceinline Class* lua_getclass(lua_State* L, const std::string& class_name, size_t index) {
-	return *static_cast<Class**>(luaL_checkudata(L, index, class_name.c_str()));
+__forceinline void lua_newclass(lua_State* L) {
+	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(std::move(LuaStack(L)));
 };
 
 template<typename Class>
-__forceinline void lua_newclass(lua_State* L) {
-	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(std::move(LuaStack(L)));
+__forceinline Class* lua_get_object(lua_State* L, const std::string& class_name, size_t index) {
+	return *static_cast<Class**>(luaL_checkudata(L, index, class_name.c_str()));
 };
 
 template<lua_CFunction constructor>
