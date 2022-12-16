@@ -17,7 +17,7 @@ void lua_register_table(lua_State* L, const std::string& name, const std::vector
 				lua_pushstring(L, std::get<std::string>(element.second).c_str());
 				break;
 			case 3:
-				lua_pushboolean(L, std::get<LuaBoolean>(element.second).state);
+				lua_pushboolean(L, std::get<LuaBoolean>(element.second));
 				break;
 			default:
 				lua_pushnil(L);
@@ -44,7 +44,7 @@ void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMul
 				lua_pushstring(L, std::get<std::string>(element.second).c_str());
 				break;
 			case 3:
-				lua_pushboolean(L, std::get<LuaBoolean>(element.second).state);
+				lua_pushboolean(L, std::get<LuaBoolean>(element.second));
 				break;
 			default:
 				lua_pushnil(L);
@@ -72,7 +72,7 @@ void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements) {
 				lua_pushstring(L, std::get<std::string>(element).c_str());
 				break;
 			case 3:
-				lua_pushboolean(L, std::get<LuaBoolean>(element).state);
+				lua_pushboolean(L, std::get<LuaBoolean>(element));
 				break;
 			default:
 				lua_pushnil(L);

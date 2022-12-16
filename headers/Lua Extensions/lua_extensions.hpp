@@ -46,7 +46,7 @@ void lua_push_object(lua_State* L, const std::vector<LuaMultiValue>& args) {
 				lua_pushstring(L, std::get<std::string>(arg).c_str());
 				break;
 			case 3:
-				lua_pushboolean(L, std::get<LuaBoolean>(arg).state);
+				lua_pushboolean(L, std::get<LuaBoolean>(arg));
 				break;
 			default:
 				lua_pushnil(L);

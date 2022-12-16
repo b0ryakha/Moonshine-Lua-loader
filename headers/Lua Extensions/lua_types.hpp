@@ -19,14 +19,18 @@ inline const std::array<std::string, 7> S_TYPE_NAME = { "Number", "Function", "S
 
 struct LuaNil {};
 
-struct LuaUserdata {
+class LuaUserdata {
     void* self = nullptr;
+
+public:
     LuaUserdata(void* userdata) : self(userdata) {}
     operator void*() const { return self; };
 };
 
-struct LuaBoolean {
+class LuaBoolean {
     bool state = false;
+
+public:
     LuaBoolean(bool state) : state(state) {}
     operator bool () const { return state; };
 };
@@ -95,7 +99,7 @@ public:
     bool get<bool>(const std::string& key) const {
         check_errors(LuaMultiValueType::Boolean, key);
 
-        return static_cast<bool>(std::get<LuaBoolean>(elements.at(key)).state);
+        return static_cast<bool>(std::get<LuaBoolean>(elements.at(key)));
     }
 
     template<>

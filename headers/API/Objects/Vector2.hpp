@@ -24,24 +24,6 @@ namespace API
             return 1;
         };
 
-        static auto is_equal = [](lua_State* L) {
-            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
-
-            lua_pushboolean(L, ((self->x == target->x) && (self->y == target->y)));
-            return 1;
-        };
-
-        static auto to_string = [](lua_State* L) {
-            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-
-            std::string result;
-            result = "{ " + std::to_string(self->x) + ", " + std::to_string(self->y) + " }";
-
-            lua_pushstring(L, result.c_str());
-            return 1;
-        };
-
         static auto index_get = [](lua_State* L) {
             const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
 
@@ -92,6 +74,40 @@ namespace API
             return 0;
         };
 
+        static auto to_string = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+
+            std::string result;
+            result = "{ " + std::to_string(self->x) + ", " + std::to_string(self->y) + " }";
+
+            lua_pushstring(L, result.c_str());
+            return 1;
+        };
+
+        static auto is_equal = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+            lua_pushboolean(L, ((self->x == target->x) && (self->y == target->y)));
+            return 1;
+        };
+
+        static auto add = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+            lua_push_object<Vector2_new>(L, { self->x + target->x, self->y + target->y });
+            return 1;
+        };
+
+        static auto sub = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+            lua_push_object<Vector2_new>(L, { self->x - target->x, self->y - target->y });
+            return 1;
+        };
+
         lua_setmethods(L, "Vector2", {
             { "__gc", destructor },
             { "__len", get_len },
@@ -99,8 +115,8 @@ namespace API
             { "__newindex", index_set },
             { "__tostring", to_string },
             { "__eq", is_equal },
-            //{ "__add", add },
-            //{ "__sub", sub },
+            { "__add", add },
+            { "__sub", sub },
             //{ "__mul", mul },
             //{ "__div", div },
             //{ "__pow", pow },
