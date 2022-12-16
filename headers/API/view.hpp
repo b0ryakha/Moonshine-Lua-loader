@@ -102,9 +102,9 @@ namespace API
         std::string view_id = args.get<std::string>();
 
         try {
-            lua_pushtable(L, {
-                std::make_pair("w", view_buffer[view_id].getSize().x),
-                std::make_pair("h", view_buffer[view_id].getSize().y)
+            lua_push_object<Vector2_new>(L, {
+                view_buffer[view_id].getSize().x,
+                view_buffer[view_id].getSize().y
             });
 
             return 1;

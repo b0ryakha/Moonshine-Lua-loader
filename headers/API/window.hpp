@@ -38,9 +38,9 @@ namespace API
     }
 
     static int window_get_size(lua_State* L) {
-        lua_pushtable(L, {
-            std::make_pair("w", window.getSize().x),
-            std::make_pair("h", window.getSize().y)
+        lua_push_object<Vector2_new>(L, {
+            window.getSize().x,
+            window.getSize().y
         });
 
         return 1;
@@ -58,9 +58,9 @@ namespace API
     }
 
     static int window_get_pos(lua_State* L) {
-        lua_pushtable(L, {
-            std::make_pair("x", window.getPosition().x),
-            std::make_pair("y", window.getPosition().y)
+        lua_push_object<Vector2_new>(L, {
+            window.getPosition().x,
+            window.getPosition().y
         });
 
         return 1;

@@ -81,3 +81,14 @@ void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements) {
 		lua_settable(L, -3);
 	}
 }
+
+void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
+	luaL_newmetatable(L, name.c_str());
+
+	for (const auto& function : methods) {
+		lua_pushcfunction(L, function.second);
+		lua_setfield(L, -2, function.first.c_str());
+	}
+
+	lua_setmetatable(L, -2);
+}

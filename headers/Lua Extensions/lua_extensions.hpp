@@ -23,11 +23,6 @@ __forceinline Class* lua_getclass(lua_State* L, const std::string& class_name, s
 };
 
 template<typename Class>
-__forceinline Class* lua_getself(lua_State* L, const std::string& class_name) {
-	return lua_getclass<Class>(L, class_name, 1);
-};
-
-template<typename Class>
 __forceinline void lua_newclass(lua_State* L) {
 	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(std::move(LuaStack(L)));
 };
@@ -61,16 +56,7 @@ void lua_push_object(lua_State* L, const std::vector<LuaMultiValue>& args) {
 	constructor(L);
 }
 
-__forceinline void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
-    if (luaL_newmetatable(L, name.c_str())) {
-		for (const auto& function : methods) {
-			lua_pushcfunction(L, function.second);
-			lua_setfield(L, -2, function.first.c_str());
-		}
-
-		lua_setmetatable(L, -2);
-    }
-}
+void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods);
 
 __forceinline sf::Color lua_getcolor(const LuaStack& stack, int index) {
 	LuaTable color = stack.get<LuaTable>(index);

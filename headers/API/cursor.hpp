@@ -1,6 +1,7 @@
 #pragma once
 
 #include "lua_extensions.hpp"
+#include "Vector2.hpp"
 
 #include <mutex>
 
@@ -26,11 +27,7 @@ namespace API
             if (y > window.getSize().y) y = window.getSize().y;
         }
 
-        lua_pushtable(L, {
-            std::make_pair("x", x),
-            std::make_pair("y", y)
-        });
-
+        lua_push_object<Vector2_new>(L, { x, y });
         return 1;
 	}
 

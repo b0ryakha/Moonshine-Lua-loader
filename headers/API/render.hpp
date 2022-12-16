@@ -104,9 +104,9 @@ namespace API
 
         sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, *size);
 
-        lua_pushtable(L, {
-            std::make_pair("w", _text.getLocalBounds().width),
-            std::make_pair("h", _text.getLocalBounds().height)
+        lua_push_object<Vector2_new>(L, {
+            _text.getLocalBounds().width,
+            _text.getLocalBounds().height
         });
 
         return 1;

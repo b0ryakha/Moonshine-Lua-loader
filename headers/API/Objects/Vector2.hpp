@@ -15,7 +15,7 @@ namespace API
         lua_newclass<Vector2>(L);
 
         static auto destructor = [](lua_State* L) {
-            delete lua_getself<Vector2>(L, "Vector2");
+            delete lua_getclass<Vector2>(L, "Vector2", 1);
             return 0;
         };
 
@@ -24,8 +24,16 @@ namespace API
             return 1;
         };
 
+        static auto is_equal = [](lua_State* L) {
+            const auto self = lua_getclass<Vector2>(L, "Vector2", 1);
+            const auto target = lua_getclass<Vector2>(L, "Vector2", 2);
+
+            lua_pushboolean(L, ((self->x == target->x) && (self->y == target->y)));
+            return 1;
+        };
+
         static auto to_string = [](lua_State* L) {
-            const auto self = lua_getself<Vector2>(L, "Vector2");
+            const auto self = lua_getclass<Vector2>(L, "Vector2", 1);
 
             std::string result;
             result = "{ " + std::to_string(self->x) + ", " + std::to_string(self->y) + " }";
@@ -35,7 +43,7 @@ namespace API
         };
 
         static auto index_get = [](lua_State* L) {
-            const auto self = lua_getself<Vector2>(L, "Vector2");
+            const auto self = lua_getclass<Vector2>(L, "Vector2", 1);
 
             if (lua_isnumber(L, 2)) {
                 switch (lua_tointeger(L, 2)) {
@@ -61,7 +69,7 @@ namespace API
         };
 
         static auto index_set = [](lua_State* L) {
-            const auto self = lua_getself<Vector2>(L, "Vector2");
+            const auto self = lua_getclass<Vector2>(L, "Vector2", 1);
             double new_value = luaL_checknumber(L, 3);
 
             if (lua_isnumber(L, 2)) {
@@ -90,6 +98,12 @@ namespace API
             { "__index", index_get },
             { "__newindex", index_set },
             { "__tostring", to_string },
+            { "__eq", is_equal },
+            //{ "__add", add },
+            //{ "__sub", sub },
+            //{ "__mul", mul },
+            //{ "__div", div },
+            //{ "__pow", pow },
         });
 
         return 1;
