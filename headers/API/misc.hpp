@@ -1,6 +1,7 @@
 #pragma once
 
 #include "lua_extensions.hpp"
+#include "Vector2.hpp"
 
 extern sf::RenderWindow window;
 extern std::string FONTS_PATH;
@@ -21,11 +22,20 @@ namespace API
                     case LuaMultiValueType::Number:
                         lua_pushnumber(L, args.get<double>(i));
                         break;
+                    case LuaMultiValueType::Function:
+                        lua_pushstring(L, "'function'");
+                        break;
                     case LuaMultiValueType::String:
                         lua_pushstring(L, args.get<std::string>(i).c_str());
                         break;
                     case LuaMultiValueType::Boolean:
                         lua_pushboolean(L, args.get<bool>(i));
+                        break;
+                    case LuaMultiValueType::Table:
+                        lua_pushstring(L, "'table'");
+                        break;
+                    case LuaMultiValueType::Userdata:
+                        lua_pushstring(L, "'userdata'");
                         break;
                     default:
                         lua_pushnil(L);
