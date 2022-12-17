@@ -5,7 +5,9 @@
 
 #include "lua_extensions.hpp"
 #include "SuperEllipse.hpp"
-#include "Vector2.hpp"
+
+#include "API/Objects/Vector2.hpp"
+#include "API/Objects/Color.hpp"
 
 extern size_t print_offset;
 
@@ -122,7 +124,7 @@ namespace API
         float y = args.get<float>();
         std::string font_id = args.get<std::string>();
         std::string text = args.get<std::string>();
-        sf::Color color = lua_getcolor(args);
+        sf::Color color = args.get<LuaUserdata, Color>();
 
         sf::Font* font = nullptr;
         size_t* size = nullptr;
@@ -154,7 +156,7 @@ namespace API
         float y = args.get<float>();
         float w = args.get<float>();
         float h = args.get<float>();
-        sf::Color color = lua_getcolor(args);
+        sf::Color color = args.get<LuaUserdata, Color>();
         float rounding = (args.size() == 6) ? args.get<float>() : 0;
 
         SuperEllipse rectangle(sf::Rect<float>(x, y, w, h), rounding, color);
@@ -173,9 +175,9 @@ namespace API
         float x = args.get<float>();
         float y = args.get<float>();
         float radius = args.get<float>();
-        sf::Color color = lua_getcolor(args);
+        sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0;
-        sf::Color outline_color = (args.size() == 6) ? lua_getcolor(args) : sf::Color();
+        sf::Color outline_color = (args.size() == 6) ? args.get<LuaUserdata, Color>() : sf::Color();
 
         sf::CircleShape circle(radius);
 
@@ -203,7 +205,7 @@ namespace API
         float x2 = args.get<float>();
         float y2 = args.get<float>();
         float thickness = args.get<float>();
-        sf::Color color = lua_getcolor(args);
+        sf::Color color = args.get<LuaUserdata, Color>();
 
         sf::Vertex line[2];
 
@@ -233,7 +235,7 @@ namespace API
             throw_error("Incorrect number of arguments!");
 
         LuaTable points = args.get<LuaTable>();
-        sf::Color color = lua_getcolor(args);
+        sf::Color color = args.get<LuaUserdata, Color>();
 
         sf::ConvexShape polygon;
 
@@ -263,7 +265,7 @@ namespace API
         std::string sprite_id = args.get<std::string>();
         float x = args.get<float>();
         float y = args.get<float>();
-        sf::Color color = (args.size() == 4 ? lua_getcolor(args) : sf::Color());
+        sf::Color color = (args.size() == 4 ? args.get<LuaUserdata, Color>() : sf::Color());
 
         sf::Sprite* sprite = nullptr;
         sf::Texture* texture = nullptr;

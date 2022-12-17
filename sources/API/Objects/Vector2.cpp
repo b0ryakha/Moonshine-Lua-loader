@@ -1,4 +1,4 @@
-#include "Vector2.hpp"
+#include "API/Objects/Vector2.hpp"
 
 API::Vector2::Vector2(const LuaStack& args) {
     if (args.size() != 2)

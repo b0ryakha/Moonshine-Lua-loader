@@ -96,14 +96,14 @@ public:
     }
 
     template<typename T, typename Class>
-    Class* get(size_t index) const {
+    Class get(size_t index) const {
         check_errors(LuaMultiValueType::Userdata, index);
 
-        return *static_cast<Class**>(std::get<LuaUserdata>(elements[index]));
+        return *(*static_cast<Class**>(std::get<LuaUserdata>(elements[index])));
     }
 
     template<typename T, typename Class>
-    Class* get() const {
+    Class get() const {
         return get<T, Class>(elements.size() - counter_of_get--);
     }
 };

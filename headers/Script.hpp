@@ -8,19 +8,20 @@
 #include "lua_extensions.hpp"
 #include "misc_functions.hpp"
 
-#include "Vector2.hpp"
+#include "API/Objects/Vector2.hpp"
+#include "API/Objects/Color.hpp"
+
 #include "cmath.hpp"
-#include "color.hpp"
-#include "cursor.hpp"
-#include "file.hpp"
-#include "global_vars.hpp"
-#include "keyboard.hpp"
-#include "misc.hpp"
-#include "mouse.hpp"
-#include "render.hpp"
-#include "sound.hpp"
-#include "view.hpp"
-#include "window.hpp"
+#include "API/cursor.hpp"
+#include "API/file.hpp"
+#include "API/global_vars.hpp"
+#include "API/keyboard.hpp"
+#include "API/misc.hpp"
+#include "API/mouse.hpp"
+#include "API/render.hpp"
+#include "API/sound.hpp"
+#include "API/view.hpp"
+#include "API/window.hpp"
 
 extern sf::RenderWindow window;
 

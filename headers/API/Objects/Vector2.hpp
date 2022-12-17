@@ -9,6 +9,7 @@ namespace API
         double y = 0;
 
         Vector2(const LuaStack& args);
+        operator sf::Vector2f() const { return sf::Vector2f(x, y); };
     };
 
     static int Vector2_new(lua_State* L) {

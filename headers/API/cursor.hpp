@@ -1,7 +1,7 @@
 #pragma once
 
 #include "lua_extensions.hpp"
-#include "Vector2.hpp"
+#include "API/Objects/Vector2.hpp"
 
 #include <mutex>
 

@@ -4,7 +4,7 @@
 #include <chrono>
 
 #include "lua_extensions.hpp"
-#include "Vector2.hpp"
+#include "API/Objects/Vector2.hpp"
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;
@@ -24,7 +24,7 @@ namespace API
             window.clear();
         }
         else if (args.size() == 1) {
-            window.clear(lua_getcolor(args));
+            window.clear(args.get<LuaUserdata, Color>());
         }
 
         print_offset = 0;

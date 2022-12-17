@@ -63,12 +63,6 @@ __forceinline void Script::open_API() const {
         std::make_pair("create_font", API::render_create_font),
     });
 
-    lua_register_table(lua_state, "color", {
-        std::make_pair("new", API::color_new),
-        std::make_pair("unpack", API::color_unpack),
-        std::make_pair("to_hex", API::color_to_hex),
-    });
-
     lua_register_table(lua_state, "window", {
         std::make_pair("get_size", API::window_get_size),
         std::make_pair("set_size", API::window_set_size),
@@ -172,6 +166,7 @@ __forceinline void Script::open_API() const {
     lua_register(lua_state, "print", API::print);
 
     lua_register(lua_state, "Vector2", API::Vector2_new);
+    lua_register(lua_state, "Color", API::Color_new);
 }
 
 bool Script::is_open() const {

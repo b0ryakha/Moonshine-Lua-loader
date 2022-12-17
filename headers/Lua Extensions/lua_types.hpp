@@ -24,7 +24,9 @@ class LuaUserdata {
 
 public:
     LuaUserdata(void* userdata) : self(userdata) {}
-    operator void*() const { return self; };
+
+    template<typename T>
+    operator T*() const { return static_cast<T*>(self); };
 };
 
 class LuaBoolean {
@@ -32,7 +34,7 @@ class LuaBoolean {
 
 public:
     LuaBoolean(bool state) : state(state) {}
-    operator bool () const { return state; };
+    operator bool() const { return state; };
 };
 
 class LuaTable {
@@ -122,14 +124,14 @@ public:
     }
 
     template<typename T, typename Class>
-    Class* get(const std::string& key) const {
+    Class get(const std::string& key) const {
         check_errors(LuaMultiValueType::Userdata, key);
 
-        return *static_cast<Class**>(std::get<LuaUserdata>(elements.at(key)).self);
+        return *(*static_cast<Class**>(std::get<LuaUserdata>(elements.at(key))));
     }
 
     template<typename T, typename Class>
-    Class* get() const {
+    Class get() const {
         return get<T, Class>(std::to_string(1 + elements.size() - counter_of_get--));
     }
 };

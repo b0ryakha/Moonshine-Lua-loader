@@ -1,7 +1,6 @@
 #pragma once
 
 #include "lua_extensions.hpp"
-#include "Vector2.hpp"
 
 extern sf::RenderWindow window;
 extern std::string FONTS_PATH;

@@ -57,13 +57,3 @@ void lua_push_object(lua_State* L, const std::vector<LuaMultiValue>& args) {
 }
 
 void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods);
-
-__forceinline sf::Color lua_getcolor(const LuaStack& stack, int index) {
-	LuaTable color = stack.get<LuaTable>(index);
-	return sf::Color(color.get<int>("r"), color.get<int>("g"), color.get<int>("b"), color.get<int>("a"));
-}
-
-__forceinline sf::Color lua_getcolor(const LuaStack& stack) {
-	LuaTable color = stack.get<LuaTable>();
-	return sf::Color(color.get<int>("r"), color.get<int>("g"), color.get<int>("b"), color.get<int>("a"));
-}

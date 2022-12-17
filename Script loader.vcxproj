@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\API\Objects\Color.cpp" />
     <ClCompile Include="sources\API\Objects\Vector2.cpp" />
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
@@ -155,13 +156,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\API\cmath.hpp" />
-    <ClInclude Include="headers\API\color.hpp" />
     <ClInclude Include="headers\API\cursor.hpp" />
     <ClInclude Include="headers\API\file.hpp" />
     <ClInclude Include="headers\API\global_vars.hpp" />
     <ClInclude Include="headers\API\keyboard.hpp" />
     <ClInclude Include="headers\API\misc.hpp" />
     <ClInclude Include="headers\API\mouse.hpp" />
+    <ClInclude Include="headers\API\Objects\Color.hpp" />
     <ClInclude Include="headers\API\Objects\Vector2.hpp" />
     <ClInclude Include="headers\API\render.hpp" />
     <ClInclude Include="headers\API\sound.hpp" />
