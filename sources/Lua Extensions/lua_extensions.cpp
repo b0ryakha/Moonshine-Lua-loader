@@ -84,22 +84,11 @@ void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements) {
 
 void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
 	luaL_newmetatable(L, name.c_str());
-	std::vector<luaL_Reg> functions;
 
 	for (const auto& method : methods) {
-		if (method.first.length() > 2 && method.first[0] == '_' && method.first[1] == '_') {
-			lua_pushcfunction(L, method.second);
-			lua_setfield(L, -2, method.first.c_str());
-		}
-		else {
-			functions.push_back(std::move(luaL_Reg{ method.first.c_str(), method.second }));
-		}
+		lua_pushcfunction(L, method.second);
+		lua_setfield(L, -2, method.first.c_str());
 	}
-
-	functions.push_back(std::move(luaL_Reg{ nullptr, nullptr }));
-	luaL_setfuncs(L, functions.data(), 0);
-	lua_pushvalue(L, -1);
-	lua_setfield(L, -2, "__index");
 
 	lua_setmetatable(L, -2);
 }
