@@ -11,13 +11,6 @@
   - [line()](#render.line)
   - [polygon()](#render.polygon)
   </details>
-
-<details><summary>:rainbow: Color</summary>
-
-  - [new()](#color.new)
-  - [unpack()](#color.unpack)
-  - [to_hex()](#color.to_hex)
-  </details>
   
 <details><summary>:computer: Window</summary>
 
@@ -115,10 +108,11 @@ print(view_obj)
 
 #### <a name="Vector2"></a> ```Vector2```
 ```lua
-local vec = Vector2(x: double, y: double)
+local vec = Vector2(x: double, y: double): Vector2
 
 print(vec.x, vec.y)  -- output: x, y
 print(tostring(vec)) -- output: { x, y }
+print(vec[2])        -- output: y
 ```
 
 #### <a name="Sprite"></a> ```Sprite```
@@ -131,10 +125,15 @@ print(sprite)
 
 #### <a name="Color"></a> ```Color```
 ```lua
-local color_obj = ...
+local color = Color(r: int, g: int, b: int[, a: int]): Color
+local color = Color(hex: string): Color
 
--- red, green, blue, alpha values of color
-print(color_obj.r, color_obj.g, color_obj.b, color_obj.a)
+local r, g, b, a = color:unpack()
+
+print(tostring(color)) -- output: { r, g, b, a }
+print(color:to_hex())  -- output: "#gff599gdv"
+print(color.r)         -- output: r value
+print(color[2])        -- output: g value
 ```
 
 #### <a name="Font"></a> ```Font```
@@ -296,51 +295,6 @@ render.polygon(points: vector<array<float, 2>>, color: Color)
 | color  | ```Color```                   | Color for polygon                                           |
 
 Render polygon on the screen.
-
-
-### :rainbow: Color
-
-#### <a name="color.new"></a> ```new```
-```lua
-color.new(r: int, g: int, b: int[, a: int]): Color
-color.new(hex: string): Color
-```
-| Name  | Type         | Description                  |
-| :---: | :---:        | :---:                        |
-| r     | ```int```    | Red [0 - 255]                |
-| g     | ```int```    | Green [0 - 255]              |
-| b     | ```int```    | Blue [0 - 255]               |
-| a     | ```int```    | Alpha [0 - 255], default 255 |
-
-| Name  | Type         | Description                  |
-| :---: | :---:        | :---:                        |
-| hex   | ```string``` | Hex string                   |
-
-Returns the [color](#Color) structure.
-
----
-
-#### <a name="color.unpack"></a> ```unpack```
-```lua
-color.unpack(color: Color): int, int, int, int
-```
-| Name  | Type        | Description         |
-| :---: | :---:       | :---:               |
-| color | ```Color``` | Color for unpacking |
-
-Returns the integer r, g, b, a values of [color](#Color).
-
----
-
-#### <a name="color.to_hex"></a> ```to_hex```
-```lua
-color.to_hex(color: Color): string
-```
-| Name  | Type        | Description              |
-| :---: | :---:       | :---:                    |
-| color | ```Color``` | Color for casting to hex |
-
-Returns the hex str.
 
 
 ### :computer: Window
