@@ -9,7 +9,7 @@ namespace API
         double y = 0;
 
         Vector2(const LuaStack& args);
-        operator sf::Vector2f() const { return sf::Vector2f(x, y); };
+        operator sf::Vector2f() const;
     };
 
     static int Vector2_new(lua_State* L) {
@@ -40,12 +40,15 @@ namespace API
                         lua_pushnil(L);
                 }
             }
-            else {
+            else if (lua_isstring(L, 2)) {
                 const std::string_view key = luaL_checkstring(L, 2);
                 
                 if (key == "x") lua_pushnumber(L, self->x);
                 else if (key == "y") lua_pushnumber(L, self->y);
                 else lua_pushnil(L);
+            }
+            else {
+                lua_pushnil(L);
             }
 
             return 1;

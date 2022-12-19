@@ -11,7 +11,7 @@ namespace API
         size_t a = 255;
 
         Color(const LuaStack& args);
-        operator sf::Color() const { return sf::Color(r, g, b, a); };
+        operator sf::Color() const;
     };
 
     static int Color_new(lua_State* L) {
@@ -68,7 +68,7 @@ namespace API
                         lua_pushnil(L);
                 }
             }
-            else {
+            else if (lua_isstring(L, 2)) {
                 const std::string_view key = luaL_checkstring(L, 2);
 
                 if (key == "r") lua_pushinteger(L, self->r);
@@ -78,6 +78,9 @@ namespace API
                 else if (key == "unpack") lua_pushcfunction(L, unpack);
                 else if (key == "to_hex") lua_pushcfunction(L, to_hex);
                 else lua_pushnil(L);
+            }
+            else {
+                lua_pushnil(L);
             }
 
             return 1;

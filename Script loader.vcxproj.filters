@@ -69,6 +69,9 @@
     <ClCompile Include="sources\API\Objects\Color.cpp">
       <Filter>Source Files\API\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="sources\API\Objects\Font.cpp">
+      <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
@@ -144,6 +147,9 @@
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\Objects\Color.hpp">
+      <Filter>Header Files\API\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\Objects\Font.hpp">
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
   </ItemGroup>

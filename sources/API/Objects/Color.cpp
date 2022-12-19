@@ -38,3 +38,7 @@ API::Color::Color(const LuaStack& args) {
             a = hex_to_number(tmp.substr(7, 2));
     }
 }
+
+API::Color::operator sf::Color() const {
+    return sf::Color(r, g, b, a);
+}

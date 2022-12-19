@@ -25,10 +25,14 @@ void Script::open(const std::string& path) const {
         return;
 
     lua_state = luaL_newstate();
-    lua_path = std::move(path);
 
     if (lua_state == nullptr)
         throw_error("Failed to create lua state.");
+
+    lua_path = std::move(path);
+
+    if (!lua_path.empty() && lua_path[0] == '\"' && lua_path[lua_path.length() - 1] == '\"')
+        lua_path = std::string(lua_path.begin() + 1, lua_path.end() - 1);
     
     luaL_openlibs(lua_state);
     open_API();
@@ -60,7 +64,7 @@ __forceinline void Script::open_API() const {
         //std::make_pair("shadow", API::render_shadow),
         std::make_pair("sprite", API::render_sprite),
         std::make_pair("create_sprite", API::render_create_sprite),
-        std::make_pair("create_font", API::render_create_font),
+        std::make_pair("create_font", API::Font_new),
     });
 
     lua_register_table(lua_state, "window", {

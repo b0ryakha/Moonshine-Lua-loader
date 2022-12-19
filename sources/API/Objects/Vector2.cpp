@@ -7,3 +7,7 @@ API::Vector2::Vector2(const LuaStack& args) {
     x = args.get<double>();
     y = args.get<double>();
 }
+
+API::Vector2::operator sf::Vector2f() const {
+    return sf::Vector2f(x, y);
+}

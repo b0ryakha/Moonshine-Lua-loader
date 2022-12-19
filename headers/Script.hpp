@@ -10,6 +10,7 @@
 
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
+#include "API/Objects/Font.hpp"
 
 #include "cmath.hpp"
 #include "API/cursor.hpp"

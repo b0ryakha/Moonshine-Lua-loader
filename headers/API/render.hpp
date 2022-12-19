@@ -8,13 +8,13 @@
 
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
+#include "API/Objects/Font.hpp"
 
 extern size_t print_offset;
 
 namespace API
 {
     static std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-    static std::unordered_map<std::string, std::pair<sf::Font, size_t>> font_buffer;
 
     static int render_create_sprite(lua_State* L) {
         LuaStack args(L);
@@ -54,57 +54,16 @@ namespace API
         return 1;
     }
 
-    static int render_create_font(lua_State* L) {
-        LuaStack args(L);
-
-        if (args.size() != 2)
-            throw_error("[render.create_font] Incorrect number of arguments!");
-
-        std::string font_name = args.get<std::string>();
-        size_t size = args.get<size_t>();
-
-        if (font_name.length() > 4) {
-            if (std::string(font_name.end() - 4, font_name.end()) != ".ttf") {
-                font_name += ".ttf";
-            }
-        }
-        else {
-            font_name += ".ttf";
-        }
-
-        sf::Font font;
-        if (!font.loadFromFile(FONTS_PATH + font_name))
-            throw_error("[render.create_font] Font '" + font_name + "' not found!");
-
-        const std::string ID = "0x102111110116" + std::to_string(font_buffer.size());
-
-        font_buffer[ID] = std::move(std::make_pair(font, size));
-
-        lua_pushstring(L, ID.c_str());
-        return 1;
-    }
-
     static int render_measure_text(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 2)
             throw_error("[render.measure_text] Incorrect number of arguments!");
 
-        std::string font_id = args.get<std::string>();
+        Font font = args.get<LuaUserdata, Font>();
         std::string text = args.get<std::string>();
 
-        sf::Font* font = nullptr;
-        size_t* size = nullptr;
-
-        try {
-            font = &font_buffer[font_id].first;
-            size = &font_buffer[font_id].second;
-        }
-        catch (...) {
-            throw_error("[render.measure_text] Font object not found!");
-        }
-
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, *size);
+        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, font.get_size());
 
         lua_push_object<Vector2_new>(L, {
             _text.getLocalBounds().width,
@@ -122,22 +81,11 @@ namespace API
 
         float x = args.get<float>();
         float y = args.get<float>();
-        std::string font_id = args.get<std::string>();
+        Font font = args.get<LuaUserdata, Font>();
         std::string text = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Font* font = nullptr;
-        size_t* size = nullptr;
-
-        try {
-            font = &font_buffer[font_id].first;
-            size = &font_buffer[font_id].second;
-        }
-        catch (const std::out_of_range& exception) {
-            throw_error(exception.what());
-        }
-
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, *size);
+        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, font.get_size());
         _text.setPosition(sf::Vector2f(x, y));
         _text.setFillColor(color);
 
