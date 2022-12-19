@@ -138,10 +138,11 @@ print(color[2])        -- output: g value
 
 #### <a name="Font"></a> ```Font```
 ```lua
-local font_obj = ...
+local font = ...
 
--- font address
-print(font_obj)
+print(font:get_family()) -- output: family
+print(font:get_size())   -- output: size
+print(tostring(font))    -- output: { family, size }
 ```
 
 #### <a name="Sound"></a> ```Sound```
