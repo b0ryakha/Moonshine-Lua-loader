@@ -65,7 +65,7 @@
   - [set_rotation()](#view.set_rotation)
   </details>
   
-<details><summary>:musical_note: Sound</summary>
+<details><summary>:musical_note: sound.new</summary>
 
   - [new()](#sound.new)
   - [play()](#sound.play)
@@ -692,12 +692,11 @@ view.set_rotation(view: View, angle: float)
 
 Sets the [view](#View) a new rotation angle.
 
-
 ### :musical_note: Sound
 
 #### <a name="sound.new"></a> ```new```
 ```lua
-Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
+sound.new(path: string, volume: size_t[, is_repeat: bool]): sound.new
 ```
 | Name      | Type         | Description                                        |
 | :---:     | :---:        | :---:                                              |
@@ -705,7 +704,7 @@ Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
 | volume    | ```size_t``` | Volume of sound [0 - 100]                          |
 | is_repeat | ```bool```   | If true then sound will be looped, default = false |
 
-Returns the [sound](#Sound).
+Returns the [sound](#sound.new).
 
 ---
 
@@ -717,7 +716,7 @@ sound_object:play([is_reset: bool])
 | :---:    | :---:       | :---:                                                                            |
 | is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
 
-Plays [sound](#Sound).
+Plays [sound](#sound.new).
 
 ---
 
@@ -726,7 +725,7 @@ Plays [sound](#Sound).
 sound_object:stop()
 ```
 
-Stops [sound](#Sound).
+Stops [sound](#sound.new).
 
 ---
 
@@ -738,7 +737,7 @@ sound_object:set_volume(volume: size_t)
 | :---:  | :---:        | :---:                     |
 | volume | ```size_t``` | Volume of sound [0 - 100] |
 
-Sets the [sound](#Sound) a new volume.
+Sets the [sound](#sound.new) a new volume.
 
 ---
 
@@ -750,7 +749,7 @@ sound_object:set_loop(is_repeat: bool)
 | :---:     | :---:       | :---:                                 |
 | is_repeat | ```bool```  | If true then the sound will be looped |
 
-Sets the [sound](#Sound) a new loop.
+Sets the [sound](#sound.new) a new loop.
 
 
 ### :file_folder: File
