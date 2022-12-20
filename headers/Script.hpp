@@ -11,6 +11,7 @@
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Font.hpp"
+#include "API/Objects/Sound.hpp"
 
 #include "cmath.hpp"
 #include "API/cursor.hpp"
@@ -20,7 +21,6 @@
 #include "API/misc.hpp"
 #include "API/mouse.hpp"
 #include "API/render.hpp"
-#include "API/sound.hpp"
 #include "API/view.hpp"
 #include "API/window.hpp"
 

@@ -137,14 +137,6 @@ __forceinline void Script::open_API() const {
         std::make_pair("set_rotation", API::view_set_rotation),
     });
 
-    lua_register_table(lua_state, "sound", {
-        std::make_pair("new", API::sound_new),
-        std::make_pair("play", API::sound_play),
-        std::make_pair("stop", API::sound_play),
-        std::make_pair("set_volume", API::sound_set_volume),
-        std::make_pair("set_loop", API::sound_set_loop),
-    });
-
     lua_register_table(lua_state, "file", {
         std::make_pair("read", API::file_read),
         //std::make_pair("write", API::file_write),
@@ -172,8 +164,9 @@ __forceinline void Script::open_API() const {
 
     lua_register(lua_state, "Vector2", API::Vector2_new);
     lua_register(lua_state, "Color", API::Color_new);
+    lua_register(lua_state, "Sound", API::Sound_new);
 }
 
 bool Script::is_open() const {
-    return (main_thread != nullptr);
+    return main_thread != nullptr;
 }

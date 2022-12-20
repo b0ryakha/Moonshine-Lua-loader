@@ -72,6 +72,9 @@
     <ClCompile Include="sources\API\Objects\Font.cpp">
       <Filter>Source Files\API\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="sources\API\Objects\Sound.cpp">
+      <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
@@ -119,9 +122,6 @@
     <ClInclude Include="headers\API\render.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\sound.hpp">
-      <Filter>Header Files\API</Filter>
-    </ClInclude>
     <ClInclude Include="headers\API\view.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
@@ -150,6 +150,9 @@
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
     <ClInclude Include="headers\API\Objects\Font.hpp">
+      <Filter>Header Files\API\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\Objects\Sound.hpp">
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
   </ItemGroup>

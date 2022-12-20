@@ -120,10 +120,7 @@ namespace API
             { "__tostring", to_string },
             { "__eq", is_equal },
             { "__add", add },
-            { "__sub", sub },
-            //{ "__mul", mul },
-            //{ "__div", div },
-            //{ "__pow", pow },
+            { "__sub", sub }
         });
 
         return 1;
