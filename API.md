@@ -67,11 +67,11 @@
   
 <details><summary>:musical_note: Sound</summary>
 
-  - [new()](#sound:new)
-  - [play()](#sound:play)
-  - [stop()](#sound:stop)
-  - [set_volume()](#sound:set_volume)
-  - [set_loop()](#sound:set_loop)
+  - [new()](#sound.new)
+  - [play()](#sound.play)
+  - [stop()](#sound.stop)
+  - [set_volume()](#sound.set_volume)
+  - [set_loop()](#sound.set_loop)
   </details>
   
 <details><summary>:file_folder: File</summary>
@@ -695,7 +695,7 @@ Sets the [view](#View) a new rotation angle.
 
 ### :musical_note: Sound
 
-#### <a name="sound:new"></a> ```new```
+#### <a name="sound.new"></a> ```new```
 ```lua
 Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
 ```
@@ -709,7 +709,7 @@ Returns the [sound](#Sound).
 
 ---
 
-#### <a name="sound:play"></a> ```play```
+#### <a name="sound.play"></a> ```play```
 ```lua
 sound_object:play([is_reset: bool])
 ```
@@ -721,7 +721,7 @@ Plays [sound](#Sound).
 
 ---
 
-#### <a name="sound:stop"></a> ```stop```
+#### <a name="sound.stop"></a> ```stop```
 ```lua
 sound_object:stop()
 ```
@@ -730,7 +730,7 @@ Stops [sound](#Sound).
 
 ---
 
-#### <a name="sound:set_volume"></a> ```set_volume```
+#### <a name="sound.set_volume"></a> ```set_volume```
 ```lua
 sound_object:set_volume(volume: size_t)
 ```
@@ -742,7 +742,7 @@ Sets the [sound](#Sound) a new volume.
 
 ---
 
-#### <a name="sound:set_loop"></a> ```set_loop```
+#### <a name="sound.set_loop"></a> ```set_loop```
 ```lua
 sound_object:set_loop(is_repeat: bool)
 ```
