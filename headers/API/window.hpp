@@ -1,10 +1,10 @@
 #pragma once
 
-#include <thread>
-#include <chrono>
-
 #include "lua_extensions.hpp"
 #include "API/Objects/Vector2.hpp"
+
+#include <thread>
+#include <chrono>
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;
@@ -17,47 +17,23 @@ namespace API
         return 0;
     }
 
-    /*static int window_capture(lua_State* L) {
+    static int window_capture(lua_State* L) {
         LuaStack args(L);
 
-        if (args.size() != 1 && args.size() != 5)
+        if (args.size() != 1)
             throw_error("Incorrect number of arguments!");
 
         std::string path = args.get<std::string>();
+        sf::Texture screenshot;
 
-        if (args.size() == 1) {
-            sf::Texture texture;
-            texture.create(window.getSize().x, window.getSize().y);
+        screenshot.create(window.getSize().x, window.getSize().y);
+        screenshot.update(window);
 
-            texture.update(window);
-
-            if (!texture.copyToImage().saveToFile(path))
-                throw_error("Error when saving a screenshot!");
-        }
-        else {
-            size_t x = args.get<size_t>();
-            size_t y = args.get<size_t>();
-            size_t w = args.get<size_t>();
-            size_t h = args.get<size_t>();
-            sf::Texture texture;
-            sf::Image image;
-            image.create(window.getSize().x, window.getSize().y);
-
-            for (int i = 0; i < window.getSize().x * window.getSize().y; ++i) {
-                float x = i % window.getSize().x;
-                float y = i / window.getSize().x;
-
-                image.setPixel(x, y, image.getPixel(x, y));
-            }
-
-            image.flipVertically();
-
-            if (!image.saveToFile(path))
-                throw_error("Error when saving a screenshot!");
-        }
+        if (!screenshot.copyToImage().saveToFile(path))
+            throw_error("Error when saving a screenshot!");
 
         return 0;
-    }*/
+    }
 
     static int window_clear(lua_State* L) {
         LuaStack args(L);

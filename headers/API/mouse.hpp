@@ -1,6 +1,7 @@
 #pragma once
 
 #include "lua_extensions.hpp"
+
 #include <string>
 
 namespace API

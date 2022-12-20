@@ -1,14 +1,14 @@
 #pragma once
 
-#include <string>
-#include <unordered_map>
-
 #include "lua_extensions.hpp"
 #include "SuperEllipse.hpp"
 
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Font.hpp"
+
+#include <string>
+#include <unordered_map>
 
 extern size_t print_offset;
 

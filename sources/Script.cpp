@@ -73,7 +73,7 @@ __forceinline void Script::open_API() const {
         std::make_pair("display", API::window_display),
         std::make_pair("clear", API::window_clear),
         std::make_pair("close", API::window_close),
-        //std::make_pair("capture", API::window_capture),
+        std::make_pair("capture", API::window_capture),
         std::make_pair("sleep", API::window_sleep),
         std::make_pair("await", API::window_await),
         std::make_pair("get_pos", API::window_get_pos),

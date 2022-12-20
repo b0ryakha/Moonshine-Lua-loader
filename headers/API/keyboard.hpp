@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include "lua_extensions.hpp"
+
+#include <string>
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;
