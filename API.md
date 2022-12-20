@@ -65,7 +65,7 @@
   - [set_rotation()](#view.set_rotation)
   </details>
   
-<details><summary>:musical_note: sound.new</summary>
+<details><summary>:musical_note: Sound</summary>
 
   - [new()](#sound.new)
   - [play()](#sound.play)
