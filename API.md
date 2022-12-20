@@ -335,9 +335,9 @@ Closes the window and destroy all the attached resources.
 ```lua
 window.capture(path: string)
 ```
-| Name   | Type         | Description                           |
-| :---:  | :---:        | :---:                                 |
-| string | ```string``` | Screenshot output path with file name |
+| Name  | Type         | Description                           |
+| :---: | :---:        | :---:                                 |
+| path  | ```string``` | Screenshot output path with file name |
 
 Takes a screenshot of the window and saves it.
 
