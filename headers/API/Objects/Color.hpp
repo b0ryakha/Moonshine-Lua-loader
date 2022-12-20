@@ -88,7 +88,10 @@ namespace API
 
         static auto index_set = [](lua_State* L) {
             const auto self = lua_get_object<Color>(L, "Color", 1);
-            double new_value = luaL_checknumber(L, 3);
+            int new_value = luaL_checkinteger(L, 3);
+
+            if (new_value < 0) new_value = 0;
+            if (new_value > 255) new_value = 255;
 
             if (lua_isnumber(L, 2)) {
                 switch (lua_tointeger(L, 2)) {
