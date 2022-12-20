@@ -25,8 +25,8 @@ namespace API
         std::string path = args.get<std::string>();
         float w = args.get<float>();
         float h = args.get<float>();
-        float t_x = (args.size() == 7 ? args.get<float>() : 0);
-        float t_y = (args.size() == 7 ? args.get<float>() : 0);
+        size_t t_x = (args.size() == 7 ? args.get<size_t>() : 0);
+        size_t t_y = (args.size() == 7 ? args.get<size_t>() : 0);
         size_t t_w = (args.size() == 7 ? args.get<size_t>() : 0);
         size_t t_h = (args.size() == 7 ? args.get<size_t>() : 0);
 

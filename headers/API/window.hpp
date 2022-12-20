@@ -17,6 +17,48 @@ namespace API
         return 0;
     }
 
+    /*static int window_capture(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1 && args.size() != 5)
+            throw_error("Incorrect number of arguments!");
+
+        std::string path = args.get<std::string>();
+
+        if (args.size() == 1) {
+            sf::Texture texture;
+            texture.create(window.getSize().x, window.getSize().y);
+
+            texture.update(window);
+
+            if (!texture.copyToImage().saveToFile(path))
+                throw_error("Error when saving a screenshot!");
+        }
+        else {
+            size_t x = args.get<size_t>();
+            size_t y = args.get<size_t>();
+            size_t w = args.get<size_t>();
+            size_t h = args.get<size_t>();
+            sf::Texture texture;
+            sf::Image image;
+            image.create(window.getSize().x, window.getSize().y);
+
+            for (int i = 0; i < window.getSize().x * window.getSize().y; ++i) {
+                float x = i % window.getSize().x;
+                float y = i / window.getSize().x;
+
+                image.setPixel(x, y, image.getPixel(x, y));
+            }
+
+            image.flipVertically();
+
+            if (!image.saveToFile(path))
+                throw_error("Error when saving a screenshot!");
+        }
+
+        return 0;
+    }*/
+
     static int window_clear(lua_State* L) {
         LuaStack args(L);
 
