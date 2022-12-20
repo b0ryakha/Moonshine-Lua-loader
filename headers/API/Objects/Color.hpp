@@ -42,8 +42,12 @@ namespace API
             std::stringstream ss;
 
             ss << '#' << std::hex << (self->r << 24 | self->g << 16 | self->b << 8 | self->a);
+            std::string result = ss.str();
 
-            lua_pushstring(L, ss.str().c_str());
+            if (result.length() <= 3)
+                result = "#000000";
+
+            lua_pushstring(L, result.c_str());
             return 1;
         };
 
