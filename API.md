@@ -17,6 +17,7 @@
   - [display()](#window.display)
   - [clear()](#window.clear)
   - [close()](#window.close)
+  - [capture()](#window.capture)
   - [get_size()](#window.get_size)
   - [set_size()](#window.set_size)
   - [get_pos()](#window.get_pos)
@@ -327,6 +328,18 @@ window.close()
 ```
 
 Closes the window and destroy all the attached resources.
+
+---
+
+#### <a name="window.capture"></a> ```capture```
+```lua
+window.capture(path: string)
+```
+| Name   | Type         | Description                           |
+| :---:  | :---:        | :---:                                 |
+| string | ```string``` | Screenshot output path with file name |
+
+Takes a screenshot of the window and saves it.
 
 ---
 
