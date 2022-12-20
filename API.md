@@ -696,7 +696,7 @@ Sets the [view](#View) a new rotation angle.
 
 #### <a name="sound.new"></a> ```new```
 ```lua
-Sound(path: string, volume: size_t[, is_repeat: bool]): sound.new
+Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
 ```
 | Name      | Type         | Description                                        |
 | :---:     | :---:        | :---:                                              |
