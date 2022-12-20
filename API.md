@@ -67,11 +67,11 @@
   
 <details><summary>:musical_note: Sound</summary>
 
-  - [new()](#sound.new)
-  - [play()](#sound.play)
-  - [stop()](#sound.stop)
-  - [set_volume()](#sound.set_volume)
-  - [set_loop()](#sound.set_loop)
+  - [new()](#sound:new)
+  - [play()](#sound:play)
+  - [stop()](#sound:stop)
+  - [set_volume()](#sound:set_volume)
+  - [set_loop()](#sound:set_loop)
   </details>
   
 <details><summary>:file_folder: File</summary>
@@ -144,14 +144,6 @@ local font = ...
 print(font:get_family()) -- output: family
 print(font:get_size())   -- output: size
 print(tostring(font))    -- output: { family, size }
-```
-
-#### <a name="Sound"></a> ```Sound```
-```lua
-local sound_obj = ...
-
--- sound address
-print(sound_obj)
 ```
 
 ---
@@ -703,9 +695,9 @@ Sets the [view](#View) a new rotation angle.
 
 ### :musical_note: Sound
 
-#### <a name="sound.new"></a> ```new```
+#### <a name="sound:new"></a> ```new```
 ```lua
-sound.new(path: string, volume: size_t[, is_repeat: bool]): Sound
+Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
 ```
 | Name      | Type         | Description                                        |
 | :---:     | :---:        | :---:                                              |
@@ -717,51 +709,45 @@ Returns the [sound](#Sound).
 
 ---
 
-#### <a name="sound.play"></a> ```play```
+#### <a name="sound:play"></a> ```play```
 ```lua
-sound.play(sound: Sound[, is_reset: bool])
+sound_object:play([is_reset: bool])
 ```
 | Name     | Type        | Description                                                                      |
 | :---:    | :---:       | :---:                                                                            |
-| sound    | ```Sound``` | Sound object                                                                     |
 | is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
 
 Plays [sound](#Sound).
 
 ---
 
-#### <a name="sound.stop"></a> ```stop```
+#### <a name="sound:stop"></a> ```stop```
 ```lua
-sound.stop(sound: Sound)
+sound_object:stop()
 ```
-| Name     | Type        | Description                                                                      |
-| :---:    | :---:       | :---:                                                                            |
-| sound    | ```Sound``` | Sound object                                                                     |
 
 Stops [sound](#Sound).
 
 ---
 
-#### <a name="sound.set_volume"></a> ```set_volume```
+#### <a name="sound:set_volume"></a> ```set_volume```
 ```lua
-sound.set_volume(sound: Sound, volume: size_t)
+sound_object:set_volume(volume: size_t)
 ```
 | Name   | Type         | Description               |
 | :---:  | :---:        | :---:                     |
-| sound  | ```Sound```  | Sound object              |
 | volume | ```size_t``` | Volume of sound [0 - 100] |
 
 Sets the [sound](#Sound) a new volume.
 
 ---
 
-#### <a name="sound.set_loop"></a> ```set_loop```
+#### <a name="sound:set_loop"></a> ```set_loop```
 ```lua
-sound.set_loop(sound: Sound, is_repeat: bool)
+sound_object:set_loop(is_repeat: bool)
 ```
 | Name      | Type        | Description                           |
 | :---:     | :---:       | :---:                                 |
-| sound     | ```Sound``` | Sound object                          |
 | is_repeat | ```bool```  | If true then the sound will be looped |
 
 Sets the [sound](#Sound) a new loop.
