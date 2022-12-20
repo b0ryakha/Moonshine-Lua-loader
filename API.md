@@ -162,15 +162,15 @@ print(sound_obj)
 
 #### <a name="render.create_sprite"></a> ```create_sprite```
 ```lua
-render.create_sprite(path: string, w: float, h: float[, t_x: float, t_y: float, t_w: size_t, t_h: size_t]): Sprite
+render.create_sprite(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite
 ```
 | Name  | Type         | Description                                     |
 | :---: | :---:        | :---:                                           |
 | path  | ```string``` | Image location directory                        |
 | w     | ```float```  | Width of image                                  |
 | h     | ```float```  | Height of image                                 |
-| t_x   | ```float```  | X coordinate of areas in the image, default = 0 |
-| t_y   | ```float```  | Y coordinate of areas in the image, default = 0 |
+| t_x   | ```size_t``` | X coordinate of areas in the image, default = 0 |
+| t_y   | ```size_t``` | Y coordinate of areas in the image, default = 0 |
 | t_w   | ```size_t``` | Width of areas in the image, default = w        |
 | t_h   | ```size_t``` | Height of areas in the image, default = h       |
 
