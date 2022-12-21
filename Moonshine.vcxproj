@@ -24,6 +24,7 @@
     <ProjectGuid>{4a1743d5-2acb-497f-9b80-c16004137de1}</ProjectGuid>
     <RootNamespace>Scriptloader</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Moonshine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -185,7 +186,7 @@
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resources\Script loader.rc" />
+    <ResourceCompile Include="resources\Moonshine.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.ico" />

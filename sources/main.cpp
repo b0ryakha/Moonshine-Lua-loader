@@ -13,7 +13,7 @@ std::mutex time_m;
 size_t print_offset = 0;
 
 __forceinline void start_program(char* cmd_line) {
-    window.create(sf::VideoMode(1400, 800), "Script Loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
+    window.create(sf::VideoMode(1400, 800), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
     
     sf::Clock clock;
     Script lua;

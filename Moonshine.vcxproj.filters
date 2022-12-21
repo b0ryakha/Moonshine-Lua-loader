@@ -157,7 +157,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resources\Script loader.rc">
+    <ResourceCompile Include="resources\Moonshine.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

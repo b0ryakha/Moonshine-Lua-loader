@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by Script loader.rc
+// Used by Moonshine.rc
 //
 #define IDI_ICON1                       101
 
