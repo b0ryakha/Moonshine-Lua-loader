@@ -5,7 +5,7 @@
 
 The API includes the ability to render, interact with files, window, math, sound, etc.
 
---
+---
 
 ## Application programming interface
 For information about the API, see [API.md](API.md) file
