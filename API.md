@@ -67,6 +67,15 @@
     
 <details><summary>:file_folder: File</summary>
 
+  - [read()](#file.read)
+  - [write()](#file.write)
+  - [download()](#file.download)
+  - [create()](#file.create)
+  - [remove()](#file.remove)
+  - [exists()](#file.exists)
+  - [line_count()](#file.line_count)
+  - [clear()](#file.clear)
+  - [rename()](#file.rename)
   </details>
   
 <details><summary>:heavy_division_sign: CMath</summary>
