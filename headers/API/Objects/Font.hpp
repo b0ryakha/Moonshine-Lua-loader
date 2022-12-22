@@ -31,13 +31,6 @@ namespace API
             return 0;
         };
 
-        static auto get_size = [](lua_State* L) {
-            const auto self = lua_get_object<Font>(L, "Font", 1);
-
-            lua_pushinteger(L, self->get_size());
-            return 1;
-        };
-
         static auto get_name = [](lua_State* L) {
             const auto self = lua_get_object<Font>(L, "Font", 1);
 
@@ -51,8 +44,7 @@ namespace API
             if (lua_isstring(L, 2)) {
                 const std::string_view key = luaL_checkstring(L, 2);
 
-                if (key == "get_size") lua_pushcfunction(L, get_size);
-                else if (key == "get_family") lua_pushcfunction(L, get_name);
+                if (key == "get_family") lua_pushcfunction(L, get_name);
                 else lua_pushnil(L);
             }
             else {
@@ -84,8 +76,7 @@ namespace API
             { "__gc", destructor },
             { "__index", index_get },
             { "__tostring", to_string },
-            { "__eq", is_equal },
-            { "__len", get_size },
+            { "__eq", is_equal }
         });
 
         return 1;

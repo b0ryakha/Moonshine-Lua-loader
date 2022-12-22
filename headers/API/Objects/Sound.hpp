@@ -132,7 +132,7 @@ namespace API
             { "__gc", destructor },
             { "__index", index_get },
             { "__tostring", to_string },
-            { "__eq", is_equal },
+            { "__eq", is_equal }
         });
 
         return 1;
