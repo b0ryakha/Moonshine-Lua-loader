@@ -23,7 +23,7 @@ namespace API
         };
 
         static auto get_len = [](lua_State* L) {
-            lua_pushnumber(L, 4);
+            lua_pushinteger(L, 4);
             return 1;
         };
 
@@ -153,5 +153,12 @@ namespace API
         });
 
         return 1;
+    }
+
+    static int Color_reg(lua_State* L) {
+        LuaStack tmp(L);
+        lua_remove(L, -static_cast<int>(tmp.size()));
+
+        return Color_new(L);
     }
 }

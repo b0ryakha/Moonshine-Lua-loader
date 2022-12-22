@@ -14,6 +14,10 @@ extern "C" {
 
 void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
 
+__forceinline void lua_register_class(lua_State* L, const std::string& name, lua_CFunction reg_constructor) {
+	lua_register_table(L, name, { std::make_pair("new", reg_constructor) });
+}
+
 void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
 void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements);
 

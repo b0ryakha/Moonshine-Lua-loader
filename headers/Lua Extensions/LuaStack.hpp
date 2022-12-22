@@ -19,7 +19,7 @@ private:
         }
 
         if (elements[index].index() != static_cast<size_t>(expected_type)) {
-            throw_error("[Stack] Incorrect type. Received " + S_TYPE_NAME[elements[index].index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+            throw_error("[Stack] Attempt to get a type element '" + S_TYPE_NAME[elements[index].index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
         }
     }
 

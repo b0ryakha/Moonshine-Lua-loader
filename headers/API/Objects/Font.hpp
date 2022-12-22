@@ -90,4 +90,11 @@ namespace API
 
         return 1;
     }
+
+    static int Font_reg(lua_State* L) {
+        LuaStack tmp(L);
+        lua_remove(L, -static_cast<int>(tmp.size()));
+
+        return Font_new(L);
+    }
 }

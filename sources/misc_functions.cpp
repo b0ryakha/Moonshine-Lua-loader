@@ -35,3 +35,14 @@ void throw_error(const std::string& error) noexcept {
 
     close_window();
 }
+
+std::string number_to_str(double n) {
+    std::string tmp = std::to_string(n);
+
+    for (auto it = tmp.end() - 1; it >= tmp.begin(); --it) {
+        if (*it == '0') it = tmp.erase(it);
+        else break;
+    }
+
+    return (tmp + '0');
+}

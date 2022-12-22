@@ -137,4 +137,11 @@ namespace API
 
         return 1;
     }
+
+    static int Sound_reg(lua_State* L) {
+        LuaStack tmp(L);
+        lua_remove(L, -static_cast<int>(tmp.size()));
+
+        return Sound_new(L);
+    }
 }

@@ -28,7 +28,7 @@ namespace API
                 }
             }
             else if (main_event.type == sf::Event::KeyPressed) {
-                lua_pushnumber(L, static_cast<int>(main_event.key.code));
+                lua_pushinteger(L, static_cast<int>(main_event.key.code));
                 return 1;
             }
         }

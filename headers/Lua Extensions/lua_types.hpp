@@ -48,7 +48,7 @@ private:
         }
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
-            throw_error("[Table] Incorrect type. Received " + S_TYPE_NAME[elements.at(key).index()] + ", but expected " + S_TYPE_NAME[static_cast<size_t>(expected_type)] + ".");
+            throw_error("[Table] Attempt to get a type element '" + S_TYPE_NAME[elements.at(key).index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
         }
     }
 

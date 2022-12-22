@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <string>
+#include <iterator>
 #include <mutex>
 
 extern sf::RenderWindow window;
@@ -15,3 +16,4 @@ inline std::mutex closing_window_m;
 
 int rand_number(int min, int max);
 void throw_error(const std::string& error) noexcept;
+std::string number_to_str(double n);

@@ -21,7 +21,7 @@ namespace API
         };
 
         static auto get_len = [](lua_State* L) {
-            lua_pushnumber(L, 2);
+            lua_pushinteger(L, 2);
             return 1;
         };
 
@@ -82,7 +82,7 @@ namespace API
             const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
 
             std::string result;
-            result = "{ " + std::to_string(self->x) + ", " + std::to_string(self->y) + " }";
+            result = "{ " + number_to_str(self->x) + ", " + number_to_str(self->y) + " }";
 
             lua_pushstring(L, result.c_str());
             return 1;
@@ -124,5 +124,12 @@ namespace API
         });
 
         return 1;
+    }
+
+    static int Vector2_reg(lua_State* L) {
+        LuaStack tmp(L);
+        lua_remove(L, -static_cast<int>(tmp.size()));
+
+        return Vector2_new(L);
     }
 }

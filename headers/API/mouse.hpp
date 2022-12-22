@@ -9,7 +9,7 @@ namespace API
     static int mouse_get_pressed(lua_State* L) {
         while (window.isOpen()) {
             if (main_event.type == sf::Event::MouseButtonPressed) {
-                lua_pushnumber(L, static_cast<int>(main_event.mouseButton.button));
+                lua_pushinteger(L, static_cast<int>(main_event.mouseButton.button));
                 return 1;
             }
         }
