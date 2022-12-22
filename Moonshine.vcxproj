@@ -39,6 +39,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -102,17 +103,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\Objects;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\C++ Libs\Boost;D:\C++ Libs\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\Objects;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;D:\C++ Libs\Boost;D:\C++ Libs\SFML\include;D:\C++ Libs\CURL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;D:\C++ Libs\Boost\$(PlatformTarget)\lib;D:\C++ Libs\SFML\$(PlatformTarget)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;D:\C++ Libs\Boost\$(PlatformTarget)\lib;D:\C++ Libs\SFML\$(PlatformTarget)\lib;D:\C++ Libs\CURL\$(PlatformTarget)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

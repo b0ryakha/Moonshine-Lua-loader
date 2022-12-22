@@ -13,7 +13,7 @@
 #include "API/Objects/Font.hpp"
 #include "API/Objects/Sound.hpp"
 
-#include "cmath.hpp"
+#include "API/cmath.hpp"
 #include "API/cursor.hpp"
 #include "API/file.hpp"
 #include "API/global_vars.hpp"
