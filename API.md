@@ -1,8 +1,8 @@
-### :dash: Navigation:
+### :dash: Navigation
+#### Functions
 <details><summary>:movie_camera: Render</summary>
 
   - [create_sprite()](#render.create_sprite)
-  - [create_font()](#render.create_font)
   - [text()](#render.text)
   - [measure_text()](#render.measure_text)
   - [sprite()](#render.sprite)
@@ -64,16 +64,7 @@
   - [get_rotation()](#view.get_rotation)
   - [set_rotation()](#view.set_rotation)
   </details>
-  
-<details><summary>:musical_note: Sound</summary>
-
-  - [new()](#sound.new)
-  - [play()](#sound.play)
-  - [stop()](#sound.stop)
-  - [set_volume()](#sound.set_volume)
-  - [set_loop()](#sound.set_loop)
-  </details>
-  
+    
 <details><summary>:file_folder: File</summary>
 
   </details>
@@ -94,10 +85,34 @@
 
   - [print()](#print)
   </details>
+  
+#### Objects
+<details><summary>:musical_note: Sound</summary>
 
----
+  - [new()](#sound.new)
+  - [play()](#sound.play)
+  - [stop()](#sound.stop)
+  - [set_volume()](#sound.set_volume)
+  - [set_loop()](#sound.set_loop)
+  </details>
+  
+<details><summary>:round_pushpin: Vector2</summary>
 
-### :paperclip: Objects:
+  - [new()](#vector2.new)
+  </details>
+  
+<details><summary>:pencil2: Font</summary>
+
+  - [new()](#font.new)
+  - [get_family()](#font.get_family)
+  </details>
+  
+<details><summary>:rainbow: Color</summary>
+
+  - [new()](#color.new)
+  - [unpack()](#color.unpack)
+  - [to_hex()](#color.to_hex)
+  </details>
 
 #### <a name="View"></a> ```View```
 ```lua
@@ -105,15 +120,6 @@ local view_obj = ...
 
 -- view address
 print(view_obj)
-```
-
-#### <a name="Vector2"></a> ```Vector2```
-```lua
-local vec = Vector2(x: double, y: double): Vector2
-
-print(vec.x, vec.y)  -- output: x, y
-print(tostring(vec)) -- output: { x, y }
-print(vec[2])        -- output: y
 ```
 
 #### <a name="Sprite"></a> ```Sprite```
@@ -124,32 +130,7 @@ local sprite = ...
 print(sprite)
 ```
 
-#### <a name="Color"></a> ```Color```
-```lua
-local color = Color(r: int, g: int, b: int[, a: int]): Color
-local color = Color(hex: string): Color
-
-local r, g, b, a = color:unpack()
-
-print(tostring(color)) -- output: { r, g, b, a }
-print(color:to_hex())  -- output: "#gff599gdv"
-print(color.r)         -- output: r value
-print(color[2])        -- output: g value
-```
-
-#### <a name="Font"></a> ```Font```
-```lua
-local font = ...
-
-print(font:get_family()) -- output: family
-print(font:get_size())   -- output: size
-print(tostring(font))    -- output: { family, size }
-```
-
 ---
-
-
-### :triangular_ruler: Functions:
 
 ### :movie_camera: Render
 
@@ -209,7 +190,7 @@ render.measure_text(font: Font, text: string): Vector2
 | font      | ```Font```   | Font for text              |
 | text      | ```string``` | Text that will be measured |
 
-Returns the measured [size](#Vector2) of the text.
+Returns the measured [size](#vector2.new) of the text.
 
 ---
 
@@ -340,7 +321,7 @@ Takes a screenshot of the window and saves it.
 window.get_size(): Vector2
 ```
 
-Returns the window [size](#Vector2).
+Returns the window [size](#vector2.new.new).
 
 ---
 
@@ -353,7 +334,7 @@ window.set_size(width: size_t, height: size_t)
 | width  | ```size_t``` | New window width  |
 | height | ```size_t``` | New window height |
 
-Sets the window a new [size](#Size).
+Sets the window a new [size](#vector2.new).
 
 ---
 
@@ -362,7 +343,7 @@ Sets the window a new [size](#Size).
 window.get_pos(): Vector2
 ```
 
-Returns the window [position](#Vector2).
+Returns the window [position](#vector2.new).
 
 ---
 
@@ -529,7 +510,7 @@ cursor.get_pos([regarding_window: bool]): Vector2
 | :---:            | :---:      | :---:                                                                |
 | regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
-Returns the cursor [position](#Vector2).
+Returns the cursor [position](#vector2.new).
 
 ---
 
@@ -638,7 +619,7 @@ view.get_size(view: View): Vector2
 | :---: | :---:       | :---:       |
 | view  | ```View```  | View object |
 
-Returns [size](#Vector2) of [view](#View).
+Returns [size](#vector2.new) of [view](#View).
 
 ---
 
@@ -691,65 +672,6 @@ view.set_rotation(view: View, angle: float)
 | angle | ```float``` | Rotation angle [0 - 360] |
 
 Sets the [view](#View) a new rotation angle.
-
-### :musical_note: Sound
-
-#### <a name="sound.new"></a> ```new```
-```lua
-Sound(path: string, volume: size_t[, is_repeat: bool]): Sound
-```
-| Name      | Type         | Description                                        |
-| :---:     | :---:        | :---:                                              |
-| path      | ```string``` | Path to sound file [WAV, OGG, FLAC]                |
-| volume    | ```size_t``` | Volume of sound [0 - 100]                          |
-| is_repeat | ```bool```   | If true then sound will be looped, default = false |
-
-Returns the [sound](#sound.new).
-
----
-
-#### <a name="sound.play"></a> ```play```
-```lua
-sound_object:play([is_reset: bool])
-```
-| Name     | Type        | Description                                                                      |
-| :---:    | :---:       | :---:                                                                            |
-| is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
-
-Plays [sound](#sound.new).
-
----
-
-#### <a name="sound.stop"></a> ```stop```
-```lua
-sound_object:stop()
-```
-
-Stops [sound](#sound.new).
-
----
-
-#### <a name="sound.set_volume"></a> ```set_volume```
-```lua
-sound_object:set_volume(volume: size_t)
-```
-| Name   | Type         | Description               |
-| :---:  | :---:        | :---:                     |
-| volume | ```size_t``` | Volume of sound [0 - 100] |
-
-Sets the [sound](#sound.new) a new volume.
-
----
-
-#### <a name="sound.set_loop"></a> ```set_loop```
-```lua
-sound_object:set_loop(is_repeat: bool)
-```
-| Name      | Type        | Description                           |
-| :---:     | :---:       | :---:                                 |
-| is_repeat | ```bool```  | If true then the sound will be looped |
-
-Sets the [sound](#sound.new) a new loop.
 
 
 ### :file_folder: File
@@ -816,3 +738,158 @@ print(text: string, ...)
 | text  | ```any```| Text        |
 
 Printing text on screen.
+
+
+### :musical_note: Sound
+
+#### <a name="sound.new"></a> ```new```
+```lua
+Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound
+```
+| Name      | Type         | Description                                        |
+| :---:     | :---:        | :---:                                              |
+| path      | ```string``` | Path to sound file [WAV, OGG, FLAC]                |
+| volume    | ```size_t``` | Volume of sound [0 - 100]                          |
+| is_repeat | ```bool```   | If true then sound will be looped, default = false |
+
+Returns the sound object.
+
+---
+
+#### <a name="sound.play"></a> ```play```
+```lua
+sound_object:play([is_reset: bool])
+```
+| Name     | Type        | Description                                                                      |
+| :---:    | :---:       | :---:                                                                            |
+| is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
+
+Plays [sound](#sound.new).
+
+---
+
+#### <a name="sound.stop"></a> ```stop```
+```lua
+sound_object:stop()
+```
+
+Stops [sound](#sound.new).
+
+---
+
+#### <a name="sound.set_volume"></a> ```set_volume```
+```lua
+sound_object:set_volume(volume: size_t)
+```
+| Name   | Type         | Description               |
+| :---:  | :---:        | :---:                     |
+| volume | ```size_t``` | Volume of sound [0 - 100] |
+
+Sets the [sound](#sound.new) a new volume.
+
+---
+
+#### <a name="sound.set_loop"></a> ```set_loop```
+```lua
+sound_object:set_loop(is_repeat: bool)
+```
+| Name      | Type        | Description                           |
+| :---:     | :---:       | :---:                                 |
+| is_repeat | ```bool```  | If true then the sound will be looped |
+
+Sets the [sound](#sound.new) a new loop.
+
+
+### :round_pushpin: Vector2
+```lua
+vec.x, vec.y     -- x, y
+vec[1], vec[2]   -- x, y
+tostring(vec)    -- "{ x, y }"
+```
+
+#### <a name="vector2.new"></a> ```new```
+```lua
+Vector2:new(x: double, y: double): Vector2
+```
+| Name  | Type         | Description  |
+| :---: | :---:        | :---:        |
+| x     | ```double``` | X coordinate |
+| y     | ```double``` | Y coordinate |
+
+Returns the vector2 object.
+
+
+### :pencil2: Font
+```lua
+tostring(font)   -- "{ family, size }"
+```
+
+#### <a name="font.new"></a> ```new```
+```lua
+Font:new(name: string, size: size_t): Font
+```
+| Name  | Type         | Description                       |
+| :---: | :---:        | :---:                             |
+| name  | ```string``` | Name of font, with file extension |
+| size  | ```size_t``` | Size of font                      |
+
+Returns the font object.
+
+---
+
+#### <a name="font.get_family"></a> ```get_family```
+```lua
+font_object:get_family(): string
+```
+
+Returns the font family.
+
+
+### :rainbow: Color
+```lua
+color.r, color.g, color.b, color.a       -- r, g, b, a
+color[1], color[2], color[3], color[4]   -- r, g, b, a
+tostring(color)                          -- "{ r, g, b, a }"
+```
+
+#### <a name="color.new"></a> ```new```
+```lua
+Color:new(r: int, g: int, b: int[, a: int]): Color
+Color:new(hex: string): Color
+```
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| r     | ```int```    | Red [0 - 255]                |
+| g     | ```int```    | Green [0 - 255]              |
+| b     | ```int```    | Blue [0 - 255]               |
+| a     | ```int```    | Alpha [0 - 255], default 255 |
+
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| hex   | ```string``` | Hex string                   |
+
+Returns the color object.
+
+---
+
+#### <a name="color.unpack"></a> ```unpack```
+```lua
+color_object:unpack(color: Color): int, int, int, int
+```
+| Name  | Type        | Description         |
+| :---: | :---:       | :---:               |
+| color | ```Color``` | Color for unpacking |
+
+Returns the integer r, g, b, a values of [color](#color.new).
+
+---
+
+#### <a name="color.to_hex"></a> ```to_hex```
+```lua
+color_object:to_hex(color: Color): string
+```
+| Name  | Type        | Description              |
+| :---: | :---:       | :---:                    |
+| color | ```Color``` | Color for casting to hex |
+
+Returns the hex string.
