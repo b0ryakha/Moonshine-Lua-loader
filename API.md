@@ -90,10 +90,13 @@
 <details><summary>:musical_note: Sound</summary>
 
   - [new()](#sound.new)
+  - [get_path()](#sound.get_path)
   - [play()](#sound.play)
   - [stop()](#sound.stop)
   - [set_volume()](#sound.set_volume)
+  - [get_volume()](#sound.get_volume)
   - [set_loop()](#sound.set_loop)
+  - [get_loop()](#sound.get_loop)
   </details>
   
 <details><summary>:round_pushpin: Vector2</summary>
@@ -731,7 +734,7 @@ Returns the update frame time.
 ### :speech_balloon: Misc
 #### <a name="print"></a> ```print```
 ```lua
-print(text: string, ...)
+print(text: any, ...)
 ```
 | Name  | Type     | Description |
 | :---: | :---:    | :---:       |
@@ -741,6 +744,10 @@ Printing text on screen.
 
 
 ### :musical_note: Sound
+```lua
+tostring(sound)   -- "{ path, volume%, loop }"
+sound == sound    -- true
+```
 
 #### <a name="sound.new"></a> ```new```
 ```lua
@@ -777,6 +784,15 @@ Stops [sound](#sound.new).
 
 ---
 
+#### <a name="sound.get_path"></a> ```get_path```
+```lua
+sound_object:get_path(): string
+```
+
+Returns the [sound](#sound.new) file path.
+
+---
+
 #### <a name="sound.set_volume"></a> ```set_volume```
 ```lua
 sound_object:set_volume(volume: size_t)
@@ -786,6 +802,15 @@ sound_object:set_volume(volume: size_t)
 | volume | ```size_t``` | Volume of sound [0 - 100] |
 
 Sets the [sound](#sound.new) a new volume.
+
+---
+
+#### <a name="sound.get_volume"></a> ```get_volume```
+```lua
+sound_object:get_volume(): size_t
+```
+
+Returns the [sound](#sound.new) volume.
 
 ---
 
@@ -799,12 +824,25 @@ sound_object:set_loop(is_repeat: bool)
 
 Sets the [sound](#sound.new) a new loop.
 
+---
+
+#### <a name="sound.get_loop"></a> ```get_loop```
+```lua
+sound_object:get_loop(): bool
+```
+
+Returns true if the sound is looped, else false.
+
 
 ### :round_pushpin: Vector2
 ```lua
 vec.x, vec.y     -- x, y
 vec[1], vec[2]   -- x, y
+#vec             -- 2
 tostring(vec)    -- "{ x, y }"
+vec == vec       -- true
+vec + vec        -- new vec
+vec - vec        -- new vec
 ```
 
 #### <a name="vector2.new"></a> ```new```
@@ -822,6 +860,7 @@ Returns the vector2 object.
 ### :pencil2: Font
 ```lua
 tostring(font)   -- "{ family, size }"
+font == font     -- true
 ```
 
 #### <a name="font.new"></a> ```new```
@@ -849,7 +888,9 @@ Returns the font family.
 ```lua
 color.r, color.g, color.b, color.a       -- r, g, b, a
 color[1], color[2], color[3], color[4]   -- r, g, b, a
+#color                                   -- 4
 tostring(color)                          -- "{ r, g, b, a }"
+color == color                           -- true
 ```
 
 #### <a name="color.new"></a> ```new```
