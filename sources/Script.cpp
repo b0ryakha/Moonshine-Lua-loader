@@ -137,12 +137,12 @@ __forceinline void Script::open_API() const {
     });
 
     lua_register_table(lua_state, "file", {
-        std::make_pair("download", API::file_download),
         std::make_pair("read", API::file_read),
         std::make_pair("write", API::file_write),
-        std::make_pair("exists", API::file_exists),
+        std::make_pair("download", API::file_download),
         std::make_pair("create", API::file_create),
         std::make_pair("remove", API::file_remove),
+        std::make_pair("exists", API::file_exists),
         std::make_pair("line_count", API::file_line_count),
         std::make_pair("clear", API::file_clear),
         std::make_pair("rename", API::file_rename),
