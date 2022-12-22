@@ -155,19 +155,6 @@ Returns the [sprite](#Sprite).
 
 ---
 
-#### <a name="render.create_font"></a> ```create_font```
-```lua
-render.create_font(font_name: string, size: size_t): Font
-```
-| Name      | Type         | Description  |
-| :---:     | :---:        | :---:        |
-| font_name | ```string``` | Name of font |
-| size      | ```size_t``` | Size of font |
-
-Returns the [font](#Font) structure.
-
----
-
 #### <a name="render.text"></a> ```text```
 ```lua
 render.text(x: float, y: float, font: Font, text: string, color: Color)
