@@ -1023,7 +1023,7 @@ Returns the color object.
 
 #### <a name="color.unpack"></a> ```unpack```
 ```lua
-color_object:unpack(color: Color): int, int, int, int
+color_object:unpack(color: Color): size_t, size_t, size_t, size_t
 ```
 | Name  | Type        | Description         |
 | :---: | :---:       | :---:               |
