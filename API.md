@@ -675,6 +675,118 @@ Sets the [view](#View) a new rotation angle.
 
 ### :file_folder: File
 
+#### <a name="file.read"></a> ```read```
+```lua
+file.read(path: string[, line_number: size_t]): table<string>
+```
+| Name        | Type         | Description                                          |
+| :---:       | :---:        | :---:                                                |
+| path        | ```string``` | Path to file                                         |
+| line_number | ```size_t``` | Number of the line to be read, default read all file |
+
+Reads the file and writes it to the string table.
+
+---
+
+#### <a name="file.write"></a> ```write```
+```lua
+file.write(path: string, content: table<string>[, is_rewrite: bool])
+file.write(path: string, content: string[, is_rewrite: bool])
+```
+| Name       | Type                              | Description                                                                |
+| :---:      | :---:                             | :---:                                                                      |
+| path       | ```string```                      | Path to file                                                               |
+| content    | ```table<string>``` / ```string```| Content that will be written to a file                                     |
+| is_rewrite | ```bool```                        | If the value is true, file will be cleared before writing, default = false |
+
+Writes the specified content to a file.
+
+---
+
+#### <a name="file.download"></a> ```download```
+```lua
+file.download(path: string, url: string)
+```
+| Name  | Type         | Description                               |
+| :---: | :---:        | :---:                                     |
+| path  | ```string``` | Path to file with its name and extension  |
+| url   | ```string``` | The url where the file will be downloaded |
+
+Downloads the file from the specified link to the specified path.
+
+---
+
+#### <a name="file.create"></a> ```create```
+```lua
+file.create(path: string)
+```
+| Name  | Type         | Description                          |
+| :---: | :---:        | :---:                                |
+| path  | ```string``` | Path to file or folder with its name |
+
+Creates a file or folder at the specified path.
+
+---
+
+#### <a name="file.remove"></a> ```remove```
+```lua
+file.remove(path: string)
+```
+| Name  | Type         | Description                          |
+| :---: | :---:        | :---:                                |
+| path  | ```string``` | Path to file or folder with its name |
+
+Deletes a file or folder at the specified path.
+
+---
+
+#### <a name="file.exists"></a> ```exists```
+```lua
+file.exists(path: string): bool
+```
+| Name  | Type         | Description                          |
+| :---: | :---:        | :---:                                |
+| path  | ```string``` | Path to file or folder with its name |
+
+Returns true if the file is found, else false.
+
+---
+
+#### <a name="file.line_count"></a> ```line_count```
+```lua
+file.line_count(path: string): size_t
+```
+| Name  | Type         | Description                          |
+| :---: | :---:        | :---:                                |
+| path  | ```string``` | Path to file or folder with its name |
+
+Returns the number of lines in the specified file.
+
+---
+
+#### <a name="file.clear"></a> ```clear```
+```lua
+file.clear(path: string)
+```
+| Name  | Type         | Description                          |
+| :---: | :---:        | :---:                                |
+| path  | ```string``` | Path to file or folder with its name |
+
+Clears the specified file.
+
+---
+
+#### <a name="file.rename"></a> ```rename```
+```lua
+file.rename(path: string, new_name: string)
+```
+| Name     | Type         | Description                          |
+| :---:    | :---:        | :---:                                |
+| path     | ```string``` | Path to file or folder with its name |
+| new_name | ```string``` | New name for the file                |
+
+Renames the specified file to a new name.
+
 
 ### :heavy_division_sign: CMath
 
