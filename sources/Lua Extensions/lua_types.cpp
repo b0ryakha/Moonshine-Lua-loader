@@ -1,5 +1,7 @@
 #include "lua_types.hpp"
 
+LuaTable::LuaTable() {}
+
 LuaTable::LuaTable(lua_State* lua_state, int index) {
     lua_pushvalue(lua_state, index);
     lua_pushnil(lua_state);

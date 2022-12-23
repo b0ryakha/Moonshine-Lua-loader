@@ -53,6 +53,7 @@ private:
     }
 
 public:
+    LuaTable();
     LuaTable(lua_State* lua_state, int index);
 
     size_t size() const noexcept;

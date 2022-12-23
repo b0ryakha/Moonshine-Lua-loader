@@ -198,23 +198,40 @@ namespace API
 			throw_error("[file.write] Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
-		LuaTable content = args.get<LuaTable>();
+
+		LuaTable t_content;
+		std::string s_content;
+
+		if (args.get_type(1) == LuaMultiValueType::Table) t_content = args.get<LuaTable>();
+		else s_content = args.get<std::string>();
+
 		bool is_rewrite = (args.size() == 3) ? args.get<bool>() : false;
 
 		if (!fs::exists(path))
 			throw_error("[file.write] The file does not exist!");
 
-		if (is_rewrite) {
-			std::ofstream file;
-			file.open(path, std::ofstream::out | std::ofstream::trunc);
-			file.close();
+		std::stringstream buffer;
+		
+		if (!is_rewrite) {
+			std::ifstream file_in(path);
+			buffer << file_in.rdbuf();
+			file_in.close();
 		}
 
-		std::ofstream file(path);
-		size_t size = content.size();
+		std::ofstream file(path, std::ios::trunc);
 
-		for (size_t i = 0; i < size; ++i)
-			file << content.get<std::string>() << (i < size - 1 ? "\n" : "");
+		if (!buffer.str().empty())
+			file << buffer.str() << "\n";
+
+		if (args.get_type(1) == LuaMultiValueType::Table) {
+			size_t size = t_content.size();
+
+			for (size_t i = 0; i < size; ++i)
+				file << t_content.get<std::string>() << (i < size - 1 ? "\n" : "");
+		}
+		else {
+			file << s_content;
+		}
 
 		file.close();
 
