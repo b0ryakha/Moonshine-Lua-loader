@@ -1029,7 +1029,7 @@ color_object:unpack(color: Color): size_t, size_t, size_t, size_t
 | :---: | :---:       | :---:               |
 | color | ```Color``` | Color for unpacking |
 
-Returns the integer r, g, b, a values of [color](#color.new).
+Returns the unsigned integer r, g, b, a values of [color](#color.new).
 
 ---
 
