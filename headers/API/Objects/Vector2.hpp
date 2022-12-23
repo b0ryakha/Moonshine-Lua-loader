@@ -25,6 +25,13 @@ namespace API
             return 1;
         };
 
+        static auto copy = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+
+            lua_push_object<Vector2_new>(L, { self->x, self->y });
+            return 1;
+        };
+
         static auto index_get = [](lua_State* L) {
             const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
 
@@ -45,6 +52,7 @@ namespace API
                 
                 if (key == "x") lua_pushnumber(L, self->x);
                 else if (key == "y") lua_pushnumber(L, self->y);
+                else if (key == "copy") lua_pushcfunction(L, copy);
                 else lua_pushnil(L);
             }
             else {
@@ -112,6 +120,25 @@ namespace API
             return 1;
         };
 
+        static auto mul = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+            lua_push_object<Vector2_new>(L, { self->x * target->x, self->y * target->y });
+            return 1;
+        };
+
+        static auto div = [](lua_State* L) {
+            const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+            const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+            if (target->x == 0 || target->y == 0)
+                throw_error("[Vector2 div] Division by zero!");
+
+            lua_push_object<Vector2_new>(L, { self->x / target->x, self->y / target->y });
+            return 1;
+        };
+
         lua_setmethods(L, "Vector2", {
             { "__gc", destructor },
             { "__len", get_len },
@@ -120,7 +147,9 @@ namespace API
             { "__tostring", to_string },
             { "__eq", is_equal },
             { "__add", add },
-            { "__sub", sub }
+            { "__sub", sub },
+            { "__mul", mul },
+            { "__div", div }
         });
 
         return 1;

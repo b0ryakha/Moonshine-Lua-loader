@@ -51,6 +51,13 @@ namespace API
             return 1;
         };
 
+        static auto copy = [](lua_State* L) {
+            const auto self = lua_get_object<Color>(L, "Color", 1);
+
+            lua_push_object<Color_new>(L, { self->r, self->g, self->b, self->a });
+            return 1;
+        };
+
         static auto index_get = [](lua_State* L) {
             const auto self = lua_get_object<Color>(L, "Color", 1);
 
@@ -81,6 +88,7 @@ namespace API
                 else if (key == "a") lua_pushinteger(L, self->a);
                 else if (key == "unpack") lua_pushcfunction(L, unpack);
                 else if (key == "to_hex") lua_pushcfunction(L, to_hex);
+                else if (key == "copy") lua_pushcfunction(L, copy);
                 else lua_pushnil(L);
             }
             else {

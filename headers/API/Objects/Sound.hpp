@@ -88,6 +88,13 @@ namespace API
             return 0;
         };
 
+        static auto copy = [](lua_State* L) {
+            const auto self = lua_get_object<Sound>(L, "Sound", 1);
+
+            lua_push_object<Sound_new>(L, { self->get_path(), self->get_volume(), self->get_loop() });
+            return 1;
+        };
+
         static auto index_get = [](lua_State* L) {
             const auto self = lua_get_object<Sound>(L, "Sound", 1);
 
@@ -101,6 +108,7 @@ namespace API
                 else if (key == "set_loop") lua_pushcfunction(L, set_loop);
                 else if (key == "play") lua_pushcfunction(L, play);
                 else if (key == "stop") lua_pushcfunction(L, stop);
+                else if (key == "copy") lua_pushcfunction(L, copy);
                 else lua_pushnil(L);
             }
             else {
