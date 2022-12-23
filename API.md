@@ -99,6 +99,7 @@
 <details><summary>:musical_note: Sound</summary>
 
   - [new()](#sound.new)
+  - [copy()](#sound.copy)
   - [get_path()](#sound.get_path)
   - [play()](#sound.play)
   - [stop()](#sound.stop)
@@ -111,17 +112,20 @@
 <details><summary>:round_pushpin: Vector2</summary>
 
   - [new()](#vector2.new)
+  - [copy()](#vector2.copy)
   </details>
   
 <details><summary>:pencil2: Font</summary>
 
   - [new()](#font.new)
+  - [copy()](#font.copy)
   - [get_family()](#font.get_family)
   </details>
   
 <details><summary>:rainbow: Color</summary>
 
   - [new()](#color.new)
+  - [copy()](#color.copy)
   - [unpack()](#color.unpack)
   - [to_hex()](#color.to_hex)
   </details>
@@ -867,7 +871,16 @@ Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound
 | volume    | ```size_t``` | Volume of sound [0 - 100]                          |
 | is_repeat | ```bool```   | If true then sound will be looped, default = false |
 
-Returns the sound object.
+Returns the sound pointer.
+
+---
+
+#### <a name="sound.copy"></a> ```copy```
+```lua
+sound_object:copy(): Sound
+```
+
+Returns the sound copy.
 
 ---
 
@@ -951,6 +964,8 @@ tostring(vec)    -- "{ x, y }"
 vec == vec       -- true
 vec + vec        -- new vec
 vec - vec        -- new vec
+vec * vec        -- new vec
+vec / vec        -- new vec
 ```
 
 #### <a name="vector2.new"></a> ```new```
@@ -962,7 +977,16 @@ Vector2:new(x: double, y: double): Vector2
 | x     | ```double``` | X coordinate |
 | y     | ```double``` | Y coordinate |
 
-Returns the vector2 object.
+Returns the vector2 pointer.
+
+---
+
+#### <a name="vector2.copy"></a> ```copy```
+```lua
+vector2_object:copy(): Vector2
+```
+
+Returns the vector2 copy.
 
 
 ### :pencil2: Font
@@ -980,7 +1004,16 @@ Font:new(name: string, size: size_t): Font
 | name  | ```string``` | Name of font, with file extension |
 | size  | ```size_t``` | Size of font                      |
 
-Returns the font object.
+Returns the font pointer.
+
+---
+
+#### <a name="font.copy"></a> ```copy```
+```lua
+font_object:copy(): Font
+```
+
+Returns the font copy.
 
 ---
 
@@ -1017,7 +1050,16 @@ Color:new(hex: string): Color
 | :---: | :---:        | :---:                        |
 | hex   | ```string``` | Hex string                   |
 
-Returns the color object.
+Returns the color pointer.
+
+---
+
+#### <a name="color.copy"></a> ```copy```
+```lua
+color_object:copy(): Color
+```
+
+Returns the color copy.
 
 ---
 
