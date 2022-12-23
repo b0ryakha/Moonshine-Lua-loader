@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Script.hpp"
-#include "images.h"
+#include "images.hpp"
 
 sf::RenderWindow window;
 sf::Event main_event;

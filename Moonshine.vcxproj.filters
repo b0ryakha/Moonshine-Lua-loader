@@ -155,7 +155,7 @@
     <ClInclude Include="headers\API\Objects\Sound.hpp">
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="resources\images.h">
+    <ClInclude Include="resources\images.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

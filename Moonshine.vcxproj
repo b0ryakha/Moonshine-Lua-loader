@@ -184,7 +184,7 @@
     <ClInclude Include="lua\include\lua.hpp" />
     <ClInclude Include="lua\include\luaconf.h" />
     <ClInclude Include="lua\include\lualib.h" />
-    <ClInclude Include="resources\images.h" />
+    <ClInclude Include="resources\images.hpp" />
     <ClInclude Include="resources\resource.h" />
   </ItemGroup>
   <ItemGroup>
