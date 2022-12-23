@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Script.hpp"
+#include "images.h"
 
 sf::RenderWindow window;
 sf::Event main_event;
@@ -21,17 +22,28 @@ __forceinline void start_program(char* cmd_line) {
     if (cmd_line[0] != '\0')
         lua.open(cmd_line);
 
+    sf::Image icon;
+    icon.loadFromMemory(res_icon, sizeof(res_icon));
+
+    window.setIcon(256, 256, icon.getPixelsPtr());
+
+    sf::Texture background_texture;
+    background_texture.loadFromMemory(res_background, sizeof(res_background));
+
+    sf::Sprite background(background_texture);
+    background.setScale(0.73, 0.74);
+
     sf::Font font;
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
         throw_error("Failed to create the font face.");
 
-    sf::Text label_text("Script name:", font, 20);
-    label_text.setPosition(sf::Vector2f(window.getSize().x / 2 - label_text.getGlobalBounds().width, window.getSize().y / 2));
+    sf::Text label_text("Script name:", font, 25);
+    label_text.setPosition(sf::Vector2f(window.getSize().x / 2 - label_text.getGlobalBounds().width - 65, window.getSize().y / 2 - 15));
 
-    sf::Text entered_text("", font, 20);
+    sf::Text entered_text("", font, 25);
     std::string entered_tmp;
 
-    sf::Text cursor("_", font, 20);
+    sf::Text cursor("_", font, 25);
     bool cursor_visible = true;
     double cursor_timer = 0;
 
@@ -43,15 +55,10 @@ __forceinline void start_program(char* cmd_line) {
         clock.restart();
 
         if (!lua.is_open()) {
-            window.clear();
-
             entered_text.setString(entered_tmp);
             entered_text.setPosition(sf::Vector2f(label_text.getPosition().x + label_text.getGlobalBounds().width + 10, label_text.getPosition().y));
-            window.draw(entered_text);
-            window.draw(label_text);
-
+            
             cursor.setPosition(sf::Vector2f(entered_text.getPosition().x + entered_text.getGlobalBounds().width + 5, entered_text.getPosition().y));
-            if (cursor_visible) window.draw(cursor);
 
             if (cursor_timer >= 600) {
                 cursor_visible = !cursor_visible;
@@ -59,6 +66,13 @@ __forceinline void start_program(char* cmd_line) {
             }
             
             cursor_timer += main_time;
+
+            window.clear();
+
+            window.draw(background);
+            window.draw(entered_text);
+            window.draw(label_text);
+            if (cursor_visible) window.draw(cursor);
 
             window.display();
         }

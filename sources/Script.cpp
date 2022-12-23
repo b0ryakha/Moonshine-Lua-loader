@@ -34,15 +34,16 @@ void Script::open(const std::string& path) const {
     if (!lua_path.empty() && lua_path[0] == '\"' && lua_path[lua_path.length() - 1] == '\"')
         lua_path = std::string(lua_path.begin() + 1, lua_path.end() - 1);
     
+    if (lua_path.find('/') == std::string::npos && lua_path.find('\\') == std::string::npos)
+        lua_path = "./" + lua_path;
+
     luaL_openlibs(lua_state);
     open_API();
 
+    window.clear();
     window.setActive(false);
 
     main_thread = new std::thread([&] {
-        window.clear();
-        window.display();
-
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(static_cast<std::string>(lua_tostring(lua_state, -1)) + ".");
 

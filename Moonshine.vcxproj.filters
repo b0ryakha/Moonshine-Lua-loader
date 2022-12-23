@@ -155,6 +155,9 @@
     <ClInclude Include="headers\API\Objects\Sound.hpp">
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="resources\images.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\Moonshine.rc">
