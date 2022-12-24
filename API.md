@@ -2,10 +2,8 @@
 #### Functions
 <details><summary>:movie_camera: Render</summary>
 
-  - [create_sprite()](#render.create_sprite)
   - [text()](#render.text)
   - [measure_text()](#render.measure_text)
-  - [sprite()](#render.sprite)
   - [rectangle()](#render.rectangle)
   - [circle()](#render.circle)
   - [line()](#render.line)
@@ -129,6 +127,27 @@
   - [unpack()](#color.unpack)
   - [to_hex()](#color.to_hex)
   </details>
+  
+  <details><summary>:crystal_ball: Sprite</summary>
+
+  - [new()](#sprite.new)
+  - [copy()](#sprite.copy)
+  - [get_path()](#sprite.get_path)
+  - [draw()](#sprite.draw)
+  - [set_color()](#sprite.set_color)
+  - [get_color()](#sprite.get_color)
+  - [set_position()](#sprite.set_position)
+  - [get_position()](#sprite.get_position)
+  - [set_rotation()](#sprite.set_rotation)
+  - [get_rotation()](#sprite.get_rotation)
+  - [set_scale()](#sprite.set_scale)
+  - [get_scale()](#sprite.get_scale)
+  - [set_origin()](#sprite.set_origin)
+  - [get_origin()](#sprite.get_origin)
+  - [scale()](#sprite.scale)
+  - [rotate()](#sprite.rotate)
+  - [move()](#sprite.move)
+  </details>
 
 #### <a name="View"></a> ```View```
 ```lua
@@ -138,35 +157,9 @@ local view_obj = ...
 print(view_obj)
 ```
 
-#### <a name="Sprite"></a> ```Sprite```
-```lua
-local sprite = ...
-
--- sprite address
-print(sprite)
-```
-
 ---
 
 ### :movie_camera: Render
-
-#### <a name="render.create_sprite"></a> ```create_sprite```
-```lua
-render.create_sprite(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite
-```
-| Name  | Type         | Description                                     |
-| :---: | :---:        | :---:                                           |
-| path  | ```string``` | Image location directory                        |
-| w     | ```float```  | Width of image                                  |
-| h     | ```float```  | Height of image                                 |
-| t_x   | ```size_t``` | X coordinate of areas in the image, default = 0 |
-| t_y   | ```size_t``` | Y coordinate of areas in the image, default = 0 |
-| t_w   | ```size_t``` | Width of areas in the image, default = w        |
-| t_h   | ```size_t``` | Height of areas in the image, default = h       |
-
-Returns the [sprite](#Sprite).
-
----
 
 #### <a name="render.text"></a> ```text```
 ```lua
@@ -194,21 +187,6 @@ render.measure_text(font: Font, text: string): Vector2
 | text      | ```string``` | Text that will be measured |
 
 Returns the measured [size](#vector2.new) of the text.
-
----
-
-#### <a name="render.sprite"></a> ```sprite```
-```lua
-render.sprite(sprite: Sprite, x: float, y: float[, color: Color])
-```
-| Name      | Type        | Description                     |
-| :---:     | :---:       | :---:                           |
-| sprite    | ```Sprite```| Sprite for render               |
-| x         | ```float``` | X coordinate                    |
-| y         | ```float``` | Y coordinate                    |
-| color     | ```Color``` | Color for sprite, default = nil |
-
-Render [sprite](#Sprite) in the specified coordinates.
 
 ---
 
@@ -1084,3 +1062,199 @@ color_object:to_hex(color: Color): string
 | color | ```Color``` | Color for casting to hex |
 
 Returns the hex string.
+
+
+### :crystal_ball: Sprite
+```lua
+tostring(sprite)   -- "{ path, x: x, y: y }"
+sprite == sprite   -- true
+```
+
+#### <a name="sprite.new"></a> ```new```
+```lua
+Sprite:new(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite
+```
+| Name  | Type         | Description                                     |
+| :---: | :---:        | :---:                                           |
+| path  | ```string``` | Image location directory                        |
+| w     | ```float```  | Width of image                                  |
+| h     | ```float```  | Height of image                                 |
+| t_x   | ```size_t``` | X coordinate of areas in the image, default = 0 |
+| t_y   | ```size_t``` | Y coordinate of areas in the image, default = 0 |
+| t_w   | ```size_t``` | Width of areas in the image, default = w        |
+| t_h   | ```size_t``` | Height of areas in the image, default = h       |
+
+Returns the sprite pointer.
+
+---
+
+#### <a name="sprite.copy"></a> ```copy```
+```lua
+sprite_object:copy(): Sprite
+```
+
+Returns the sprite copy.
+
+---
+
+#### <a name="sprite.draw"></a> ```draw```
+```lua
+sprite_object:draw()
+```
+
+Draws a sprite.
+
+---
+
+#### <a name="sprite.get_path"></a> ```get_path```
+```lua
+sprite_object:get_path(): string
+```
+
+Returns the path to the texture.
+
+---
+
+#### <a name="sprite.set_color"></a> ```set_color```
+```lua
+sprite_object:set_color(color: Color)
+```
+| Name  | Type        | Description          |
+| :---: | :---:       | :---:                |
+| color | ```Сolor``` | New color for sprite |
+
+Sets a new color for the sprite.
+
+---
+
+#### <a name="sprite.get_color"></a> ```get_color```
+```lua
+sprite_object:get_color(): Color
+```
+
+Returns the color of the sprite.
+
+---
+
+#### <a name="sprite.set_position"></a> ```set_position```
+```lua
+sprite_object:set_position(x: double, y: double)
+```
+| Name  | Type         | Description                 |
+| :---: | :---:        | :---:                       |
+| x     | ```double``` | New x coordinate for sprite |
+| y     | ```double``` | New y coordinate for sprite |
+
+Sets a new position for the sprite.
+
+---
+
+#### <a name="sprite.get_position"></a> ```get_position```
+```lua
+sprite_object:get_position(): Vector2
+```
+
+Returns the position of the sprite.
+
+---
+
+#### <a name="sprite.set_rotation"></a> ```set_rotation```
+```lua
+sprite_object:set_rotation(angle: double)
+```
+| Name  | Type         | Description                   |
+| :---: | :---:        | :---:                         |
+| angle | ```double``` | New rotation angle for sprite |
+
+Sets a new rotation angle for the sprite.
+
+---
+
+#### <a name="sprite.get_rotation"></a> ```get_rotation```
+```lua
+sprite_object:get_rotation(): double
+```
+
+Returns the rotation angle of the sprite.
+
+---
+
+#### <a name="sprite.set_scale"></a> ```set_scale```
+```lua
+sprite_object:set_scale(x_factor: double, y_factor: double)
+```
+| Name     | Type         | Description                   |
+| :---:    | :---:        | :---:                         |
+| x_factor | ```double``` | New x scale factor for sprite |
+| y_factor | ```double``` | New y scale factor for sprite |
+
+Sets a new scale for the sprite.
+
+---
+
+#### <a name="sprite.get_scale"></a> ```get_scale```
+```lua
+sprite_object:get_scale(): Vector2
+```
+
+Returns the scale of the sprite.
+
+---
+
+#### <a name="sprite.set_origin"></a> ```set_origin```
+```lua
+sprite_object:set_origin(x: double, y: double)
+```
+| Name  | Type         | Description             |
+| :---: | :---:        | :---:                   |
+| x     | ```double``` | New x origin for sprite |
+| y     | ```double``` | New y origin for sprite |
+
+Sets a new origin for the sprite.
+
+---
+
+#### <a name="sprite.get_origin"></a> ```get_origin```
+```lua
+sprite_object:get_origin(): Vector2
+```
+
+Returns the origin of the sprite.
+
+---
+
+#### <a name="sprite.scale"></a> ```scale```
+```lua
+sprite_object:scale(x_factor: double, y_factor: double)
+```
+| Name     | Type         | Description               |
+| :---:    | :---:        | :---:                     |
+| x_factor | ```double``` | X scale factor for sprite |
+| y_factor | ```double``` | Y scale factor for sprite |
+
+Scales the sprite.
+
+---
+
+#### <a name="sprite.rotate"></a> ```rotate```
+```lua
+sprite_object:rotate(angle: double)
+```
+| Name  | Type         | Description                |
+| :---: | :---:        | :---:                      |
+| angle | ```double``` | Rotations angle for sprite |
+
+Rotates the sprite.
+
+---
+
+#### <a name="sprite.move"></a> ```move```
+```lua
+sprite_object:move(x_offset: double, y_offset: double)
+```
+| Name     | Type         | Description                       |
+| :---:    | :---:        | :---:                             |
+| x_offset | ```double``` | X offset of coordinate for sprite |
+| y_offset | ```double``` | Y offset of coordinate for sprite |
+
+Moves the sprite.
