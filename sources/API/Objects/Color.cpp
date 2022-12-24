@@ -2,7 +2,7 @@
 
 API::Color::Color(const LuaStack& args) {
     if (args.size() != 1 && args.size() != 3 && args.size() != 4)
-        throw_error("[Color.new] Incorrect number of arguments!");
+        throw_error("[Color:new] Incorrect number of arguments!");
 
     if (args.size() > 1) {
         r = args.get<size_t>();
@@ -17,7 +17,7 @@ API::Color::Color(const LuaStack& args) {
         std::string tmp = args.get<std::string>();
 
         if ((tmp.length() != 7 && tmp.length() != 9) || tmp[0] != '#')
-            throw_error("[Color.new] Incorrect number of arguments!");
+            throw_error("[Color:new] Incorrect number of arguments!");
 
         auto hex_to_number = [](const std::string& hex) -> size_t {
             size_t result = 0;

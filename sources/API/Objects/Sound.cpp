@@ -2,14 +2,14 @@
 
 API::Sound::Sound(const LuaStack& args) {
     if (args.size() != 2 && args.size() != 3)
-        throw_error("[Sound.new] Incorrect number of arguments!");
+        throw_error("[Sound:new] Incorrect number of arguments!");
 
     path = args.get<std::string>();
     size_t volume = args.get<size_t>();
     bool is_repeat = (args.size() == 3) ? args.get<bool>() : false;
 
     if (!buffer.loadFromFile(path))
-        throw_error("[Sound.new] The sound cannot be found in the path '" + path + "'!");
+        throw_error("[Sound:new] Sound by path '" + path + "' cannot be loaded!");
 
     self.setBuffer(buffer);
     self.setLoop(is_repeat);

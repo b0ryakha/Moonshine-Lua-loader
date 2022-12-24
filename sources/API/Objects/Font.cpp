@@ -2,7 +2,7 @@
 
 API::Font::Font(const LuaStack& args) {
 	if (args.size() != 2)
-		throw_error("[Font.new] Incorrect number of arguments!");
+		throw_error("[Font:new] Incorrect number of arguments!");
 
 	family = args.get<std::string>();
 	size = args.get<size_t>();
@@ -10,7 +10,7 @@ API::Font::Font(const LuaStack& args) {
 	self = std::make_shared<sf::Font>();
 
 	if (!self->loadFromFile(FONTS_PATH + family))
-		throw_error("[Font.new] Font '" + family + "' was not found, perhaps the file extension was not specified!");
+		throw_error("[Font:new] Font '" + family + "' was not found, perhaps the file extension was not specified!");
 }
 
 API::Font::operator sf::Font*() const {

@@ -13,7 +13,7 @@ API::Sprite::Sprite(const LuaStack& args) {
     size_t t_h = (args.size() == 7 ? args.get<size_t>() : 0);
 
     if (!texture.loadFromFile(path))
-        throw_error("[Sprite:new] The texture cannot be found in the path '" + path + "'!");
+        throw_error("[Sprite:new] Texture by path '" + path + "' cannot be loaded!");
 
     if (args.size() == 3) {
         t_w = texture.getSize().x;
