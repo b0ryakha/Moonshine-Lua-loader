@@ -63,8 +63,6 @@ __forceinline void Script::open_API() const {
         std::make_pair("polygon", API::render_polygon),
         //std::make_pair("blur", API::render_blur),
         //std::make_pair("shadow", API::render_shadow),
-        std::make_pair("sprite", API::render_sprite),
-        std::make_pair("create_sprite", API::render_create_sprite),
     });
 
     lua_register_table(lua_state, "window", {
@@ -165,6 +163,7 @@ __forceinline void Script::open_API() const {
     lua_register_class(lua_state, "Vector2", API::Vector2_reg);
     lua_register_class(lua_state, "Color", API::Color_reg);
     lua_register_class(lua_state, "Sound", API::Sound_reg);
+    lua_register_class(lua_state, "Sprite", API::Sprite_reg);
 }
 
 bool Script::is_open() const {

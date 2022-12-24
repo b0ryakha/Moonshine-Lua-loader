@@ -12,6 +12,7 @@
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Font.hpp"
 #include "API/Objects/Sound.hpp"
+#include "API/Objects/Sprite.hpp"
 
 #include "API/cmath.hpp"
 #include "API/cursor.hpp"

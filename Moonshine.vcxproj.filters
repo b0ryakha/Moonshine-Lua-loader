@@ -75,6 +75,9 @@
     <ClCompile Include="sources\API\Objects\Sound.cpp">
       <Filter>Source Files\API\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="sources\API\Objects\Sprite.cpp">
+      <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="resources\images.hpp">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\Objects\Sprite.hpp">
+      <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

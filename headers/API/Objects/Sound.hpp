@@ -9,7 +9,7 @@ namespace API
 {
     class Sound {
     private:
-        mutable sf::Sound sound;
+        mutable sf::Sound self;
         sf::SoundBuffer buffer;
         std::string path;
 
@@ -132,7 +132,11 @@ namespace API
             const auto self = lua_get_object<Sound>(L, "Sound", 1);
             const auto target = lua_get_object<Sound>(L, "Sound", 2);
 
-            lua_pushboolean(L, ((self->get_path() == target->get_path()) && (self->get_volume() == target->get_volume()) && (self->get_path() == target->get_path())));
+            lua_pushboolean(L, (
+                (self->get_path() == target->get_path()) &&
+                (self->get_volume() == target->get_volume()) &&
+                (self->get_path() == target->get_path()))
+            );
             return 1;
         };
 

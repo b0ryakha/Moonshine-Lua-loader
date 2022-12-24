@@ -6,54 +6,14 @@
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Font.hpp"
+#include "API/Objects/Sprite.hpp"
 
 #include <string>
-#include <unordered_map>
 
 extern size_t print_offset;
 
 namespace API
 {
-    static std::unordered_map<std::string, std::pair<sf::Sprite, sf::Texture>> sprite_buffer;
-
-    static int render_create_sprite(lua_State* L) {
-        LuaStack args(L);
-
-        if (args.size() != 3 && args.size() != 7)
-            throw_error("[render.create_sprite] Incorrect number of arguments!");
-
-        std::string path = args.get<std::string>();
-        float w = args.get<float>();
-        float h = args.get<float>();
-        size_t t_x = (args.size() == 7 ? args.get<size_t>() : 0);
-        size_t t_y = (args.size() == 7 ? args.get<size_t>() : 0);
-        size_t t_w = (args.size() == 7 ? args.get<size_t>() : 0);
-        size_t t_h = (args.size() == 7 ? args.get<size_t>() : 0);
-
-        const std::string ID = "0x115112114105116101" + std::to_string(sprite_buffer.size());
-
-        sf::Texture texture;
-        if (!texture.loadFromFile(path))
-            throw_error("[render.create_sprite] The texture cannot be found in the path '" + path + "'!");
-
-        if (args.size() == 3) {
-            t_w = texture.getSize().x;
-            t_h = texture.getSize().y;
-        }
-
-        sf::Sprite sprite(texture);
-
-        sprite.setScale(sf::Vector2(w / t_w, h / t_h));
-
-        if (args.size() == 7)
-            sprite.setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));
-
-        sprite_buffer[ID] = std::move(std::make_pair(sprite, texture));
-
-        lua_pushstring(L, ID.c_str());
-        return 1;
-    }
-
     static int render_measure_text(lua_State* L) {
         LuaStack args(L);
 
@@ -200,39 +160,6 @@ namespace API
         }
 
         window.draw(polygon);
-
-        return 0;
-    }
-
-    static int render_sprite(lua_State* L) {
-        LuaStack args(L);
-
-        if (args.size() != 3 && args.size() != 4)
-            throw_error("Incorrect number of arguments!");
-
-        std::string sprite_id = args.get<std::string>();
-        float x = args.get<float>();
-        float y = args.get<float>();
-        sf::Color color = (args.size() == 4 ? args.get<LuaUserdata, Color>() : sf::Color());
-
-        sf::Sprite* sprite = nullptr;
-        sf::Texture* texture = nullptr;
-
-        try {
-            sprite = &sprite_buffer[sprite_id].first;
-            texture = &sprite_buffer[sprite_id].second;
-        }
-        catch (const std::out_of_range& exception) {
-            throw_error(exception.what());
-        }
-
-        sprite->setPosition(sf::Vector2f(x, y));
-        sprite->setTexture(*texture);
-
-        if (args.size() == 4)
-            sprite->setColor(color);
-
-        window.draw(*sprite);
 
         return 0;
     }

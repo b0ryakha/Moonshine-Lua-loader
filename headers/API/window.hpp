@@ -158,15 +158,8 @@ namespace API
         if (args.size() != 1)
             throw_error("Incorrect number of arguments!");
 
-        std::string sprite_id = args.get<std::string>();
-        sf::Texture* texture = nullptr;
-
-        try {
-            texture = &sprite_buffer[sprite_id].second;
-        }
-        catch (const std::out_of_range& exception) {
-            throw_error(exception.what());
-        }
+        sf::Sprite sprite = args.get<LuaUserdata, Sprite>();
+        const sf::Texture* texture = sprite.getTexture();
 
         window.setIcon(texture->getSize().x, texture->getSize().y, texture->copyToImage().getPixelsPtr());
 

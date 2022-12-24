@@ -9,16 +9,16 @@ API::Sound::Sound(const LuaStack& args) {
     bool is_repeat = (args.size() == 3) ? args.get<bool>() : false;
 
     if (!buffer.loadFromFile(path))
-        throw_error("[Sound.new] The sound cannot be found in the path '" + path + "'!");
+        throw_error("[Sound.new] The self cannot be found in the path '" + path + "'!");
 
-    sound.setBuffer(buffer);
-    sound.setLoop(is_repeat);
-    sound.setVolume((volume > 100) ? 100 : volume);
+    self.setBuffer(buffer);
+    self.setLoop(is_repeat);
+    self.setVolume((volume > 100) ? 100 : volume);
 }
 
 API::Sound::operator sf::Sound() const {
-	sound.setBuffer(buffer);
-	return sound;
+	self.setBuffer(buffer);
+	return self;
 }
 
 std::string API::Sound::get_path() const {
@@ -26,31 +26,31 @@ std::string API::Sound::get_path() const {
 }
 
 size_t API::Sound::get_volume() const {
-	return sound.getVolume();
+	return self.getVolume();
 }
 
 void API::Sound::set_volume(int volume) {
 	if (volume > 100) volume = 100;
 	if (volume < 0) volume = 0;
 
-	sound.setVolume(volume);
+	self.setVolume(volume);
 }
 
 bool API::Sound::get_loop() const {
-	return sound.getLoop();
+	return self.getLoop();
 }
 
 void API::Sound::set_loop(bool is_repeat) {
-	sound.setLoop(is_repeat);
+	self.setLoop(is_repeat);
 }
 
 void API::Sound::play(bool is_reset) {
-    if (is_reset || sound.getStatus() != sf::SoundSource::Status::Playing) {
-        sound.setBuffer(buffer);
-        sound.play();
+    if (is_reset || self.getStatus() != sf::SoundSource::Status::Playing) {
+        self.setBuffer(buffer);
+        self.play();
     }
 }
 
 void API::Sound::stop() {
-    sound.stop();
+    self.stop();
 }
