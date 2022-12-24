@@ -86,23 +86,6 @@ namespace API
             return 0;
         };
 
-        static auto get_origin = [](lua_State* L) {
-            const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-            sf::Vector2f origin = self->get_sprite().getOrigin();
-
-            lua_push_object<Vector2_new>(L, { origin.x, origin.y });
-            return 1;
-        };
-
-        static auto set_origin = [](lua_State* L) {
-            auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-            double offset_x = luaL_checknumber(L, 2);
-            double offset_y = luaL_checknumber(L, 3);
-
-            self->get_sprite().setOrigin(offset_x, offset_y);
-            return 0;
-        };
-
         static auto get_rotation = [](lua_State* L) {
             const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
 
@@ -112,10 +95,10 @@ namespace API
 
         static auto set_scale = [](lua_State* L) {
             auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-            double offset_x = luaL_checknumber(L, 2);
-            double offset_y = luaL_checknumber(L, 3);
+            double factor_x = luaL_checknumber(L, 2);
+            double factor_y = luaL_checknumber(L, 3);
 
-            self->get_sprite().setScale(offset_x, offset_y);
+            self->get_sprite().setScale(factor_x, factor_y);
             return 0;
         };
 
@@ -124,6 +107,23 @@ namespace API
             sf::Vector2f scale = self->get_sprite().getScale();
 
             lua_push_object<Vector2_new>(L, { scale.x, scale.y });
+            return 1;
+        };
+
+        static auto set_origin = [](lua_State* L) {
+            auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+            double x = luaL_checknumber(L, 2);
+            double y = luaL_checknumber(L, 3);
+
+            self->get_sprite().setOrigin(x, y);
+            return 0;
+        };
+
+        static auto get_origin = [](lua_State* L) {
+            const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+            sf::Vector2f origin = self->get_sprite().getOrigin();
+
+            lua_push_object<Vector2_new>(L, { origin.x, origin.y });
             return 1;
         };
 
@@ -137,10 +137,10 @@ namespace API
 
         static auto scale = [](lua_State* L) {
             auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-            double offset_x = luaL_checknumber(L, 2);
-            double offset_y = luaL_checknumber(L, 3);
+            double factor_x = luaL_checknumber(L, 2);
+            double factor_y = luaL_checknumber(L, 3);
 
-            self->get_sprite().scale(offset_x, offset_y);
+            self->get_sprite().scale(factor_x, factor_y);
             return 0;
         };
 
