@@ -16,7 +16,7 @@ You can view code examples using the API in [Examples.md](Examples.md) file
 ## Built With
 - [SFML](https://www.sfml-dev.org/) - Graphics and sound engine
 - [Boost](https://www.boost.org/) - For math (random)
-- [CURL](https://curl.se) - For file downloading
+- [cURL](https://curl.se) - For file downloading
 
 ## Author
 - **[b0ryakha](https://github.com/b0ryakha)**
