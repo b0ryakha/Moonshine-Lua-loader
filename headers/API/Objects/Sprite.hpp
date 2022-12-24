@@ -56,7 +56,7 @@ namespace API
         static auto get_color = [](lua_State* L) {
             const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
             sf::Color color = self->get_sprite().getColor();
-
+            
             lua_push_object<Color_new>(L, { color.r, color.g, color.b, color.a });
             return 1;
         };
@@ -127,6 +127,26 @@ namespace API
             return 1;
         };
 
+        static auto set_size = [](lua_State* L) {
+            auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+            double w = luaL_checknumber(L, 2);
+            double h = luaL_checknumber(L, 3);
+
+            sf::Vector2u texture_size = self->get_sprite().getTexture()->getSize();
+
+            self->get_sprite().setScale(w / texture_size.x, h / texture_size.y);
+
+            return 0;
+        };
+
+        static auto get_size = [](lua_State* L) {
+            const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+            sf::Vector2u size = self->get_sprite().getTexture()->getSize();
+
+            lua_push_object<Vector2_new>(L, { size.x, size.y });
+            return 1;
+        };
+
         static auto rotate = [](lua_State* L) {
             auto self = lua_get_object<Sprite>(L, "Sprite", 1);
             double angle = luaL_checknumber(L, 2);
@@ -186,6 +206,8 @@ namespace API
                 else if (key == "get_scale") lua_pushcfunction(L, get_scale);
                 else if (key == "set_origin") lua_pushcfunction(L, set_origin);
                 else if (key == "get_origin") lua_pushcfunction(L, get_origin);
+                else if (key == "set_size") lua_pushcfunction(L, set_size);
+                else if (key == "get_size") lua_pushcfunction(L, get_size);
                 else if (key == "scale") lua_pushcfunction(L, scale);
                 else if (key == "rotate") lua_pushcfunction(L, rotate);
                 else if (key == "move") lua_pushcfunction(L, move);
