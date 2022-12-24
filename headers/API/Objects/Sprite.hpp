@@ -38,13 +38,6 @@ namespace API
             return 1;
         };
 
-        static auto draw = [](lua_State* L) {
-            const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-
-            window.draw(self->get_sprite());
-            return 0;
-        };
-
         static auto set_color = [](lua_State* L) {
             auto self = lua_get_object<Sprite>(L, "Sprite", 1);
             const auto color = lua_get_object<Color>(L, "Color", 2);
@@ -196,7 +189,6 @@ namespace API
                 const std::string_view key = luaL_checkstring(L, 2);
 
                 if (key == "get_path") lua_pushcfunction(L, get_path);
-                else if (key == "draw") lua_pushcfunction(L, draw);
                 else if (key == "set_color") lua_pushcfunction(L, set_color);
                 else if (key == "get_color") lua_pushcfunction(L, get_color);
                 else if (key == "set_position") lua_pushcfunction(L, set_position);

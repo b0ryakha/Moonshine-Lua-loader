@@ -33,6 +33,17 @@ namespace API
         return 1;
     }
 
+    static int render_sprite(lua_State* L) {
+        if (lua_gettop(L) != 1)
+            throw_error("Incorrect number of arguments!");
+
+        const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+
+        window.draw(self->get_sprite());
+
+        return 0;
+    }
+
     static int render_text(lua_State* L) {
         LuaStack args(L);
 

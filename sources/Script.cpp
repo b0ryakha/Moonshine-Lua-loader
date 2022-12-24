@@ -56,6 +56,7 @@ void Script::open(const std::string& path) const {
 __forceinline void Script::open_API() const {
     lua_register_table(lua_state, "render", {
         std::make_pair("text", API::render_text),
+        std::make_pair("sprite", API::render_sprite),
         std::make_pair("measure_text", API::render_measure_text),
         std::make_pair("rectangle", API::render_rectangle),
         std::make_pair("circle", API::render_circle),
