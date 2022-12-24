@@ -234,8 +234,8 @@ render.line(x1: float, y1: float, x2: float, y2: float, thickness: float, color:
 | y1        | ```float``` | Initial Y coordinate |
 | x2        | ```float``` | Finite X coordinate  |
 | y2        | ```float``` | Finite Y coordinate  |
-| color     | ```Color``` | Color for line       |
 | thickness | ```float``` | Thickness of line    |
+| color     | ```Color``` | Color for line       |
 
 Render line on the screen.
 
