@@ -9,7 +9,7 @@ API::Sound::Sound(const LuaStack& args) {
     bool is_repeat = (args.size() == 3) ? args.get<bool>() : false;
 
     if (!buffer.loadFromFile(path))
-        throw_error("[Sound.new] The self cannot be found in the path '" + path + "'!");
+        throw_error("[Sound.new] The sound cannot be found in the path '" + path + "'!");
 
     self.setBuffer(buffer);
     self.setLoop(is_repeat);
