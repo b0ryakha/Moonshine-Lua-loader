@@ -144,6 +144,8 @@
   - [get_scale()](#sprite.get_scale)
   - [set_origin()](#sprite.set_origin)
   - [get_origin()](#sprite.get_origin)
+  - [set_size()](#sprite.set_size)
+  - [get_size()](#sprite.get_size)
   - [scale()](#sprite.scale)
   - [rotate()](#sprite.rotate)
   - [move()](#sprite.move)
@@ -1220,6 +1222,28 @@ sprite_object:get_origin(): Vector2
 ```
 
 Returns the origin of the sprite.
+
+---
+
+#### <a name="sprite.set_size"></a> ```set_size```
+```lua
+sprite_object:set_size(w: double, h: double)
+```
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| w     | ```double``` | New width for sprite         |
+| h     | ```double``` | New heigth origin for sprite |
+
+Sets a new size for the sprite.
+
+---
+
+#### <a name="sprite.get_size"></a> ```get_size```
+```lua
+sprite_object:get_size(): Vector2
+```
+
+Returns the size of the sprite.
 
 ---
 
