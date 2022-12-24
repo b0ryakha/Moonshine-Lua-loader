@@ -3,6 +3,7 @@
 <details><summary>:movie_camera: Render</summary>
 
   - [text()](#render.text)
+  - [sprite()](#render.sprite)
   - [measure_text()](#render.measure_text)
   - [rectangle()](#render.rectangle)
   - [circle()](#render.circle)
@@ -133,7 +134,6 @@
   - [new()](#sprite.new)
   - [copy()](#sprite.copy)
   - [get_path()](#sprite.get_path)
-  - [draw()](#sprite.draw)
   - [set_color()](#sprite.set_color)
   - [get_color()](#sprite.get_color)
   - [set_position()](#sprite.set_position)
@@ -176,6 +176,18 @@ render.text(x: float, y: float, font: Font, text: string, color: Color)
 | color     | ```Color``` | Color for text     |
 
 Render text in the specified coordinates.
+
+---
+
+#### <a name="render.sprite"></a> ```sprite```
+```lua
+render.sprite(sprite: Sprite)
+```
+| Name   | Type         | Description   |
+| :---:  | :---:        | :---:         |
+| sprite | ```Sprite``` | Sprite object |
+
+Render sprite.
 
 ---
 
@@ -1096,15 +1108,6 @@ sprite_object:copy(): Sprite
 ```
 
 Returns the sprite copy.
-
----
-
-#### <a name="sprite.draw"></a> ```draw```
-```lua
-sprite_object:draw()
-```
-
-Draws a sprite.
 
 ---
 
