@@ -141,9 +141,10 @@ namespace API
 
         static auto get_size = [](lua_State* L) {
             const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-            sf::Vector2u size = self->get_sprite().getTexture()->getSize();
+            double w = self->get_sprite().getGlobalBounds().width;
+            double h = self->get_sprite().getGlobalBounds().height;
 
-            lua_push_object<Vector2_new>(L, { size.x, size.y });
+            lua_push_object<Vector2_new>(L, { w, h });
             return 1;
         };
 
