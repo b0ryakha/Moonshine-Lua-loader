@@ -3,6 +3,8 @@
 #include "lua_extensions.hpp"
 #include "misc_functions.hpp"
 
+#include <random>
+
 namespace API
 {
     static int rand_int(lua_State* L) {
@@ -14,7 +16,11 @@ namespace API
         const int min = args.get<int>();
         const int max = args.get<int>();
 
-        lua_pushinteger(L, rand_number(min, max));
+        static std::random_device rd;
+        static std::mt19937 gen{ rd() };
+        std::uniform_int_distribution<int> dist{ min, max };
+
+        lua_pushinteger(L, dist(gen));
         return 1;
     }
 

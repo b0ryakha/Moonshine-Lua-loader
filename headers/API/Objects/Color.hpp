@@ -2,6 +2,8 @@
 
 #include "lua_extensions.hpp"
 
+#include <sstream>
+
 namespace API
 {
     struct Color {
