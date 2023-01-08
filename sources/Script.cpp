@@ -29,7 +29,7 @@ void Script::open(const std::string& path) const {
     if (lua_state == nullptr)
         throw_error("Failed to create lua state.");
 
-    lua_path = std::move(path);
+    lua_path = std::move(const_cast<std::string&>(path));
 
     if (!lua_path.empty() && lua_path[0] == '\"' && lua_path[lua_path.length() - 1] == '\"')
         lua_path = std::string(lua_path.begin() + 1, lua_path.end() - 1);
