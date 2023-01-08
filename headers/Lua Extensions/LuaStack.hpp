@@ -25,6 +25,11 @@ private:
 
 public:
     LuaStack(lua_State* lua_state);
+    LuaStack(const LuaStack& other);
+    LuaStack(LuaStack&& tmp) noexcept;
+    ~LuaStack() = default;
+    LuaStack& operator=(const LuaStack& other);
+    LuaStack& operator=(LuaStack&& tmp) noexcept;
 
     size_t size() const noexcept;
     size_t empty() const noexcept;

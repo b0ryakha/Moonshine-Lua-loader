@@ -12,7 +12,7 @@ LuaStack::LuaStack(lua_State* lua_state) {
                 elements.push_back(std::move(static_cast<std::string>(lua_tostring(lua_state, i))));
                 break;
             case LUA_TBOOLEAN:
-                elements.push_back(std::move(LuaBoolean(lua_toboolean(lua_state, i))));
+                elements.push_back(LuaBoolean(lua_toboolean(lua_state, i)));
                 break;
             case LUA_TNUMBER:
                 elements.push_back(lua_tonumber(lua_state, i));
@@ -21,14 +21,32 @@ LuaStack::LuaStack(lua_State* lua_state) {
                 elements.push_back(lua_tocfunction(lua_state, i));
                 break;
             case LUA_TUSERDATA:
-                elements.push_back(std::move(LuaUserdata(lua_touserdata(lua_state, i))));
+                elements.push_back(LuaUserdata(lua_touserdata(lua_state, i)));
                 break;
             default:
-                elements.push_back(std::move(LuaNil()));
+                elements.push_back(LuaNil());
         }
     }
 
     counter_of_get = elements.size();
+}
+
+LuaStack::LuaStack(const LuaStack& other) : elements(other.elements) {}
+
+LuaStack::LuaStack(LuaStack&& tmp) noexcept : elements(std::move(tmp.elements)) {}
+
+LuaStack& LuaStack::operator=(const LuaStack& other) {
+    if (this != &other)
+        elements = other.elements;
+
+    return *this;
+}
+
+LuaStack& LuaStack::operator=(LuaStack&& tmp) noexcept {
+    if (this != &tmp)
+        elements = std::move(tmp.elements);
+
+    return *this;
 }
 
 LuaMultiValueType LuaStack::get_type(size_t index) const {

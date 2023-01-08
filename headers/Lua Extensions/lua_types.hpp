@@ -53,8 +53,13 @@ private:
     }
 
 public:
-    LuaTable();
+    LuaTable() = default;
     LuaTable(lua_State* lua_state, int index);
+    LuaTable(const LuaTable& other);
+    LuaTable(LuaTable&& tmp) noexcept;
+    ~LuaTable() = default;
+    LuaTable& operator=(const LuaTable& other);
+    LuaTable& operator=(LuaTable&& tmp) noexcept;
 
     size_t size() const noexcept;
     size_t empty() const noexcept;
