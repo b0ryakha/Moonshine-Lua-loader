@@ -17,9 +17,9 @@ enum class LuaMultiValueType : size_t { Number = 0, Function, String, Boolean, T
 
 inline const std::array<std::string, 7> S_TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Userdata", "Nil" };
 
-struct LuaNil {};
+struct LuaNil final {};
 
-class LuaUserdata {
+class LuaUserdata final {
     void* self = nullptr;
 
 public:
@@ -29,7 +29,7 @@ public:
     operator T*() const { return static_cast<T*>(self); };
 };
 
-class LuaBoolean {
+class LuaBoolean final {
     bool state = false;
 
 public:
@@ -37,7 +37,7 @@ public:
     operator bool() const { return state; };
 };
 
-class LuaTable {
+class LuaTable final {
 private:
     std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaUserdata, LuaNil>> elements;
     mutable size_t counter_of_get = 0;

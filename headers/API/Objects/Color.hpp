@@ -6,7 +6,7 @@
 
 namespace API
 {
-    struct Color {
+    struct Color final {
         size_t r = 0;
         size_t g = 0;
         size_t b = 0;

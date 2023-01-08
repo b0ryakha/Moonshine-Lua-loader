@@ -8,7 +8,7 @@
 #include "misc_functions.hpp"
 #include "lua_types.hpp"
 
-class LuaStack {
+class LuaStack final {
 private:
     std::vector<LuaMultiValue> elements;
     mutable size_t counter_of_get = 0;

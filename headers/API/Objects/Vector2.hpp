@@ -4,7 +4,7 @@
 
 namespace API
 {
-    struct Vector2 {
+    struct Vector2 final {
         double x = 0;
         double y = 0;
 

@@ -7,7 +7,7 @@
 
 namespace API
 {
-    class Sound {
+    class Sound final {
     private:
         mutable sf::Sound self;
         sf::SoundBuffer buffer;

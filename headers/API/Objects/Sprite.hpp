@@ -9,7 +9,7 @@
 
 namespace API
 {
-    class Sprite {
+    class Sprite final {
     private:
         mutable sf::Sprite self;
         sf::Texture texture;

@@ -8,7 +8,7 @@
 
 namespace API
 {
-    class Font {
+    class Font final {
     private:
         std::shared_ptr<sf::Font> self;
         std::string family;
