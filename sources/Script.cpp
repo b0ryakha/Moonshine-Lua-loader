@@ -149,7 +149,8 @@ __forceinline void Script::open_API() const {
     });
 
     lua_register_table(lua_state, "cmath", {
-        std::make_pair("rand", API::rand_int),
+        std::make_pair("rand_int", API::rand_int),
+        std::make_pair("rand_double", API::rand_double),
         std::make_pair("lerp", API::lerp),
         std::make_pair("clamp", API::clamp),
     });

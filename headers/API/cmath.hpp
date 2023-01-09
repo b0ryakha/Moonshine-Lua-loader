@@ -7,6 +7,9 @@
 
 namespace API
 {
+    static std::random_device rd;
+    static std::mt19937 gen{ rd() };
+
     static int rand_int(lua_State* L) {
         LuaStack args(L);
 
@@ -16,11 +19,25 @@ namespace API
         const int min = args.get<int>();
         const int max = args.get<int>();
 
-        static std::random_device rd;
-        static std::mt19937 gen{ rd() };
-        std::uniform_int_distribution<int> dist{ min, max };
+        std::uniform_int_distribution dist{ min, max };
 
         lua_pushinteger(L, dist(gen));
+        return 1;
+    }
+
+    static int rand_double(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 2)
+            throw_error("[cmath.rand] Incorrect number of arguments!");
+
+        const double min = args.get<double>();
+        const double max = args.get<double>();
+
+        int n = std::pow(10, std::max(number_to_str(std::abs(min)).length(), number_to_str(std::abs(max)).length()) - 3);
+        std::uniform_real_distribution dist{ min, max };
+
+        lua_pushnumber(L, std::round(dist(gen) * n) / n);
         return 1;
     }
 
