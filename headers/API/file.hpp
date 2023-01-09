@@ -169,7 +169,7 @@ namespace API
 			throw_error("[file.read] The file does not exist!");
 
 		std::ifstream file(path);
-		std::vector<LuaMultiValue> file_content;
+		std::vector<LuaMultiValue_t> file_content;
 		std::string tmp;
 
 		while (std::getline(file, tmp, '\n'))
@@ -202,7 +202,7 @@ namespace API
 		LuaTable t_content;
 		std::string s_content;
 
-		if (args.get_type(1) == LuaMultiValueType::Table) t_content = args.get<LuaTable>();
+		if (args.get_type(1) == LuaMultiValue::Table) t_content = args.get<LuaTable>();
 		else s_content = args.get<std::string>();
 
 		bool is_rewrite = (args.size() == 3) ? args.get<bool>() : false;
@@ -223,7 +223,7 @@ namespace API
 		if (!buffer.str().empty())
 			file << buffer.str() << "\n";
 
-		if (args.get_type(1) == LuaMultiValueType::Table) {
+		if (args.get_type(1) == LuaMultiValue::Table) {
 			size_t size = t_content.size();
 
 			for (size_t i = 0; i < size; ++i)

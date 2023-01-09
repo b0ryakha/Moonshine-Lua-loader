@@ -49,12 +49,12 @@ LuaStack& LuaStack::operator=(LuaStack&& tmp) noexcept {
     return *this;
 }
 
-LuaMultiValueType LuaStack::get_type(size_t index) const {
+LuaMultiValue LuaStack::get_type(size_t index) const {
     if (index < 0 || index >= elements.size()) {
         throw_error("[Stack] Attempt to get element under index '" + std::to_string(index) + "', size = " + std::to_string(elements.size()) + ".");
     }
 
-    return static_cast<LuaMultiValueType>(elements[index].index());
+    return static_cast<LuaMultiValue>(elements[index].index());
 }
 
 size_t LuaStack::size() const noexcept {

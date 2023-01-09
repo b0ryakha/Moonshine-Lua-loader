@@ -114,7 +114,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;D:\C++ Libs\SFML\$(PlatformTarget)\lib;D:\C++ Libs\CURL\$(PlatformTarget)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -152,9 +152,11 @@
     <ClCompile Include="sources\API\Objects\Sprite.cpp" />
     <ClCompile Include="sources\API\Objects\Vector2.cpp" />
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
+    <ClCompile Include="sources\Lua Extensions\LuaBoolean.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
+    <ClCompile Include="sources\Lua Extensions\LuaTable.cpp" />
+    <ClCompile Include="sources\Lua Extensions\LuaUserdata.cpp" />
     <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp" />
-    <ClCompile Include="sources\Lua Extensions\lua_types.cpp" />
     <ClCompile Include="sources\misc_functions.cpp" />
     <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\main.cpp" />
@@ -176,9 +178,12 @@
     <ClInclude Include="headers\API\view.hpp" />
     <ClInclude Include="headers\API\window.hpp" />
     <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp" />
+    <ClInclude Include="headers\Lua Extensions\LuaBoolean.hpp" />
+    <ClInclude Include="headers\Lua Extensions\LuaNil.hpp" />
     <ClInclude Include="headers\Lua Extensions\LuaStack.hpp" />
+    <ClInclude Include="headers\Lua Extensions\LuaTable.hpp" />
+    <ClInclude Include="headers\Lua Extensions\LuaUserdata.hpp" />
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp" />
-    <ClInclude Include="headers\Lua Extensions\lua_types.hpp" />
     <ClInclude Include="headers\misc_functions.hpp" />
     <ClInclude Include="headers\Script.hpp" />
     <ClInclude Include="lua\include\lauxlib.h" />

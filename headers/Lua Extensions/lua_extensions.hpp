@@ -2,24 +2,18 @@
 
 #include <vector>
 #include <string>
-#include <SFML/Graphics.hpp>
 
 #include "misc_functions.hpp"
 #include "LuaStack.hpp"
 
-#include "lua.hpp"
-extern "C" {
-	#pragma comment(lib, "lua54.lib")
-}
-
-void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
+void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
 
 __forceinline void lua_register_class(lua_State* L, const std::string& name, lua_CFunction reg_constructor) {
 	lua_register_table(L, name, { std::make_pair("new", reg_constructor) });
 }
 
-void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue>>& elements);
-void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue>& elements);
+void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
+void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue_t>& elements);
 
 template<typename Class>
 __forceinline void lua_newclass(lua_State* L) {
@@ -32,7 +26,7 @@ __forceinline Class* lua_get_object(lua_State* L, const std::string& class_name,
 };
 
 template<lua_CFunction constructor>
-void lua_push_object(lua_State* L, const std::vector<LuaMultiValue>& args) {
+void lua_push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
 	LuaStack old_stack(L);
 
 	if (!old_stack.empty())

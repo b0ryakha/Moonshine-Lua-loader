@@ -54,9 +54,6 @@
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Lua Extensions\lua_types.cpp">
-      <Filter>Source Files\Lua Extensions</Filter>
-    </ClCompile>
     <ClCompile Include="sources\Lua Extensions\lua_extensions.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
@@ -77,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="sources\API\Objects\Sprite.cpp">
       <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\LuaTable.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\LuaBoolean.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Lua Extensions\LuaUserdata.cpp">
+      <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +143,6 @@
     <ClInclude Include="headers\Lua Extensions\LuaStack.hpp">
       <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Lua Extensions\lua_types.hpp">
-      <Filter>Header Files\Lua Extensions</Filter>
-    </ClInclude>
     <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp">
       <Filter>Header Files\Custom Shapes</Filter>
     </ClInclude>
@@ -163,6 +166,18 @@
     </ClInclude>
     <ClInclude Include="headers\API\Objects\Sprite.hpp">
       <Filter>Header Files\API\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\LuaTable.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\LuaUserdata.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\LuaNil.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Lua Extensions\LuaBoolean.hpp">
+      <Filter>Header Files\Lua Extensions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

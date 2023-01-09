@@ -18,22 +18,22 @@ namespace API
 
             if (lua_isfunction(L, -1)) {
                 switch (args.get_type(i)) {
-                    case LuaMultiValueType::Number:
+                    case LuaMultiValue::Number:
                         lua_pushnumber(L, args.get<double>(i));
                         break;
-                    case LuaMultiValueType::Function:
+                    case LuaMultiValue::Function:
                         lua_pushstring(L, "'function'");
                         break;
-                    case LuaMultiValueType::String:
+                    case LuaMultiValue::String:
                         lua_pushstring(L, args.get<std::string>(i).c_str());
                         break;
-                    case LuaMultiValueType::Boolean:
+                    case LuaMultiValue::Boolean:
                         lua_pushboolean(L, args.get<bool>(i));
                         break;
-                    case LuaMultiValueType::Table:
+                    case LuaMultiValue::Table:
                         lua_pushstring(L, "'table'");
                         break;
-                    case LuaMultiValueType::Userdata:
+                    case LuaMultiValue::Userdata:
                         lua_pushstring(L, "'userdata'");
                         break;
                     default:
