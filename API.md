@@ -802,10 +802,10 @@ Returns the random integer number [min, max].
 
 #### <a name="cmath.rand_double"></a> ```rand_double```
 ```lua
-cmath.rand_double(min: double, max: idoublent): double
+cmath.rand_double(min: double, max: double): double
 ```
-| Name  | Type     | Description          |
-| :---: | :---:    | :---:                |
+| Name  | Type        | Description          |
+| :---: | :---:       | :---:                |
 | min   | ```double```| Minimum random value |
 | max   | ```double```| Maximum random value |
 
