@@ -79,7 +79,8 @@
   
 <details><summary>:heavy_division_sign: CMath</summary>
 
-  - [rand()](#cmath.rand)
+  - [rand_int()](#cmath.rand_int)
+  - [rand_double()](#cmath.rand_double)
   - [lerp()](#cmath.lerp)
   - [clamp()](#cmath.clamp)
   </details>
@@ -786,9 +787,9 @@ Renames the specified file to a new name.
 
 ### :heavy_division_sign: CMath
 
-#### <a name="cmath.rand"></a> ```rand```
+#### <a name="cmath.rand_int"></a> ```rand_int```
 ```lua
-cmath.rand(min: int, max: int): int
+cmath.rand_int(min: int, max: int): int
 ```
 | Name  | Type     | Description          |
 | :---: | :---:    | :---:                |
@@ -796,6 +797,19 @@ cmath.rand(min: int, max: int): int
 | max   | ```int```| Maximum random value |
 
 Returns the random integer number [min, max].
+
+---
+
+#### <a name="cmath.rand_double"></a> ```rand_double```
+```lua
+cmath.rand_double(min: double, max: idoublent): double
+```
+| Name  | Type     | Description          |
+| :---: | :---:    | :---:                |
+| min   | ```double```| Minimum random value |
+| max   | ```double```| Maximum random value |
+
+Returns the random point floating number [min, max].
 
 ---
 
