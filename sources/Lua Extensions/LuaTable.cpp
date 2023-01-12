@@ -7,14 +7,14 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
     while (lua_next(lua_state, -2)) {
         lua_pushvalue(lua_state, -2);
 
-        const std::string_view key = static_cast<std::string_view>(lua_tostring(lua_state, -1));
+        const std::string_view key(lua_tostring(lua_state, -1));
 
         switch (lua_type(lua_state, -2)) {
         case LUA_TTABLE:
             elements[key] = std::move(std::make_shared<LuaTable>(lua_state, -2));
             break;
         case LUA_TSTRING:
-            elements[key] = std::move(static_cast<std::string>(lua_tostring(lua_state, -2)));
+            elements[key] = std::move(std::string(lua_tostring(lua_state, -2)));
             break;
         case LUA_TBOOLEAN:
             elements[key] = LuaBoolean(lua_toboolean(lua_state, -2));
