@@ -9,7 +9,7 @@ LuaStack::LuaStack(lua_State* lua_state) {
                 elements.push_back(std::move(LuaTable(lua_state, i)));
                 break;
             case LUA_TSTRING:
-                elements.push_back(std::move(static_cast<std::string>(lua_tostring(lua_state, i))));
+                elements.push_back(std::move(std::string(lua_tostring(lua_state, i))));
                 break;
             case LUA_TBOOLEAN:
                 elements.push_back(LuaBoolean(lua_toboolean(lua_state, i)));
