@@ -43,7 +43,7 @@ namespace API
                 lua_pcall(L, 1, 1, 0);
 
                 if (!lua_isnil(L, -1)) {
-                    result += static_cast<std::string>(lua_tostring(L, -1)) + '\t';
+                    result += std::string(lua_tostring(L, -1)) + '\t';
                     lua_pop(L, 1);
                 }
             }
