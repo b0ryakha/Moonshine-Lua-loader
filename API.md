@@ -134,7 +134,6 @@
 
   - [new()](#sprite.new)
   - [copy()](#sprite.copy)
-  - [get_path()](#sprite.get_path)
   - [set_color()](#sprite.set_color)
   - [get_color()](#sprite.get_color)
   - [set_position()](#sprite.set_position)
@@ -1122,15 +1121,6 @@ sprite_object:copy(): Sprite
 ```
 
 Returns the sprite copy.
-
----
-
-#### <a name="sprite.get_path"></a> ```get_path```
-```lua
-sprite_object:get_path(): string
-```
-
-Returns the path to the texture.
 
 ---
 
