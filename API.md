@@ -869,7 +869,7 @@ sound == sound    -- true
 
 #### <a name="sound.new"></a> ```new```
 ```lua
-Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound
+Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound&
 ```
 | Name      | Type         | Description                                        |
 | :---:     | :---:        | :---:                                              |
@@ -877,7 +877,7 @@ Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound
 | volume    | ```size_t``` | Volume of sound [0 - 100]                          |
 | is_repeat | ```bool```   | If true then sound will be looped, default = false |
 
-Returns the sound pointer.
+Returns the sound reference.
 
 ---
 
@@ -976,14 +976,14 @@ vec / vec        -- new vec
 
 #### <a name="vector2.new"></a> ```new```
 ```lua
-Vector2:new(x: double, y: double): Vector2
+Vector2:new(x: double, y: double): Vector2&
 ```
 | Name  | Type         | Description  |
 | :---: | :---:        | :---:        |
 | x     | ```double``` | X coordinate |
 | y     | ```double``` | Y coordinate |
 
-Returns the vector2 pointer.
+Returns the vector2 reference.
 
 ---
 
@@ -1003,14 +1003,14 @@ font == font     -- true
 
 #### <a name="font.new"></a> ```new```
 ```lua
-Font:new(name: string, size: size_t): Font
+Font:new(name: string, size: size_t): Font&
 ```
 | Name  | Type         | Description                       |
 | :---: | :---:        | :---:                             |
 | name  | ```string``` | Name of font, with file extension |
 | size  | ```size_t``` | Size of font                      |
 
-Returns the font pointer.
+Returns the font reference.
 
 ---
 
@@ -1042,8 +1042,8 @@ color == color                           -- true
 
 #### <a name="color.new"></a> ```new```
 ```lua
-Color:new(r: int, g: int, b: int[, a: int]): Color
-Color:new(hex: string): Color
+Color:new(r: int, g: int, b: int[, a: int]): Color&
+Color:new(hex: string): Color&
 ```
 | Name  | Type         | Description                  |
 | :---: | :---:        | :---:                        |
@@ -1056,7 +1056,7 @@ Color:new(hex: string): Color
 | :---: | :---:        | :---:                        |
 | hex   | ```string``` | Hex string                   |
 
-Returns the color pointer.
+Returns the color reference.
 
 ---
 
@@ -1100,7 +1100,7 @@ sprite == sprite   -- true
 
 #### <a name="sprite.new"></a> ```new```
 ```lua
-Sprite:new(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite
+Sprite:new(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite&
 ```
 | Name  | Type         | Description                                     |
 | :---: | :---:        | :---:                                           |
@@ -1112,7 +1112,7 @@ Sprite:new(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: siz
 | t_w   | ```size_t``` | Width of areas in the image, default = w        |
 | t_h   | ```size_t``` | Height of areas in the image, default = h       |
 
-Returns the sprite pointer.
+Returns the sprite reference.
 
 ---
 
