@@ -31,13 +31,6 @@ namespace API
             return 0;
         };
 
-        static auto get_path = [](lua_State* L) {
-            const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-
-            lua_pushstring(L, self->get_path().c_str());
-            return 1;
-        };
-
         static auto set_color = [](lua_State* L) {
             auto self = lua_get_object<Sprite>(L, "Sprite", 1);
             const auto color = lua_get_object<Color>(L, "Color", 2);
@@ -188,8 +181,7 @@ namespace API
             if (lua_isstring(L, 2)) {
                 const std::string_view key = luaL_checkstring(L, 2);
 
-                if (key == "get_path") lua_pushcfunction(L, get_path);
-                else if (key == "set_color") lua_pushcfunction(L, set_color);
+                if (key == "set_color") lua_pushcfunction(L, set_color);
                 else if (key == "get_color") lua_pushcfunction(L, get_color);
                 else if (key == "set_position") lua_pushcfunction(L, set_position);
                 else if (key == "get_position") lua_pushcfunction(L, get_position);
