@@ -161,11 +161,11 @@ __forceinline void Script::open_API() const {
 
     lua_register(lua_state, "print", API::print);
 
-    lua_register_class(lua_state, "Font", API::Font_reg);
-    lua_register_class(lua_state, "Vector2", API::Vector2_reg);
-    lua_register_class(lua_state, "Color", API::Color_reg);
-    lua_register_class(lua_state, "Sound", API::Sound_reg);
-    lua_register_class(lua_state, "Sprite", API::Sprite_reg);
+    lua_register_class<API::Font>(lua_state, "Font");
+    lua_register_class<API::Vector2>(lua_state, "Vector2");
+    lua_register_class<API::Color>(lua_state, "Color");
+    lua_register_class<API::Sound>(lua_state, "Sound");
+    lua_register_class<API::Sprite>(lua_state, "Sprite");
 }
 
 bool Script::is_open() const {

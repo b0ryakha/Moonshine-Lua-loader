@@ -27,7 +27,7 @@ namespace API
             if (y > window.getSize().y) y = window.getSize().y;
         }
 
-        lua_push_object<Vector2_new>(L, { x, y });
+        lua_push_object<Vector2>(L, { x, y });
         return 1;
 	}
 

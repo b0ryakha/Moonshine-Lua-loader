@@ -102,7 +102,7 @@ namespace API
         std::string view_id = args.get<std::string>();
 
         try {
-            lua_push_object<Vector2_new>(L, {
+            lua_push_object<Vector2>(L, {
                 view_buffer[view_id].getSize().x,
                 view_buffer[view_id].getSize().y
             });

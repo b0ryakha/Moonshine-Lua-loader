@@ -8,8 +8,9 @@
 
 void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
 
-__forceinline void lua_register_class(lua_State* L, const std::string& name, lua_CFunction reg_constructor) {
-	lua_register_table(L, name, { std::make_pair("new", reg_constructor) });
+template<typename Class>
+__forceinline void lua_register_class(lua_State* L, const std::string& name) {
+	lua_register_table(L, name, { std::make_pair("new", Class::reg) });
 }
 
 void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
@@ -25,7 +26,7 @@ __forceinline Class* lua_get_object(lua_State* L, const std::string& class_name,
 	return *static_cast<Class**>(luaL_checkudata(L, index, class_name.c_str()));
 };
 
-template<lua_CFunction constructor>
+template<typename Class>
 void lua_push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
 	LuaStack old_stack(L);
 
@@ -51,7 +52,7 @@ void lua_push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
 		}
 	}
 
-	constructor(L);
+	Class::push_to_lua(L);
 }
 
 void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods);

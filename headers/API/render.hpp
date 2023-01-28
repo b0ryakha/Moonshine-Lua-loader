@@ -25,7 +25,7 @@ namespace API
 
         sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, font.get_size());
 
-        lua_push_object<Vector2_new>(L, {
+        lua_push_object<Vector2>(L, {
             _text.getLocalBounds().width,
             _text.getLocalBounds().height
         });

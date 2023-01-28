@@ -56,7 +56,7 @@ namespace API
     }
 
     static int window_get_size(lua_State* L) {
-        lua_push_object<Vector2_new>(L, {
+        lua_push_object<Vector2>(L, {
             window.getSize().x,
             window.getSize().y
         });
@@ -76,7 +76,7 @@ namespace API
     }
 
     static int window_get_pos(lua_State* L) {
-        lua_push_object<Vector2_new>(L, {
+        lua_push_object<Vector2>(L, {
             window.getPosition().x,
             window.getPosition().y
         });
