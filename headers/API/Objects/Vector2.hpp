@@ -2,6 +2,8 @@
 
 #include "lua_extensions.hpp"
 
+#include <sstream>
+
 namespace API
 {
     struct Vector2 final {
@@ -87,10 +89,10 @@ namespace API
             static auto to_string = [](lua_State* L) {
                 const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
 
-                std::string result;
-                result = "{ " + number_to_str(self->x) + ", " + number_to_str(self->y) + " }";
+                std::stringstream result;
+                result << "{ " << self->x << ", " << self->y << " }";
 
-                lua_pushstring(L, result.c_str());
+                lua_pushstring(L, result.str().c_str());
                 return 1;
             };
 

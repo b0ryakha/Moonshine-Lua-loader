@@ -4,6 +4,7 @@
 #include "misc_functions.hpp"
 
 #include <random>
+#include <sstream>
 
 namespace API
 {
@@ -31,10 +32,19 @@ namespace API
         if (args.size() != 2)
             throw_error("[cmath.rand] Incorrect number of arguments!");
 
+        std::stringstream tmp;
         const double min = args.get<double>();
         const double max = args.get<double>();
 
-        int n = std::pow(10, std::max(number_to_str(std::abs(min)).length(), number_to_str(std::abs(max)).length()) - 3);
+        tmp << std::abs(min);
+        int first = tmp.str().length();
+
+        tmp.clear();
+
+        tmp << std::abs(max);
+        int second = tmp.str().length();
+
+        int n = std::pow(10, std::max(first, second - 3));
         std::uniform_real_distribution dist{ min, max };
 
         lua_pushnumber(L, std::round(dist(gen) * n) / n);

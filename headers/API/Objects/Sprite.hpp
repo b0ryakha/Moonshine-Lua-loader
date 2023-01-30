@@ -5,7 +5,7 @@
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Vector2.hpp"
 
-#include <string>
+#include <sstream>
 
 namespace API
 {
@@ -209,10 +209,10 @@ namespace API
                 const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f pos = self->get_sprite().getPosition();
 
-                std::string result;
-                result = "{ \"" + self->get_path() + "\", x: " + number_to_str(pos.x) + ", y: " + number_to_str(pos.y) + " }";
+                std::stringstream result;
+                result << "{ \"" << self->get_path() << "\", x: " << pos.x << ", y: " << pos.y << " }";
 
-                lua_pushstring(L, result.c_str());
+                lua_pushstring(L, result.str().c_str());
                 return 1;
             };
 
