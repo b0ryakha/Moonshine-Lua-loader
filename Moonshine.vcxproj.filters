@@ -84,6 +84,9 @@
     <ClCompile Include="sources\Lua Extensions\LuaUserdata.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
+    <ClCompile Include="sources\API\Objects\View.cpp">
+      <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
@@ -131,9 +134,6 @@
     <ClInclude Include="headers\API\render.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="headers\API\view.hpp">
-      <Filter>Header Files\API</Filter>
-    </ClInclude>
     <ClInclude Include="headers\API\window.hpp">
       <Filter>Header Files\API</Filter>
     </ClInclude>
@@ -178,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="headers\Lua Extensions\LuaBoolean.hpp">
       <Filter>Header Files\Lua Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\API\Objects\View.hpp">
+      <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -154,6 +154,7 @@
     <ClCompile Include="sources\API\Objects\Sound.cpp" />
     <ClCompile Include="sources\API\Objects\Sprite.cpp" />
     <ClCompile Include="sources\API\Objects\Vector2.cpp" />
+    <ClCompile Include="sources\API\Objects\View.cpp" />
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaBoolean.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
@@ -177,8 +178,8 @@
     <ClInclude Include="headers\API\Objects\Sound.hpp" />
     <ClInclude Include="headers\API\Objects\Sprite.hpp" />
     <ClInclude Include="headers\API\Objects\Vector2.hpp" />
+    <ClInclude Include="headers\API\Objects\View.hpp" />
     <ClInclude Include="headers\API\render.hpp" />
-    <ClInclude Include="headers\API\view.hpp" />
     <ClInclude Include="headers\API\window.hpp" />
     <ClInclude Include="headers\Custom Shapes\SuperEllipse.hpp" />
     <ClInclude Include="headers\Lua Extensions\LuaBoolean.hpp" />

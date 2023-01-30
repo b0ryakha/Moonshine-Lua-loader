@@ -13,6 +13,7 @@
 #include "API/Objects/Font.hpp"
 #include "API/Objects/Sound.hpp"
 #include "API/Objects/Sprite.hpp"
+#include "API/Objects/View.hpp"
 
 #include "API/cmath.hpp"
 #include "API/cursor.hpp"
@@ -22,7 +23,6 @@
 #include "API/misc.hpp"
 #include "API/mouse.hpp"
 #include "API/render.hpp"
-#include "API/view.hpp"
 #include "API/window.hpp"
 
 extern sf::RenderWindow window;

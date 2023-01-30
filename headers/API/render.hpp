@@ -39,7 +39,7 @@ namespace API
 
         const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
 
-        window.draw(self->get_sprite());
+        window.draw(self->__self);
 
         return 0;
     }

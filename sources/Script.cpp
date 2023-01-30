@@ -124,18 +124,6 @@ __forceinline void Script::open_API() const {
         std::make_pair("in_window", API::cursor_in_window),
     });
 
-    lua_register_table(lua_state, "view", {
-        std::make_pair("new", API::view_new),
-        std::make_pair("active", API::view_active),
-        std::make_pair("set_port", API::view_set_port),
-        std::make_pair("set_center", API::view_set_center),
-        std::make_pair("get_size", API::view_get_size),
-        std::make_pair("set_size", API::view_set_size),
-        std::make_pair("set_zoom", API::view_set_zoom),
-        std::make_pair("get_rotation", API::view_get_rotation),
-        std::make_pair("set_rotation", API::view_set_rotation),
-    });
-
     lua_register_table(lua_state, "file", {
         std::make_pair("read", API::file_read),
         std::make_pair("write", API::file_write),
@@ -166,6 +154,7 @@ __forceinline void Script::open_API() const {
     lua_register_class<API::Color>(lua_state, "Color");
     lua_register_class<API::Sound>(lua_state, "Sound");
     lua_register_class<API::Sprite>(lua_state, "Sprite");
+    lua_register_class<API::View>(lua_state, "View");
 }
 
 bool Script::is_open() const {
