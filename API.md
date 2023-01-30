@@ -1,5 +1,5 @@
 ### :dash: Navigation
-#### Functions
+#### Namespaces
 <details><summary>:movie_camera: Render</summary>
 
   - [text()](#render.text)
