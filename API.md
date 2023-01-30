@@ -50,19 +50,6 @@
   - [in_bounds()](#cursor.in_bounds)
   - [in_window()](#cursor.in_window)
   </details>
-  
-<details><summary>:camera: View</summary>
-
-  - [new()](#view.new)
-  - [active()](#view.active)
-  - [set_port()](#view.set_port)
-  - [set_center()](#view.set_center)
-  - [get_size()](#view.get_size)
-  - [set_size()](#view.set_size)
-  - [set_zoom()](#view.set_zoom)
-  - [get_rotation()](#view.get_rotation)
-  - [set_rotation()](#view.set_rotation)
-  </details>
     
 <details><summary>:file_folder: File</summary>
 
@@ -150,14 +137,20 @@
   - [rotate()](#sprite.rotate)
   - [move()](#sprite.move)
   </details>
+  
+  <details><summary>:camera: View</summary>
 
-#### <a name="View"></a> ```View```
-```lua
-local view_obj = ...
-
--- view address
-print(view_obj)
-```
+  - [new()](#view.new)
+  - [copy()](#view.copy)
+  - [active()](#view.active)
+  - [set_port()](#view.set_port)
+  - [set_center()](#view.set_center)
+  - [get_size()](#view.get_size)
+  - [set_size()](#view.set_size)
+  - [set_zoom()](#view.set_zoom)
+  - [get_rotation()](#view.get_rotation)
+  - [set_rotation()](#view.set_rotation)
+  </details>
 
 ---
 
@@ -545,128 +538,6 @@ cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool
 | regarding_window | ```bool```   | Is true then function return position regarding window, default = true |
 
 Returns true if cursor in bounds, else false.
-
-### :camera: View
-
-#### <a name="view.new"></a> ```new```
-```lua
-view.new([x: float, y: float, w: float, h: float]): View
-```
-| Name   | Type        | Description |
-| :---:  | :---:       | :---:       |
-| x      | ```float``` | X position  |
-| y      | ```float``` | Y position  |
-| w      | ```float``` | Width       |
-| h      | ```float``` | Height      |
-
-Returns the [view](#View).
-
----
-
-#### <a name="view.active"></a> ```active```
-```lua
-view.active(view: View)
-```
-| Name  | Type       | Description |
-| :---: | :---:      | :---:       |
-| view  | ```View``` | View object |
-
-Activates the [view](#View).
-
----
-
-
-#### <a name="view.set_port"></a> ```set_port```
-```lua
-view.set_port(view: View, x: float, y: float, w: float, h: float)
-```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
-| x     | ```float``` | X position  |
-| y     | ```float``` | Y position  |
-| w     | ```float``` | Width       |
-| h     | ```float``` | Height      |
-
-Sets the [view](#View) a new view port.
-
----
-
-#### <a name="view.set_center"></a> ```set_center```
-```lua
-view.set_center(view: View, x: float, y: float)
-```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
-| x     | ```float``` | X position  |
-| y     | ```float``` | Y position  |
-
-Sets the [view](#View) a new center position.
-
----
-
-#### <a name="view.get_size"></a> ```get_size```
-```lua
-view.get_size(view: View): Vector2
-```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
-
-Returns [size](#vector2.new) of [view](#View).
-
----
-
-#### <a name="view.set_size"></a> ```set_size```
-```lua
-view.set_size(view: View, w: float, h: float)
-```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
-| w     | ```float``` | Width       |
-| h     | ```float``` | Height      |
-
-Sets the [view](#View) a new size.
-
----
-
-#### <a name="view.set_zoom"></a> ```set_zoom```
-```lua
-view.set_zoom(view: View, zoom_factor: float)
-```
-| Name        | Type        | Description |
-| :---:       | :---:       | :---:       |
-| view        | ```View```  | View object |
-| zoom_factor | ```float``` | Zoom degree |
-
-Zooms [view](#View).
-
----
-
-#### <a name="view.get_rotation"></a> ```get_rotation```
-```lua
-view.get_rotation(view: View): float
-```
-| Name        | Type        | Description |
-| :---:       | :---:       | :---:       |
-| view        | ```View```  | View object |
-
-Returns a [view](#View) rotation.
-
----
-
-#### <a name="view.set_rotation"></a> ```set_rotation```
-```lua
-view.set_rotation(view: View, angle: float)
-```
-| Name  | Type        | Description              |
-| :---: | :---:       | :---:                    |
-| view  | ```View```  | View object              |
-| angle | ```float``` | Rotation angle [0 - 360] |
-
-Sets the [view](#View) a new rotation angle.
 
 
 ### :file_folder: File
@@ -1289,3 +1160,139 @@ sprite_object:move(x_offset: double, y_offset: double)
 | y_offset | ```double``` | Y offset of coordinate for sprite |
 
 Moves the sprite.
+
+
+### :camera: View
+```lua
+tostring(view)   -- "{ x: x, y: y, w: w, h: h }"
+view == view     -- true
+```
+
+#### <a name="view.new"></a> ```new```
+```lua
+View:new([x: float, y: float, w: float, h: float]): View&
+```
+| Name   | Type        | Description             |
+| :---:  | :---:       | :---:                   |
+| x      | ```float``` | X position, default = 0 |
+| y      | ```float``` | Y position, default = 0 |
+| w      | ```float``` | Width, default = 0      |
+| h      | ```float``` | Height, default = 0     |
+
+Returns the view reference.
+
+---
+
+#### <a name="view.copy"></a> ```copy```
+```lua
+view_object:view(): View
+```
+
+Returns the view copy.
+
+---
+
+#### <a name="view.active"></a> ```active```
+```lua
+view_object:active(view: View)
+```
+| Name  | Type       | Description |
+| :---: | :---:      | :---:       |
+| view  | ```View``` | View object |
+
+Activates the view.
+
+---
+
+
+#### <a name="view.set_port"></a> ```set_port```
+```lua
+view_object:set_port(view: View, x: float, y: float, w: float, h: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| x     | ```float``` | X position  |
+| y     | ```float``` | Y position  |
+| w     | ```float``` | Width       |
+| h     | ```float``` | Height      |
+
+Sets the view a new view port.
+
+---
+
+#### <a name="view.set_center"></a> ```set_center```
+```lua
+view_object:set_center(view: View, x: float, y: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| x     | ```float``` | X position  |
+| y     | ```float``` | Y position  |
+
+Sets the view a new center position.
+
+---
+
+#### <a name="view.get_size"></a> ```get_size```
+```lua
+view_object:get_size(view: View): Vector2
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+
+Returns [size](#vector2.new) of view.
+
+---
+
+#### <a name="view.set_size"></a> ```set_size```
+```lua
+view_object:set_size(view: View, w: float, h: float)
+```
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| view  | ```View```  | View object |
+| w     | ```float``` | Width       |
+| h     | ```float``` | Height      |
+
+Sets the view a new size.
+
+---
+
+#### <a name="view.set_zoom"></a> ```set_zoom```
+```lua
+view_object:set_zoom(view: View, zoom_factor: float)
+```
+| Name        | Type        | Description |
+| :---:       | :---:       | :---:       |
+| view        | ```View```  | View object |
+| zoom_factor | ```float``` | Zoom degree |
+
+Zooms view.
+
+---
+
+#### <a name="view.get_rotation"></a> ```get_rotation```
+```lua
+view_object:get_rotation(view: View): float
+```
+| Name        | Type        | Description |
+| :---:       | :---:       | :---:       |
+| view        | ```View```  | View object |
+
+Returns a view rotation.
+
+---
+
+#### <a name="view.set_rotation"></a> ```set_rotation```
+```lua
+view_object:set_rotation(view: View, angle: float)
+```
+| Name  | Type        | Description              |
+| :---: | :---:       | :---:                    |
+| view  | ```View```  | View object              |
+| angle | ```float``` | Rotation angle [0 - 360] |
+
+Sets the view a new rotation angle.
