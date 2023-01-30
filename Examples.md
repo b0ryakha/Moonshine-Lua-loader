@@ -1,6 +1,6 @@
 ## Render red circle
 ```lua
-local fill_color = color.new(255, 0, 0)
+local fill_color = Color:new(255, 0, 0)
 
 while true do
   window.clear()
