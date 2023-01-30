@@ -3,9 +3,9 @@
 local fill_color = Color:new(255, 0, 0)
 
 while true do
-  window.clear()
-  render.circle(500, 500, 20, fill_color)
-  window.display()
+    window.clear()
+    render.circle(500, 500, 20, fill_color)
+    window.display()
 end
 ```
 
