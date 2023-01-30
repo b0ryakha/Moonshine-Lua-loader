@@ -34,8 +34,8 @@ local color = Color:new(100, 100, 50)
 
 while true do
     window.clear()
-	  render.text(500, 500, font, "Test text!", color)
-	  window.display()
+    render.text(500, 500, font, "Test text!", color)
+    window.display()
 end
 ```
 
@@ -46,7 +46,7 @@ local sprite = Sprite:new("./img.png", 100, 100)
 
 while true do
     window.clear()
-	  render.sprite(sprite)
-	  window.display()
+    render.sprite(sprite)
+    window.display()
 end
 ```
