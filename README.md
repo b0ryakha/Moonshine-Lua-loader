@@ -7,7 +7,7 @@ The API includes the ability to render, interact with files, window, math, sound
 
 ---
 
-## Application programming interface
+## API documentation
 For information about the API, see [API.md](API.md) file
 
 ## Code examples
@@ -16,9 +16,6 @@ You can view code examples using the API in [Examples.md](Examples.md) file
 ## Built With
 - [SFML](https://www.sfml-dev.org/) - Graphics and sound engine
 - [cURL](https://curl.se) - For file downloading
-
-## Author
-- **[b0ryakha](https://github.com/b0ryakha)**
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
