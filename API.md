@@ -1194,11 +1194,8 @@ Returns the view copy.
 
 #### <a name="view.active"></a> ```active```
 ```lua
-view_object:active(view: View)
+view_object:active()
 ```
-| Name  | Type       | Description |
-| :---: | :---:      | :---:       |
-| view  | ```View``` | View object |
 
 Activates the view.
 
@@ -1207,11 +1204,10 @@ Activates the view.
 
 #### <a name="view.set_port"></a> ```set_port```
 ```lua
-view_object:set_port(view: View, x: float, y: float, w: float, h: float)
+view_object:set_port(x: float, y: float, w: float, h: float)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
 | x     | ```float``` | X position  |
 | y     | ```float``` | Y position  |
 | w     | ```float``` | Width       |
@@ -1223,11 +1219,10 @@ Sets the view a new view port.
 
 #### <a name="view.set_center"></a> ```set_center```
 ```lua
-view_object:set_center(view: View, x: float, y: float)
+view_object:set_center(x: float, y: float)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
 | x     | ```float``` | X position  |
 | y     | ```float``` | Y position  |
 
@@ -1237,11 +1232,8 @@ Sets the view a new center position.
 
 #### <a name="view.get_size"></a> ```get_size```
 ```lua
-view_object:get_size(view: View): Vector2
+view_object:get_size(): Vector2
 ```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
 
 Returns [size](#vector2.new) of view.
 
@@ -1249,11 +1241,10 @@ Returns [size](#vector2.new) of view.
 
 #### <a name="view.set_size"></a> ```set_size```
 ```lua
-view_object:set_size(view: View, w: float, h: float)
+view_object:set_size(w: float, h: float)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| view  | ```View```  | View object |
 | w     | ```float``` | Width       |
 | h     | ```float``` | Height      |
 
@@ -1263,11 +1254,10 @@ Sets the view a new size.
 
 #### <a name="view.set_zoom"></a> ```set_zoom```
 ```lua
-view_object:set_zoom(view: View, zoom_factor: float)
+view_object:set_zoom(zoom_factor: float)
 ```
 | Name        | Type        | Description |
 | :---:       | :---:       | :---:       |
-| view        | ```View```  | View object |
 | zoom_factor | ```float``` | Zoom degree |
 
 Zooms view.
@@ -1276,11 +1266,8 @@ Zooms view.
 
 #### <a name="view.get_rotation"></a> ```get_rotation```
 ```lua
-view_object:get_rotation(view: View): float
+view_object:get_rotation(): float
 ```
-| Name        | Type        | Description |
-| :---:       | :---:       | :---:       |
-| view        | ```View```  | View object |
 
 Returns a view rotation.
 
@@ -1288,11 +1275,10 @@ Returns a view rotation.
 
 #### <a name="view.set_rotation"></a> ```set_rotation```
 ```lua
-view_object:set_rotation(view: View, angle: float)
+view_object:set_rotation(angle: float)
 ```
 | Name  | Type        | Description              |
 | :---: | :---:       | :---:                    |
-| view  | ```View```  | View object              |
 | angle | ```float``` | Rotation angle [0 - 360] |
 
 Sets the view a new rotation angle.
