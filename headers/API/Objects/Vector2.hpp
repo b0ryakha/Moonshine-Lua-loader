@@ -6,11 +6,8 @@
 
 namespace API
 {
-    struct Vector2 final {
-        double x, y = 0;
-
+    struct Vector2 final : public sf::Vector2f {
         Vector2(const LuaStack& args);
-        operator sf::Vector2f() const;
 
         static int push_to_lua(lua_State* L) {
             lua_newclass<Vector2>(L);

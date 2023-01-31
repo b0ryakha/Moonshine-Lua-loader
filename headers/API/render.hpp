@@ -23,7 +23,7 @@ namespace API
         Font font = args.get<LuaUserdata, Font>();
         std::string text = args.get<std::string>();
 
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, font.get_size());
+        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), font, font.get_size());
 
         lua_push_object<Vector2>(L, {
             _text.getLocalBounds().width,
@@ -39,7 +39,7 @@ namespace API
 
         const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
 
-        window.draw(self->__self);
+        window.draw(*self);
 
         return 0;
     }
@@ -56,7 +56,7 @@ namespace API
         std::string text = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), *font, font.get_size());
+        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), font, font.get_size());
         _text.setPosition(sf::Vector2f(x, y));
         _text.setFillColor(color);
 

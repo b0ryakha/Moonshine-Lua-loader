@@ -3,15 +3,13 @@
 #include "lua_extensions.hpp"
 
 #include <sstream>
+#include <iomanip>
+#include <iostream>
 
 namespace API
 {
-    struct Color final {
-        size_t r, g, b = 0;
-        size_t a = 255;
-
+    struct Color final : public sf::Color {
         Color(const LuaStack& args);
-        operator sf::Color() const;
 
         static int push_to_lua(lua_State* L) {
             lua_newclass<Color>(L);
@@ -38,15 +36,12 @@ namespace API
 
             static auto to_hex = [](lua_State* L) {
                 const auto self = lua_get_object<Color>(L, "Color", 1);
-                std::stringstream ss;
+                size_t hex_color = (self->r << 24 | self->g << 16 | self->b << 8 | self->a);
 
-                ss << '#' << std::hex << (self->r << 24 | self->g << 16 | self->b << 8 | self->a);
-                std::string result = ss.str();
+                std::stringstream result;
+                result << '#' << std::hex << std::uppercase << std::setfill('0') << std::setw(8) << hex_color;
 
-                if (result.length() <= 3)
-                    result = "#000000";
-
-                lua_pushstring(L, result.c_str());
+                lua_pushstring(L, result.str().c_str());
                 return 1;
             };
 
@@ -146,7 +141,12 @@ namespace API
                 const auto self = lua_get_object<Color>(L, "Color", 1);
                 const auto target = lua_get_object<Color>(L, "Color", 2);
 
-                lua_pushboolean(L, ((self->r == target->r) && (self->g == target->g) && (self->b == target->b) && (self->a == target->a)));
+                lua_pushboolean(L, (
+                    (self->r == target->r) &&
+                    (self->g == target->g) &&
+                    (self->b == target->b) &&
+                    (self->a == target->a)
+                ));
                 return 1;
             };
 

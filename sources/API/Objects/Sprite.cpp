@@ -20,17 +20,13 @@ API::Sprite::Sprite(const LuaStack& args) {
         t_h = texture.getSize().y;
     }
 
-    __self.setTexture(texture);
-    __self.setScale(sf::Vector2(w / t_w, h / t_h));
+    setTexture(texture);
+    setScale(sf::Vector2(w / t_w, h / t_h));
 
     if (args.size() == 7)
-        __self.setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));
+        setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));
 }
 
-API::Sprite::operator sf::Sprite() const {
-    return __self;
-}
-
-std::string API::Sprite::get_path() const {
+const std::string API::Sprite::get_path() const {
     return path;
 }

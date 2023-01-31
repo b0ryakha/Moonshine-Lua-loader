@@ -8,11 +8,8 @@
 
 namespace API
 {
-    struct View final {
-        sf::View __self;
-
+    struct View final : public sf::View {
         View(const LuaStack& args);
-        operator sf::View() const;
 
         static int push_to_lua(lua_State* L) {
             lua_newclass<View>(L);
@@ -24,7 +21,7 @@ namespace API
 
             static auto active = [](lua_State* L) {
                 auto self = lua_get_object<View>(L, "View", 1);
-                window.setView(self->__self);
+                window.setView(*self);
 
                 return 0;
             };
@@ -36,7 +33,7 @@ namespace API
                 float w = luaL_checknumber(L, 4);
                 float h = luaL_checknumber(L, 5);
 
-                self->__self.setViewport(sf::FloatRect(
+                self->setViewport(sf::FloatRect(
                     x / window.getSize().x,
                     y / window.getSize().y,
                     w / window.getSize().x,
@@ -51,7 +48,7 @@ namespace API
                 float x = luaL_checknumber(L, 2);
                 float y = luaL_checknumber(L, 3);
 
-                self->__self.setCenter(x, y);
+                self->setCenter(x, y);
 
                 return 0;
             };
@@ -61,7 +58,7 @@ namespace API
                 float w = luaL_checknumber(L, 2);
                 float h = luaL_checknumber(L, 3);
 
-                self->__self.setSize(w, h);
+                self->setSize(w, h);
 
                 return 0;
             };
@@ -70,8 +67,8 @@ namespace API
                 auto self = lua_get_object<View>(L, "View", 1);
 
                 lua_push_object<Vector2>(L, {
-                    self->__self.getSize().x,
-                    self->__self.getSize().y
+                    self->getSize().x,
+                    self->getSize().y
                 });
                 return 1;
             };
@@ -80,7 +77,7 @@ namespace API
                 auto self = lua_get_object<View>(L, "View", 1);
                 float zoom_factor = luaL_checknumber(L, 2);
 
-                self->__self.zoom((100.f - zoom_factor) / 100.f);
+                self->zoom((100.f - zoom_factor) / 100.f);
 
                 return 0;
             };
@@ -89,7 +86,7 @@ namespace API
                 auto self = lua_get_object<View>(L, "View", 1);
                 float angle = luaL_checknumber(L, 2);
 
-                self->__self.setRotation(angle);
+                self->setRotation(angle);
 
                 return 0;
             };
@@ -97,14 +94,14 @@ namespace API
             static auto get_rotation = [](lua_State* L) {
                 auto self = lua_get_object<View>(L, "View", 1);
 
-                lua_pushnumber(L, self->__self.getRotation());
+                lua_pushnumber(L, self->getRotation());
                 return 0;
             };
 
             static auto copy = [](lua_State* L) {
                 const auto self = lua_get_object<View>(L, "View", 1);
-                sf::Vector2f center_pos = self->__self.getCenter();
-                sf::Vector2f size = self->__self.getSize();
+                sf::Vector2f center_pos = self->getCenter();
+                sf::Vector2f size = self->getSize();
 
                 lua_push_object<View>(L, { center_pos.x - size.x / 2, center_pos.y - size.y / 2, size.x, size.y });
                 return 1;
@@ -136,8 +133,8 @@ namespace API
 
             static auto to_string = [](lua_State* L) {
                 const auto self = lua_get_object<View>(L, "View", 1);
-                sf::Vector2f center_pos = self->__self.getCenter();
-                sf::Vector2f size = self->__self.getSize();
+                sf::Vector2f center_pos = self->getCenter();
+                sf::Vector2f size = self->getSize();
 
                 std::stringstream result;
                 result << "{ x: " << center_pos.x - size.x / 2
@@ -155,9 +152,9 @@ namespace API
                 const auto target = lua_get_object<View>(L, "View", 2);
 
                 lua_pushboolean(L, (
-                    self->__self.getCenter() == target->__self.getCenter() &&
-                    self->__self.getSize() == target->__self.getSize() &&
-                    self->__self.getRotation() == target->__self.getRotation()
+                    self->getCenter() == target->getCenter() &&
+                    self->getSize() == target->getSize() &&
+                    self->getRotation() == target->getRotation()
                 ));
                 return 1;
             };

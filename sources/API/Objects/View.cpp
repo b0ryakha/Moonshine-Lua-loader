@@ -9,9 +9,5 @@ API::View::View(const LuaStack& args) {
     float w = (args.size() == 4) ? args.get<float>() : 0;
     float h = (args.size() == 4) ? args.get<float>() : 0;
 
-    __self.reset(sf::FloatRect(x, y, w, h));
-}
-
-API::View::operator sf::View() const {
-    return __self;
+    reset(sf::FloatRect(x, y, w, h));
 }
