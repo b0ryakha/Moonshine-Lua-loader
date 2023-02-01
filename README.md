@@ -8,7 +8,8 @@ The API includes the ability to render, interact with files, window, sound, etc.
 ---
 
 ## API documentation
-For information about the API, see [API.md](API.md) file
+For information about the API, see [API.md](API.md) file.  
+For ease of use, downloading [snippets.json](snippets.json) (VS Code only).
 
 ## Code examples
 You can view code examples using the API in [Examples.md](Examples.md) file
