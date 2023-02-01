@@ -1,0 +1,493 @@
+{
+	"render.text": {
+        "prefix": "render.text",
+        "body": [
+          "render.text(x, y, font, text, color)"
+        ],
+    },
+
+    "render.sprite": {
+        "prefix": "render.sprite",
+        "body": [
+          "render.sprite(sprite)"
+        ],
+    },
+
+	"render.measure_text": {
+		"prefix": "render.measure_text",
+		"body": [
+		  "render.measure_text(font, text)"
+		],
+	},
+
+	"render.rectangle": {
+		"prefix": "render.rectangle",
+		"body": [
+		  "render.rectangle(x, y, w, h, color[, rounding])"
+		],
+	},
+
+	"render.circle": {
+		"prefix": "render.circle",
+		"body": [
+		  "render.circle(x, y, radius, color[, thickness, outline_color])"
+		],
+	},
+
+	"render.line": {
+		"prefix": "render.line",
+		"body": [
+		  "render.line(x1, y1, x2, y2, thickness, color)"
+		],
+	},
+
+	"render.polygon": {
+		"prefix": "render.polygon",
+		"body": [
+		  "render.polygon(points, color)"
+		],
+	},
+
+
+	
+	"window.display": {
+		"prefix": "window.display",
+		"body": [
+		  "window.display()"
+		],
+	},
+
+	"window.clear": {
+		"prefix": "window.clear",
+		"body": [
+		  "window.clear([color])"
+		],
+	},
+
+	"window.close": {
+		"prefix": "window.close",
+		"body": [
+		  "window.close()"
+		],
+	},
+
+	"window.capture": {
+		"prefix": "window.capture",
+		"body": [
+		  "window.capture()"
+		],
+	},
+
+	"window.get_size": {
+		"prefix": "window.get_size",
+		"body": [
+		  "window.get_size()"
+		],
+	},
+
+	"window.set_size": {
+		"prefix": "window.set_size",
+		"body": [
+		  "window.set_size(width, height)"
+		],
+	},
+
+	"window.get_pos": {
+		"prefix": "window.get_pos",
+		"body": [
+		  "window.get_pos()"
+		],
+	},
+
+	"window.set_pos": {
+		"prefix": "window.set_pos",
+		"body": [
+		  "window.set_pos(x, y)"
+		],
+	},
+
+	"window.set_title": {
+		"prefix": "window.set_title",
+		"body": [
+		  "window.set_title(title)"
+		],
+	},
+
+	"window.set_vsync": {
+		"prefix": "window.set_vsync",
+		"body": [
+		  "window.set_vsync(state)"
+		],
+	},
+
+	"window.set_frame_limit": {
+		"prefix": "window.set_frame_limit",
+		"body": [
+		  "window.set_frame_limit(fps_max)"
+		],
+	},
+
+	"window.sleep": {
+		"prefix": "window.sleep",
+		"body": [
+		  "window.sleep(milliseconds)"
+		],
+	},
+
+	"window.await": {
+		"prefix": "window.await",
+		"body": [
+		  "window.await()"
+		],
+	},
+
+	"window.set_icon": {
+		"prefix": "window.set_icon",
+		"body": [
+		  "window.set_icon(icon)"
+		],
+	},
+
+
+
+	"key.A": { "prefix": "key.A", "body": [ "key.A" ] },
+	"key.B": { "prefix": "key.B", "body": [ "key.B" ] },
+	"key.C": { "prefix": "key.C", "body": [ "key.C" ] },
+	"key.D": { "prefix": "key.D", "body": [ "key.D" ] },
+	"key.E": { "prefix": "key.E", "body": [ "key.E" ] },
+	"key.F": { "prefix": "key.F", "body": [ "key.F" ] },
+	"key.G": { "prefix": "key.G", "body": [ "key.G" ] },
+	"key.H": { "prefix": "key.H", "body": [ "key.H" ] },
+	"key.I": { "prefix": "key.I", "body": [ "key.I" ] },
+	"key.J": { "prefix": "key.J", "body": [ "key.J" ] },
+	"key.K": { "prefix": "key.K", "body": [ "key.K" ] },
+	"key.L": { "prefix": "key.L", "body": [ "key.L" ] },
+	"key.M": { "prefix": "key.M", "body": [ "key.M" ] },
+	"key.N": { "prefix": "key.N", "body": [ "key.N" ] },
+	"key.O": { "prefix": "key.O", "body": [ "key.O" ] },
+	"key.P": { "prefix": "key.P", "body": [ "key.P" ] },
+	"key.Q": { "prefix": "key.Q", "body": [ "key.Q" ] },
+	"key.R": { "prefix": "key.R", "body": [ "key.R" ] },
+	"key.S": { "prefix": "key.S", "body": [ "key.S" ] },
+	"key.T": { "prefix": "key.T", "body": [ "key.T" ] },
+	"key.U": { "prefix": "key.U", "body": [ "key.U" ] },
+	"key.V": { "prefix": "key.V", "body": [ "key.V" ] },
+	"key.W": { "prefix": "key.W", "body": [ "key.W" ] },
+	"key.X": { "prefix": "key.X", "body": [ "key.X" ] },
+	"key.Y": { "prefix": "key.Y", "body": [ "key.Y" ] },
+	"key.Z": { "prefix": "key.Z", "body": [ "key.Z" ] },
+	"key.Num0": { "prefix": "key.Num0", "body": [ "key.Num0" ] },
+	"key.Num1": { "prefix": "key.Num1", "body": [ "key.Num1" ] },
+	"key.Num2": { "prefix": "key.Num2", "body": [ "key.Num2" ] },
+	"key.Num3": { "prefix": "key.Num3", "body": [ "key.Num3" ] },
+	"key.Num4": { "prefix": "key.Num4", "body": [ "key.Num4" ] },
+	"key.Num5": { "prefix": "key.Num5", "body": [ "key.Num5" ] },
+	"key.Num6": { "prefix": "key.Num6", "body": [ "key.Num6" ] },
+	"key.Num7": { "prefix": "key.Num7", "body": [ "key.Num7" ] },
+	"key.Num8": { "prefix": "key.Num8", "body": [ "key.Num8" ] },
+	"key.Num9": { "prefix": "key.Num9", "body": [ "key.Num9" ] },
+	"key.Escape": { "prefix": "key.Escape", "body": [ "key.Escape" ] },
+	"key.LControl": { "prefix": "key.LControl", "body": [ "key.LControl" ] },
+	"key.LShift": { "prefix": "key.LShift", "body": [ "key.LShift" ] },
+	"key.LAlt": { "prefix": "key.LAlt", "body": [ "key.LAlt" ] },
+	"key.LSystem": { "prefix": "key.LSystem", "body": [ "key.LSystem" ] },
+	"key.RControl": { "prefix": "key.RControl", "body": [ "key.RControl" ] },
+	"key.RShift": { "prefix": "key.RShift", "body": [ "key.RShift" ] },
+	"key.RAlt": { "prefix": "key.RAlt", "body": [ "key.RAlt" ] },
+	"key.RSystem": { "prefix": "key.RSystem", "body": [ "key.RSystem" ] },
+	"key.Menu": { "prefix": "key.Menu", "body": [ "key.Menu" ] },
+	"key.LBracket": { "prefix": "key.LBracket", "body": [ "key.LBracket" ] },
+	"key.RBracket": { "prefix": "key.RBracket", "body": [ "key.RBracket" ] },
+	"key.Semicolon": { "prefix": "key.Semicolon", "body": [ "key.Semicolon" ] },
+	"key.Comma": { "prefix": "key.Comma", "body": [ "key.Comma" ] },
+	"key.Period": { "prefix": "key.Period", "body": [ "key.Period" ] },
+	"key.Quote": { "prefix": "key.Quote", "body": [ "key.Quote" ] },
+	"key.Slash": { "prefix": "key.Slash", "body": [ "key.Slash" ] },
+	"key.Backslash": { "prefix": "key.Backslash", "body": [ "key.Backslash" ] },
+	"key.Tilde": { "prefix": "key.Tilde", "body": [ "key.Tilde" ] },
+	"key.Equal": { "prefix": "key.Equal", "body": [ "key.Equal" ] },
+	"key.Hyphen": { "prefix": "key.Hyphen", "body": [ "key.Hyphen" ] },
+	"key.Space": { "prefix": "key.Space", "body": [ "key.Space" ] },
+	"key.Enter": { "prefix": "key.Enter", "body": [ "key.Enter" ] },
+	"key.Backspace": { "prefix": "key.Backspace", "body": [ "key.Backspace" ] },
+	"key.Tab": { "prefix": "key.Tab", "body": [ "key.Tab" ] },
+	"key.PageUp": { "prefix": "key.PageUp", "body": [ "key.PageUp" ] },
+	"key.PageDown": { "prefix": "key.PageDown", "body": [ "key.PageDown" ] },
+	"key.End": { "prefix": "key.End", "body": [ "key.End" ] },
+	"key.Home": { "prefix": "key.Home", "body": [ "key.Home" ] },
+	"key.Insert": { "prefix": "key.Insert", "body": [ "key.Insert" ] },
+	"key.Delete": { "prefix": "key.Delete", "body": [ "key.Delete" ] },
+	"key.Add": { "prefix": "key.Add", "body": [ "key.Add" ] },
+	"key.Subtract": { "prefix": "key.Subtract", "body": [ "key.Subtract" ] },
+	"key.Multiply": { "prefix": "key.Multiply", "body": [ "key.Multiply" ] },
+	"key.Divide": { "prefix": "key.Divide", "body": [ "key.Divide" ] },
+	"key.Left": { "prefix": "key.Left", "body": [ "key.Left" ] },
+	"key.Right": { "prefix": "key.Right", "body": [ "key.Right" ] },
+	"key.Up": { "prefix": "key.Up", "body": [ "key.Up" ] },
+	"key.Down": { "prefix": "key.Down", "body": [ "key.Down" ] },
+	"key.Numpad0": { "prefix": "key.Numpad0", "body": [ "key.Numpad0" ] },
+	"key.Numpad1": { "prefix": "key.Numpad1", "body": [ "key.Numpad1" ] },
+	"key.Numpad2": { "prefix": "key.Numpad2", "body": [ "key.Numpad2" ] },
+	"key.Numpad3": { "prefix": "key.Numpad3", "body": [ "key.Numpad3" ] },
+	"key.Numpad4": { "prefix": "key.Numpad4", "body": [ "key.Numpad4" ] },
+	"key.Numpad5": { "prefix": "key.Numpad5", "body": [ "key.Numpad5" ] },
+	"key.Numpad6": { "prefix": "key.Numpad6", "body": [ "key.Numpad6" ] },
+	"key.Numpad7": { "prefix": "key.Numpad7", "body": [ "key.Numpad7" ] },
+	"key.Numpad8": { "prefix": "key.Numpad8", "body": [ "key.Numpad8" ] },
+	"key.Numpad9": { "prefix": "key.Numpad9", "body": [ "key.Numpad9" ] },
+	"key.F1": { "prefix": "key.F1", "body": [ "key.F1" ] },
+	"key.F2": { "prefix": "key.F2", "body": [ "key.F2" ] },
+	"key.F3": { "prefix": "key.F3", "body": [ "key.F3" ] },
+	"key.F4": { "prefix": "key.F4", "body": [ "key.F4" ] },
+	"key.F5": { "prefix": "key.F5", "body": [ "key.F5" ] },
+	"key.F6": { "prefix": "key.F6", "body": [ "key.F6" ] },
+	"key.F7": { "prefix": "key.F7", "body": [ "key.F7" ] },
+	"key.F8": { "prefix": "key.F8", "body": [ "key.F8" ] },
+	"key.F9": { "prefix": "key.F9", "body": [ "key.F9" ] },
+	"key.F10": { "prefix": "key.F10", "body": [ "key.F10" ] },
+	"key.F11": { "prefix": "key.F11", "body": [ "key.F11" ] },
+	"key.F12": { "prefix": "key.F12", "body": [ "key.F12" ] },
+	"key.F13": { "prefix": "key.F13", "body": [ "key.F13" ] },
+	"key.F14": { "prefix": "key.F14", "body": [ "key.F14" ] },
+	"key.F15": { "prefix": "key.F15", "body": [ "key.F15" ] },
+	"key.Pause": { "prefix": "key.Pause", "body": [ "key.Pause" ] },
+
+	"keyboard.get_pressed": {
+		"prefix": "keyboard.get_pressed",
+		"body": [
+		  "keyboard.get_pressed([return_symbol])"
+		],
+	},
+
+	"keyboard.is_pressed": {
+		"prefix": "keyboard.is_pressed",
+		"body": [
+		  "keyboard.is_pressed(key_code)"
+		],
+	},
+
+
+
+	"button.Left": { "prefix": "button.Left", "body": [ "button.Left" ] },
+	"button.Right": { "prefix": "button.Right", "body": [ "button.Right" ] },
+	"button.Middle": { "prefix": "button.Middle", "body": [ "button.Middle" ] },
+	"button.XButton1": { "prefix": "button.XButton1", "body": [ "button.XButton1" ] },
+	"button.XButton2": { "prefix": "button.XButton2", "body": [ "button.XButton2" ] },
+
+	"mouse.get_pressed": {
+		"prefix": "mouse.get_pressed",
+		"body": [
+		  "mouse.get_pressed()"
+		],
+	},
+
+	"mouse.is_pressed": {
+		"prefix": "mouse.is_pressed",
+		"body": [
+		  "mouse.is_pressed(button_code)"
+		],
+	},
+
+	"mouse.is_scrolling_up": {
+		"prefix": "mouse.is_scrolling_up",
+		"body": [
+		  "mouse.is_scrolling_up()"
+		],
+	},
+
+	"mouse.is_scrolling_down": {
+		"prefix": "mouse.is_scrolling_down",
+		"body": [
+		  "mouse.is_scrolling_down()"
+		],
+	},
+
+
+
+	"cursor.get_pos": {
+		"prefix": "cursor.get_pos",
+		"body": [
+		  "cursor.get_pos([regarding_window])"
+		],
+	},
+
+	"cursor.set_pos": {
+		"prefix": "cursor.set_pos",
+		"body": [
+		  "cursor.set_pos(x, y[, regarding_window])"
+		],
+	},
+
+	"cursor.in_window": {
+		"prefix": "cursor.in_window",
+		"body": [
+		  "cursor.in_window()"
+		],
+	},
+
+	"cursor.in_bounds": {
+		"prefix": "cursor.in_bounds",
+		"body": [
+		  "cursor.in_bounds(x, y, w, h[, regarding_window])"
+		],
+	},
+
+
+
+	"file.read": {
+		"prefix": "file.read",
+		"body": [
+		  "file.read(path[, line_number])"
+		],
+	},
+
+	"file.write": {
+		"prefix": "file.write",
+		"body": [
+		  "file.write(path, content[, is_rewrite])"
+		],
+	},
+
+	"file.download": {
+		"prefix": "file.download",
+		"body": [
+		  "file.download(path, url)"
+		],
+	},
+
+	"file.create": {
+		"prefix": "file.create",
+		"body": [
+		  "file.create(path)"
+		],
+	},
+
+	"file.remove": {
+		"prefix": "file.remove",
+		"body": [
+		  "file.remove(path)"
+		],
+	},
+
+	"file.exists": {
+		"prefix": "file.exists",
+		"body": [
+		  "file.exists(path)"
+		],
+	},
+
+	"file.line_count": {
+		"prefix": "file.line_count",
+		"body": [
+		  "file.line_count(path)"
+		],
+	},
+
+	"file.clear": {
+		"prefix": "file.clear",
+		"body": [
+		  "file.clear(path)"
+		],
+	},
+
+	"file.rename": {
+		"prefix": "file.rename",
+		"body": [
+		  "file.rename(path, new_name)"
+		],
+	},
+
+
+
+
+	"cmath.rand_int": {
+		"prefix": "cmath.rand_int",
+		"body": [
+		  "cmath.rand_int(min, max)"
+		],
+	},
+
+	"cmath.rand_double": {
+		"prefix": "cmath.rand_double",
+		"body": [
+		  "cmath.rand_double(min, max)"
+		],
+	},
+
+	"cmath.lerp": {
+		"prefix": "cmath.lerp",
+		"body": [
+		  "cmath.lerp(start, end, time)"
+		],
+	},
+
+	"cmath.clamp": {
+		"prefix": "cmath.clamp",
+		"body": [
+		  "cmath.clamp(number, lower, upper)"
+		],
+	},
+
+
+
+	"globalvars.get_frametime": {
+		"prefix": "globalvars.get_frametime",
+		"body": [
+		  "globalvars.get_frametime()"
+		],
+	},
+
+
+
+	"Sound:new": {
+		"prefix": "Sound:new",
+		"body": [
+		  "Sound:new(path, volume[, is_repeat])"
+		],
+	},
+	
+
+
+	"Vector2:new": {
+		"prefix": "Vector2:new",
+		"body": [
+		  "Vector2:new(x, y)"
+		],
+	},
+	
+
+
+	"Font:new": {
+		"prefix": "Font:new",
+		"body": [
+		  "Font:new(name, size)"
+		],
+	},
+	
+
+
+	"Color:new": {
+		"prefix": "Color:new",
+		"body": [
+		  "Color:new(r, g, b[, a] | hex)"
+		],
+	},
+	
+
+
+	"Sprite:new": {
+		"prefix": "Sprite:new",
+		"body": [
+		  "Sprite:new(path, w, h[, t_x, t_y, t_w, t_h])"
+		],
+	},
+	
+
+
+	"View:new": {
+		"prefix": "View:new",
+		"body": [
+		  "View:new([x, y, w, h])"
+		],
+	},
+}
