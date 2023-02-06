@@ -62,6 +62,7 @@
   - [line_count()](#file.line_count)
   - [clear()](#file.clear)
   - [rename()](#file.rename)
+  - [get_list()](#file.get_list)
   </details>
   
 <details><summary>:heavy_division_sign: CMath</summary>
@@ -653,6 +654,18 @@ file.rename(path: string, new_name: string)
 | new_name | ```string``` | New name for the file                |
 
 Renames the specified file to a new name.
+
+---
+
+#### <a name="file.get_list"></a> ```get_list```
+```lua
+file.get_list(path: string): table<string>
+```
+| Name  | Type         | Description                  |
+| :---: | :---:        | :---:                        |
+| path  | ```string``` | Path to folder with its name |
+
+Returns a list of names of all files in the specified folder.
 
 
 ### :heavy_division_sign: CMath
