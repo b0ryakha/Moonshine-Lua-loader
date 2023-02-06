@@ -146,11 +146,11 @@ namespace API
 		LuaStack args(L);
 
 		if (args.size() != 1)
-			throw_error("[file.length] Incorrect number of arguments!");
+			throw_error("[file.line_count] Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.length] The file does not exist!");
+			throw_error("[file.line_count] The file does not exist!");
 
 		std::ifstream file(path);
 		size_t length = std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1;
