@@ -396,7 +396,13 @@
 		  "file.rename(path, new_name)"
 		],
 	},
-
+	
+	"file.get_list": {
+		"prefix": "file.get_list",
+		"body": [
+		  "file.get_list(path)"
+		],
+	},
 
 
 
