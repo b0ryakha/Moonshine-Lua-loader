@@ -27,20 +27,20 @@ namespace API
 		if (args.size() != 2)
 			throw_error("[file.download] Incorrect number of arguments!");
 
-		std::string path = args.get<std::string>();
+		fs::path path = args.get<std::string>();
 		std::string url = args.get<std::string>();
 
 		if (fs::exists(path))
 			throw_error("[file.download] Such a file already exists!");
 
-		if (path.empty() || path.find('.') == std::string::npos)
+		if (path.empty() || !path.has_extension())
 			throw_error("[file.download] You need to specify the name of the file with its extension!");
 
 		CURL* curl = curl_easy_init();
 		if (!curl)
 			throw_error("[file.download] Error during CURL initialization!");
 
-		FILE* data = fopen(path.c_str(), "wb");
+		FILE* data = fopen(path.string().c_str(), "wb");
 		if (!data)
 			throw_error("[file.download] Invalid file path!");
 
@@ -78,12 +78,17 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (fs::exists(path))
-			throw_error("[file.create] Such a file already exists!");
+			throw_error("[file.create] Such a file / folder already exists!");
 
-		fs::create_directories(path.parent_path());
+		if (path.has_extension()) {
+			fs::create_directories(path.parent_path());
 
-		std::ofstream ofs(path);
-		ofs.close();
+			std::ofstream ofs(path);
+			ofs.close();
+		}
+		else {
+			fs::create_directories(path);
+		}
 
 		return 0;
 	}
@@ -236,5 +241,28 @@ namespace API
 		file.close();
 
 		return 0;
+	}
+
+	static int file_get_list(lua_State* L) {
+		LuaStack args(L);
+
+		if (args.size() != 1)
+			throw_error("[file.get_list] Incorrect number of arguments!");
+
+		fs::path path = args.get<std::string>();
+
+		if (path.has_extension())
+			throw_error("[file.get_list] The path must be specified to the folder!");
+
+		if (!fs::exists(path))
+			throw_error("[file.get_list] The folder does not exist!");
+
+		std::vector<LuaMultiValue_t> list;
+
+		for (const auto& entry : fs::directory_iterator(path))
+			list.emplace_back(entry.path().filename().string());
+
+		lua_pushtable(L, list);
+		return 1;
 	}
 }

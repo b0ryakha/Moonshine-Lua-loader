@@ -134,6 +134,7 @@ __forceinline void Script::open_API() const {
         std::make_pair("line_count", API::file_line_count),
         std::make_pair("clear", API::file_clear),
         std::make_pair("rename", API::file_rename),
+        std::make_pair("get_list", API::file_get_list),
     });
 
     lua_register_table(lua_state, "cmath", {
