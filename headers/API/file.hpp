@@ -229,10 +229,8 @@ namespace API
 			file << buffer.str() << "\n";
 
 		if (args.get_type(1) == LuaMultiValue::Table) {
-			size_t size = t_content.size();
-
-			for (size_t i = 0; i < size; ++i)
-				file << t_content.get<std::string>() << (i < size - 1 ? "\n" : "");
+			for (size_t i = 0, size = t_content.size(); i < size; ++i)
+				file << t_content.get<std::string>(std::to_string(i + 1)) << (i < size - 1 ? "\n" : "");
 		}
 		else {
 			file << s_content;

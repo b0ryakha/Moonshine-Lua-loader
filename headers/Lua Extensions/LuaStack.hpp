@@ -14,13 +14,11 @@ private:
     mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValue expected_type, size_t index) const {
-        if (index < 0 || index >= elements.size()) {
+        if (index < 0 || index >= elements.size())
             throw_error("[Stack] Attempt to get an element under index '" + std::to_string(index) + "', size = " + std::to_string(elements.size()) + ".");
-        }
 
-        if (elements[index].index() != static_cast<size_t>(expected_type)) {
+        if (elements[index].index() != static_cast<size_t>(expected_type))
             throw_error("[Stack] Attempt to get a type element '" + S_TYPE_NAME[elements[index].index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
-        }
     }
 
 public:

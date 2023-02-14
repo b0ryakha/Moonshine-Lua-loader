@@ -22,13 +22,11 @@ private:
     mutable size_t counter_of_get = 0;
 
     __forceinline void check_errors(LuaMultiValue expected_type, std::string key) const {
-        if (elements.find(key) == elements.end()) {
+        if (elements.find(key) == elements.end())
             throw_error("[Table] Attempt to get element under key '" + key + "'.");
-        }
 
-        if (elements.at(key).index() != static_cast<size_t>(expected_type)) {
+        if (elements.at(key).index() != static_cast<size_t>(expected_type))
             throw_error("[Table] Attempt to get a type element '" + S_TYPE_NAME[elements.at(key).index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
-        }
     }
 
 public:

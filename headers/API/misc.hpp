@@ -13,7 +13,7 @@ namespace API
         std::string result;
         constexpr size_t size = 20;
 
-        for (size_t i = 0; i < args.size(); ++i) {
+        for (size_t i = 0, size = args.size(); i < size; ++i) {
             lua_getglobal(L, "tostring");
 
             if (lua_isfunction(L, -1)) {

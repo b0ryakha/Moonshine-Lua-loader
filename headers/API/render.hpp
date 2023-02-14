@@ -180,7 +180,7 @@ namespace API
         polygon.setFillColor(color);
         polygon.setPointCount(points.size());
 
-        for (size_t i = 0; i < points.size(); ++i) {
+        for (size_t i = 0, size = points.size(); i < size; ++i) {
             LuaTable point = points.get<LuaTable>();
 
             if (point.size() != 2)
