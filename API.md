@@ -76,6 +76,7 @@
 <details><summary>:mag: GlobalVars</summary>
 
   - [get_frametime()](#globalvars.get_frametime)
+  - [get_executable_path()](#globalvars.get_executable_path)
   </details>
   
 <details><summary>:speech_balloon: Misc</summary>
@@ -730,6 +731,15 @@ globalvars.get_frametime(): double
 ```
 
 Returns the update frame time.
+
+---
+
+#### <a name="globalvars.get_executable_path"></a> ```get_executable_path```
+```lua
+globalvars.get_executable_path(): string
+```
+
+Returns the path of executable.
 
 
 ### :speech_balloon: Misc
