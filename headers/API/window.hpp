@@ -21,7 +21,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.capture] Incorrect number of arguments!");
 
         std::string path = args.get<std::string>();
         sf::Texture screenshot;
@@ -30,7 +30,7 @@ namespace API
         screenshot.update(window);
 
         if (!screenshot.copyToImage().saveToFile(path))
-            throw_error("Error when saving a screenshot!");
+            throw_error("[window.capture] Error when saving a screenshot!");
 
         return 0;
     }
@@ -68,7 +68,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_size] Incorrect number of arguments!");
 
         window.setSize(sf::Vector2u(args.get<size_t>(0), args.get<size_t>(1)));
 
@@ -88,7 +88,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_pos] Incorrect number of arguments!");
 
         window.setPosition(sf::Vector2i(args.get<int>(0), args.get<int>(1)));
 
@@ -99,7 +99,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_title] Incorrect number of arguments!");
 
         window.setTitle(args.get<std::string>());
 
@@ -110,7 +110,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_vsync] Incorrect number of arguments!");
 
         window.setVerticalSyncEnabled(args.get<bool>());
 
@@ -121,7 +121,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_frame_limit] Incorrect number of arguments!");
 
         window.setFramerateLimit(args.get<size_t>());
 
@@ -132,7 +132,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.sleep] Incorrect number of arguments!");
 
         std::this_thread::sleep_for(std::chrono::milliseconds(args.get<size_t>()));
 
@@ -140,15 +140,7 @@ namespace API
     }
 
     static int window_await(lua_State* L) {
-        while (window.isOpen()) {
-            switch (main_event.type) {
-                case sf::Event::MouseButtonPressed:
-                case sf::Event::KeyPressed:
-                    goto loop_break;
-            }
-        }
-        loop_break:
-
+        while (main_event.type != sf::Event::MouseButtonPressed && main_event.type != sf::Event::KeyPressed) {}
         return 0;
     }
 
@@ -156,7 +148,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[window.set_icon] Incorrect number of arguments!");
 
         sf::Sprite sprite = args.get<LuaUserdata, Sprite>();
         const sf::Texture* texture = sprite.getTexture();

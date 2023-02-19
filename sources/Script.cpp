@@ -80,7 +80,7 @@ __forceinline void Script::open_API() const {
         std::make_pair("set_title", API::window_set_title),
         std::make_pair("set_vsync", API::window_set_vsync),
         std::make_pair("set_frame_limit", API::window_set_frame_limit),
-        std::make_pair("set_icon", API::window_set_icon),
+        std::make_pair("set_icon", API::window_set_icon)
     });
 
     std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_KEYS;

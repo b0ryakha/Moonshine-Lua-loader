@@ -130,7 +130,7 @@ namespace API
                 const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
 
                 if (target->x == 0 || target->y == 0)
-                    throw_error("[Vector2 div] Division by zero!");
+                    throw_error("[Vector2:div] Division by zero!");
 
                 lua_push_object<Vector2>(L, { self->x / target->x, self->y / target->y });
                 return 1;

@@ -35,7 +35,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2 && args.size() != 3)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[cursor.set_pos] Incorrect number of arguments!");
 
         int x = args.get<int>();
         int y = args.get<int>();

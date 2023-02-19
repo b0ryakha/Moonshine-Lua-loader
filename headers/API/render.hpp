@@ -35,7 +35,7 @@ namespace API
 
     static int render_sprite(lua_State* L) {
         if (lua_gettop(L) != 1)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.sprite] Incorrect number of arguments!");
 
         const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
 
@@ -48,7 +48,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 5)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.text] Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -69,7 +69,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 5 && args.size() != 6)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.rectangle] Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -89,7 +89,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 4 && args.size() != 6)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.circle] Incorrect number of arguments!");
 
         float x = args.get<float>();
         float y = args.get<float>();
@@ -117,7 +117,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 6)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.line] Incorrect number of arguments!");
 
         float x1 = args.get<float>();
         float y1 = args.get<float>();
@@ -151,7 +151,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 6 && args.size() != 7)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.blur] Incorrect number of arguments!");
 
         float x1 = args.get<float>();
         float y1 = args.get<float>();
@@ -170,7 +170,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("Incorrect number of arguments!");
+            throw_error("[render.polygon] Incorrect number of arguments!");
 
         LuaTable points = args.get<LuaTable>();
         sf::Color color = args.get<LuaUserdata, Color>();
@@ -184,7 +184,7 @@ namespace API
             LuaTable point = points.get<LuaTable>();
 
             if (point.size() != 2)
-                throw_error("[point] Incorrect number of values!");
+                throw_error("[render.polygon] Incorrect number of values!");
 
             polygon.setPoint(i, sf::Vector2f(point.get<float>(), point.get<float>()));
         }

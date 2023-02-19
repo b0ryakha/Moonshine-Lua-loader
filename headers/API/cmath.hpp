@@ -15,7 +15,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("[cmath.rand] Incorrect number of arguments!");
+            throw_error("[cmath.rand_int] Incorrect number of arguments!");
 
         const int min = args.get<int>();
         const int max = args.get<int>();
@@ -30,7 +30,7 @@ namespace API
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("[cmath.rand] Incorrect number of arguments!");
+            throw_error("[cmath.rand_double] Incorrect number of arguments!");
 
         std::stringstream tmp;
         const double min = args.get<double>();
