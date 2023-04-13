@@ -49,7 +49,7 @@ __forceinline void start_program(char* cmd_line) {
 
     while (window.isOpen()) {
         time_m.lock();
-        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800.f;
+        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800.0;
         time_m.unlock();
 
         clock.restart();

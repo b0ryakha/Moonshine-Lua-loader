@@ -15,11 +15,13 @@ namespace API
 
         for (size_t i = 0, size = args.size(); i < size; ++i) {
             lua_getglobal(L, "tostring");
+            bool is_number = false;
 
             if (lua_isfunction(L, -1)) {
                 switch (args.get_type(i)) {
                     case LuaMultiValue::Number:
                         lua_pushnumber(L, args.get<double>(i));
+                        is_number = true;
                         break;
                     case LuaMultiValue::Function:
                         lua_pushstring(L, "'function'");
@@ -43,7 +45,13 @@ namespace API
                 lua_pcall(L, 1, 1, 0);
 
                 if (!lua_isnil(L, -1)) {
-                    result += std::string(lua_tostring(L, -1)) + '\t';
+                    std::string tmp = lua_tostring(L, -1);
+                    size_t length = tmp.length();
+                    
+                    if (is_number && length >= 3 && tmp[length - 2] == '.' && tmp[length - 1] == '0')
+                        tmp.resize(tmp.size() - 2);
+
+                    result += tmp + '\t';
                     lua_pop(L, 1);
                 }
             }
