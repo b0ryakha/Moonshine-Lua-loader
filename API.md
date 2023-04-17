@@ -55,6 +55,7 @@
 
   - [read()](#file.read)
   - [write()](#file.write)
+  - [copy()](#file.copy)
   - [download()](#file.download)
   - [create()](#file.create)
   - [remove()](#file.remove)
@@ -569,6 +570,19 @@ file.write(path: string, content: string[, is_rewrite: bool])
 | is_rewrite | ```bool```                        | If the value is true, file will be cleared before writing, default = false |
 
 Writes the specified content to a file.
+
+---
+
+#### <a name="file.copy"></a> ```copy```
+```lua
+file.copy(path: string[, output_path: string])
+```
+| Name        | Type         | Description                        |
+| :---:       | :---:        | :---:                              |
+| path        | ```string``` | Path to file                       |
+| output_path | ```string``` | Output file path, default = source |
+
+Copies the file.
 
 ---
 
