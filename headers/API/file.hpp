@@ -108,6 +108,34 @@ namespace API
 		return 0;
 	}
 
+	static int file_copy(lua_State* L) {
+		LuaStack args(L);
+
+		if (args.size() != 1 && args.size() != 2)
+			throw_error("[file.copy] Incorrect number of arguments!");
+
+		fs::path path = args.get<std::string>();
+		if (!fs::exists(path))
+			throw_error("[file.copy] The file does not exist!");
+		
+		fs::path output_path;
+
+		if (args.size() == 2) {
+			output_path = args.get<std::string>();
+		}
+		else {
+			output_path = path;
+			fs::path extension = output_path.extension();
+
+			output_path.replace_extension("");
+			output_path.replace_filename(output_path.filename().string() + "(copy)" + extension.string());
+		}
+
+		fs::copy_file(path, output_path, fs::copy_options::overwrite_existing);
+
+		return 0;
+	}
+
 	static int file_clear(lua_State* L) {
 		LuaStack args(L);
 
