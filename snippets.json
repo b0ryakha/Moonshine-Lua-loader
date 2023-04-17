@@ -347,6 +347,13 @@
 		  "file.write(path, content[, is_rewrite])"
 		],
 	},
+	
+	"file.copy": {
+		"prefix": "file.copy",
+		"body": [
+		  "file.copy(path[, output_path])"
+		],
+	},
 
 	"file.download": {
 		"prefix": "file.download",
