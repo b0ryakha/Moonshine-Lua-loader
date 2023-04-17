@@ -103,7 +103,12 @@ namespace API
 		if (!fs::exists(path))
 			throw_error("[file.remove] The file does not exist!");
 
-		fs::remove(path);
+		if (path.has_extension()) {
+			fs::remove(path);
+		}
+		else {
+			fs::remove_all(path);
+		}
 
 		return 0;
 	}
