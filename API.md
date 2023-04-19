@@ -879,6 +879,10 @@ vec + vec        -- new vec
 vec - vec        -- new vec
 vec * vec        -- new vec
 vec / vec        -- new vec
+vec + number     -- new vec
+vec - number     -- new vec
+vec * number     -- new vec
+vec / number     -- new vec
 ```
 
 #### <a name="vector2.new"></a> ```new```
