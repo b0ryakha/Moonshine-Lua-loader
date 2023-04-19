@@ -3,13 +3,8 @@
 void throw_error(const std::string& error) noexcept {
     sf::Font font;
 
-    auto close_window = [&] {
-        std::lock_guard<std::mutex> lock(closing_window_m);
-        window.close();
-    };
-
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
-        close_window();
+        window.close();
 
     sf::Text text(error, font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
@@ -26,5 +21,5 @@ void throw_error(const std::string& error) noexcept {
 
     while (window.isOpen() && main_event.type != sf::Event::KeyPressed) {}
 
-    close_window();
+    window.close();
 }

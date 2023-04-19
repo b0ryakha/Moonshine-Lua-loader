@@ -72,12 +72,12 @@ __forceinline void start_program(char* cmd_line) {
             window.draw(background);
             window.draw(entered_text);
             window.draw(label_text);
-            if (cursor_visible) window.draw(cursor);
+
+            if (cursor_visible)
+                window.draw(cursor);
 
             window.display();
         }
-
-        closing_window_m.lock();
 
         while (window.pollEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
@@ -95,7 +95,8 @@ __forceinline void start_program(char* cmd_line) {
                 cursor_in_window_m.unlock();
             }
 
-            if (lua.is_open()) continue;
+            if (lua.is_open())
+                continue;
 
             if (main_event.type == sf::Event::TextEntered) {
                 if (main_event.key.code == 22)                           // 22 = Ctrl + V
@@ -113,8 +114,6 @@ __forceinline void start_program(char* cmd_line) {
                     lua.open(entered_tmp);
             }
         }
-
-        closing_window_m.unlock();
     }
 }
 
@@ -127,6 +126,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     start_program(lpCmdLine);
     return 0;
 }
+
 #elif defined(__linux__)
 int main(int argc, char** argv) {
     FONTS_PATH = "/usr/share/fonts/";

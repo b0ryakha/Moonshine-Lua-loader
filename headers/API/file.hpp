@@ -103,12 +103,7 @@ namespace API
 		if (!fs::exists(path))
 			throw_error("[file.remove] The file does not exist!");
 
-		if (path.has_extension()) {
-			fs::remove(path);
-		}
-		else {
-			fs::remove_all(path);
-		}
+		fs::remove_all(path);
 
 		return 0;
 	}
@@ -130,10 +125,10 @@ namespace API
 		}
 		else {
 			output_path = path;
-			fs::path extension = output_path.extension();
+			std::string extension = path.extension().string();
 
 			output_path.replace_extension("");
-			output_path.replace_filename(output_path.filename().string() + "(copy)" + extension.string());
+			output_path.replace_filename(output_path.filename().string() + " (copy)" + extension);
 		}
 
 		fs::copy_file(path, output_path, fs::copy_options::overwrite_existing);
@@ -149,11 +144,17 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.clear] The file does not exist!");
+			throw_error("[file.clear] The file / folder does not exist!");
 
-		std::ofstream file;
-		file.open(path, std::ofstream::out | std::ofstream::trunc);
-		file.close();
+		if (path.has_extension()) {
+			std::ofstream file;
+			file.open(path, std::ofstream::out | std::ofstream::trunc);
+			file.close();
+		}
+		else {
+			for (const auto& entry : fs::directory_iterator(path))
+				fs::remove_all(entry.path());
+		}
 
 		return 0;
 	}
@@ -166,7 +167,7 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.rename] The file does not exist!");
+			throw_error("[file.rename] The file / folder does not exist!");
 
 		std::string new_name = args.get<std::string>();
 
@@ -184,6 +185,9 @@ namespace API
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
 			throw_error("[file.line_count] The file does not exist!");
+
+		if (path.has_extension())
+			throw_error("[file.line_count] The path must be specified to the folder!");
 
 		std::ifstream file(path);
 		size_t length = std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1;
