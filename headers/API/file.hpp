@@ -118,6 +118,9 @@ namespace API
 		if (!fs::exists(path))
 			throw_error("[file.copy] The file does not exist!");
 		
+		if (!path.has_extension())
+			throw_error("[file.copy] The path must be specified to the file!");
+
 		fs::path output_path;
 
 		if (args.size() == 2) {
