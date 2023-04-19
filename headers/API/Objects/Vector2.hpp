@@ -103,36 +103,69 @@ namespace API
 
             static auto add = [](lua_State* L) {
                 const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-                const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
 
-                lua_push_object<Vector2>(L, { self->x + target->x, self->y + target->y });
+                if (lua_isnumber(L, 2)) {
+                    float number = lua_tonumber(L, 2);
+                    lua_push_object<Vector2>(L, { self->x + number, self->y + number });
+                }
+                else {
+                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                    lua_push_object<Vector2>(L, { self->x + target->x, self->y + target->y });
+                }
+
                 return 1;
             };
 
             static auto sub = [](lua_State* L) {
                 const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-                const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
 
-                lua_push_object<Vector2>(L, { self->x - target->x, self->y - target->y });
+                if (lua_isnumber(L, 2)) {
+                    float number = lua_tonumber(L, 2);
+                    lua_push_object<Vector2>(L, { self->x - number, self->y - number });
+                }
+                else {
+                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                    lua_push_object<Vector2>(L, { self->x - target->x, self->y - target->y });
+                }
+
                 return 1;
             };
 
             static auto mul = [](lua_State* L) {
                 const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-                const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                
+                if (lua_isnumber(L, 2)) {
+                    float number = lua_tonumber(L, 2);
+                    lua_push_object<Vector2>(L, { self->x * number, self->y * number });
+                }
+                else {
+                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                    lua_push_object<Vector2>(L, { self->x * target->x, self->y * target->y });
+                }
 
-                lua_push_object<Vector2>(L, { self->x * target->x, self->y * target->y });
                 return 1;
             };
 
             static auto div = [](lua_State* L) {
                 const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-                const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
 
-                if (target->x == 0 || target->y == 0)
-                    throw_error("[Vector2:div] Division by zero!");
+                if (lua_isnumber(L, 2)) {
+                    float number = lua_tonumber(L, 2);
 
-                lua_push_object<Vector2>(L, { self->x / target->x, self->y / target->y });
+                    if (number == 0)
+                        throw_error("[Vector2:div] Division by zero!");
+
+                    lua_push_object<Vector2>(L, { self->x / number, self->y / number });
+                }
+                else {
+                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+
+                    if (target->x == 0 || target->y == 0)
+                        throw_error("[Vector2:div] Division by zero!");
+
+                    lua_push_object<Vector2>(L, { self->x / target->x, self->y / target->y });
+                }
+
                 return 1;
             };
 
