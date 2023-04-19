@@ -79,7 +79,7 @@ __forceinline void start_program(char* cmd_line) {
             window.display();
         }
 
-        while (window.pollEvent(main_event)) {
+        if (window.waitEvent(main_event)) {
             if (main_event.type == sf::Event::Closed)
                 window.close();
 
