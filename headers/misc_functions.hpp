@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <thread>
+#include <chrono>
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;

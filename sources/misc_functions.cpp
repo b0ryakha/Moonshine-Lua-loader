@@ -19,7 +19,9 @@ void throw_error(const std::string& error) noexcept {
     window.draw(info);
     window.display();
 
-    while (window.isOpen() && main_event.type != sf::Event::KeyPressed) {}
+    while (window.isOpen() && main_event.type != sf::Event::KeyPressed) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 
     window.close();
 }
