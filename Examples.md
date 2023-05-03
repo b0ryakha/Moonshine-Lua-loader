@@ -53,3 +53,37 @@ while true do   -- main loop
     window.display()
 end
 ```
+
+## Set interval function
+```lua
+local cache = {}
+local set_interval = function(func, ticks)
+    if not cache[tostring(func)] then
+        cache[tostring(func)] = { handle = func, cur_tick = 0, ticks = ticks }
+        func()
+    end
+
+    for _, data in pairs(cache) do
+        data.cur_tick = data.cur_tick + 1
+
+        if data.cur_tick >= data.ticks then
+            data.cur_tick = 0
+            data.handle()
+        end
+    end
+end
+
+while true do
+    window.clear()
+
+    set_interval(function()
+        print("first")
+    end, 1000)
+    
+    set_interval(function()
+        print("second")
+    end, 500)
+
+    window.display()
+end
+```
