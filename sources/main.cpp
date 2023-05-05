@@ -8,7 +8,7 @@ sf::RenderWindow window;
 sf::Event main_event;
 std::string FONTS_PATH;
 
-double main_time = 0;
+double main_time = 0.0;
 std::mutex time_m;
 
 size_t print_offset = 0;
@@ -45,7 +45,7 @@ __forceinline void start_program(char* cmd_line) {
 
     sf::Text cursor("_", font, 25);
     bool cursor_visible = true;
-    double cursor_timer = 0;
+    double cursor_timer = 0.0;
 
     while (window.isOpen()) {
         time_m.lock();

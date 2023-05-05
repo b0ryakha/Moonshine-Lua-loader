@@ -12,7 +12,7 @@ private:
     sf::Vector2f m_position = { 0, 0 };
     std::vector<sf::Vector2f> m_points;
 
-    float m_radius = 0;
+    float m_radius = 0.f;
 
     void init();
 

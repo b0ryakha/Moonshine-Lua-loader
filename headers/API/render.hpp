@@ -76,7 +76,7 @@ namespace API
         float w = args.get<float>();
         float h = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
-        float rounding = (args.size() == 6) ? args.get<float>() : 0;
+        float rounding = (args.size() == 6) ? args.get<float>() : 0.f;
 
         SuperEllipse rectangle(sf::Rect<float>(x, y, w, h), rounding, color);
 
@@ -95,7 +95,7 @@ namespace API
         float y = args.get<float>();
         float radius = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
-        float thickness = (args.size() == 6) ? args.get<float>() : 0;
+        float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
         sf::Color outline_color = (args.size() == 6) ? args.get<LuaUserdata, Color>() : sf::Color();
 
         sf::CircleShape circle(radius);
@@ -138,10 +138,10 @@ namespace API
             window.draw(line, 2, sf::Lines);
         };
 
-        for (float i = 0; i < thickness / 2; ++i)
+        for (int i = 0; i < floor(thickness / 2); ++i)
             draw_line(sf::Vector2f(x1, y1 - i), sf::Vector2f(x2, y2 - i));
 
-        for (float i = 0; i < thickness / 2; ++i)
+        for (int i = 0; i < floor(thickness / 2); ++i)
             draw_line(sf::Vector2f(x1, y1 + i), sf::Vector2f(x2, y2 + i));
 
         return 0;
@@ -159,7 +159,7 @@ namespace API
         float y2 = args.get<float>();
         float strength = args.get<float>();
         float alpha = args.get<float>();
-        float rounding = args.size() == 7 ? args.get<float>() : 0;
+        float rounding = args.size() == 7 ? args.get<float>() : 0.f;
 
         
 
