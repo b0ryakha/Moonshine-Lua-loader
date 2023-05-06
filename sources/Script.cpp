@@ -41,11 +41,12 @@ void Script::open(const std::string& path) const {
     open_API();
 
     window.clear();
+    window.display();
     window.setActive(false);
 
     main_thread = new std::thread([&] {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
-            throw_error(std::string(lua_tostring(lua_state, -1)) + ".");
+            throw_error(lua_tostring(lua_state, -1));
 
         lua_pcall(lua_state, 0, 0, 0);
     });
