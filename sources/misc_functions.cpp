@@ -5,7 +5,7 @@ void throw_error(const std::string& error) noexcept {
 
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf")) {
         window.close();
-        std::abort();
+        std::exit(0);
     }
 
     sf::Text text(error, font, 20);
@@ -21,9 +21,11 @@ void throw_error(const std::string& error) noexcept {
     window.draw(info);
     window.display();
 
-    while (window.isOpen() && main_event.type != sf::Event::KeyPressed)
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-
+    while (window.isOpen()) {
+        if (main_event.type == sf::Event::KeyPressed)
+            break;
+    }
+    
     window.close();
-    std::abort();
+    std::exit(0);
 }

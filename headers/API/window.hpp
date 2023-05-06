@@ -140,8 +140,10 @@ namespace API
     }
 
     static int window_await(lua_State* L) {
-        while (main_event.type != sf::Event::MouseButtonPressed && main_event.type != sf::Event::KeyPressed)
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+        while (window.isOpen()) {
+            if (main_event.type == sf::Event::MouseButtonPressed || main_event.type == sf::Event::KeyPressed)
+                break;
+        }
 
         return 0;
     }
