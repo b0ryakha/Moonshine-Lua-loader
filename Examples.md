@@ -11,11 +11,8 @@ end
 
 ## Printing
 ```lua
-while true do   -- main loop
-    window.clear()
-    print("hello", 145, nil, true)  -- output: hello   145   nil   true
-    window.display()
-end
+print("hello", 145, nil, true)  -- output: hello   145   nil   true
+window.display()
 ```
 
 ## Play sound on click
