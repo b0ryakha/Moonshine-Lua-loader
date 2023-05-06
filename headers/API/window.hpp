@@ -140,9 +140,8 @@ namespace API
     }
 
     static int window_await(lua_State* L) {
-        while (main_event.type != sf::Event::MouseButtonPressed && main_event.type != sf::Event::KeyPressed) {
+        while (main_event.type != sf::Event::MouseButtonPressed && main_event.type != sf::Event::KeyPressed)
             std::this_thread::sleep_for(std::chrono::seconds(1));
-        }
 
         return 0;
     }
