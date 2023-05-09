@@ -85,6 +85,20 @@
   - [print()](#print)
   </details>
   
+<details><summary>:satellite: Network</summary>
+
+  - [open()](#network.open)
+  - [close()](#network.close)
+  - [listen()](#network.listen)
+  - [connect()](#network.connect)
+  - [disconnect()](#network.disconnect)
+  - [send()](#network.send)
+  - [receive()](#network.receive)
+  - [client_ready()](#network.client_ready)
+  - [get_local_address()](#network.get_local_address)
+  </details>
+  
+  
 #### Objects
 <details><summary>:musical_note: Sound</summary>
 
@@ -495,11 +509,8 @@ Returns true if scrolling down, else false.
 ### :video_game: Cursor
 #### <a name="cursor.get_pos"></a> ```get_pos```
 ```lua
-cursor.get_pos([regarding_window: bool]): Vector2
+cursor.get_pos(): Vector2
 ```
-| Name             | Type       | Description                                                          |
-| :---:            | :---:      | :---:                                                                |
-| regarding_window | ```bool``` | Is true then function sets position regarding window, default = true |
 
 Returns the cursor [position](#vector2.new).
 
@@ -507,13 +518,12 @@ Returns the cursor [position](#vector2.new).
 
 #### <a name="cursor.set_pos"></a> ```set_pos```
 ```lua
-cursor.set_pos(x: int, y: int[, regarding_window: bool])
+cursor.set_pos(x: int, y: int)
 ```
 | Name             | Type       | Description                                                            |
 | :---:            | :---:      | :---:                                                                  |
 | x                | ```int```  | New cursor x position                                                  |
 | y                | ```int```  | New cursor y position                                                  |
-| regarding_window | ```bool``` | Is true then function return position regarding window, default = true |
 
 Sets the cursor a new position.
 
@@ -530,7 +540,7 @@ Returns true if cursor in window, else false.
 
 #### <a name="cursor.in_bounds"></a> ```in_bounds```
 ```lua
-cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool])
+cursor.in_bounds(x: float, y: float, w: float, h: float)
 ```
 | Name             | Type         | Description                                                            |
 | :---:            | :---:        | :---:                                                                  |
@@ -538,7 +548,6 @@ cursor.in_bounds(x: float, y: float, w: float, h: float[, regarding_window: bool
 | y                | ```float```  | Y position                                                             |
 | w                | ```float```  | Width                                                                  |
 | h                | ```float```  | Height                                                                 |
-| regarding_window | ```bool```   | Is true then function return position regarding window, default = true |
 
 Returns true if cursor in bounds, else false.
 
@@ -766,6 +775,97 @@ print(text: any, ...)
 | text  | ```any```| Text        |
 
 Printing text on screen.
+
+
+### :satellite: Network
+#### <a name="network.open"></a> ```open```
+```lua
+network.open(port: int)
+```
+| Name  | Type     | Description |
+| :---: | :---:    | :---:       |
+| port  | ```int```| Open port   |
+
+Starts the server on the specified port.
+
+---
+
+#### <a name="network.close"></a> ```close```
+```lua
+network.close()
+```
+
+Shuts down the server.
+
+---
+
+#### <a name="network.listen"></a> ```listen```
+```lua
+network.listen()
+```
+
+Listens for incoming requests to connect to the server and connects them.
+
+---
+
+#### <a name="network.client_ready"></a> ```client_ready```
+```lua
+network.client_ready(): bool
+```
+
+Returns true if the client is ready to send or receive data, else false.
+
+---
+
+#### <a name="network.connect"></a> ```connect```
+```lua
+network.connect(ip : string, port: int)
+```
+| Name  | Type        | Description                                       |
+| :---: | :---:       | :---:                                             |
+| ip    | ```string```| IP address at which the connection will be played |
+| port  | ```int```   | Open port                                         |
+
+Connects to the server at the specified address.
+
+---
+
+#### <a name="network.disconnect"></a> ```disconnect```
+```lua
+network.disconnect()
+```
+
+Disconnects from the server.
+
+---
+
+#### <a name="network.send"></a> ```send```
+```lua
+network.send(data: any, ...)
+```
+| Name  | Type     | Description                                      |
+| :---: | :---:    | :---:                                            |
+| data  | ```any```| Data to send (only number, string, boolean, nil) |
+
+Sends data.
+
+---
+
+#### <a name="network.receive"></a> ```receive```
+```lua
+network.receive(): table
+```
+
+Returns a table with the received data, nil on failure.
+
+---
+
+#### <a name="network.get_local_address"></a> ```get_local_address```
+```lua
+network.get_local_address(): string
+```
+
+Returns the local ip address.
 
 
 ### :musical_note: Sound
