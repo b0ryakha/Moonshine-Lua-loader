@@ -40,6 +40,7 @@ public:
 
     size_t size() const noexcept;
     size_t empty() const noexcept;
+    LuaMultiValue get_type(const std::string& key) const;
 
     template<typename T>
     T get(const std::string& key) const { throw_error("[Table] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }

@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)\lua\lib;D:\C++ Libs\SFML\$(PlatformTarget)\lib;D:\C++ Libs\CURL\$(PlatformTarget)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;sfml-network-s.lib;winmm.lib;opengl32.lib;freetype.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,6 +173,7 @@
     <ClInclude Include="headers\API\keyboard.hpp" />
     <ClInclude Include="headers\API\misc.hpp" />
     <ClInclude Include="headers\API\mouse.hpp" />
+    <ClInclude Include="headers\API\network.hpp" />
     <ClInclude Include="headers\API\Objects\Color.hpp" />
     <ClInclude Include="headers\API\Objects\Font.hpp" />
     <ClInclude Include="headers\API\Objects\Sound.hpp" />

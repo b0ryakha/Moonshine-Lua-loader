@@ -65,3 +65,10 @@ size_t LuaTable::size() const noexcept {
 size_t LuaTable::empty() const noexcept {
     return elements.empty();
 }
+
+LuaMultiValue LuaTable::get_type(const std::string& key) const {
+    if (elements.find(key) == elements.end())
+        return LuaMultiValue::Nil;
+
+    return static_cast<LuaMultiValue>(elements.at(key).index());
+}

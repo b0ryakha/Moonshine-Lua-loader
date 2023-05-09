@@ -151,6 +151,18 @@ __forceinline void Script::open_API() const {
         std::make_pair("get_executable_path", API::get_executable_path),
     });
 
+    lua_register_table(lua_state, "network", {
+        std::make_pair("open", API::network_open),
+        std::make_pair("close", API::network_close),
+        std::make_pair("listen", API::network_listen),
+        std::make_pair("connect", API::network_connect),
+        std::make_pair("disconnect", API::network_disconnect),
+        std::make_pair("send", API::network_send),
+        std::make_pair("receive", API::network_receive),
+        std::make_pair("client_ready", API::network_client_ready),
+        std::make_pair("get_local_address", API::network_get_local_address)
+    });
+
     lua_register(lua_state, "print", API::print);
 
     lua_register_class<API::Font>(lua_state, "Font");

@@ -24,6 +24,7 @@
 #include "API/mouse.hpp"
 #include "API/render.hpp"
 #include "API/window.hpp"
+#include "API/network.hpp"
 
 extern sf::RenderWindow window;
 

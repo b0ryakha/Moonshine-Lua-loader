@@ -182,6 +182,9 @@
     <ClInclude Include="headers\API\Objects\View.hpp">
       <Filter>Header Files\API\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="headers\API\network.hpp">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources\Moonshine.rc">
