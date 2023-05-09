@@ -459,6 +459,72 @@
 
 
 
+	"network.open": {
+		"prefix": "network.open",
+		"body": [
+		  "network.open(port)"
+		],
+	},
+	
+	"network.close": {
+		"prefix": "network.close",
+		"body": [
+		  "network.close()"
+		],
+	},
+
+	"network.listen": {
+		"prefix": "network.listen",
+		"body": [
+		  "network.listen()"
+		],
+	},
+
+	"network.client_ready": {
+		"prefix": "network.client_ready",
+		"body": [
+		  "network.client_ready()"
+		],
+	},
+
+	"network.connect": {
+		"prefix": "network.connect",
+		"body": [
+		  "network.connect(ip, port)"
+		],
+	},
+
+	"network.disconnect": {
+		"prefix": "network.disconnect",
+		"body": [
+		  "network.disconnect()"
+		],
+	},
+
+	"network.send": {
+		"prefix": "network.send",
+		"body": [
+		  "network.send(data, ...)"
+		],
+	},
+
+	"network.receive": {
+		"prefix": "network.receive",
+		"body": [
+		  "network.receive()"
+		],
+	},
+
+	"network.get_local_address": {
+		"prefix": "network.get_local_address",
+		"body": [
+		  "network.get_local_address()"
+		],
+	},
+
+
+
+
 	"Sound:new": {
 		"prefix": "Sound:new",
 		"body": [
