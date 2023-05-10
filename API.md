@@ -94,7 +94,6 @@
   - [disconnect()](#network.disconnect)
   - [send()](#network.send)
   - [receive()](#network.receive)
-  - [client_ready()](#network.client_ready)
   - [get_local_address()](#network.get_local_address)
   </details>
   
@@ -805,15 +804,6 @@ network.listen()
 ```
 
 Listens for incoming requests to connect to the server and connects them.
-
----
-
-#### <a name="network.client_ready"></a> ```client_ready```
-```lua
-network.client_ready(): bool
-```
-
-Returns true if the client is ready to send or receive data, else false.
 
 ---
 
