@@ -159,7 +159,6 @@ __forceinline void Script::open_API() const {
         std::make_pair("disconnect", API::network_disconnect),
         std::make_pair("send", API::network_send),
         std::make_pair("receive", API::network_receive),
-        std::make_pair("client_ready", API::network_client_ready),
         std::make_pair("get_local_address", API::network_get_local_address)
     });
 
