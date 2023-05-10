@@ -84,3 +84,27 @@ while true do
     window.display()
 end
 ```
+
+## Server
+```lua
+while true do
+    network.listen()
+
+    if network.client_ready() then
+        network.send("word", 100, nil, true)
+    end
+end
+```
+
+## Client
+```lua
+-- server sends { "word", 100, nil, true }
+
+while true do
+    local data = network.receive()
+    if not data then return end
+
+    print(data[1], data[2], data[3], data[4])  -- output: "word", 100, nil, true
+    window.display()
+end
+```
