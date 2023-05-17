@@ -87,11 +87,8 @@
   
 <details><summary>:satellite: Network</summary>
 
-  - [open()](#network.open)
-  - [close()](#network.close)
-  - [listen()](#network.listen)
-  - [connect()](#network.connect)
-  - [disconnect()](#network.disconnect)
+  - [bind()](#network.bind)
+  - [unbind()](#network.unbind)
   - [send()](#network.send)
   - [receive()](#network.receive)
   - [get_local_address()](#network.get_local_address)
@@ -777,67 +774,38 @@ Printing text on screen.
 
 
 ### :satellite: Network
-#### <a name="network.open"></a> ```open```
+#### <a name="network.bind"></a> ```bind```
 ```lua
-network.open(port: int)
+network.bind(port: int)
 ```
-| Name  | Type     | Description |
-| :---: | :---:    | :---:       |
-| port  | ```int```| Open port   |
+| Name  | Type        | Description |
+| :---: | :---:       | :---:       |
+| port  | ```int```   | Valid port  |
 
-Starts the server on the specified port.
+Binds a local socket to a port over UDP.
 
 ---
 
-#### <a name="network.close"></a> ```close```
+#### <a name="network.unbind"></a> ```unbind```
 ```lua
-network.close()
+network.unbind()
 ```
 
-Shuts down the server.
-
----
-
-#### <a name="network.listen"></a> ```listen```
-```lua
-network.listen()
-```
-
-Listens for incoming requests to connect to the server and connects them.
-
----
-
-#### <a name="network.connect"></a> ```connect```
-```lua
-network.connect(ip : string, port: int)
-```
-| Name  | Type        | Description                                       |
-| :---: | :---:       | :---:                                             |
-| ip    | ```string```| IP address at which the connection will be played |
-| port  | ```int```   | Open port                                         |
-
-Connects to the server at the specified address.
-
----
-
-#### <a name="network.disconnect"></a> ```disconnect```
-```lua
-network.disconnect()
-```
-
-Disconnects from the server.
+Unbinds the socket from the port.
 
 ---
 
 #### <a name="network.send"></a> ```send```
 ```lua
-network.send(data: any, ...)
+network.send([ip: string, port: int, ]packet: table)
 ```
-| Name  | Type     | Description                                      |
-| :---: | :---:    | :---:                                            |
-| data  | ```any```| Data to send (only number, string, boolean, nil) |
+| Name   | Type        | Description                                                    |
+| :---:  | :---:       | :---:                                                          |
+| ip     | ```string```| Recipient's IP address                                         |
+| port   | ```int```   | Recipient's port                                               |
+| packet | ```table``` | Data to send (table include only number, string, boolean, nil) |
 
-Sends data.
+Sends data to a specific address or to all binded clients.
 
 ---
 
