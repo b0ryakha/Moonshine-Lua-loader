@@ -476,7 +476,7 @@
 	"network.send": {
 		"prefix": "network.send",
 		"body": [
-		  "network.send([ip, port, ]data)"
+		  "network.send([ip, port, ]packet)"
 		],
 	},
 
