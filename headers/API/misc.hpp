@@ -3,15 +3,14 @@
 #include "lua_extensions.hpp"
 
 extern sf::RenderWindow window;
-extern std::string FONTS_PATH;
-extern size_t print_offset;
+extern std::string font_path;
+inline sf::Vector2f print_offset{ 0.f, 0.f };
 
 namespace API
 {
 	static int print(lua_State* L) {
         LuaStack args(L);
         std::string result;
-        constexpr size_t size = 20;
 
         for (size_t i = 0, args_size = args.size(); i < args_size; ++i) {
             lua_getglobal(L, "tostring");
@@ -58,19 +57,24 @@ namespace API
         }
 
         sf::Font font;
-        if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+        if (!font.loadFromFile(font_path + "arial.ttf"))
             throw_error("[print] Failed to create the font face.");
 
-        sf::Text text(sf::String::fromUtf8(result.begin(), result.end()), font, size);
-        text.setPosition(sf::Vector2f(0, print_offset));
+        sf::Text text(sf::String::fromUtf8(result.begin(), result.end()), font, 20);
+        text.setPosition(print_offset);
         text.setFillColor(sf::Color::White);
 
         window.draw(text);
 
-        print_offset += size;
+        print_offset.y += text.getLocalBounds().height;
 
-        if (print_offset >= window.getSize().y)
-            print_offset = 0;
+        if (print_offset.y >= window.getSize().y) {
+            print_offset.x += text.getLocalBounds().width;
+            print_offset.y = 0.f;
+        }
+
+        if (print_offset.x >= window.getSize().x)
+            print_offset = { 0.f, 0.f };
 
         return 0;
     }

@@ -15,10 +15,10 @@ private:
 
     __forceinline void check_errors(LuaMultiValue expected_type, size_t index) const {
         if (index < 0 || index >= elements.size())
-            throw_error("[Stack] Attempt to get an element under index '" + std::to_string(index) + "', size = " + std::to_string(elements.size()) + ".");
+            throw_error("[Stack assert] Out of range, index = " + std::to_string(index) + ", size = " + std::to_string(elements.size()) + ".");
 
         if (elements[index].index() != static_cast<size_t>(expected_type))
-            throw_error("[Stack] Attempt to get a type element '" + S_TYPE_NAME[elements[index].index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
+            throw_error("[Stack] Cannot convert '" + LuaMultiValue_s[elements[index].index()] + "' to '" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + "'.");
     }
 
 public:
@@ -34,7 +34,21 @@ public:
     LuaMultiValue get_type(size_t index) const;
 
     template<typename T>
-    T get(size_t index) const { throw_error("[Stack] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+    T get(size_t index) const { throw_error("[Stack assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+
+    template<>
+    short get<short>(size_t index) const {
+        check_errors(LuaMultiValue::Number, index);
+
+        return static_cast<short>(std::get<lua_Number>(elements[index]));
+    }
+
+    template<>
+    ushort_t get<ushort_t>(size_t index) const {
+        check_errors(LuaMultiValue::Number, index);
+
+        return static_cast<ushort_t>(std::get<lua_Number>(elements[index]));
+    }
 
     template<>
     int get<int>(size_t index) const {
@@ -63,6 +77,14 @@ public:
         check_errors(LuaMultiValue::Number, index);
 
         return static_cast<float>(std::get<lua_Number>(elements[index]));
+    }
+
+    template<>
+    char get<char>(size_t index) const {
+        check_errors(LuaMultiValue::String, index);
+
+        const std::string_view tmp = std::move(std::get<std::string>(elements[index]));
+        return tmp.empty() ? '\0' : tmp[0];
     }
 
     template<>

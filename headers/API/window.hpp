@@ -8,7 +8,7 @@
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;
-extern size_t print_offset;
+extern sf::Vector2f print_offset;
 
 namespace API
 {
@@ -45,7 +45,7 @@ namespace API
             window.clear(args.get<LuaUserdata, Color>());
         }
 
-        print_offset = 0;
+        print_offset = { 0.f, 0.f };
 
         return 0;
     }

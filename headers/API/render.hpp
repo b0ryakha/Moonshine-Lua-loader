@@ -10,8 +10,6 @@
 
 #include <string>
 
-extern size_t print_offset;
-
 namespace API
 {
     static int render_measure_text(lua_State* L) {

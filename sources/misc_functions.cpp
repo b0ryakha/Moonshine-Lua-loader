@@ -3,7 +3,7 @@
 void throw_error(const std::string& error) noexcept {
     sf::Font font;
 
-    if (!font.loadFromFile(FONTS_PATH + "arial.ttf")) {
+    if (!font.loadFromFile(font_path + "arial.ttf")) {
         window.close();
         std::exit(0);
     }

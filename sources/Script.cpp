@@ -152,11 +152,8 @@ __forceinline void Script::open_API() const {
     });
 
     lua_register_table(lua_state, "network", {
-        std::make_pair("open", API::network_open),
-        std::make_pair("close", API::network_close),
-        std::make_pair("listen", API::network_listen),
-        std::make_pair("connect", API::network_connect),
-        std::make_pair("disconnect", API::network_disconnect),
+        std::make_pair("bind", API::network_bind),
+        std::make_pair("unbind", API::network_unbind),
         std::make_pair("send", API::network_send),
         std::make_pair("receive", API::network_receive),
         std::make_pair("get_local_address", API::network_get_local_address)

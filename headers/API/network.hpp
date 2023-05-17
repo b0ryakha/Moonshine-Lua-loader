@@ -2,81 +2,53 @@
 
 #include <SFML/Network.hpp>
 #include <memory>
+#include <unordered_map>
 
 #include "lua_extensions.hpp"
 
 namespace API
 {
-    static std::unique_ptr<sf::TcpListener> listener;
-    static std::unique_ptr<sf::TcpSocket> local;
+    static std::unordered_map<ushort_t, sf::IpAddress> clients;
 
-    static int network_open(lua_State* L) {
-        LuaStack args(L);
-        
-        if (args.size() != 1)
-            throw_error("[network.open] Incorrect number of arguments!");
+    static std::unique_ptr<sf::UdpSocket> l_socket;
+    static const sf::IpAddress l_ip = sf::IpAddress::getLocalAddress();
+    static ushort_t l_port = 0;
 
-        if (listener != nullptr || local != nullptr)
-            throw_error("[network.open] Host is already a server or client!");
+    static char socket_type = '\0';
 
-        size_t port = args.get<size_t>();
-
-        listener = std::make_unique<sf::TcpListener>();
-        listener->setBlocking(false);
-
-        local = std::make_unique<sf::TcpSocket>();
-
-        if (listener->listen(port) != sf::Socket::Done)
-            throw_error("[network.open] Server creation error!");
-
-        return 0;
-    }
-
-    static int network_close(lua_State* L) {
-        if (listener == nullptr || local == nullptr)
-            return 0;
-
-        listener->close();
-        listener = nullptr;
-
-        local->disconnect();
-        local = nullptr;
-
-        return 0;
-    }
-
-    static int network_listen(lua_State* L) {
-        if (listener == nullptr)
-            throw_error("[network.listen] Server closed!");
-
-        listener->accept(*local);
-
-        return 0;
-    }
-
-    static int network_connect(lua_State* L) {
+    static int network_bind(lua_State* L) {
         LuaStack args(L);
 
         if (args.size() != 2)
-            throw_error("[network.connect] Incorrect number of arguments!");
+            throw_error("[network.bind] Incorrect number of arguments!");
 
-        std::string ip = args.get<std::string>();
-        size_t port = args.get<size_t>();
+        if (l_port != 0)
+            return 0;
 
-        local = std::make_unique<sf::TcpSocket>();
+        l_port = args.get<ushort_t>();
+        socket_type = args.get<char>();
 
-        if (local->connect(ip, port) != sf::Socket::Done)
-            throw_error("[network.connect] Connection error!");
+        if (socket_type != 's' && socket_type != 'c')
+            throw_error("[network.bind] Invalid socket type!");
+
+        l_socket = std::make_unique<sf::UdpSocket>();
+        l_socket->setBlocking(false);
+
+        if (l_socket->bind(l_port) != sf::Socket::Done)
+            throw_error("[network.bind] Binding error!");
 
         return 0;
     }
 
-    static int network_disconnect(lua_State* L) {
-        if (listener != nullptr || local == nullptr)
+    static int network_unbind(lua_State* L) {
+        if (socket_type == '\0')
             return 0;
 
-        local->disconnect();
-        local = nullptr;
+        socket_type = '\0';
+        l_socket->unbind();
+        l_socket = nullptr;
+
+        clients.clear();
 
         return 0;
     }
@@ -84,53 +56,82 @@ namespace API
     static int network_send(lua_State* L) {
         LuaStack args(L);
 
-        if (args.empty())
+        if (args.size() != 1 && args.size() != 3)
             throw_error("[network.send] Incorrect number of arguments!");
 
-        if (local == nullptr)
-            throw_error("[network.send] Connection error!");
+        if (socket_type == '\0')
+            throw_error("[network.send] Local socket is not bind!");
+
+        const std::string recipient_ip = args.size() == 1 ? "" : args.get<std::string>();
+        const ushort_t recipient_port = args.size() == 1 ? 0 : args.get<ushort_t>();
+        const LuaTable table = args.get<LuaTable>();
 
         sf::Packet packet;
-        
-        packet << args.size();
+        packet << table.size();
 
-        for (size_t i = 0, args_size = args.size(); i < args_size; ++i) {
-            switch (args.get_type(i)) {
+        for (size_t i = 1, size = table.size(); i <= size; ++i) {
+            const std::string key = std::to_string(i);
+
+            switch (table.get_type(key)) {
                 case LuaMultiValue::Number:
-                    packet << static_cast<size_t>(LuaMultiValue::Number) << args.get<double>(i);
+                    packet << static_cast<size_t>(LuaMultiValue::Number) << table.get<double>(key);
                     break;
                 case LuaMultiValue::String:
-                    packet << static_cast<size_t>(LuaMultiValue::String) << args.get<std::string>(i);
+                    packet << static_cast<size_t>(LuaMultiValue::String) << table.get<std::string>(key);
                     break;
                 case LuaMultiValue::Boolean:
-                    packet << static_cast<size_t>(LuaMultiValue::Boolean) << args.get<bool>(i);
+                    packet << static_cast<size_t>(LuaMultiValue::Boolean) << table.get<bool>(key);
                     break;
                 default:
                     packet << static_cast<size_t>(LuaMultiValue::Nil);
             }
         }
         
-        local->send(packet);
+        if (socket_type == 's') {
+            if (recipient_port != 0)
+                clients[recipient_port] = recipient_ip;
+
+            for (auto it = clients.begin(), end = clients.end(); it != end; ++it) {
+                if (it->first == l_port && it->second == l_ip)
+                    continue;
+
+                if (l_socket->send(packet, it->second, it->first) == sf::Socket::Disconnected) {
+                    it = clients.erase(it);
+                    --it;
+                }
+            }
+        }
+        else {
+            l_socket->send(packet, recipient_ip, recipient_port);
+        }
 
         return 0;
     }
 
     static int network_receive(lua_State* L) {
-        if (local == nullptr) {
+        if (l_socket == nullptr) {
             lua_pushnil(L);
             return 1;
         }
 
         sf::Packet packet;
-        size_t size;
+        sf::IpAddress new_ip;
+        ushort_t new_port;
 
-        local->receive(packet);
-        
-        if (!(packet >> size)) {
+        if (l_socket->receive(packet, new_ip, new_port) != sf::Socket::Done) {
             lua_pushnil(L);
             return 1;
         }
         
+        if (socket_type == 's')
+            clients[new_port] = std::move(new_ip);
+
+        size_t size;
+        if (!(packet >> size)) {
+            lua_pushnil(L);
+            return 1;
+        }
+
         std::vector<LuaMultiValue_t> result;
         result.reserve(size);
 
@@ -173,7 +174,7 @@ namespace API
     }
 
     static int network_get_local_address(lua_State* L) {
-        lua_pushstring(L, sf::IpAddress::getLocalAddress().toString().c_str());
+        lua_pushstring(L, l_ip.toString().c_str());
         return 1;
     }
 }

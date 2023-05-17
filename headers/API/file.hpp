@@ -101,7 +101,7 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.remove] The file does not exist!");
+			throw_error("[file.remove] File does not exist!");
 
 		fs::remove_all(path);
 
@@ -116,10 +116,10 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.copy] The file does not exist!");
+			throw_error("[file.copy] File does not exist!");
 		
 		if (!path.has_extension())
-			throw_error("[file.copy] The path must be specified to the file!");
+			throw_error("[file.copy] Path must be specified to the file!");
 
 		fs::path output_path;
 
@@ -147,7 +147,7 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.clear] The file / folder does not exist!");
+			throw_error("[file.clear] File or folder does not exist!");
 
 		if (path.has_extension()) {
 			std::ofstream file;
@@ -170,7 +170,7 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.rename] The file / folder does not exist!");
+			throw_error("[file.rename] File or folder does not exist!");
 
 		std::string new_name = args.get<std::string>();
 
@@ -187,10 +187,10 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.line_count] The file does not exist!");
+			throw_error("[file.line_count] File does not exist!");
 
 		if (path.has_extension())
-			throw_error("[file.line_count] The path must be specified to the folder!");
+			throw_error("[file.line_count] Path must be specified to the folder!");
 
 		std::ifstream file(path);
 		size_t length = std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1;
@@ -211,7 +211,7 @@ namespace API
 		size_t line_number = (args.size() == 2) ? args.get<size_t>() : 0;
 
 		if (!fs::exists(path))
-			throw_error("[file.read] The file does not exist!");
+			throw_error("[file.read] File does not exist!");
 
 		std::ifstream file(path);
 		std::vector<LuaMultiValue_t> file_content;
@@ -253,7 +253,7 @@ namespace API
 		bool is_rewrite = (args.size() == 3) ? args.get<bool>() : false;
 
 		if (!fs::exists(path))
-			throw_error("[file.write] The file does not exist!");
+			throw_error("[file.write] File does not exist!");
 
 		std::stringstream buffer;
 		
@@ -290,10 +290,10 @@ namespace API
 		fs::path path = args.get<std::string>();
 
 		if (path.has_extension())
-			throw_error("[file.get_list] The path must be specified to the folder!");
+			throw_error("[file.get_list] Path must be specified to the folder!");
 
 		if (!fs::exists(path))
-			throw_error("[file.get_list] The folder does not exist!");
+			throw_error("[file.get_list] Folder does not exist!");
 
 		std::vector<LuaMultiValue_t> list;
 

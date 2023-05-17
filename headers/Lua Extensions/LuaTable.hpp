@@ -14,7 +14,7 @@
 #include "LuaNil.hpp"
 
 enum class LuaMultiValue : size_t { Number = 0, Function, String, Boolean, Table, Userdata, Nil };
-inline const std::array<std::string, 7> S_TYPE_NAME = { "Number", "Function", "String", "Boolean", "Table", "Userdata", "Nil" };
+inline const std::array<std::string, 7> LuaMultiValue_s = { "Number", "Function", "String", "Boolean", "Table", "Userdata", "Nil" };
 
 class LuaTable final {
 private:
@@ -23,10 +23,10 @@ private:
 
     __forceinline void check_errors(LuaMultiValue expected_type, std::string key) const {
         if (elements.find(key) == elements.end())
-            throw_error("[Table] Attempt to get element under key '" + key + "'.");
+            throw_error("[Table assert] Out of range, key = '" + key + "'.");
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type))
-            throw_error("[Table] Attempt to get a type element '" + S_TYPE_NAME[elements.at(key).index()] + "', but expected '" + S_TYPE_NAME[static_cast<size_t>(expected_type)] + "'.");
+            throw_error("[Table] Cannot convert '" + LuaMultiValue_s[elements.at(key).index()] + "' to '" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + "'.");
     }
 
 public:
@@ -43,7 +43,21 @@ public:
     LuaMultiValue get_type(const std::string& key) const;
 
     template<typename T>
-    T get(const std::string& key) const { throw_error("[Table] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+    T get(const std::string& key) const { throw_error("[Table assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+
+    template<>
+    short get<short>(const std::string& key) const {
+        check_errors(LuaMultiValue::Number, key);
+
+        return static_cast<short>(std::get<lua_Number>(elements.at(key)));
+    }
+
+    template<>
+    ushort_t get<ushort_t>(const std::string& key) const {
+        check_errors(LuaMultiValue::Number, key);
+
+        return static_cast<ushort_t>(std::get<lua_Number>(elements.at(key)));
+    }
 
     template<>
     int get<int>(const std::string& key) const {
@@ -72,6 +86,14 @@ public:
         check_errors(LuaMultiValue::Number, key);
 
         return static_cast<float>(std::get<lua_Number>(elements.at(key)));
+    }
+
+    template<>
+    char get<char>(const std::string& key) const {
+        check_errors(LuaMultiValue::String, key);
+
+        const std::string_view tmp = std::move(std::get<std::string>(elements.at(key)));
+        return tmp.empty() ? '\0' : tmp[0];
     }
 
     template<>

@@ -6,12 +6,10 @@
 
 sf::RenderWindow window;
 sf::Event main_event;
-std::string FONTS_PATH;
+std::string font_path;
 
 double main_time = 0.0;
 std::mutex time_m;
-
-size_t print_offset = 0;
 
 __forceinline void start_program(char* cmd_line) {
     window.create(sf::VideoMode(1400, 800), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
@@ -34,7 +32,7 @@ __forceinline void start_program(char* cmd_line) {
     background.setScale(0.73, 0.74);
 
     sf::Font font;
-    if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+    if (!font.loadFromFile(font_path + "arial.ttf"))
         throw_error("Failed to create the font face.");
 
     sf::Text label_text("Script name:", font, 25);
@@ -121,7 +119,7 @@ __forceinline void start_program(char* cmd_line) {
 #include <windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
-    FONTS_PATH = "C:/WINDOWS/Fonts/";
+    font_path = "C:/WINDOWS/Fonts/";
 
     start_program(lpCmdLine);
     return 0;
@@ -129,7 +127,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 #elif defined(__linux__)
 int main(int argc, char** argv) {
-    FONTS_PATH = "/usr/share/fonts/";
+    font_path = "/usr/share/fonts/";
 
     start_program(argv[0]);
     return 0;
