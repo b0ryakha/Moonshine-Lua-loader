@@ -776,11 +776,12 @@ Printing text on screen.
 ### :satellite: Network
 #### <a name="network.bind"></a> ```bind```
 ```lua
-network.bind(port: int)
+network.bind(port: int, socket_type: char)
 ```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| port  | ```int```   | Valid port  |
+| Name         | Type       | Description                                  |
+| :---:        | :---:      | :---:                                        |
+| port         | ```int```  | Valid port                                   |
+| socket_type  | ```char``` | Socket type ('s' for server, 'c' for client) |
 
 Binds a local socket to a port over UDP.
 
