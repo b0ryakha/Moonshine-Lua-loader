@@ -87,20 +87,34 @@ end
 
 ## Server
 ```lua
-while true do
-    network.listen()
+network.bind(54000, 's')
 
-    network.send("word", 100, nil, true)
+while true do
+    network.send({ "word", 100, nil, true })
+    
+    -- client sends { "hi!" }
+    local data = network.receive()
+    if not data then return end
+
+    print(data[1])  -- output: "hi!"
+    window.display()
 end
 ```
 
 ## Client
 ```lua
--- server sends { "word", 100, nil, true }
+local server_ip = network.get_local_address()   -- local ip
+local server_port = 54000
+
+local unique_port = 53002
+network.bind(unique_port, 'c')
 
 while true do
+    -- server sends { "word", 100, nil, true }
     local data = network.receive()
     if not data then return end
+    
+    network.send(server_ip, server_port, { "hi!" })
 
     print(data[1], data[2], data[3], data[4])  -- output: "word", 100, nil, true
     window.display()
