@@ -462,7 +462,7 @@
 	"network.bind": {
 		"prefix": "network.bind",
 		"body": [
-		  "network.bind(port)"
+		  "network.bind(port, socket_type)"
 		],
 	},
 
