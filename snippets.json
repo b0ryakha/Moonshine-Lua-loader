@@ -459,52 +459,24 @@
 
 
 
-	"network.open": {
-		"prefix": "network.open",
+	"network.bind": {
+		"prefix": "network.bind",
 		"body": [
-		  "network.open(port)"
-		],
-	},
-	
-	"network.close": {
-		"prefix": "network.close",
-		"body": [
-		  "network.close()"
+		  "network.bind(port)"
 		],
 	},
 
-	"network.listen": {
-		"prefix": "network.listen",
+	"network.unbind": {
+		"prefix": "network.unbind",
 		"body": [
-		  "network.listen()"
-		],
-	},
-
-	"network.client_ready": {
-		"prefix": "network.client_ready",
-		"body": [
-		  "network.client_ready()"
-		],
-	},
-
-	"network.connect": {
-		"prefix": "network.connect",
-		"body": [
-		  "network.connect(ip, port)"
-		],
-	},
-
-	"network.disconnect": {
-		"prefix": "network.disconnect",
-		"body": [
-		  "network.disconnect()"
+		  "network.unbind()"
 		],
 	},
 
 	"network.send": {
 		"prefix": "network.send",
 		"body": [
-		  "network.send(data, ...)"
+		  "network.send([ip, port, ]data)"
 		],
 	},
 
