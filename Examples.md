@@ -90,9 +90,7 @@ end
 while true do
     network.listen()
 
-    if network.client_ready() then
-        network.send("word", 100, nil, true)
-    end
+    network.send("word", 100, nil, true)
 end
 ```
 
