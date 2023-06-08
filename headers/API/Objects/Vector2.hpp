@@ -70,7 +70,6 @@ namespace API
                             break;
                         case 2:
                             self->y = new_value;
-                            break;
                     }
                 }
                 else {

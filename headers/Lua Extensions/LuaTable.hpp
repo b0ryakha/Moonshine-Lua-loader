@@ -21,9 +21,9 @@ private:
     std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaUserdata, LuaNil>> elements;
     mutable size_t counter_of_get = 0;
 
-    __forceinline void check_errors(LuaMultiValue expected_type, std::string key) const {
+    __forceinline void check_errors(LuaMultiValue expected_type, std::string_view key) const {
         if (elements.find(key) == elements.end())
-            throw_error("[Table assert] Out of range, key = '" + key + "'.");
+            throw_error("[Table assert] Out of range, key = '" + std::string(key) + "'.");
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type))
             throw_error("[Table] Cannot convert '" + LuaMultiValue_s[elements.at(key).index()] + "' to '" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + "'.");
@@ -33,41 +33,44 @@ public:
     LuaTable() = default;
     LuaTable(lua_State* lua_state, int index);
     LuaTable(const LuaTable& other);
-    LuaTable(LuaTable&& tmp) noexcept;
+
+    template<typename T>
+    LuaTable(LuaTable&& tmp) noexcept : elements(std::forward<T>(tmp.elements)) {}
+
     ~LuaTable() = default;
     LuaTable& operator=(const LuaTable& other);
     LuaTable& operator=(LuaTable&& tmp) noexcept;
 
     size_t size() const noexcept;
     size_t empty() const noexcept;
-    LuaMultiValue get_type(const std::string& key) const;
+    LuaMultiValue get_type(std::string_view key) const;
 
     template<typename T>
-    T get(const std::string& key) const { throw_error("[Table assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+    T get(std::string_view key) const { throw_error("[Table assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
 
     template<>
-    short get<short>(const std::string& key) const {
+    short get<short>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         return static_cast<short>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    ushort_t get<ushort_t>(const std::string& key) const {
+    ushort_t get<ushort_t>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         return static_cast<ushort_t>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    int get<int>(const std::string& key) const {
+    int get<int>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         return static_cast<int>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    size_t get<size_t>(const std::string& key) const {
+    size_t get<size_t>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         const lua_Number tmp = std::get<lua_Number>(elements.at(key));
@@ -75,50 +78,50 @@ public:
     }
 
     template<>
-    double get<double>(const std::string& key) const {
+    double get<double>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         return std::get<lua_Number>(elements.at(key));
     }
 
     template<>
-    float get<float>(const std::string& key) const {
+    float get<float>(std::string_view key) const {
         check_errors(LuaMultiValue::Number, key);
 
         return static_cast<float>(std::get<lua_Number>(elements.at(key)));
     }
 
     template<>
-    char get<char>(const std::string& key) const {
+    char get<char>(std::string_view key) const {
         check_errors(LuaMultiValue::String, key);
 
-        const std::string_view tmp = std::move(std::get<std::string>(elements.at(key)));
-        return tmp.empty() ? '\0' : tmp[0];
+        const std::string_view tmp{std::get<std::string>(elements.at(key)).c_str(), std::get<std::string>(elements.at(key)).size()};
+        return *(tmp.data());
     }
 
     template<>
-    std::string get<std::string>(const std::string& key) const {
+    std::string get<std::string>(std::string_view key) const {
         check_errors(LuaMultiValue::String, key);
 
         return std::get<std::string>(elements.at(key));
     }
 
     template<>
-    bool get<bool>(const std::string& key) const {
+    bool get<bool>(std::string_view key) const {
         check_errors(LuaMultiValue::Boolean, key);
 
         return static_cast<bool>(std::get<LuaBoolean>(elements.at(key)));
     }
 
     template<>
-    LuaNil get<LuaNil>(const std::string& key) const {
+    LuaNil get<LuaNil>(std::string_view key) const {
         check_errors(LuaMultiValue::Nil, key);
 
         return std::get<LuaNil>(elements.at(key));
     }
 
     template<>
-    LuaTable get<LuaTable>(const std::string& key) const {
+    LuaTable get<LuaTable>(std::string_view key) const {
         check_errors(LuaMultiValue::Table, key);
 
         return *(std::get<std::shared_ptr<LuaTable>>(elements.at(key)));
@@ -130,7 +133,7 @@ public:
     }
 
     template<typename T, typename Class>
-    Class get(const std::string& key) const {
+    Class get(std::string_view key) const {
         check_errors(LuaMultiValue::Userdata, key);
 
         return *(*static_cast<Class**>(std::get<LuaUserdata>(elements.at(key))));

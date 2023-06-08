@@ -33,8 +33,6 @@ LuaStack::LuaStack(lua_State* lua_state) {
 
 LuaStack::LuaStack(const LuaStack& other) : elements(other.elements) {}
 
-LuaStack::LuaStack(LuaStack&& tmp) noexcept : elements(std::move(tmp.elements)) {}
-
 LuaStack& LuaStack::operator=(const LuaStack& other) {
     if (this != &other)
         elements = other.elements;

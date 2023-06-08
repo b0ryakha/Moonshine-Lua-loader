@@ -112,7 +112,6 @@ namespace API
                             break;
                         case 4:
                             self->a = new_value;
-                            break;
                     }
                 }
                 else {

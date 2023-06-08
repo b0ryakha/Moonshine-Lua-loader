@@ -1,6 +1,6 @@
 #include "Script.hpp"
 
-Script::Script(const std::string& path) {
+Script::Script(std::string_view path) {
     open(path);
 }
 
@@ -8,7 +8,7 @@ Script::~Script() {
     close();
 }
 
-void Script::close() const {
+void Script::close() {
     if (is_open()) {
         delete main_thread;
         main_thread = nullptr;
@@ -20,7 +20,7 @@ void Script::close() const {
     window.setActive(true);
 }
 
-void Script::open(const std::string& path) const {
+void Script::open(std::string_view path) {
     if (is_open())
         return;
 
@@ -29,7 +29,7 @@ void Script::open(const std::string& path) const {
     if (lua_state == nullptr)
         throw_error("Failed to create lua state.");
 
-    lua_path = std::move(const_cast<std::string&>(path));
+    lua_path = std::move(path);
 
     if (!lua_path.empty() && lua_path[0] == '\"' && lua_path[lua_path.length() - 1] == '\"')
         lua_path = std::string(lua_path.begin() + 1, lua_path.end() - 1);
@@ -54,7 +54,7 @@ void Script::open(const std::string& path) const {
     main_thread->detach();
 }
 
-__forceinline void Script::open_API() const {
+__forceinline void Script::open_API() {
     lua_register_table(lua_state, "render", {
         std::make_pair("text", API::render_text),
         std::make_pair("sprite", API::render_sprite),

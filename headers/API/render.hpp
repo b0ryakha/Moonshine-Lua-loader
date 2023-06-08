@@ -19,9 +19,9 @@ namespace API
             throw_error("[render.measure_text] Incorrect number of arguments!");
 
         Font font = args.get<LuaUserdata, Font>();
-        std::string text = args.get<std::string>();
+        const std::string text = args.get<std::string>();
 
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), font, font.get_size());
+        sf::Text _text(sf::String::fromUtf8(text.cbegin(), text.cend()), font, font.get_size());
 
         lua_push_object<Vector2>(L, {
             _text.getLocalBounds().width,
@@ -51,10 +51,10 @@ namespace API
         float x = args.get<float>();
         float y = args.get<float>();
         Font font = args.get<LuaUserdata, Font>();
-        std::string text = args.get<std::string>();
+        const std::string text = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text _text(sf::String::fromUtf8(text.begin(), text.end()), font, font.get_size());
+        sf::Text _text(sf::String::fromUtf8(text.cbegin(), text.cend()), font, font.get_size());
         _text.setPosition(sf::Vector2f(x, y));
         _text.setFillColor(color);
 

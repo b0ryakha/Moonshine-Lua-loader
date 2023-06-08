@@ -23,7 +23,7 @@ namespace API
         if (args.size() != 1)
             throw_error("[window.capture] Incorrect number of arguments!");
 
-        std::string path = args.get<std::string>();
+        const std::string path = args.get<std::string>();
         sf::Texture screenshot;
 
         screenshot.create(window.getSize().x, window.getSize().y);

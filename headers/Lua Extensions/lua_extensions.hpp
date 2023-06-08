@@ -6,10 +6,10 @@
 #include "misc_functions.hpp"
 #include "LuaStack.hpp"
 
-void lua_register_table(lua_State* L, const std::string& name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
+void lua_register_table(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
 
 template<typename Class>
-__forceinline void lua_register_class(lua_State* L, const std::string& name) {
+__forceinline void lua_register_class(lua_State* L, std::string_view name) {
 	lua_register_table(L, name, { std::make_pair("new", Class::reg) });
 }
 
@@ -22,8 +22,8 @@ __forceinline void lua_newclass(lua_State* L) {
 };
 
 template<typename Class>
-__forceinline Class* lua_get_object(lua_State* L, const std::string& class_name, size_t index) {
-	return *static_cast<Class**>(luaL_checkudata(L, index, class_name.c_str()));
+__forceinline Class* lua_get_object(lua_State* L, std::string_view class_name, size_t index) {
+	return *static_cast<Class**>(luaL_checkudata(L, index, class_name.data()));
 };
 
 template<typename Class>
@@ -55,4 +55,4 @@ void lua_push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
 	Class::push_to_lua(L);
 }
 
-void lua_setmethods(lua_State* L, const std::string& name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods);
+void lua_setmethods(lua_State* L, std::string_view name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods);

@@ -24,7 +24,10 @@ private:
 public:
     LuaStack(lua_State* lua_state);
     LuaStack(const LuaStack& other);
-    LuaStack(LuaStack&& tmp) noexcept;
+
+    template<typename T>
+    LuaStack(LuaStack&& tmp) noexcept : elements(std::forward<T>(tmp.elements)) {}
+
     ~LuaStack() = default;
     LuaStack& operator=(const LuaStack& other);
     LuaStack& operator=(LuaStack&& tmp) noexcept;
@@ -83,8 +86,8 @@ public:
     char get<char>(size_t index) const {
         check_errors(LuaMultiValue::String, index);
 
-        const std::string_view tmp = std::move(std::get<std::string>(elements[index]));
-        return tmp.empty() ? '\0' : tmp[0];
+        const std::string_view tmp{std::get<std::string>(elements[index]).c_str(), std::get<std::string>(elements[index]).size()};
+        return *(tmp.data());
     }
 
     template<>

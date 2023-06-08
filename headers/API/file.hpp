@@ -7,14 +7,8 @@
 #include <vector>
 #include <string>
 #include <iterator>
+#include <optional>
 #include <cstdio>
-
-#pragma comment(lib, "Normaliz.lib")
-#pragma comment(lib, "Wldap32.lib")
-#pragma comment(lib, "Crypt32.lib")
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment(lib, "libcurl_a.lib")
-
 #include <curl\curl.h>
 
 namespace fs = std::filesystem;
@@ -28,7 +22,7 @@ namespace API
 			throw_error("[file.download] Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
-		std::string url = args.get<std::string>();
+		const std::string_view url = args.get<std::string>();
 
 		if (fs::exists(path))
 			throw_error("[file.download] Such a file already exists!");
@@ -172,7 +166,7 @@ namespace API
 		if (!fs::exists(path))
 			throw_error("[file.rename] File or folder does not exist!");
 
-		std::string new_name = args.get<std::string>();
+		const std::string_view new_name = args.get<std::string>();
 
 		fs::rename(path, (path.parent_path()) / new_name);
 
@@ -244,11 +238,13 @@ namespace API
 
 		fs::path path = args.get<std::string>();
 
-		LuaTable t_content;
-		std::string s_content;
+		std::optional<LuaTable> t_content;
+		std::optional<std::string> s_content;
 
-		if (args.get_type(1) == LuaMultiValue::Table) t_content = args.get<LuaTable>();
-		else s_content = args.get<std::string>();
+		if (args.get_type(1) == LuaMultiValue::Table)
+			t_content.emplace(args.get<LuaTable>());
+		else
+			s_content.emplace(args.get<std::string>());
 
 		bool is_rewrite = (args.size() == 3) ? args.get<bool>() : false;
 
@@ -269,11 +265,11 @@ namespace API
 			file << buffer.str() << "\n";
 
 		if (args.get_type(1) == LuaMultiValue::Table) {
-			for (size_t i = 0, size = t_content.size(); i < size; ++i)
-				file << t_content.get<std::string>(std::to_string(i + 1)) << (i < size - 1 ? "\n" : "");
+			for (size_t i = 0, size = t_content->size(); i < size; ++i)
+				file << t_content->get<std::string>(std::to_string(i + 1)) << (i < size - 1 ? "\n" : "");
 		}
 		else {
-			file << s_content;
+			file << *s_content;
 		}
 
 		file.close();

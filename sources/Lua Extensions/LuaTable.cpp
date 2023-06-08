@@ -10,26 +10,26 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
         const std::string_view key = lua_tostring(lua_state, -1);
 
         switch (lua_type(lua_state, -2)) {
-        case LUA_TTABLE:
-            elements[key] = std::move(std::make_shared<LuaTable>(lua_state, -2));
-            break;
-        case LUA_TSTRING:
-            elements[key] = std::move(std::string(lua_tostring(lua_state, -2)));
-            break;
-        case LUA_TBOOLEAN:
-            elements[key] = LuaBoolean(lua_toboolean(lua_state, -2));
-            break;
-        case LUA_TNUMBER:
-            elements[key] = lua_tonumber(lua_state, -2);
-            break;
-        case LUA_TFUNCTION:
-            elements[key] = lua_tocfunction(lua_state, -2);
-            break;
-        case LUA_TUSERDATA:
-            elements[key] = LuaUserdata(lua_touserdata(lua_state, -2));
-            break;
-        default:
-            elements[key] = LuaNil();
+            case LUA_TTABLE:
+                elements[key] = std::move(std::make_shared<LuaTable>(lua_state, -2));
+                break;
+            case LUA_TSTRING:
+                elements[key] = std::move(std::string(lua_tostring(lua_state, -2)));
+                break;
+            case LUA_TBOOLEAN:
+                elements[key] = LuaBoolean(lua_toboolean(lua_state, -2));
+                break;
+            case LUA_TNUMBER:
+                elements[key] = lua_tonumber(lua_state, -2);
+                break;
+            case LUA_TFUNCTION:
+                elements[key] = lua_tocfunction(lua_state, -2);
+                break;
+            case LUA_TUSERDATA:
+                elements[key] = LuaUserdata(lua_touserdata(lua_state, -2));
+                break;
+            default:
+                elements[key] = LuaNil();
         }
 
         lua_pop(lua_state, 2);
@@ -41,8 +41,6 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
 }
 
 LuaTable::LuaTable(const LuaTable& other) : elements(other.elements) {}
-
-LuaTable::LuaTable(LuaTable&& tmp) noexcept : elements(std::move(tmp.elements)) {}
 
 LuaTable& LuaTable::operator=(const LuaTable& other) {
     if (this != &other)
@@ -66,7 +64,7 @@ size_t LuaTable::empty() const noexcept {
     return elements.empty();
 }
 
-LuaMultiValue LuaTable::get_type(const std::string& key) const {
+LuaMultiValue LuaTable::get_type(std::string_view key) const {
     if (elements.find(key) == elements.end())
         return LuaMultiValue::Nil;
 

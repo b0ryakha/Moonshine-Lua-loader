@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Network.hpp>
-#include <memory>
+#include <optional>
 #include <unordered_map>
 
 #include "lua_extensions.hpp"
@@ -10,7 +10,7 @@ namespace API
 {
     static std::unordered_map<ushort_t, sf::IpAddress> clients;
 
-    static std::unique_ptr<sf::UdpSocket> l_socket;
+    static std::optional<sf::UdpSocket> l_socket;
     static const sf::IpAddress l_ip = sf::IpAddress::getLocalAddress();
     static ushort_t l_port = 0;
 
@@ -31,7 +31,7 @@ namespace API
         if (socket_type != 's' && socket_type != 'c')
             throw_error("[network.bind] Invalid socket type!");
 
-        l_socket = std::make_unique<sf::UdpSocket>();
+        l_socket.emplace();
         l_socket->setBlocking(false);
 
         if (l_socket->bind(l_port) != sf::Socket::Done)
@@ -46,7 +46,7 @@ namespace API
 
         socket_type = '\0';
         l_socket->unbind();
-        l_socket = nullptr;
+        l_socket.reset();
 
         clients.clear();
 
@@ -89,7 +89,7 @@ namespace API
         
         if (socket_type == 's') {
             if (recipient_port != 0)
-                clients[recipient_port] = recipient_ip;
+                clients[recipient_port] = std::move(recipient_ip);
 
             for (auto it = clients.begin(), end = clients.end(); it != end; ++it) {
                 if (it->first == l_port && it->second == l_ip)
@@ -109,7 +109,7 @@ namespace API
     }
 
     static int network_receive(lua_State* L) {
-        if (l_socket == nullptr) {
+        if (!l_socket.has_value()) {
             lua_pushnil(L);
             return 1;
         }

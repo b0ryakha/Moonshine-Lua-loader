@@ -1,6 +1,6 @@
 #include "misc_functions.hpp"
 
-void throw_error(const std::string& error) noexcept {
+void throw_error(std::string_view error) noexcept {
     sf::Font font;
 
     if (!font.loadFromFile(font_path + "arial.ttf")) {
@@ -8,7 +8,7 @@ void throw_error(const std::string& error) noexcept {
         std::exit(0);
     }
 
-    sf::Text text(error, font, 20);
+    sf::Text text(error.data(), font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
     text.setFillColor(sf::Color::Red);
 
