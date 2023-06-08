@@ -33,10 +33,7 @@ public:
     LuaTable() = default;
     LuaTable(lua_State* lua_state, int index);
     LuaTable(const LuaTable& other);
-
-    template<typename T>
-    LuaTable(LuaTable&& tmp) noexcept : elements(std::forward<T>(tmp.elements)) {}
-
+    LuaTable(LuaTable&& tmp) noexcept;
     ~LuaTable() = default;
     LuaTable& operator=(const LuaTable& other);
     LuaTable& operator=(LuaTable&& tmp) noexcept;

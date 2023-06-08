@@ -42,6 +42,8 @@ LuaTable::LuaTable(lua_State* lua_state, int index) {
 
 LuaTable::LuaTable(const LuaTable& other) : elements(other.elements) {}
 
+LuaTable::LuaTable(LuaTable&& tmp) noexcept : elements(std::move(tmp.elements)) {}
+
 LuaTable& LuaTable::operator=(const LuaTable& other) {
     if (this != &other)
         elements = other.elements;

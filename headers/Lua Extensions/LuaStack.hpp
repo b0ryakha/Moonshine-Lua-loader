@@ -24,10 +24,7 @@ private:
 public:
     LuaStack(lua_State* lua_state);
     LuaStack(const LuaStack& other);
-
-    template<typename T>
-    LuaStack(LuaStack&& tmp) noexcept : elements(std::forward<T>(tmp.elements)) {}
-
+    LuaStack(LuaStack&& tmp) noexcept;
     ~LuaStack() = default;
     LuaStack& operator=(const LuaStack& other);
     LuaStack& operator=(LuaStack&& tmp) noexcept;
