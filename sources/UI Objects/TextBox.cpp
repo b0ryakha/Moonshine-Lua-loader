@@ -70,8 +70,8 @@ void TextBox::handleEvent(sf::Event& event) {
         if ((label.findCharacterPos(focus_char).x + label.getScale().x * text_size) < (width + pos_x)) {
             std::string str;
 
-            if (true) {
-                str += std::to_string(event.key.code);//static_cast<char>(event.text.unicode);
+            if (event.text.unicode > 31 && event.text.unicode < 256) {
+                str += static_cast<char>(event.text.unicode);
             }
             else if (event.key.code == 22) { // 22 = Ctrl + V
                 str = std::move(sf::Clipboard::getString());
