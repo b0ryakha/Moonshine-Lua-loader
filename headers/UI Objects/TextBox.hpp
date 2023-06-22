@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <stack>
+
 #include "Label.hpp"
 
 class TextBox final {
@@ -15,6 +17,8 @@ private:
     sf::Clock clock;
     sf::Time time = sf::Time::Zero;
     Label label;
+
+    std::stack<std::string_view> cache;
 
     size_t text_size = 0;
     size_t focus_char = 0;

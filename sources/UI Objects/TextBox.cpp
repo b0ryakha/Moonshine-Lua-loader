@@ -70,10 +70,25 @@ void TextBox::handleEvent(sf::Event& event) {
         if ((label.findCharacterPos(focus_char).x + label.getScale().x * text_size) < (width + pos_x)) {
             std::string str;
 
-            if (event.text.unicode > 31 && event.text.unicode < 256)
-                str += static_cast<char>(event.text.unicode);
-            else if (event.key.code == 22) // 22 = Ctrl + V
+            if (true) {
+                str += std::to_string(event.key.code);//static_cast<char>(event.text.unicode);
+            }
+            else if (event.key.code == 22) { // 22 = Ctrl + V
                 str = std::move(sf::Clipboard::getString());
+            }
+            else if (event.key.code == 26) { // 26 = Ctrl + Z
+                if (cache.size() > 1) {
+                    cache.pop();
+                    text = cache.top();
+                    focus_char = text.length();
+                }
+                else if (!cache.empty()) {
+                    text.clear();
+                    text.shrink_to_fit();
+                    cache = std::stack<std::string_view>();
+                    focus_char = 0;
+                }
+            }
 
             if (!str.empty()) {
                 if (focus_char == text.length())
@@ -82,6 +97,7 @@ void TextBox::handleEvent(sf::Event& event) {
                     text = text.substr(0, focus_char) + str + text.substr(focus_char, text.length() - focus_char);
 
                 focus_char += str.length();
+                cache.push(text);
             }
         }
     }
@@ -90,6 +106,7 @@ void TextBox::handleEvent(sf::Event& event) {
         if (event.key.code == sf::Keyboard::BackSpace) {
             if (focus_char != 0) {
                 text.erase(focus_char - 1, 1);
+                cache.push(text);
 
                 if (focus_char > 0)
                     --focus_char;
@@ -97,16 +114,19 @@ void TextBox::handleEvent(sf::Event& event) {
         }
 
         if (event.key.code == sf::Keyboard::Delete) {
-            if (focus_char != text.length())
+            if (focus_char != text.length()) {
                 text.erase(focus_char, 1);
+                cache.push(text);
+            }
         }
 
         if (event.key.code == sf::Keyboard::Enter) {
-            if (!text.empty())
+            if (!text.empty()) {
                 text_input = text;
-
-            focus_char = 0;
-            text.clear();
+                focus_char = 0;
+                text.clear();
+                cache = std::stack<std::string_view>();
+            }
         }
 
         if (event.key.code == sf::Keyboard::Left) {
