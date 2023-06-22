@@ -4,6 +4,9 @@
 #include "Script.hpp"
 #include "images.hpp"
 
+#include "Label.hpp"
+#include "TextBox.hpp"
+
 sf::RenderWindow window;
 sf::Event main_event;
 std::string font_path;
@@ -31,19 +34,14 @@ __forceinline void start_program(char* cmd_line) {
     sf::Sprite background(background_texture);
     background.setScale(0.73, 0.74);
 
-    sf::Font font;
-    if (!font.loadFromFile(font_path + "arial.ttf"))
-        throw_error("Failed to create the font face.");
+    Label hint("Enter the path to the lua script ...", font_path + "arial.ttf", 25);
+    hint.setPosition(sf::Vector2f(window.getSize().x / 2 - hint.getGlobalBounds().width / 2, window.getSize().y / 2 + 300));
+    hint.setFillColor(sf::Color(55, 55, 55, 200));
 
-    sf::Text label_text("Script name:", font, 25);
-    label_text.setPosition(sf::Vector2f(window.getSize().x / 2 - label_text.getGlobalBounds().width - 65, window.getSize().y / 2 - 15));
-
-    sf::Text entered_text("", font, 25);
-    std::string entered_tmp;
-
-    sf::Text cursor("_", font, 25);
-    bool cursor_visible = true;
-    double cursor_timer = 0.0;
+    TextBox textbox(font_path + "arial.ttf", window.getSize().x / 2 - 205, window.getSize().y / 2 - 21, 410, 42);
+    textbox.setBackgroundColor(sf::Color(55, 55, 55));
+    textbox.setBlinkerColor(sf::Color::White);
+    textbox.setTextColor(sf::Color::White);
 
     while (window.isOpen()) {
         time_m.lock();
@@ -53,31 +51,23 @@ __forceinline void start_program(char* cmd_line) {
         clock.restart();
 
         if (!lua.is_open()) {
-            entered_text.setString(entered_tmp);
-            entered_text.setPosition(sf::Vector2f(label_text.getPosition().x + label_text.getGlobalBounds().width + 10, label_text.getPosition().y));
-            
-            cursor.setPosition(sf::Vector2f(entered_text.getPosition().x + entered_text.getGlobalBounds().width + 5, entered_text.getPosition().y));
-
-            if (cursor_timer >= 600) {
-                cursor_visible = !cursor_visible;
-                cursor_timer = 0;
-            }
-            
-            cursor_timer += main_time;
-
             window.clear();
 
             window.draw(background);
-            window.draw(entered_text);
-            window.draw(label_text);
-
-            if (cursor_visible)
-                window.draw(cursor);
+            window.draw(hint);
+            textbox.draw(window);
 
             window.display();
         }
 
-        if (window.waitEvent(main_event)) {
+        if (window.pollEvent(main_event)) {
+            if (!lua.is_open()) {
+                textbox.handleEvent(main_event);
+
+                if (textbox.isEntered())
+                    lua.open(textbox.getText());
+            }
+
             if (main_event.type == sf::Event::Closed)
                 window.close();
 
@@ -91,25 +81,6 @@ __forceinline void start_program(char* cmd_line) {
                 cursor_in_window_m.lock();
                 f_cursor_in_window = false;
                 cursor_in_window_m.unlock();
-            }
-
-            if (lua.is_open())
-                continue;
-
-            if (main_event.type == sf::Event::TextEntered) {
-                if (main_event.key.code == 22)                           // 22 = Ctrl + V
-                    entered_tmp += std::move(sf::Clipboard::getString());
-
-                if (main_event.key.code == 8 && !entered_tmp.empty())    // 8 = Backspace
-                    entered_tmp.pop_back();
-
-                if (main_event.text.unicode > 31 && main_event.text.unicode < 128)
-                    entered_tmp += static_cast<char>(main_event.text.unicode);
-            }
-
-            if (main_event.type == sf::Event::KeyPressed) {
-                if (main_event.key.code == sf::Keyboard::Enter && !entered_tmp.empty())
-                    lua.open(entered_tmp);
             }
         }
     }

@@ -62,9 +62,7 @@ __forceinline void Script::open_API() {
         std::make_pair("rectangle", API::render_rectangle),
         std::make_pair("circle", API::render_circle),
         std::make_pair("line", API::render_line),
-        std::make_pair("polygon", API::render_polygon),
-        //std::make_pair("blur", API::render_blur),
-        //std::make_pair("shadow", API::render_shadow),
+        std::make_pair("polygon", API::render_polygon)
     });
 
     lua_register_table(lua_state, "window", {

@@ -40,6 +40,12 @@
     <Filter Include="Source Files\API\Objects">
       <UniqueIdentifier>{0f02cd13-eff1-4cb6-88a5-1479edfa61ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI Objects">
+      <UniqueIdentifier>{ed553cc4-7472-4ca9-a904-e4ada6a64f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI Objects">
+      <UniqueIdentifier>{f10bc129-153f-49fd-867d-76c230f476cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -78,14 +84,17 @@
     <ClCompile Include="sources\Lua Extensions\LuaTable.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Lua Extensions\LuaBoolean.cpp">
-      <Filter>Source Files\Lua Extensions</Filter>
-    </ClCompile>
     <ClCompile Include="sources\Lua Extensions\LuaUserdata.cpp">
       <Filter>Source Files\Lua Extensions</Filter>
     </ClCompile>
     <ClCompile Include="sources\API\Objects\View.cpp">
       <Filter>Source Files\API\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\UI Objects\TextBox.cpp">
+      <Filter>Source Files\UI Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\UI Objects\Label.cpp">
+      <Filter>Source Files\UI Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="headers\API\network.hpp">
       <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\UI Objects\TextBox.hpp">
+      <Filter>Header Files\UI Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\UI Objects\Label.hpp">
+      <Filter>Header Files\UI Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

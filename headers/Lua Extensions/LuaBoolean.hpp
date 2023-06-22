@@ -4,6 +4,9 @@ class LuaBoolean final {
     bool state = false;
 
 public:
-    LuaBoolean(bool state);
-    operator bool() const;
+    LuaBoolean(bool state) : state(state) {}
+
+    constexpr operator bool() const {
+        return state;
+    };
 };

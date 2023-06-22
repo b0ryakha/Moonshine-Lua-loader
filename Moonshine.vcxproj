@@ -107,7 +107,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;SFML_STATIC;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\Objects;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\lua\include;$(ProjectDir)\resources;D:\C++ Libs\SFML\include;D:\C++ Libs\CURL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\headers;$(ProjectDir)\headers\API;$(ProjectDir)\headers\API\Objects;$(ProjectDir)\headers\Custom Shapes;$(ProjectDir)\headers\Lua Extensions;$(ProjectDir)\headers\UI Objects;$(ProjectDir)\lua\include;$(ProjectDir)\resources;D:\C++ Libs\SFML\include;D:\C++ Libs\CURL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -157,7 +157,6 @@
     <ClCompile Include="sources\API\Objects\Vector2.cpp" />
     <ClCompile Include="sources\API\Objects\View.cpp" />
     <ClCompile Include="sources\Custom Shapes\SuperEllipse.cpp" />
-    <ClCompile Include="sources\Lua Extensions\LuaBoolean.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaStack.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaTable.cpp" />
     <ClCompile Include="sources\Lua Extensions\LuaUserdata.cpp" />
@@ -165,6 +164,8 @@
     <ClCompile Include="sources\misc_functions.cpp" />
     <ClCompile Include="sources\Script.cpp" />
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="sources\UI Objects\Label.cpp" />
+    <ClCompile Include="sources\UI Objects\TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\API\cmath.hpp" />
@@ -192,6 +193,8 @@
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp" />
     <ClInclude Include="headers\misc_functions.hpp" />
     <ClInclude Include="headers\Script.hpp" />
+    <ClInclude Include="headers\UI Objects\Label.hpp" />
+    <ClInclude Include="headers\UI Objects\TextBox.hpp" />
     <ClInclude Include="lua\include\lauxlib.h" />
     <ClInclude Include="lua\include\lua.h" />
     <ClInclude Include="lua\include\lua.hpp" />

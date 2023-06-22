@@ -7,7 +7,7 @@ public:
     LuaUserdata(void* userdata);
 
     template<typename T>
-    operator T*() const {
+    constexpr operator T*() const {
         return static_cast<T*>(self);
     };
 };

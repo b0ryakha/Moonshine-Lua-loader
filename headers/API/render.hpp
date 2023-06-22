@@ -145,25 +145,6 @@ namespace API
         return 0;
     }
 
-    /*static int render_blur(lua_State* L) {
-        LuaStack args(L);
-
-        if (args.size() != 6 && args.size() != 7)
-            throw_error("[render.blur] Incorrect number of arguments!");
-
-        float x1 = args.get<float>();
-        float y1 = args.get<float>();
-        float x2 = args.get<float>();
-        float y2 = args.get<float>();
-        float strength = args.get<float>();
-        float alpha = args.get<float>();
-        float rounding = args.size() == 7 ? args.get<float>() : 0.f;
-
-        
-
-        return 0;
-    }*/
-
     static int render_polygon(lua_State* L) {
         LuaStack args(L);
 
