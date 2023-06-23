@@ -442,13 +442,6 @@
 	},
 
 
-
-	"globalvars.get_frametime": {
-		"prefix": "globalvars.get_frametime",
-		"body": [
-		  "globalvars.get_frametime()"
-		],
-	},
 	
 	"globalvars.get_executable_path": {
 		"prefix": "globalvars.get_executable_path",
