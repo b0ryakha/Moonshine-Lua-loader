@@ -76,7 +76,6 @@
   
 <details><summary>:mag: GlobalVars</summary>
 
-  - [get_frametime()](#globalvars.get_frametime)
   - [get_executable_path()](#globalvars.get_executable_path)
   </details>
   
@@ -744,15 +743,6 @@ Returns the clumped value.
 
 
 ### :mag: GlobalVars
-#### <a name="globalvars.get_frametime"></a> ```get_frametime```
-```lua
-globalvars.get_frametime(): double
-```
-
-Returns the update frame time.
-
----
-
 #### <a name="globalvars.get_executable_path"></a> ```get_executable_path```
 ```lua
 globalvars.get_executable_path(): string
