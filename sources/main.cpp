@@ -11,13 +11,9 @@ sf::RenderWindow window;
 sf::Event main_event;
 std::string font_path;
 
-double main_time = 0.0;
-std::mutex time_m;
-
 __forceinline void start_program(char* cmd_line) {
     window.create(sf::VideoMode(1400, 800), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
     
-    sf::Clock clock;
     Script lua;
 
     if (cmd_line[0] != '\0')
@@ -38,18 +34,12 @@ __forceinline void start_program(char* cmd_line) {
     hint.setPosition(sf::Vector2f(window.getSize().x / 2 - hint.getGlobalBounds().width / 2, window.getSize().y / 2 + 300));
     hint.setFillColor(sf::Color(55, 55, 55, 200));
 
-    TextBox textbox(font_path + "arial.ttf", window.getSize().x / 2 - 205, window.getSize().y / 2 - 21, 410, 42);
-    textbox.setBackgroundColor(sf::Color(55, 55, 55));
+    TextBox textbox(font_path + "arial.ttf", window.getSize().x / 2 - 205, window.getSize().y / 2 - 21, 410, 42, false);
     textbox.setBlinkerColor(sf::Color::White);
     textbox.setTextColor(sf::Color::White);
+    textbox.focus();
 
     while (window.isOpen()) {
-        time_m.lock();
-        main_time = static_cast<double>(clock.getElapsedTime().asMicroseconds()) / 800.0;
-        time_m.unlock();
-
-        clock.restart();
-
         if (!lua.is_open()) {
             window.clear();
 
@@ -73,13 +63,13 @@ __forceinline void start_program(char* cmd_line) {
 
             if (main_event.type == sf::Event::MouseEntered) {
                 cursor_in_window_m.lock();
-                f_cursor_in_window = true;
+                is_cursor_in_window = true;
                 cursor_in_window_m.unlock();
             }
 
             if (main_event.type == sf::Event::MouseLeft) {
                 cursor_in_window_m.lock();
-                f_cursor_in_window = false;
+                is_cursor_in_window = false;
                 cursor_in_window_m.unlock();
             }
         }

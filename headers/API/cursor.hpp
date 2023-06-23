@@ -5,7 +5,7 @@
 
 #include <mutex>
 
-inline bool f_cursor_in_window = false;
+inline bool is_cursor_in_window = false;
 inline std::mutex cursor_in_window_m;
 
 namespace API
@@ -46,7 +46,7 @@ namespace API
     }
 
     static int cursor_in_window(lua_State* L) {
-        lua_pushboolean(L, f_cursor_in_window);
+        lua_pushboolean(L, is_cursor_in_window);
         return 1;
     }
 }

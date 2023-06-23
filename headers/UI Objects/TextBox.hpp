@@ -18,7 +18,7 @@ private:
     sf::Time time = sf::Time::Zero;
     Label label;
 
-    std::stack<std::string_view> cache;
+    std::stack<std::string> cache;
 
     size_t text_size = 0;
     size_t focus_char = 0;
@@ -28,7 +28,7 @@ private:
     float pos_y = 0;
     float height = 0;
     float width = 0;
-    bool focus = false;
+    bool is_focus = false;
     bool show_bg = false;
 
 public:
@@ -47,4 +47,5 @@ public:
     void setBackgroundColor(const sf::Color& color);
     void setBlinkerColor(const sf::Color& color);
     void setBorderColor(const sf::Color& color);
+    void focus();
 };

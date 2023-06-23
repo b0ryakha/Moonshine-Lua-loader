@@ -145,7 +145,6 @@ __forceinline void Script::open_API() {
     });
 
     lua_register_table(lua_state, "globalvars", {
-        std::make_pair("get_frametime", API::get_frametime),
         std::make_pair("get_executable_path", API::get_executable_path),
     });
 
