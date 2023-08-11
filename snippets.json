@@ -307,14 +307,7 @@
 	"cursor.get_pos": {
 		"prefix": "cursor.get_pos",
 		"body": [
-		  "cursor.get_pos([regarding_window])"
-		],
-	},
-
-	"cursor.set_pos": {
-		"prefix": "cursor.set_pos",
-		"body": [
-		  "cursor.set_pos(x, y[, regarding_window])"
+		  "cursor.get_pos()"
 		],
 	},
 
@@ -325,10 +318,10 @@
 		],
 	},
 
-	"cursor.in_bounds": {
-		"prefix": "cursor.in_bounds",
+	"cursor.is_bound": {
+		"prefix": "cursor.is_bound",
 		"body": [
-		  "cursor.in_bounds(x, y, w, h[, regarding_window])"
+		  "cursor.is_bound(x, y, w, h)"
 		],
 	},
 
