@@ -42,7 +42,7 @@ namespace API
                 return 1;
             };
 
-            static auto set_position = [](lua_State* L) {
+            static auto set_pos = [](lua_State* L) {
                 auto self = lua_get_object<Sprite>(L, "Sprite", 1);
                 double x = luaL_checknumber(L, 2);
                 double y = luaL_checknumber(L, 3);
@@ -51,7 +51,7 @@ namespace API
                 return 0;
             };
 
-            static auto get_position = [](lua_State* L) {
+            static auto get_pos = [](lua_State* L) {
                 const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f pos = self->getPosition();
 
@@ -178,8 +178,8 @@ namespace API
 
                     if (key == "set_color") lua_pushcfunction(L, set_color);
                     else if (key == "get_color") lua_pushcfunction(L, get_color);
-                    else if (key == "set_position") lua_pushcfunction(L, set_position);
-                    else if (key == "get_position") lua_pushcfunction(L, get_position);
+                    else if (key == "set_pos") lua_pushcfunction(L, set_pos);
+                    else if (key == "get_pos") lua_pushcfunction(L, get_pos);
                     else if (key == "set_rotation") lua_pushcfunction(L, set_rotation);
                     else if (key == "get_rotation") lua_pushcfunction(L, get_rotation);
                     else if (key == "set_scale") lua_pushcfunction(L, set_scale);

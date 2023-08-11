@@ -28,14 +28,16 @@ namespace API
 
             static auto set_port = [](lua_State* L) {
                 auto self = lua_get_object<View>(L, "View", 1);
-                float x = luaL_checknumber(L, 2);
-                float y = luaL_checknumber(L, 3);
+                size_t x = luaL_checkinteger(L, 2);
+                size_t y = luaL_checkinteger(L, 3);
                 float w = luaL_checknumber(L, 4);
                 float h = luaL_checknumber(L, 5);
 
+                const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
                 self->setViewport(sf::FloatRect(
-                    x / window.getSize().x,
-                    y / window.getSize().y,
+                    converted.x / window.getSize().x,
+                    converted.y / window.getSize().y,
                     w / window.getSize().x,
                     h / window.getSize().y
                 ));
@@ -45,10 +47,12 @@ namespace API
 
             static auto set_center = [](lua_State* L) {
                 auto self = lua_get_object<View>(L, "View", 1);
-                float x = luaL_checknumber(L, 2);
-                float y = luaL_checknumber(L, 3);
+                size_t x = luaL_checkinteger(L, 2);
+                size_t y = luaL_checkinteger(L, 3);
 
-                self->setCenter(x, y);
+                const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
+                self->setCenter(converted.x, converted.y);
 
                 return 0;
             };
