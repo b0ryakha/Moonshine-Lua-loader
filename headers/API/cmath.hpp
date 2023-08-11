@@ -78,4 +78,16 @@ namespace API
         lua_pushnumber(L, std::clamp(number, lower, upper));
         return 1;
     }
+
+    static int round(lua_State* L) {
+        LuaStack args(L);
+
+        if (args.size() != 1)
+            throw_error("[cmath.round] Incorrect number of arguments!");
+
+        const float number = args.get<float>();
+
+        lua_pushinteger(L, std::round(number));
+        return 1;
+    }
 }

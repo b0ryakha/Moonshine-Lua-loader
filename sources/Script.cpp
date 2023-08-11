@@ -125,6 +125,7 @@ __forceinline void Script::open_API() {
         std::make_pair("rand_double", API::rand_double),
         std::make_pair("lerp", API::lerp),
         std::make_pair("clamp", API::clamp),
+        std::make_pair("round", API::round),
     });
 
     lua_register_table(lua_state, "globalvars", {
