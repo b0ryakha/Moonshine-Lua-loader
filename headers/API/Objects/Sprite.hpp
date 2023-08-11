@@ -44,10 +44,12 @@ namespace API
 
             static auto set_pos = [](lua_State* L) {
                 auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-                double x = luaL_checknumber(L, 2);
-                double y = luaL_checknumber(L, 3);
+                size_t x = luaL_checkinteger(L, 2);
+                size_t y = luaL_checkinteger(L, 3);
 
-                self->setPosition(x, y);
+                const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
+                self->setPosition(converted.x, converted.y);
                 return 0;
             };
 
@@ -151,7 +153,9 @@ namespace API
                 double x_offset = luaL_checknumber(L, 2);
                 double y_offset = luaL_checknumber(L, 3);
 
-                self->move(x_offset, y_offset);
+                const auto converted = window.mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
+
+                self->move(converted.x, converted.y);
                 return 0;
             };
 
