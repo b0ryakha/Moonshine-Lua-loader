@@ -19,13 +19,13 @@ namespace API
             throw_error("[render.measure_text] Incorrect number of arguments!");
 
         Font font = args.get<LuaUserdata, Font>();
-        const std::string text = args.get<std::string>();
+        const std::string str = args.get<std::string>();
 
-        sf::Text _text(sf::String::fromUtf8(text.cbegin(), text.cend()), font, font.get_size());
+        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
 
         lua_push_object<Vector2>(L, {
-            _text.getLocalBounds().width,
-            _text.getLocalBounds().height
+            text.getLocalBounds().width,
+            text.getLocalBounds().height
         });
 
         return 1;
@@ -48,17 +48,17 @@ namespace API
         if (args.size() != 5)
             throw_error("[render.text] Incorrect number of arguments!");
 
-        float x = args.get<float>();
-        float y = args.get<float>();
+        size_t x = args.get<size_t>();
+        size_t y = args.get<size_t>();
         Font font = args.get<LuaUserdata, Font>();
-        const std::string text = args.get<std::string>();
+        const std::string str = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text _text(sf::String::fromUtf8(text.cbegin(), text.cend()), font, font.get_size());
-        _text.setPosition(sf::Vector2f(x, y));
-        _text.setFillColor(color);
+        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
+        text.setPosition(window.mapPixelToCoords(sf::Vector2i(x, y)));
+        text.setFillColor(color);
 
-        window.draw(_text);
+        window.draw(text);
 
         return 0;
     }
@@ -69,14 +69,16 @@ namespace API
         if (args.size() != 5 && args.size() != 6)
             throw_error("[render.rectangle] Incorrect number of arguments!");
 
-        float x = args.get<float>();
-        float y = args.get<float>();
+        size_t x = args.get<size_t>();
+        size_t y = args.get<size_t>();
         float w = args.get<float>();
         float h = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
         float rounding = (args.size() == 6) ? args.get<float>() : 0.f;
 
-        SuperEllipse rectangle(sf::Rect<float>(x, y, w, h), rounding, color);
+        const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
+        SuperEllipse rectangle(sf::Rect<float>(converted.x, converted.y, w, h), rounding, color);
 
         window.draw(rectangle);
 
@@ -89,8 +91,8 @@ namespace API
         if (args.size() != 4 && args.size() != 6)
             throw_error("[render.circle] Incorrect number of arguments!");
 
-        float x = args.get<float>();
-        float y = args.get<float>();
+        size_t x = args.get<size_t>();
+        size_t y = args.get<size_t>();
         float radius = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
@@ -98,8 +100,10 @@ namespace API
 
         sf::CircleShape circle(radius);
 
+        const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
         circle.setFillColor(color);
-        circle.setPosition(sf::Vector2f(x - radius, y - radius));
+        circle.setPosition(sf::Vector2f(converted.x - radius, converted.y - radius));
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
@@ -117,12 +121,15 @@ namespace API
         if (args.size() != 6)
             throw_error("[render.line] Incorrect number of arguments!");
 
-        float x1 = args.get<float>();
-        float y1 = args.get<float>();
-        float x2 = args.get<float>();
-        float y2 = args.get<float>();
+        size_t x1 = args.get<size_t>();
+        size_t y1 = args.get<size_t>();
+        size_t x2 = args.get<size_t>();
+        size_t y2 = args.get<size_t>();
         float thickness = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
+
+        const auto converted1 = window.mapPixelToCoords(sf::Vector2i(x1, y1));
+        const auto converted2 = window.mapPixelToCoords(sf::Vector2i(x2, y2));
 
         sf::Vertex line[2];
 
@@ -137,10 +144,10 @@ namespace API
         };
 
         for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(x1, y1 - i), sf::Vector2f(x2, y2 - i));
+            draw_line(sf::Vector2f(converted1.x, converted1.y - i), sf::Vector2f(converted2.x, converted2.y - i));
 
         for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(x1, y1 + i), sf::Vector2f(x2, y2 + i));
+            draw_line(sf::Vector2f(converted1.x, converted1.y + i), sf::Vector2f(converted2.x, converted2.y + i));
 
         return 0;
     }
@@ -165,7 +172,7 @@ namespace API
             if (point.size() != 2)
                 throw_error("[render.polygon] Incorrect number of values!");
 
-            polygon.setPoint(i, sf::Vector2f(point.get<float>(), point.get<float>()));
+            polygon.setPoint(i, window.mapPixelToCoords(sf::Vector2i(point.get<float>(), point.get<float>())));
         }
 
         window.draw(polygon);

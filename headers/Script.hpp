@@ -3,6 +3,7 @@
 #include <thread>
 #include <string>
 #include <array>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "lua_extensions.hpp"
@@ -31,7 +32,7 @@ extern sf::RenderWindow window;
 class Script final {
 private:
 	lua_State* lua_state = nullptr;
-	std::thread* main_thread = nullptr;
+	std::unique_ptr<std::thread> main_thread;
 	std::string lua_path;
 
 	__forceinline void open_API();
@@ -39,9 +40,7 @@ private:
 public:
 	Script() = default;
 	Script(std::string_view path);
-	~Script();
 
 	void open(std::string_view path);
-	void close();
 	bool is_open() const;
 };

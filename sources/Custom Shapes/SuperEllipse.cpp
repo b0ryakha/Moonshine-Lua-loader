@@ -27,7 +27,12 @@ void SuperEllipse::init() {
 
 SuperEllipse::SuperEllipse() {};
 
-SuperEllipse::SuperEllipse(const sf::Rect<float>& rect, float radius, const sf::Color& color) : m_rect(rect), m_radius(radius) {
+SuperEllipse::SuperEllipse(const sf::Rect<float>& rect, size_t rounding, const sf::Color& color) : m_rect(rect) {
+    rounding = std::min(std::max(rounding, 0u), 100u);
+    const float max_rounding = std::min(rect.width, rect.height) / 2;
+
+    m_radius = (max_rounding * rounding) / 100;
+
     init();
     setPosition(rect.left, rect.top);
     setFillColor(color);

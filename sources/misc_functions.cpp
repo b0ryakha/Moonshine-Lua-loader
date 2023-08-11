@@ -8,7 +8,7 @@ void throw_error(std::string_view error) noexcept {
         std::exit(0);
     }
 
-    sf::Text text(error.data(), font, 20);
+    sf::Text text(sf::String::fromUtf8(error.cbegin(), error.cend()), font, 20);
     text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
     text.setFillColor(sf::Color::Red);
 

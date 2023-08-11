@@ -1,13 +1,17 @@
 #include "API/Objects/View.hpp"
 
 API::View::View(const LuaStack& args) {
-    if (!args.empty() && args.size() != 4)
+    const size_t args_size = args.size();
+
+    if (!args.empty() && args_size != 4)
         throw_error("[View:new] Incorrect number of arguments!");
 
-    float x = (args.size() == 4) ? args.get<float>() : 0.f;
-    float y = (args.size() == 4) ? args.get<float>() : 0.f;
-    float w = (args.size() == 4) ? args.get<float>() : 0.f;
-    float h = (args.size() == 4) ? args.get<float>() : 0.f;
+    size_t x = (args_size == 4) ? args.get<size_t>() : 0;
+    size_t y = (args_size == 4) ? args.get<size_t>() : 0;
+    float w = (args_size == 4) ? args.get<float>() : 0.f;
+    float h = (args_size == 4) ? args.get<float>() : 0.f;
 
-    reset(sf::FloatRect(x, y, w, h));
+    const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+
+    reset(sf::FloatRect(converted.x, converted.y, w, h));
 }

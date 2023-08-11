@@ -5,13 +5,13 @@ API::Color::Color(const LuaStack& args) : sf::Color(0, 0, 0) {
         throw_error("[Color:new] Incorrect number of arguments!");
 
     if (args.size() > 1) {
-        r = args.get<int>();
-        g = args.get<int>();
-        b = args.get<int>();
+        r = std::min(std::max(args.get<int>(), 0), 255);
+        g = std::min(std::max(args.get<int>(), 0), 255);
+        b = std::min(std::max(args.get<int>(), 0), 255);
     }
 
     if (args.size() == 4)
-        a = args.get<int>();
+        a = std::min(std::max(args.get<int>(), 0), 255);
 
     if (args.size() == 1) {
         std::string hex = args.get<std::string>();
@@ -23,6 +23,6 @@ API::Color::Color(const LuaStack& args) : sf::Color(0, 0, 0) {
             hex += "FF";
 
         if (std::sscanf(hex.c_str(), "#%02x%02x%02x%02x", &r, &g, &b, &a) != 4)
-            throw_error("[Color:new] Ñonverting hex error!");
+            throw_error("[Color:new] Converting hex error!");
     }
 }

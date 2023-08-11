@@ -70,6 +70,7 @@ namespace API
                     self->getSize().x,
                     self->getSize().y
                 });
+
                 return 1;
             };
 

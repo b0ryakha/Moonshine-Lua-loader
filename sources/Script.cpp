@@ -4,22 +4,6 @@ Script::Script(std::string_view path) {
     open(path);
 }
 
-Script::~Script() {
-    close();
-}
-
-void Script::close() {
-    if (is_open()) {
-        delete main_thread;
-        main_thread = nullptr;
-    }
-
-    if (lua_state != nullptr)
-        lua_close(lua_state);
-
-    window.setActive(true);
-}
-
 void Script::open(std::string_view path) {
     if (is_open())
         return;
@@ -44,7 +28,7 @@ void Script::open(std::string_view path) {
     window.display();
     window.setActive(false);
 
-    main_thread = new std::thread([&] {
+    main_thread = std::make_unique<std::thread>([&] {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(lua_tostring(lua_state, -1));
 
@@ -118,8 +102,7 @@ __forceinline void Script::open_API() {
 
     lua_register_table(lua_state, "cursor", {
         std::make_pair("get_pos", API::cursor_get_pos),
-        std::make_pair("set_pos", API::cursor_set_pos),
-        std::make_pair("in_bounds", API::cursor_in_bounds),
+        std::make_pair("is_bound", API::cursor_is_bound),
         std::make_pair("in_window", API::cursor_in_window),
     });
 
