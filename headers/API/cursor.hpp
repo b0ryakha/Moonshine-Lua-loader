@@ -27,10 +27,10 @@ namespace API
         if (args.size() != 4)
             throw_error("[cursor.is_bound] Incorrect number of arguments!");
 
-        const float x = args.get<float>();
-        const float y = args.get<float>();
-        const float w = args.get<float>();
-        const float h = args.get<float>();
+        const size_t x = args.get<size_t>();
+        const size_t y = args.get<size_t>();
+        const size_t w = args.get<size_t>();
+        const size_t h = args.get<size_t>();
 
         const sf::Vector2i m = sf::Mouse::getPosition(window);
 
