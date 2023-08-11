@@ -46,8 +46,7 @@
 <details><summary>:video_game: Cursor</summary>
 
   - [get_pos()](#cursor.get_pos)
-  - [set_pos()](#cursor.set_pos)
-  - [in_bounds()](#cursor.in_bounds)
+  - [is_bound()](#cursor.is_bound)
   - [in_window()](#cursor.in_window)
   </details>
     
@@ -135,8 +134,8 @@
   - [copy()](#sprite.copy)
   - [set_color()](#sprite.set_color)
   - [get_color()](#sprite.get_color)
-  - [set_position()](#sprite.set_position)
-  - [get_position()](#sprite.get_position)
+  - [set_pos()](#sprite.set_pos)
+  - [get_pos()](#sprite.get_pos)
   - [set_rotation()](#sprite.set_rotation)
   - [get_rotation()](#sprite.get_rotation)
   - [set_scale()](#sprite.set_scale)
@@ -170,12 +169,12 @@
 
 #### <a name="render.text"></a> ```text```
 ```lua
-render.text(x: float, y: float, font: Font, text: string, color: Color)
+render.text(x: size_t, y: size_t, font: Font, text: string, color: Color)
 ```
 | Name      | Type        | Description        |
 | :---:     | :---:       | :---:              |
-| x         | ```float``` | X coordinate       |
-| y         | ```float``` | Y coordinate       |
+| x         | ```size_t```| X coordinate       |
+| y         | ```size_t```| Y coordinate       |
 | font      | ```Font```  | Font for text      |
 | text      | ```string```| Text for render    |
 | color     | ```Color``` | Color for text     |
@@ -211,16 +210,16 @@ Returns the measured [size](#vector2.new) of the text.
 
 #### <a name="render.rectangle"></a> ```rectangle```
 ```lua
-render.rectangle(x: float, y: float, w: float, h: float, color: Color[, rounding: float])
+render.rectangle(x: size_t, y: size_t, w: float, h: float, color: Color[, rounding: size_t])
 ```
-| Name     | Type        | Description                       |
-| :---:    | :---:       | :---:                             |
-| x        | ```float``` | X coordinate                      |
-| y        | ```float``` | Y coordinate                      |
-| w        | ```float``` | Width                             |
-| h        | ```float``` | Height                            |
-| color    | ```Color``` | Color for filling the rectangle   |
-| rounding | ```float``` | Edge rounding factor, default = 0 |
+| Name     | Type        | Description                                   |
+| :---:    | :---:       | :---:                                         |
+| x        | ```size_t```| X coordinate                                  |
+| y        | ```size_t```| Y coordinate                                  |
+| w        | ```float``` | Width                                         |
+| h        | ```float``` | Height                                        |
+| color    | ```Color``` | Color for filling the rectangle               |
+| rounding | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
 
 Render rectangle on the screen.
 
@@ -228,12 +227,12 @@ Render rectangle on the screen.
 
 #### <a name="render.circle"></a> ```circle```
 ```lua
-render.circle(x: float, y: float, radius: float, color: Color[, thickness: float, outline_color: Color])
+render.circle(x: size_t, y: size_t, radius: float, color: Color[, thickness: float, outline_color: Color])
 ```
 | Name          | Type        | Description                                 |
 | :---:         | :---:       | :---:                                       |
-| x             | ```float``` | X coordinate                                |
-| y             | ```float``` | Y coordinate                                |
+| x             | ```size_t```| X coordinate                                |
+| y             | ```size_t```| Y coordinate                                |
 | radius        | ```float``` | Circle radius                               |
 | color         | ```Color``` | Color for filling the circle                |
 | thickness     | ```float``` | Thickness of outline line, default = 0      |
@@ -245,14 +244,14 @@ Render circle on the screen.
 
 #### <a name="render.line"></a> ```line```
 ```lua
-render.line(x1: float, y1: float, x2: float, y2: float, thickness: float, color: Color)
+render.line(x1: size_t, y1: size_t, x2: size_t, y2: size_t, thickness: float, color: Color)
 ```
 | Name      | Type        | Description          |
 | :---:     | :---:       | :---:                |
-| x1        | ```float``` | Initial X coordinate |
-| y1        | ```float``` | Initial Y coordinate |
-| x2        | ```float``` | Finite X coordinate  |
-| y2        | ```float``` | Finite Y coordinate  |
+| x1        | ```size_t```| Initial X coordinate |
+| y1        | ```size_t```| Initial Y coordinate |
+| x2        | ```size_t```| Finite X coordinate  |
+| y2        | ```size_t```| Finite Y coordinate  |
 | thickness | ```float``` | Thickness of line    |
 | color     | ```Color``` | Color for line       |
 
@@ -262,11 +261,11 @@ Render line on the screen.
 
 #### <a name="render.polygon"></a> ```polygon```
 ```lua
-render.polygon(points: vector<array<float, 2>>, color: Color)
+render.polygon(points: vector<array<size_t, 2>>, color: Color)
 ```
 | Name   | Type                          | Description                                                 |
 | :---:  | :---:                         | :---:                                                       |
-| points | ```vector<array<float, 2>>``` | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
+| points | ```vector<array<size_t, 2>>```| Table of coords pairs, example: { { x, y }, { x, y }, ... } |
 | color  | ```Color```                   | Color for polygon                                           |
 
 Render polygon on the screen.
@@ -511,19 +510,6 @@ Returns the cursor [position](#vector2.new).
 
 ---
 
-#### <a name="cursor.set_pos"></a> ```set_pos```
-```lua
-cursor.set_pos(x: int, y: int)
-```
-| Name             | Type       | Description                                                            |
-| :---:            | :---:      | :---:                                                                  |
-| x                | ```int```  | New cursor x position                                                  |
-| y                | ```int```  | New cursor y position                                                  |
-
-Sets the cursor a new position.
-
----
-
 #### <a name="cursor.in_window"></a> ```in_window```
 ```lua
 cursor.in_window(): bool
@@ -533,9 +519,9 @@ Returns true if cursor in window, else false.
 
 ---
 
-#### <a name="cursor.in_bounds"></a> ```in_bounds```
+#### <a name="cursor.is_bound"></a> ```is_bound```
 ```lua
-cursor.in_bounds(x: float, y: float, w: float, h: float)
+cursor.is_bound(x: float, y: float, w: float, h: float)
 ```
 | Name             | Type         | Description                                                            |
 | :---:            | :---:        | :---:                                                                  |
@@ -1060,13 +1046,13 @@ sprite == sprite   -- true
 
 #### <a name="sprite.new"></a> ```new```
 ```lua
-Sprite:new(path: string, w: float, h: float[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite&
+Sprite:new(path: string, w: int, h: int[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite&
 ```
 | Name  | Type         | Description                                     |
 | :---: | :---:        | :---:                                           |
 | path  | ```string``` | Image location directory                        |
-| w     | ```float```  | Width of image                                  |
-| h     | ```float```  | Height of image                                 |
+| w     | ```int```    | Width of image                                  |
+| h     | ```int```    | Height of image                                 |
 | t_x   | ```size_t``` | X coordinate of areas in the image, default = 0 |
 | t_y   | ```size_t``` | Y coordinate of areas in the image, default = 0 |
 | t_w   | ```size_t``` | Width of areas in the image, default = w        |
@@ -1106,9 +1092,9 @@ Returns the color of the sprite.
 
 ---
 
-#### <a name="sprite.set_position"></a> ```set_position```
+#### <a name="sprite.set_pos"></a> ```set_pos```
 ```lua
-sprite_object:set_position(x: double, y: double)
+sprite_object:set_pos(x: double, y: double)
 ```
 | Name  | Type         | Description                 |
 | :---: | :---:        | :---:                       |
@@ -1119,9 +1105,9 @@ Sets a new position for the sprite.
 
 ---
 
-#### <a name="sprite.get_position"></a> ```get_position```
+#### <a name="sprite.get_pos"></a> ```get_pos```
 ```lua
-sprite_object:get_position(): Vector2
+sprite_object:get_pos(): Vector2
 ```
 
 Returns the position of the sprite.
@@ -1260,12 +1246,12 @@ view == view     -- true
 
 #### <a name="view.new"></a> ```new```
 ```lua
-View:new([x: float, y: float, w: float, h: float]): View&
+View:new([x: size_t, y: size_t, w: float, h: float]): View&
 ```
 | Name   | Type        | Description             |
 | :---:  | :---:       | :---:                   |
-| x      | ```float``` | X position, default = 0 |
-| y      | ```float``` | Y position, default = 0 |
+| x      | ```size_t```| X position, default = 0 |
+| y      | ```size_t```| Y position, default = 0 |
 | w      | ```float``` | Width, default = 0      |
 | h      | ```float``` | Height, default = 0     |
 
@@ -1294,12 +1280,12 @@ Activates the view.
 
 #### <a name="view.set_port"></a> ```set_port```
 ```lua
-view_object:set_port(x: float, y: float, w: float, h: float)
+view_object:set_port(x: size_t, y: size_t, w: float, h: float)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| x     | ```float``` | X position  |
-| y     | ```float``` | Y position  |
+| x     | ```size_t```| X position  |
+| y     | ```size_t```| Y position  |
 | w     | ```float``` | Width       |
 | h     | ```float``` | Height      |
 
@@ -1309,12 +1295,12 @@ Sets the view a new view port.
 
 #### <a name="view.set_center"></a> ```set_center```
 ```lua
-view_object:set_center(x: float, y: float)
+view_object:set_center(x: size_t, y: size_t)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| x     | ```float``` | X position  |
-| y     | ```float``` | Y position  |
+| x     | ```size_t```| X position  |
+| y     | ```size_t```| Y position  |
 
 Sets the view a new center position.
 
