@@ -71,14 +71,15 @@ namespace API
 
         size_t x = args.get<size_t>();
         size_t y = args.get<size_t>();
-        float w = args.get<float>();
-        float h = args.get<float>();
+        size_t w = args.get<size_t>();
+        size_t h = args.get<size_t>();
         sf::Color color = args.get<LuaUserdata, Color>();
-        float rounding = (args.size() == 6) ? args.get<float>() : 0.f;
+        size_t rounding = (args.size() == 6) ? args.get<size_t>() : 0;
 
-        const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_pos = window.mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_size = window.mapPixelToCoords(sf::Vector2i(w, h));
 
-        SuperEllipse rectangle(sf::Rect<float>(converted.x, converted.y, w, h), rounding, color);
+        SuperEllipse rectangle(sf::Rect<float>(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y), rounding, color);
 
         window.draw(rectangle);
 
@@ -93,17 +94,17 @@ namespace API
 
         size_t x = args.get<size_t>();
         size_t y = args.get<size_t>();
-        float radius = args.get<float>();
+        float radius = pixel_to_coord(args.get<size_t>());
         sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
         sf::Color outline_color = (args.size() == 6) ? args.get<LuaUserdata, Color>() : sf::Color();
 
         sf::CircleShape circle(radius);
 
-        const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_pos = window.mapPixelToCoords(sf::Vector2i(x, y));
 
         circle.setFillColor(color);
-        circle.setPosition(sf::Vector2f(converted.x - radius, converted.y - radius));
+        circle.setPosition(sf::Vector2f(conv_pos.x - radius, conv_pos.y - radius));
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
@@ -128,8 +129,8 @@ namespace API
         float thickness = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        const auto converted1 = window.mapPixelToCoords(sf::Vector2i(x1, y1));
-        const auto converted2 = window.mapPixelToCoords(sf::Vector2i(x2, y2));
+        const auto conv_pos1 = window.mapPixelToCoords(sf::Vector2i(x1, y1));
+        const auto conv_pos2 = window.mapPixelToCoords(sf::Vector2i(x2, y2));
 
         sf::Vertex line[2];
 
@@ -144,10 +145,10 @@ namespace API
         };
 
         for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(converted1.x, converted1.y - i), sf::Vector2f(converted2.x, converted2.y - i));
+            draw_line(sf::Vector2f(conv_pos1.x, conv_pos1.y - i), sf::Vector2f(conv_pos2.x, conv_pos2.y - i));
 
         for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(converted1.x, converted1.y + i), sf::Vector2f(converted2.x, converted2.y + i));
+            draw_line(sf::Vector2f(conv_pos1.x, conv_pos1.y + i), sf::Vector2f(conv_pos2.x, conv_pos2.y + i));
 
         return 0;
     }
