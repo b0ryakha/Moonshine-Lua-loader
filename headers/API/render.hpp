@@ -24,8 +24,8 @@ namespace API
         sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
 
         lua_push_object<Vector2>(L, {
-            text.getLocalBounds().width,
-            text.getLocalBounds().height
+            text.getGlobalBounds().width,
+            text.getGlobalBounds().height
         });
 
         return 1;
@@ -35,9 +35,7 @@ namespace API
         if (lua_gettop(L) != 1)
             throw_error("[render.sprite] Incorrect number of arguments!");
 
-        const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-
-        window.draw(*self);
+        window.draw(*lua_get_object<Sprite>(L, "Sprite", 1));
 
         return 0;
     }
@@ -54,8 +52,9 @@ namespace API
         const std::string str = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
-        text.setPosition(window.mapPixelToCoords(sf::Vector2i(x, y)));
+        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, pixel_to_rcoord(font.get_size()));
+
+        text.setPosition(window.mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
         text.setFillColor(color);
 
         window.draw(text);

@@ -44,8 +44,8 @@ namespace API
 
             static auto set_pos = [](lua_State* L) {
                 auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-                size_t x = round(luaL_checknumber(L, 2));
-                size_t y = round(luaL_checknumber(L, 3));
+                size_t x = std::round(luaL_checknumber(L, 2));
+                size_t y = std::round(luaL_checknumber(L, 3));
 
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
 
@@ -112,8 +112,8 @@ namespace API
 
             static auto set_size = [](lua_State* L) {
                 auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-                int w = round(luaL_checknumber(L, 2));
-                int h = round(luaL_checknumber(L, 3));
+                int w = std::round(luaL_checknumber(L, 2));
+                int h = std::round(luaL_checknumber(L, 3));
 
                 sf::Vector2u texture_size = self->getTexture()->getSize();
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(w, h));
