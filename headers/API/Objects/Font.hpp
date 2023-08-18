@@ -30,6 +30,13 @@ namespace API
                 return 1;
             };
 
+            static auto get_size = [](lua_State* L) {
+                const auto self = lua_get_object<Font>(L, "Font", 1);
+
+                lua_pushstring(L, std::to_string(self->get_size()).c_str());
+                return 1;
+            };
+
             static auto copy = [](lua_State* L) {
                 const auto self = lua_get_object<Font>(L, "Font", 1);
 
@@ -44,6 +51,7 @@ namespace API
                     const std::string_view key = luaL_checkstring(L, 2);
 
                     if (key == "get_family") lua_pushcfunction(L, get_family);
+                    else if (key == "get_size") lua_pushcfunction(L, get_size);
                     else if (key == "copy") lua_pushcfunction(L, copy);
                     else lua_pushnil(L);
                 }
