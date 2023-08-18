@@ -71,6 +71,7 @@
   - [rand_double()](#cmath.rand_double)
   - [lerp()](#cmath.lerp)
   - [clamp()](#cmath.clamp)
+  - [round()](#cmath.round)
   </details>
   
 <details><summary>:mag: GlobalVars</summary>
@@ -210,14 +211,14 @@ Returns the measured [size](#vector2.new) of the text.
 
 #### <a name="render.rectangle"></a> ```rectangle```
 ```lua
-render.rectangle(x: size_t, y: size_t, w: float, h: float, color: Color[, rounding: size_t])
+render.rectangle(x: size_t, y: size_t, w: size_t, h: size_t, color: Color[, rounding: size_t])
 ```
 | Name     | Type        | Description                                   |
 | :---:    | :---:       | :---:                                         |
 | x        | ```size_t```| X coordinate                                  |
 | y        | ```size_t```| Y coordinate                                  |
-| w        | ```float``` | Width                                         |
-| h        | ```float``` | Height                                        |
+| w        | ```size_t```| Width                                         |
+| h        | ```size_t```| Height                                        |
 | color    | ```Color``` | Color for filling the rectangle               |
 | rounding | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
 
@@ -227,13 +228,13 @@ Render rectangle on the screen.
 
 #### <a name="render.circle"></a> ```circle```
 ```lua
-render.circle(x: size_t, y: size_t, radius: float, color: Color[, thickness: float, outline_color: Color])
+render.circle(x: size_t, y: size_t, radius: size_t, color: Color[, thickness: float, outline_color: Color])
 ```
 | Name          | Type        | Description                                 |
 | :---:         | :---:       | :---:                                       |
 | x             | ```size_t```| X coordinate                                |
 | y             | ```size_t```| Y coordinate                                |
-| radius        | ```float``` | Circle radius                               |
+| radius        | ```size_t```| Circle radius                               |
 | color         | ```Color``` | Color for filling the circle                |
 | thickness     | ```float``` | Thickness of outline line, default = 0      |
 | outline_color | ```Color``` | Color for filling the circle, default = nil |
@@ -521,14 +522,14 @@ Returns true if cursor in window, else false.
 
 #### <a name="cursor.is_bound"></a> ```is_bound```
 ```lua
-cursor.is_bound(x: float, y: float, w: float, h: float)
+cursor.is_bound(x: size_t, y: size_t, w: size_t, h: size_t)
 ```
-| Name             | Type         | Description                                                            |
-| :---:            | :---:        | :---:                                                                  |
-| x                | ```float```  | X position                                                             |
-| y                | ```float```  | Y position                                                             |
-| w                | ```float```  | Width                                                                  |
-| h                | ```float```  | Height                                                                 |
+| Name             | Type          | Description                                                            |
+| :---:            | :---:         | :---:                                                                  |
+| x                | ```size_t```  | X position                                                             |
+| y                | ```size_t```  | Y position                                                             |
+| w                | ```size_t```  | Width                                                                  |
+| h                | ```size_t```  | Height                                                                 |
 
 Returns true if cursor in bounds, else false.
 
@@ -726,6 +727,18 @@ cmath.clamp(number: float, lower: float, upper: float): float
 | upper  | ```float```| Upper bound    |
 
 Returns the clumped value.
+
+---
+
+#### <a name="cmath.round"></a> ```round```
+```lua
+cmath.round(number: float): size_t
+```
+| Name   | Type       | Description       |
+| :---:  | :---:      | :---:             |
+| number | ```float```| Value to rounding |
+
+Returns the rounded value.
 
 
 ### :mag: GlobalVars
@@ -1094,12 +1107,12 @@ Returns the color of the sprite.
 
 #### <a name="sprite.set_pos"></a> ```set_pos```
 ```lua
-sprite_object:set_pos(x: double, y: double)
+sprite_object:set_pos(x: size_t, y: size_t)
 ```
 | Name  | Type         | Description                 |
 | :---: | :---:        | :---:                       |
-| x     | ```double``` | New x coordinate for sprite |
-| y     | ```double``` | New y coordinate for sprite |
+| x     | ```size_t``` | New x coordinate for sprite |
+| y     | ```size_t``` | New y coordinate for sprite |
 
 Sets a new position for the sprite.
 
@@ -1181,12 +1194,12 @@ Returns the origin of the sprite.
 
 #### <a name="sprite.set_size"></a> ```set_size```
 ```lua
-sprite_object:set_size(w: double, h: double)
+sprite_object:set_size(w: int, h: int)
 ```
-| Name  | Type         | Description                  |
-| :---: | :---:        | :---:                        |
-| w     | ```double``` | New width for sprite         |
-| h     | ```double``` | New heigth origin for sprite |
+| Name  | Type      | Description                  |
+| :---: | :---:     | :---:                        |
+| w     | ```int``` | New width for sprite         |
+| h     | ```int``` | New heigth origin for sprite |
 
 Sets a new size for the sprite.
 
@@ -1246,14 +1259,14 @@ view == view     -- true
 
 #### <a name="view.new"></a> ```new```
 ```lua
-View:new([x: size_t, y: size_t, w: float, h: float]): View&
+View:new([x: size_t, y: size_t, w: size_t, h: size_t]): View&
 ```
 | Name   | Type        | Description             |
 | :---:  | :---:       | :---:                   |
 | x      | ```size_t```| X position, default = 0 |
 | y      | ```size_t```| Y position, default = 0 |
-| w      | ```float``` | Width, default = 0      |
-| h      | ```float``` | Height, default = 0     |
+| w      | ```size_t```| Width, default = 0      |
+| h      | ```size_t```| Height, default = 0     |
 
 Returns the view reference.
 
@@ -1280,14 +1293,14 @@ Activates the view.
 
 #### <a name="view.set_port"></a> ```set_port```
 ```lua
-view_object:set_port(x: size_t, y: size_t, w: float, h: float)
+view_object:set_port(x: size_t, y: size_t, w: size_t, h: size_t)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
 | x     | ```size_t```| X position  |
 | y     | ```size_t```| Y position  |
-| w     | ```float``` | Width       |
-| h     | ```float``` | Height      |
+| w     | ```size_t```| Width       |
+| h     | ```size_t```| Height      |
 
 Sets the view a new view port.
 
@@ -1317,12 +1330,12 @@ Returns [size](#vector2.new) of view.
 
 #### <a name="view.set_size"></a> ```set_size```
 ```lua
-view_object:set_size(w: float, h: float)
+view_object:set_size(w: size_t, h: size_t)
 ```
-| Name  | Type        | Description |
-| :---: | :---:       | :---:       |
-| w     | ```float``` | Width       |
-| h     | ```float``` | Height      |
+| Name  | Type         | Description |
+| :---: | :---:        | :---:       |
+| w     | ```size_t``` | Width       |
+| h     | ```size_t``` | Height      |
 
 Sets the view a new size.
 

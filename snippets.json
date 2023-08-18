@@ -434,6 +434,13 @@
 		],
 	},
 
+	"cmath.round": {
+		"prefix": "cmath.round",
+		"body": [
+		  "cmath.round(number)"
+		],
+	},
+
 
 	
 	"globalvars.get_executable_path": {
