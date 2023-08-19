@@ -46,8 +46,8 @@ namespace API
         if (args.size() != 5)
             throw_error("[render.text] Incorrect number of arguments!");
 
-        size_t x = args.get<size_t>();
-        size_t y = args.get<size_t>();
+        int x = args.get<int>();
+        int y = args.get<int>();
         Font font = args.get<LuaUserdata, Font>();
         const std::string str = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
@@ -68,8 +68,8 @@ namespace API
         if (args.size() != 5 && args.size() != 6)
             throw_error("[render.rectangle] Incorrect number of arguments!");
 
-        size_t x = args.get<size_t>();
-        size_t y = args.get<size_t>();
+        int x = args.get<int>();
+        int y = args.get<int>();
         size_t w = args.get<size_t>();
         size_t h = args.get<size_t>();
         sf::Color color = args.get<LuaUserdata, Color>();
@@ -91,8 +91,8 @@ namespace API
         if (args.size() != 4 && args.size() != 6)
             throw_error("[render.circle] Incorrect number of arguments!");
 
-        size_t x = args.get<size_t>();
-        size_t y = args.get<size_t>();
+        int x = args.get<int>();
+        int y = args.get<int>();
         float radius = pixel_to_coord(args.get<size_t>());
         sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
@@ -121,10 +121,10 @@ namespace API
         if (args.size() != 6)
             throw_error("[render.line] Incorrect number of arguments!");
 
-        size_t x1 = args.get<size_t>();
-        size_t y1 = args.get<size_t>();
-        size_t x2 = args.get<size_t>();
-        size_t y2 = args.get<size_t>();
+        int x1 = args.get<int>();
+        int y1 = args.get<int>();
+        int x2 = args.get<int>();
+        int y2 = args.get<int>();
         float thickness = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
