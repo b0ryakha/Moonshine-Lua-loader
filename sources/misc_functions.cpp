@@ -9,11 +9,19 @@ void throw_error(std::string_view error) noexcept {
     }
 
     sf::Text text(sf::String::fromUtf8(error.cbegin(), error.cend()), font, 20);
-    text.setPosition(sf::Vector2f(window.getSize().x / 2 - text.getGlobalBounds().width / 2, window.getSize().y / 2));
-    text.setFillColor(sf::Color::Red);
-
     sf::Text info("Press any key to continue...", font, 20);
-    info.setPosition(sf::Vector2f(window.getSize().x / 2 - info.getGlobalBounds().width / 2, window.getSize().y / 2 + text.getGlobalBounds().height + 10));
+
+    text.setPosition(window.mapPixelToCoords(sf::Vector2i(
+        window.getSize().x / 2 - text.getGlobalBounds().width / 2,
+        window.getSize().y / 2
+    )));
+    
+    info.setPosition(window.mapPixelToCoords(sf::Vector2i(
+        window.getSize().x / 2 - info.getGlobalBounds().width / 2,
+        window.getSize().y / 2 + text.getGlobalBounds().height + 10
+    )));
+
+    text.setFillColor(sf::Color::Red);
     info.setFillColor(sf::Color::Red);
 
     window.clear();
