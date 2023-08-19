@@ -10,10 +10,12 @@ namespace API
     class Font final : public sf::Font {
     private:
         size_t size = 0;
+        ushort_t styles = sf::Text::Style::Regular;
 
     public:
         Font(const LuaStack& args);
         size_t get_size() const;
+        sf::Text::Style get_style() const;
 
         static int push_to_lua(lua_State* L) {
             lua_newclass<Font>(L);
@@ -33,7 +35,31 @@ namespace API
             static auto get_size = [](lua_State* L) {
                 const auto self = lua_get_object<Font>(L, "Font", 1);
 
-                lua_pushstring(L, std::to_string(self->get_size()).c_str());
+                lua_pushinteger(L, self->get_size());
+                return 1;
+            };
+
+            static auto get_style = [](lua_State* L) {
+                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const ushort_t styles = self->get_style();
+                std::string result;
+
+                if ((styles & sf::Text::Style::Regular) == sf::Text::Style::Regular)
+                    result.push_back('r');
+
+                if ((styles & sf::Text::Style::Bold) == sf::Text::Style::Bold)
+                    result.push_back('b');
+
+                if ((styles & sf::Text::Style::Italic) == sf::Text::Style::Italic)
+                    result.push_back('i');
+
+                if ((styles & sf::Text::Style::Underlined) == sf::Text::Style::Underlined)
+                    result.push_back('l');
+
+                if ((styles & sf::Text::Style::StrikeThrough) == sf::Text::Style::StrikeThrough)
+                    result.push_back('s');
+
+                lua_pushstring(L, result.c_str());
                 return 1;
             };
 
@@ -52,6 +78,7 @@ namespace API
 
                     if (key == "get_family") lua_pushcfunction(L, get_family);
                     else if (key == "get_size") lua_pushcfunction(L, get_size);
+                    else if (key == "get_style") lua_pushcfunction(L, get_style);
                     else if (key == "copy") lua_pushcfunction(L, copy);
                     else lua_pushnil(L);
                 }
@@ -66,7 +93,7 @@ namespace API
                 const auto self = lua_get_object<Font>(L, "Font", 1);
 
                 std::stringstream result;
-                result << "{ " << self->getInfo().family << ", " << self->get_size() << " }";
+                result << "{ " << self->getInfo().family << ", " << self->get_size() << ", " << self->get_style() << " }";
 
                 lua_pushstring(L, result.str().c_str());
                 return 1;
@@ -78,7 +105,8 @@ namespace API
 
                 lua_pushboolean(L, (
                     self->getInfo().family == target->getInfo().family &&
-                    self->get_size() == target->get_size()
+                    self->get_size() == target->get_size() &&
+                    self->get_style() == target->get_style()
                 ));
 
                 return 1;

@@ -22,6 +22,7 @@ namespace API
         const std::string str = args.get<std::string>();
 
         sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
+        text.setStyle(font.get_style());
 
         lua_push_object<Vector2>(L, {
             text.getGlobalBounds().width,
@@ -53,6 +54,7 @@ namespace API
         sf::Color color = args.get<LuaUserdata, Color>();
 
         sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, pixel_to_rcoord(font.get_size()));
+        text.setStyle(font.get_style());
 
         text.setPosition(window.mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
         text.setFillColor(color);
