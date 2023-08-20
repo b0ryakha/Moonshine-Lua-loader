@@ -119,6 +119,8 @@
   - [new()](#font.new)
   - [copy()](#font.copy)
   - [get_family()](#font.get_family)
+  - [get_size()](#font.get_size)
+  - [get_style()](#font.get_style)
   </details>
   
 <details><summary>:rainbow: Color</summary>
@@ -170,12 +172,12 @@
 
 #### <a name="render.text"></a> ```text```
 ```lua
-render.text(x: size_t, y: size_t, font: Font, text: string, color: Color)
+render.text(x: int, y: int, font: Font, text: string, color: Color)
 ```
 | Name      | Type        | Description        |
 | :---:     | :---:       | :---:              |
-| x         | ```size_t```| X coordinate       |
-| y         | ```size_t```| Y coordinate       |
+| x         | ```int```   | X coordinate       |
+| y         | ```int```   | Y coordinate       |
 | font      | ```Font```  | Font for text      |
 | text      | ```string```| Text for render    |
 | color     | ```Color``` | Color for text     |
@@ -211,12 +213,12 @@ Returns the measured [size](#vector2.new) of the text.
 
 #### <a name="render.rectangle"></a> ```rectangle```
 ```lua
-render.rectangle(x: size_t, y: size_t, w: size_t, h: size_t, color: Color[, rounding: size_t])
+render.rectangle(x: int, y: int, w: size_t, h: size_t, color: Color[, rounding: size_t])
 ```
 | Name     | Type        | Description                                   |
 | :---:    | :---:       | :---:                                         |
-| x        | ```size_t```| X coordinate                                  |
-| y        | ```size_t```| Y coordinate                                  |
+| x        | ```int```   | X coordinate                                  |
+| y        | ```int```   | Y coordinate                                  |
 | w        | ```size_t```| Width                                         |
 | h        | ```size_t```| Height                                        |
 | color    | ```Color``` | Color for filling the rectangle               |
@@ -228,12 +230,12 @@ Render rectangle on the screen.
 
 #### <a name="render.circle"></a> ```circle```
 ```lua
-render.circle(x: size_t, y: size_t, radius: size_t, color: Color[, thickness: float, outline_color: Color])
+render.circle(x: int, y: int, radius: size_t, color: Color[, thickness: float, outline_color: Color])
 ```
 | Name          | Type        | Description                                 |
 | :---:         | :---:       | :---:                                       |
-| x             | ```size_t```| X coordinate                                |
-| y             | ```size_t```| Y coordinate                                |
+| x             | ```int```   | X coordinate                                |
+| y             | ```int```   | Y coordinate                                |
 | radius        | ```size_t```| Circle radius                               |
 | color         | ```Color``` | Color for filling the circle                |
 | thickness     | ```float``` | Thickness of outline line, default = 0      |
@@ -245,14 +247,14 @@ Render circle on the screen.
 
 #### <a name="render.line"></a> ```line```
 ```lua
-render.line(x1: size_t, y1: size_t, x2: size_t, y2: size_t, thickness: float, color: Color)
+render.line(x1: int, y1: int, x2: int, y2: int, thickness: float, color: Color)
 ```
 | Name      | Type        | Description          |
 | :---:     | :---:       | :---:                |
-| x1        | ```size_t```| Initial X coordinate |
-| y1        | ```size_t```| Initial Y coordinate |
-| x2        | ```size_t```| Finite X coordinate  |
-| y2        | ```size_t```| Finite Y coordinate  |
+| x1        | ```int```   | Initial X coordinate |
+| y1        | ```int```   | Initial Y coordinate |
+| x2        | ```int```   | Finite X coordinate  |
+| y2        | ```int```   | Finite Y coordinate  |
 | thickness | ```float``` | Thickness of line    |
 | color     | ```Color``` | Color for line       |
 
@@ -262,11 +264,11 @@ Render line on the screen.
 
 #### <a name="render.polygon"></a> ```polygon```
 ```lua
-render.polygon(points: vector<array<size_t, 2>>, color: Color)
+render.polygon(points: vector<array<int, 2>>, color: Color)
 ```
 | Name   | Type                          | Description                                                 |
 | :---:  | :---:                         | :---:                                                       |
-| points | ```vector<array<size_t, 2>>```| Table of coords pairs, example: { { x, y }, { x, y }, ... } |
+| points | ```vector<array<int, 2>>```   | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
 | color  | ```Color```                   | Color for polygon                                           |
 
 Render polygon on the screen.
@@ -956,18 +958,19 @@ Returns the vector2 copy.
 
 ### :pencil2: Font
 ```lua
-tostring(font)   -- "{ family, size }"
+tostring(font)   -- "{ family, size, style }"
 font == font     -- true
 ```
 
 #### <a name="font.new"></a> ```new```
 ```lua
-Font:new(name: string, size: size_t): Font&
+Font:new(name: string, size: size_t[, style: string]): Font&
 ```
-| Name  | Type         | Description                       |
-| :---: | :---:        | :---:                             |
-| name  | ```string``` | Name of font, with file extension |
-| size  | ```size_t``` | Size of font                      |
+| Name  | Type         | Description                                                                                                                     |
+| :---: | :---:        | :---:                                                                                                                           |
+| name  | ```string``` | Name of font, with file extension                                                                                               |
+| size  | ```size_t``` | Size of font                                                                                                                    |
+| style | ```string``` | Style of font, can store symbols: 'r' - Regular, 'b' - Bold, 'i' - Italic, 'l' - Underlined, 's' - StrikeThrough, default = "r" |
 
 Returns the font reference.
 
@@ -988,6 +991,24 @@ font_object:get_family(): string
 ```
 
 Returns the font family.
+
+---
+
+#### <a name="font.get_size"></a> ```get_size```
+```lua
+font_object:get_size(): size_t
+```
+
+Returns the font size.
+
+---
+
+#### <a name="font.get_style"></a> ```get_style```
+```lua
+font_object:get_style(): string
+```
+
+Returns the font style, example: "r".
 
 
 ### :rainbow: Color
