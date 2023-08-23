@@ -16,7 +16,7 @@ You can view code examples using the API in [Examples.md](Examples.md) file
 
 ## Built With
 - [SFML](https://www.sfml-dev.org) - Graphics and sound engine
-- [cURL](https://curl.se) - For file downloading
+- [cURL](https://curl.se) - To download files
 - [Lua C API](https://www.lua.org) - For binding Lua and C++
 
 ## License
