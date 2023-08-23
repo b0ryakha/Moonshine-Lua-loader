@@ -1,4 +1,4 @@
-### :sparkles: Current features :sparkles:
+### :sparkles: Features :sparkles:
 | Library                                  | Description                                                                                         |
 | :---:                                    | :---:                                                                                               |
 | [LuaJIT](https://luajit.org)             | LuaJIT is a Just-In-Time (JIT) compiler for the Lua programming language.                           |
