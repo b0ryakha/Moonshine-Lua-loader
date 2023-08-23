@@ -1,5 +1,17 @@
+### :sparkles: Current features :sparkles:
+| Library                                  | Description                                                                                         |
+| :---:                                    | :---:                                                                                               |
+| [LuaJIT](https://luajit.org)             | LuaJIT is a Just-In-Time (JIT) compiler for the Lua programming language.                           |
+| [FFI](https://luajit.org/ext_ffi.html)   | The FFI library allows calling external C functions and using C data structures from pure Lua code. |
+| [BIT](https://bitop.luajit.org/api.html) | BitOp is a C extension module for Lua which adds bitwise operations on numbers.                     |
+
+### :exclamation: Disclaimer :exclamation:
+Arguments in square brackets are optional.
+
+---
+
 ### :dash: Navigation
-#### Namespaces
+#### Namespaces:
 <details><summary>:movie_camera: Render</summary>
 
   - [text()](#render.text)
@@ -94,7 +106,7 @@
   </details>
   
   
-#### Objects
+#### Objects:
 <details><summary>:musical_note: Sound</summary>
 
   - [new()](#sound.new)
