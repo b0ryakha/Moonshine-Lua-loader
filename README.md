@@ -1,6 +1,6 @@
 <img src="resources/icon.ico" align="right" width="150" />
 
-## Moonshine ![BETA](https://img.shields.io/static/v1?label=stage&message=beta&color=orange)
+## Moonshine ![STABLE](https://img.shields.io/static/v1?label=stage&message=stable&color=blue)
 > A loader for lua scripts with custom API.
 
 The API includes the ability to render, interact with files, window, sound, etc.
