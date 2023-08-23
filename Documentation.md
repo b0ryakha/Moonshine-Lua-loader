@@ -6,7 +6,8 @@
 | [BIT](https://bitop.luajit.org/api.html) | BitOp is a C extension module for Lua which adds bitwise operations on numbers.                     |
 
 ### :exclamation: Disclaimer :exclamation:
-Arguments in square brackets are optional.
+   - Lua version 5.1 is used.
+   - Arguments in square brackets are optional.
 
 ---
 
