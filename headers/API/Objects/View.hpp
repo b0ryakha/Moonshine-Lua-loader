@@ -120,8 +120,7 @@ namespace API
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 
-                    if (key == "__type") lua_pushstring(L, "View");
-                    else if (key == "active") lua_pushcfunction(L, active);
+                    if (key == "active") lua_pushcfunction(L, active);
                     else if (key == "set_port") lua_pushcfunction(L, set_port);
                     else if (key == "set_center") lua_pushcfunction(L, set_center);
                     else if (key == "set_size") lua_pushcfunction(L, set_size);

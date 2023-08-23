@@ -76,8 +76,7 @@ namespace API
                 else if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 
-                    if (key == "__type") lua_pushstring(L, "Color");
-                    else if (key == "r") lua_pushinteger(L, self->r);
+                    if (key == "r") lua_pushinteger(L, self->r);
                     else if (key == "g") lua_pushinteger(L, self->g);
                     else if (key == "b") lua_pushinteger(L, self->b);
                     else if (key == "a") lua_pushinteger(L, self->a);

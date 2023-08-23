@@ -47,8 +47,7 @@ namespace API
                 else if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 
-                    if (key == "__type") lua_pushstring(L, "Vector2");
-                    else if (key == "x") lua_pushnumber(L, self->x);
+                    if (key == "x") lua_pushnumber(L, self->x);
                     else if (key == "y") lua_pushnumber(L, self->y);
                     else if (key == "copy") lua_pushcfunction(L, copy);
                     else lua_pushnil(L);
