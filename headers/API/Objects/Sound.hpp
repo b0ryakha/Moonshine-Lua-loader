@@ -92,7 +92,8 @@ namespace API
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 
-                    if (key == "get_path") lua_pushcfunction(L, get_path);
+                    if (key == "__type") lua_pushstring(L, "Sound");
+                    else if (key == "get_path") lua_pushcfunction(L, get_path);
                     else if (key == "get_volume") lua_pushcfunction(L, get_volume);
                     else if (key == "set_volume") lua_pushcfunction(L, set_volume);
                     else if (key == "get_loop") lua_pushcfunction(L, get_loop);

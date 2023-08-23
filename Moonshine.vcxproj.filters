@@ -16,9 +16,6 @@
     <Filter Include="Header Files\Lua Extensions">
       <UniqueIdentifier>{89296a1a-98e8-4de8-b1e9-628ab5235808}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Lua Extensions\Lua">
-      <UniqueIdentifier>{9f6035f0-6805-489f-9074-29bcc0ddb4d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Lua Extensions">
       <UniqueIdentifier>{54353dc8-3fe5-47b3-9b0c-b3ec239fe2b9}</UniqueIdentifier>
     </Filter>
@@ -100,21 +97,6 @@
   <ItemGroup>
     <ClInclude Include="headers\Script.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lua\include\lauxlib.h">
-      <Filter>Header Files\Lua Extensions\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="lua\include\lua.h">
-      <Filter>Header Files\Lua Extensions\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="lua\include\lua.hpp">
-      <Filter>Header Files\Lua Extensions\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="lua\include\luaconf.h">
-      <Filter>Header Files\Lua Extensions\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="lua\include\lualib.h">
-      <Filter>Header Files\Lua Extensions\Lua</Filter>
     </ClInclude>
     <ClInclude Include="headers\Lua Extensions\lua_extensions.hpp">
       <Filter>Header Files\Lua Extensions</Filter>

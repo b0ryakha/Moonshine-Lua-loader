@@ -181,7 +181,8 @@ namespace API
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 
-                    if (key == "set_color") lua_pushcfunction(L, set_color);
+                    if (key == "__type") lua_pushstring(L, "Sprite");
+                    else if (key == "set_color") lua_pushcfunction(L, set_color);
                     else if (key == "get_color") lua_pushcfunction(L, get_color);
                     else if (key == "set_pos") lua_pushcfunction(L, set_pos);
                     else if (key == "get_pos") lua_pushcfunction(L, get_pos);
