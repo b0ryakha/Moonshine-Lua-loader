@@ -18,7 +18,7 @@ void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue_t>& elements);
 
 template<typename Class>
 __forceinline void lua_newclass(lua_State* L) {
-	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(std::move(LuaStack(L)));
+	*static_cast<Class**>(lua_newuserdata(L, sizeof(Class*))) = new Class(std::move(LuaStack(L, "")));
 };
 
 template<typename Class>
@@ -28,7 +28,7 @@ __forceinline Class* lua_get_object(lua_State* L, std::string_view class_name, s
 
 template<typename Class>
 void lua_push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
-	LuaStack old_stack(L);
+	LuaStack old_stack(L, "");
 
 	if (!old_stack.empty())
 		lua_pop(L, static_cast<int>(old_stack.size()));

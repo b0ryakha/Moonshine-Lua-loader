@@ -12,7 +12,7 @@ namespace API
     static std::mt19937 gen{ rd() };
 
     static int rand_int(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cmath.rand_int");
 
         if (args.size() != 2)
             throw_error("[cmath.rand_int] Incorrect number of arguments!");
@@ -27,7 +27,7 @@ namespace API
     }
 
     static int rand_double(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cmath.rand_double");
 
         if (args.size() != 2)
             throw_error("[cmath.rand_double] Incorrect number of arguments!");
@@ -52,7 +52,7 @@ namespace API
     }
 
     static int lerp(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cmath.lerp");
 
         if (args.size() != 3)
             throw_error("[cmath.lerp] Incorrect number of arguments!");
@@ -66,7 +66,7 @@ namespace API
     }
 
     static int clamp(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cmath.clamp");
 
         if (args.size() != 3)
             throw_error("[cmath.clamp] Incorrect number of arguments!");
@@ -80,7 +80,7 @@ namespace API
     }
 
     static int round(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cmath.round");
 
         if (args.size() != 1)
             throw_error("[cmath.round] Incorrect number of arguments!");

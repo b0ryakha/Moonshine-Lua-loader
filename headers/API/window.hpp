@@ -18,7 +18,7 @@ namespace API
     }
 
     static int window_capture(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.capture");
 
         if (args.size() != 1)
             throw_error("[window.capture] Incorrect number of arguments!");
@@ -36,13 +36,16 @@ namespace API
     }
 
     static int window_clear(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.clear");
 
         if (args.empty()) {
             window.clear();
         }
         else if (args.size() == 1) {
             window.clear(args.get<LuaUserdata, Color>());
+        }
+        else {
+            throw_error("[window.clear] Incorrect number of arguments!");
         }
 
         print_offset = { 0.f, 0.f };
@@ -65,7 +68,7 @@ namespace API
     }
 
     static int window_set_size(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_size");
 
         if (args.size() != 2)
             throw_error("[window.set_size] Incorrect number of arguments!");
@@ -85,7 +88,7 @@ namespace API
     }
 
     static int window_set_pos(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_pos");
 
         if (args.size() != 2)
             throw_error("[window.set_pos] Incorrect number of arguments!");
@@ -96,7 +99,7 @@ namespace API
     }
 
     static int window_set_title(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_title");
 
         if (args.size() != 1)
             throw_error("[window.set_title] Incorrect number of arguments!");
@@ -107,7 +110,7 @@ namespace API
     }
 
     static int window_set_vsync(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_vsync");
 
         if (args.size() != 1)
             throw_error("[window.set_vsync] Incorrect number of arguments!");
@@ -118,7 +121,7 @@ namespace API
     }
 
     static int window_set_frame_limit(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_frame_limit");
 
         if (args.size() != 1)
             throw_error("[window.set_frame_limit] Incorrect number of arguments!");
@@ -129,7 +132,7 @@ namespace API
     }
 
     static int window_sleep(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.sleep");
 
         if (args.size() != 1)
             throw_error("[window.sleep] Incorrect number of arguments!");
@@ -149,7 +152,7 @@ namespace API
     }
 
     static int window_set_icon(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "window.set_icon");
 
         if (args.size() != 1)
             throw_error("[window.set_icon] Incorrect number of arguments!");

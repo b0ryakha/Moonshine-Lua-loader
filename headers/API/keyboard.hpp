@@ -10,7 +10,7 @@ extern sf::Event main_event;
 namespace API
 {
     static int keyboard_get_pressed(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "keyboard.get_pressed");
 
         if (args.size() > 1)
             throw_error("[keyboard.get_pressed] Incorrect number of arguments!");
@@ -35,7 +35,7 @@ namespace API
     }
 
     static int keyboard_is_pressed(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "keyboard.is_pressed");
 
         if (args.size() != 1)
             throw_error("[keyboard.is_pressed] Incorrect number of arguments!");

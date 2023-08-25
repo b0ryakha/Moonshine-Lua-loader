@@ -17,7 +17,7 @@ namespace API
     static char socket_type = '\0';
 
     static int network_bind(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "network.bind");
 
         if (args.size() != 2)
             throw_error("[network.bind] Incorrect number of arguments!");
@@ -54,7 +54,7 @@ namespace API
     }
 
     static int network_send(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "network.send");
 
         if (args.size() != 1 && args.size() != 3)
             throw_error("[network.send] Incorrect number of arguments!");

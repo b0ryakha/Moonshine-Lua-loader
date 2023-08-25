@@ -177,7 +177,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L);
+            LuaStack tmp(L, "");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

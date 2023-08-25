@@ -22,7 +22,7 @@ namespace API
 	}
 
     static int cursor_is_bound(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "cursor.is_bound");
 
         if (args.size() != 4)
             throw_error("[cursor.is_bound] Incorrect number of arguments!");

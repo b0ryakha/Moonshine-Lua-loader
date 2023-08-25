@@ -16,7 +16,7 @@ namespace fs = std::filesystem;
 namespace API
 {
 	static int file_download(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.download");
 
 		if (args.size() != 2)
 			throw_error("[file.download] Incorrect number of arguments!");
@@ -53,7 +53,7 @@ namespace API
 	}
 
 	static int file_exists(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.exists");
 
 		if (args.size() != 1)
 			throw_error("[file.exists] Incorrect number of arguments!");
@@ -65,7 +65,7 @@ namespace API
 	}
 
 	static int file_create(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.create");
 
 		if (args.size() != 1)
 			throw_error("[file.create] Incorrect number of arguments!");
@@ -88,7 +88,7 @@ namespace API
 	}
 
 	static int file_remove(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.remove");
 
 		if (args.size() != 1)
 			throw_error("[file.remove] Incorrect number of arguments!");
@@ -103,7 +103,7 @@ namespace API
 	}
 
 	static int file_copy(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.copy");
 
 		if (args.size() != 1 && args.size() != 2)
 			throw_error("[file.copy] Incorrect number of arguments!");
@@ -134,7 +134,7 @@ namespace API
 	}
 
 	static int file_clear(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.clear");
 
 		if (args.size() != 1)
 			throw_error("[file.clear] Incorrect number of arguments!");
@@ -157,7 +157,7 @@ namespace API
 	}
 
 	static int file_rename(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.rename");
 
 		if (args.size() != 2)
 			throw_error("[file.rename] Incorrect number of arguments!");
@@ -174,7 +174,7 @@ namespace API
 	}
 
 	static int file_line_count(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.line_count");
 
 		if (args.size() != 1)
 			throw_error("[file.line_count] Incorrect number of arguments!");
@@ -196,7 +196,7 @@ namespace API
 	}
 
 	static int file_read(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.read");
 
 		if (args.size() != 1 && args.size() != 2)
 			throw_error("[file.read] Incorrect number of arguments!");
@@ -231,7 +231,7 @@ namespace API
 	}
 
 	static int file_write(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.write");
 
 		if (args.size() != 2 && args.size() != 3)
 			throw_error("[file.write] Incorrect number of arguments!");
@@ -278,7 +278,7 @@ namespace API
 	}
 
 	static int file_get_list(lua_State* L) {
-		LuaStack args(L);
+		LuaStack args(L, "file.get_list");
 
 		if (args.size() != 1)
 			throw_error("[file.get_list] Incorrect number of arguments!");

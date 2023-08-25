@@ -1,7 +1,5 @@
 #pragma once
 
-#include "lua_extensions.hpp"
-
 #include <filesystem>
 namespace fs = std::filesystem;
 

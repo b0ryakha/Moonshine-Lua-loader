@@ -11,18 +11,19 @@
 class LuaStack final {
 private:
     std::vector<LuaMultiValue_t> elements;
-    mutable size_t counter_of_get = 0;
+    std::string linked_func_name;
+    mutable size_t counter_of_get = 0u;
 
     __forceinline void check_errors(LuaMultiValue expected_type, size_t index) const {
-        if (index < 0 || index >= elements.size())
+        if (index < 0u || index >= elements.size())
             throw_error("[Stack assert] Out of range, index = " + std::to_string(index) + ", size = " + std::to_string(elements.size()) + ".");
 
         if (elements[index].index() != static_cast<size_t>(expected_type))
-            throw_error("[Stack] Cannot convert '" + LuaMultiValue_s[elements[index].index()] + "' to '" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + "'.");
+            throw_error("[" + linked_func_name + "] Bad argument #" + std::to_string(index + 1) + " (" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + " expected, got " + LuaMultiValue_s[elements[index].index()] + ")");
     }
 
 public:
-    LuaStack(lua_State* lua_state);
+    LuaStack(lua_State* lua_state, std::string_view func_name);
     LuaStack(const LuaStack& other);
     LuaStack(LuaStack&& tmp) noexcept;
     ~LuaStack() = default;
@@ -122,6 +123,9 @@ public:
 
     template<typename T, typename Class>
     Class get(size_t index) const {
+        if (!std::is_same_v<T, LuaUserdata>)
+            throw_error("[Stack assert] Unknown type for get<T, Class>!");
+
         check_errors(LuaMultiValue::Userdata, index);
 
         return *(*static_cast<Class**>(std::get<LuaUserdata>(elements[index])));

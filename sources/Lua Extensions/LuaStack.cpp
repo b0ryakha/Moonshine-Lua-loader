@@ -1,6 +1,7 @@
 #include "LuaStack.hpp"
 
-LuaStack::LuaStack(lua_State* lua_state) {
+LuaStack::LuaStack(lua_State* lua_state, std::string_view func_name) {
+    linked_func_name = std::move(func_name);
     elements.reserve(lua_gettop(lua_state));
 
     for (int i = 1; i <= lua_gettop(lua_state); ++i) {

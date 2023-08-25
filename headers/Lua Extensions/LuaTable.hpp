@@ -26,7 +26,7 @@ private:
             throw_error("[Table assert] Out of range, key = '" + std::string(key) + "'.");
 
         if (elements.at(key).index() != static_cast<size_t>(expected_type))
-            throw_error("[Table] Cannot convert '" + LuaMultiValue_s[elements.at(key).index()] + "' to '" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + "'.");
+            throw_error("[Table] Bad argument #" + std::string(key) + " (" + LuaMultiValue_s[static_cast<size_t>(expected_type)] + " expected, got " + LuaMultiValue_s[elements.at(key).index()] + ")");
     }
 
 public:

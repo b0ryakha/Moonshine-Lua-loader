@@ -13,7 +13,7 @@
 namespace API
 {
     static int render_measure_text(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.measure_text");
 
         if (args.size() != 2)
             throw_error("[render.measure_text] Incorrect number of arguments!");
@@ -42,7 +42,7 @@ namespace API
     }
 
     static int render_text(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.text");
 
         if (args.size() != 5)
             throw_error("[render.text] Incorrect number of arguments!");
@@ -65,7 +65,7 @@ namespace API
     }
 
     static int render_rectangle(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.rectangle");
 
         if (args.size() != 5 && args.size() != 6)
             throw_error("[render.rectangle] Incorrect number of arguments!");
@@ -88,7 +88,7 @@ namespace API
     }
 
     static int render_circle(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.circle");
 
         if (args.size() != 4 && args.size() != 6)
             throw_error("[render.circle] Incorrect number of arguments!");
@@ -118,7 +118,7 @@ namespace API
     }
 
     static int render_line(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.line");
 
         if (args.size() != 6)
             throw_error("[render.line] Incorrect number of arguments!");
@@ -155,7 +155,7 @@ namespace API
     }
 
     static int render_polygon(lua_State* L) {
-        LuaStack args(L);
+        LuaStack args(L, "render.polygon");
 
         if (args.size() != 2)
             throw_error("[render.polygon] Incorrect number of arguments!");
