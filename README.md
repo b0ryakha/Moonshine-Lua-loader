@@ -17,7 +17,7 @@ You can view code examples using the API in [Examples.md](Examples.md) file
 ## Built With
 - [SFML](https://www.sfml-dev.org) - Graphics and sound engine
 - [CURL](https://curl.se) - To download files
-- [LuaJIT](https://luajit.org) - For binding Lua and C++
+- [LuaJIT](https://luajit.org/luajit.html) - For binding Lua and C++
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
