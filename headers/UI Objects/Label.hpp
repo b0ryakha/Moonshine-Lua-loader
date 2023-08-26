@@ -17,22 +17,27 @@ public:
 
     void setFont(const std::string& path);
     
-    inline size_t length() const noexcept { return text.length(); }
-    inline bool empty() const noexcept { return text.empty(); }
-    inline void clear() noexcept {
+    __forceinline size_t length() const noexcept { return text.length(); }
+    __forceinline bool empty() const noexcept { return text.empty(); }
+
+    __forceinline void clear() noexcept {
         text.clear();
         text.shrink_to_fit();
         sf::Text::setString("");
     }
-    inline std::string getString() const noexcept { return text; };
-    inline void setString(const std::string_view str) noexcept {
+
+    __forceinline std::string getString() const noexcept { return text; };
+
+    __forceinline void setString(const std::string_view str) noexcept {
         text = str;
         sf::Text::setString(text);
     };
-    inline std::string subString(size_t off = 0U, size_t count = std::numeric_limits<size_t>::max()) const {
+
+    __forceinline std::string subString(size_t off = 0U, size_t count = std::numeric_limits<size_t>::max()) const {
         return text.substr(off, count);
     }
-    inline std::string& erase(size_t off, size_t count) {
+
+    __forceinline std::string& erase(size_t off, size_t count) {
         auto&& tmp = text.erase(off, count);
         sf::Text::setString(tmp);
         return tmp;

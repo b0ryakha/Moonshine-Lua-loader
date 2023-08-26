@@ -9,7 +9,7 @@ void throw_error(std::string_view error) noexcept {
     }
 
     sf::Text text(sf::String::fromUtf8(error.cbegin(), error.cend()), font, 20);
-    sf::Text info("Press any key to continue...", font, 20);
+    sf::Text info("Press any key to continue...\n\n [CTRL + C] copy the error.", font, 20);
 
     text.setPosition(window.mapPixelToCoords(sf::Vector2i(
         window.getSize().x / 2 - text.getGlobalBounds().width / 2,
@@ -24,14 +24,21 @@ void throw_error(std::string_view error) noexcept {
     text.setFillColor(sf::Color::Red);
     info.setFillColor(sf::Color::Red);
 
-    window.clear();
-    window.draw(text);
-    window.draw(info);
-    window.display();
-
     while (window.isOpen()) {
-        if (main_event.type == sf::Event::KeyPressed)
-            break;
+        window.clear();
+        window.draw(text);
+        window.draw(info);
+        window.display();
+
+        if (main_event.type == sf::Event::TextEntered && main_event.key.code == 3) { // 3 = Ctrl + C
+            info.setString("Press any key to continue...");
+            sf::Clipboard::setString(error.data());
+        }
+
+        if (main_event.type == sf::Event::KeyPressed) {
+            if (!main_event.key.control && !main_event.key.system && !main_event.key.alt &&!main_event.key.shift)
+                break;
+        }
     }
     
     window.close();
