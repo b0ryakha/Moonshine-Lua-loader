@@ -1,6 +1,7 @@
 ### :exclamation: Disclaimer:
    - The [LuaJIT v2.1](https://luajit.org/luajit.html) compiler is used, as well as all its extensions, such as [FFI](https://luajit.org/ext_ffi.html), [BitOp](https://bitop.luajit.org/api.html) and etc.
    - The [Lua v5.1](https://www.lua.org/manual/5.1) is used.
+   - The X, Y coordinate is the upper-left corner of any graphic object.
    - Arguments in square brackets are optional.
 
 ---
