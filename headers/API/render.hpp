@@ -16,7 +16,7 @@ namespace API
         LuaStack args(L, "render.measure_text");
 
         if (args.size() != 2)
-            throw_error("[render.measure_text] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         Font font = args.get<LuaUserdata, Font>();
         const std::string str = args.get<std::string>();
@@ -45,7 +45,7 @@ namespace API
         LuaStack args(L, "render.text");
 
         if (args.size() != 5)
-            throw_error("[render.text] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         int x = args.get<int>();
         int y = args.get<int>();
@@ -68,7 +68,7 @@ namespace API
         LuaStack args(L, "render.rectangle");
 
         if (args.size() != 5 && args.size() != 6)
-            throw_error("[render.rectangle] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         int x = args.get<int>();
         int y = args.get<int>();
@@ -91,7 +91,7 @@ namespace API
         LuaStack args(L, "render.circle");
 
         if (args.size() != 4 && args.size() != 6)
-            throw_error("[render.circle] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         int x = args.get<int>();
         int y = args.get<int>();
@@ -121,7 +121,7 @@ namespace API
         LuaStack args(L, "render.line");
 
         if (args.size() != 6)
-            throw_error("[render.line] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         int x1 = args.get<int>();
         int y1 = args.get<int>();
@@ -158,7 +158,7 @@ namespace API
         LuaStack args(L, "render.polygon");
 
         if (args.size() != 2)
-            throw_error("[render.polygon] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         LuaTable points = args.get<LuaTable>();
         sf::Color color = args.get<LuaUserdata, Color>();
@@ -172,7 +172,7 @@ namespace API
             LuaTable point = points.get<LuaTable>();
 
             if (point.size() != 2)
-                throw_error("[render.polygon] Incorrect number of values!");
+                args.error("Incorrect number of values!");
 
             polygon.setPoint(i, window.mapPixelToCoords(sf::Vector2i(point.get<float>(), point.get<float>())));
         }

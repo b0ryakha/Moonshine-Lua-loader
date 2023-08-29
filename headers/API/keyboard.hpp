@@ -13,7 +13,7 @@ namespace API
         LuaStack args(L, "keyboard.get_pressed");
 
         if (args.size() > 1)
-            throw_error("[keyboard.get_pressed] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const bool is_symbol = (args.size() == 1 ? args.get<bool>() : false);
 
@@ -38,7 +38,7 @@ namespace API
         LuaStack args(L, "keyboard.is_pressed");
 
         if (args.size() != 1)
-            throw_error("[keyboard.is_pressed] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         lua_pushboolean(L, sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(args.get<int>())));
         return 1;

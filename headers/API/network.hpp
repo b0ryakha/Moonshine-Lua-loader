@@ -20,7 +20,7 @@ namespace API
         LuaStack args(L, "network.bind");
 
         if (args.size() != 2)
-            throw_error("[network.bind] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         if (l_port != 0)
             return 0;
@@ -29,13 +29,13 @@ namespace API
         socket_type = args.get<char>();
 
         if (socket_type != 's' && socket_type != 'c')
-            throw_error("[network.bind] Invalid socket type!");
+            args.error("Invalid socket type!");
 
         l_socket.emplace();
         l_socket->setBlocking(false);
 
         if (l_socket->bind(l_port) != sf::Socket::Done)
-            throw_error("[network.bind] Binding error!");
+            args.error("Binding error!");
 
         return 0;
     }
@@ -57,10 +57,10 @@ namespace API
         LuaStack args(L, "network.send");
 
         if (args.size() != 1 && args.size() != 3)
-            throw_error("[network.send] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         if (socket_type == '\0')
-            throw_error("[network.send] Local socket is not bind!");
+            args.error("Local socket is not bind!");
 
         const std::string recipient_ip = args.size() == 1 ? "" : args.get<std::string>();
         const ushort_t recipient_port = args.size() == 1 ? 0 : args.get<ushort_t>();

@@ -19,7 +19,7 @@ namespace API
         LuaStack args(L, "mouse.is_pressed");
 
         if (args.size() != 1)
-            throw_error("[mouse.is_pressed] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const int key_code = args.get<int>();
 

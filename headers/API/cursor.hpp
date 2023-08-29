@@ -25,7 +25,7 @@ namespace API
         LuaStack args(L, "cursor.is_bound");
 
         if (args.size() != 4)
-            throw_error("[cursor.is_bound] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const size_t x = args.get<size_t>();
         const size_t y = args.get<size_t>();

@@ -33,6 +33,10 @@ public:
     size_t size() const noexcept;
     size_t empty() const noexcept;
     LuaMultiValue get_type(size_t index) const;
+    
+    __forceinline void error(const std::string& error) const noexcept {
+        throw_error("[" + linked_func_name + "] " + error);
+    }
 
     template<typename T>
     T get(size_t index) const { throw_error("[Stack assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }

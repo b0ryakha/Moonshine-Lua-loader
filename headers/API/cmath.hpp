@@ -15,7 +15,7 @@ namespace API
         LuaStack args(L, "cmath.rand_int");
 
         if (args.size() != 2)
-            throw_error("[cmath.rand_int] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const int min = args.get<int>();
         const int max = args.get<int>();
@@ -30,7 +30,7 @@ namespace API
         LuaStack args(L, "cmath.rand_double");
 
         if (args.size() != 2)
-            throw_error("[cmath.rand_double] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         std::stringstream tmp;
         const double min = args.get<double>();
@@ -55,7 +55,7 @@ namespace API
         LuaStack args(L, "cmath.lerp");
 
         if (args.size() != 3)
-            throw_error("[cmath.lerp] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const float start = args.get<float>();
         const float end = args.get<float>();
@@ -69,7 +69,7 @@ namespace API
         LuaStack args(L, "cmath.clamp");
 
         if (args.size() != 3)
-            throw_error("[cmath.clamp] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const float number = args.get<float>();
         const float lower = args.get<float>();
@@ -83,7 +83,7 @@ namespace API
         LuaStack args(L, "cmath.round");
 
         if (args.size() != 1)
-            throw_error("[cmath.round] Incorrect number of arguments!");
+            args.error("Incorrect number of arguments!");
 
         const float number = args.get<float>();
 

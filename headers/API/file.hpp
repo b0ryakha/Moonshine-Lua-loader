@@ -19,24 +19,24 @@ namespace API
 		LuaStack args(L, "file.download");
 
 		if (args.size() != 2)
-			throw_error("[file.download] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		const std::string_view url = args.get<std::string>();
 
 		if (fs::exists(path))
-			throw_error("[file.download] Such a file already exists!");
+			args.error("Such a file already exists!");
 
 		if (path.empty() || !path.has_extension())
-			throw_error("[file.download] You need to specify the name of the file with its extension!");
+			args.error("You need to specify the name of the file with its extension!");
 
 		CURL* curl = curl_easy_init();
 		if (!curl)
-			throw_error("[file.download] Error during CURL initialization!");
+			args.error("Error during CURL initialization!");
 
 		FILE* data = fopen(path.string().c_str(), "wb");
 		if (!data)
-			throw_error("[file.download] Invalid file path!");
+			args.error("Invalid file path!");
 
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
@@ -44,7 +44,7 @@ namespace API
 
 		CURLcode error_id = curl_easy_perform(curl);
 		if (error_id != CURLM_OK)
-			throw_error("[file.download] Error while receiving binary code, error id: " + std::to_string(error_id));
+			args.error("Error while receiving binary code, error id: " + std::to_string(error_id));
 
 		curl_easy_cleanup(curl);
 		fclose(data);
@@ -56,7 +56,7 @@ namespace API
 		LuaStack args(L, "file.exists");
 
 		if (args.size() != 1)
-			throw_error("[file.exists] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 
@@ -68,11 +68,11 @@ namespace API
 		LuaStack args(L, "file.create");
 
 		if (args.size() != 1)
-			throw_error("[file.create] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (fs::exists(path))
-			throw_error("[file.create] Such a file / folder already exists!");
+			args.error("Such a file or folder already exists!");
 
 		if (path.has_extension()) {
 			fs::create_directories(path.parent_path());
@@ -91,11 +91,11 @@ namespace API
 		LuaStack args(L, "file.remove");
 
 		if (args.size() != 1)
-			throw_error("[file.remove] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.remove] File does not exist!");
+			args.error("File does not exist!");
 
 		fs::remove_all(path);
 
@@ -106,14 +106,14 @@ namespace API
 		LuaStack args(L, "file.copy");
 
 		if (args.size() != 1 && args.size() != 2)
-			throw_error("[file.copy] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.copy] File does not exist!");
+			args.error("File does not exist!");
 		
 		if (!path.has_extension())
-			throw_error("[file.copy] Path must be specified to the file!");
+			args.error("Path must be specified to the file!");
 
 		fs::path output_path;
 
@@ -137,11 +137,11 @@ namespace API
 		LuaStack args(L, "file.clear");
 
 		if (args.size() != 1)
-			throw_error("[file.clear] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.clear] File or folder does not exist!");
+			args.error("File or folder does not exist!");
 
 		if (path.has_extension()) {
 			std::ofstream file;
@@ -160,11 +160,11 @@ namespace API
 		LuaStack args(L, "file.rename");
 
 		if (args.size() != 2)
-			throw_error("[file.rename] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.rename] File or folder does not exist!");
+			args.error("File or folder does not exist!");
 
 		const std::string_view new_name = args.get<std::string>();
 
@@ -177,14 +177,14 @@ namespace API
 		LuaStack args(L, "file.line_count");
 
 		if (args.size() != 1)
-			throw_error("[file.line_count] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		if (!fs::exists(path))
-			throw_error("[file.line_count] File does not exist!");
+			args.error("File does not exist!");
 
 		if (path.has_extension())
-			throw_error("[file.line_count] Path must be specified to the folder!");
+			args.error("Path must be specified to the folder!");
 
 		std::ifstream file(path);
 		size_t length = std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1;
@@ -199,13 +199,13 @@ namespace API
 		LuaStack args(L, "file.read");
 
 		if (args.size() != 1 && args.size() != 2)
-			throw_error("[file.read] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 		size_t line_number = (args.size() == 2) ? args.get<size_t>() : 0;
 
 		if (!fs::exists(path))
-			throw_error("[file.read] File does not exist!");
+			args.error("File does not exist!");
 
 		std::ifstream file(path);
 		std::vector<LuaMultiValue_t> file_content;
@@ -222,7 +222,7 @@ namespace API
 				lua_pushstring(L, std::get<std::string>(file_content.at(line_number - 1)).c_str());
 			}
 			catch (...) {
-				throw_error("[file.read] There is no line under this number!");
+				args.error("There is no line under this number!");
 			}
 		}
 
@@ -234,7 +234,7 @@ namespace API
 		LuaStack args(L, "file.write");
 
 		if (args.size() != 2 && args.size() != 3)
-			throw_error("[file.write] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 
@@ -249,7 +249,7 @@ namespace API
 		bool is_rewrite = (args.size() == 3) ? args.get<bool>() : false;
 
 		if (!fs::exists(path))
-			throw_error("[file.write] File does not exist!");
+			args.error("File does not exist!");
 
 		std::stringstream buffer;
 		
@@ -281,15 +281,15 @@ namespace API
 		LuaStack args(L, "file.get_list");
 
 		if (args.size() != 1)
-			throw_error("[file.get_list] Incorrect number of arguments!");
+			args.error("Incorrect number of arguments!");
 
 		fs::path path = args.get<std::string>();
 
 		if (path.has_extension())
-			throw_error("[file.get_list] Path must be specified to the folder!");
+			args.error("Path must be specified to the folder!");
 
 		if (!fs::exists(path))
-			throw_error("[file.get_list] Folder does not exist!");
+			args.error("Folder does not exist!");
 
 		std::vector<LuaMultiValue_t> list;
 
