@@ -316,11 +316,15 @@ Closes the window and destroy all the attached resources.
 
 #### <a name="window.capture"></a> ```capture```
 ```lua
-window.capture(path: string)
+window.capture(path: string[, x: size_t, y: size_t, w: size_t, h: size_t])
 ```
 | Name  | Type         | Description                           |
 | :---: | :---:        | :---:                                 |
 | path  | ```string``` | Screenshot output path with file name |
+| x     | ```size_t``` | X coordinate, default = 0             |
+| y     | ```size_t``` | Y coordinate, default = 0             |
+| w     | ```size_t``` | Width, default = window width         |
+| h     | ```size_t``` | Height, default = window height       |
 
 Takes a screenshot of the window and saves it.
 
