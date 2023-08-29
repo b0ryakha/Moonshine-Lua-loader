@@ -74,7 +74,7 @@
 	"window.capture": {
 		"prefix": "window.capture",
 		"body": [
-		  "window.capture()"
+		  "window.capture(path[, x, y, w, h])"
 		],
 	},
 
