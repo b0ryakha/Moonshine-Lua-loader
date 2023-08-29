@@ -326,7 +326,7 @@ window.capture(path: string[, x: size_t, y: size_t, w: size_t, h: size_t])
 | w     | ```size_t``` | Width, default = window width         |
 | h     | ```size_t``` | Height, default = window height       |
 
-Takes a screenshot of the window and saves it.
+Takes a screenshot of the window and saves it (make sure the screen has not been updated by window.display).
 
 ---
 
