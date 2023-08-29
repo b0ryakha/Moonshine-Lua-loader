@@ -20,17 +20,41 @@ namespace API
     static int window_capture(lua_State* L) {
         LuaStack args(L, "window.capture");
 
-        if (args.size() != 1)
+        if (args.size() != 1 && args.size() != 5)
             args.error("Incorrect number of arguments!");
 
         const std::string path = args.get<std::string>();
-        sf::Texture screenshot;
+        size_t x = args.size() == 5 ? args.get<size_t>() : 0u;
+        size_t y = args.size() == 5 ? args.get<size_t>() : 0u;
+        size_t w = args.size() == 5 ? args.get<size_t>() : 0u;
+        size_t h = args.size() == 5 ? args.get<size_t>() : 0u;
 
+        sf::Texture screenshot;
         screenshot.create(window.getSize().x, window.getSize().y);
         screenshot.update(window);
 
-        if (!screenshot.copyToImage().saveToFile(path))
-            args.error("Error when saving a screenshot!");
+        sf::Image image = screenshot.copyToImage();
+
+        if (args.size() == 5) {
+            x = std::min(x, window.getSize().x);
+            y = std::min(y, window.getSize().y);
+            w = std::min(w, window.getSize().x);
+            h = std::min(h, window.getSize().y);
+
+            sf::Image cropped;
+            cropped.create(w, h);
+
+            for (size_t i = 0; i < h; ++i) {
+                for (size_t j = 0; j < w; ++j) {
+                    cropped.setPixel(j, i, image.getPixel(j + x, i + y));
+                }
+            }
+
+            image = std::move(cropped);
+        }
+
+        if (!image.saveToFile(path))
+            args.error("Attempt to save a corrupted image!");
 
         return 0;
     }
