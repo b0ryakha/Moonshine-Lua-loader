@@ -30,14 +30,12 @@ void throw_error(std::string_view error) noexcept {
         window.draw(info);
         window.display();
 
-        if (main_event.type == sf::Event::TextEntered && main_event.key.code == 3) { // 3 = Ctrl + C
+        if (main_event.type == sf::Event::TextEntered) {
+            if (main_event.key.code != 3) // 3 = Ctrl + C
+                break;
+                
             info.setString("Press any key to continue...");
             sf::Clipboard::setString(error.data());
-        }
-
-        if (main_event.type == sf::Event::KeyPressed) {
-            if (!main_event.key.control && !main_event.key.system && !main_event.key.alt &&!main_event.key.shift)
-                break;
         }
     }
     
