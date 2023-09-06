@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include "API/Objects/Vector2.hpp"
 
@@ -12,22 +12,22 @@ namespace API
         View(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<View>(L);
+            lhelper::new_class<View>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<View>(L, "View", 1);
+                delete lhelper::get_object<View>(L, "View", 1);
                 return 0;
             };
 
             static auto active = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 window.setView(*self);
 
                 return 0;
             };
 
             static auto set_port = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 size_t x = round(luaL_checknumber(L, 2));
                 size_t y = round(luaL_checknumber(L, 3));
                 float w = luaL_checknumber(L, 4);
@@ -46,7 +46,7 @@ namespace API
             };
 
             static auto set_center = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 size_t x = round(luaL_checknumber(L, 2));
                 size_t y = round(luaL_checknumber(L, 3));
 
@@ -58,7 +58,7 @@ namespace API
             };
 
             static auto set_size = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 size_t w = round(luaL_checknumber(L, 2));
                 size_t h = round(luaL_checknumber(L, 3));
 
@@ -70,9 +70,9 @@ namespace API
             };
 
             static auto get_size = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
 
-                lua_push_object<Vector2>(L, {
+                lhelper::push_object<Vector2>(L, {
                     self->getSize().x,
                     self->getSize().y
                 });
@@ -81,7 +81,7 @@ namespace API
             };
 
             static auto set_zoom = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 float zoom_factor = luaL_checknumber(L, 2);
 
                 self->zoom((100.f - zoom_factor) / 100.f);
@@ -90,7 +90,7 @@ namespace API
             };
 
             static auto set_rotation = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
                 float angle = luaL_checknumber(L, 2);
 
                 self->setRotation(angle);
@@ -99,23 +99,23 @@ namespace API
             };
 
             static auto get_rotation = [](lua_State* L) {
-                auto self = lua_get_object<View>(L, "View", 1);
+                auto self = lhelper::get_object<View>(L, "View", 1);
 
                 lua_pushnumber(L, self->getRotation());
                 return 0;
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<View>(L, "View", 1);
+                const auto self = lhelper::get_object<View>(L, "View", 1);
                 sf::Vector2f center_pos = self->getCenter();
                 sf::Vector2f size = self->getSize();
 
-                lua_push_object<View>(L, { center_pos.x - size.x / 2, center_pos.y - size.y / 2, size.x, size.y });
+                lhelper::push_object<View>(L, { center_pos.x - size.x / 2, center_pos.y - size.y / 2, size.x, size.y });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<View>(L, "View", 1);
+                const auto self = lhelper::get_object<View>(L, "View", 1);
 
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
@@ -139,7 +139,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<View>(L, "View", 1);
+                const auto self = lhelper::get_object<View>(L, "View", 1);
                 sf::Vector2f center_pos = self->getCenter();
                 sf::Vector2f size = self->getSize();
 
@@ -155,8 +155,8 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<View>(L, "View", 1);
-                const auto target = lua_get_object<View>(L, "View", 2);
+                const auto self = lhelper::get_object<View>(L, "View", 1);
+                const auto target = lhelper::get_object<View>(L, "View", 2);
 
                 lua_pushboolean(L, (
                     self->getCenter() == target->getCenter() &&
@@ -166,7 +166,7 @@ namespace API
                 return 1;
             };
 
-            lua_setmethods(L, "View", {
+            lhelper::set_methods(L, "View", {
                 { "__gc", destructor },
                 { "__index", index_get },
                 { "__tostring", to_string },

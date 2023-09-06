@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -215,7 +215,7 @@ namespace API
 			file_content.emplace_back(tmp);
 
 		if (args.size() == 1) {
-			lua_pushtable(L, file_content);
+			lhelper::push_table(L, file_content);
 		}
 		else {
 			try {
@@ -296,7 +296,7 @@ namespace API
 		for (const auto& entry : fs::directory_iterator(path))
 			list.emplace_back(entry.path().filename().string());
 
-		lua_pushtable(L, list);
+		lhelper::push_table(L, list);
 		return 1;
 	}
 }

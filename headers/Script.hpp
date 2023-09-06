@@ -6,7 +6,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 #include "misc_functions.hpp"
 
 #include "API/Objects/Vector2.hpp"
@@ -35,7 +35,7 @@ private:
 	std::unique_ptr<std::thread> main_thread;
 	std::string lua_path;
 
-	__forceinline void open_API();
+	void open_API();
 
 public:
 	Script() = default;

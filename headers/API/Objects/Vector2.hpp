@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include <sstream>
 
@@ -10,10 +10,10 @@ namespace API
         Vector2(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<Vector2>(L);
+            lhelper::new_class<Vector2>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<Vector2>(L, "Vector2", 1);
+                delete lhelper::get_object<Vector2>(L, "Vector2", 1);
                 return 0;
             };
 
@@ -23,14 +23,14 @@ namespace API
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
-                lua_push_object<Vector2>(L, { self->x, self->y });
+                lhelper::push_object<Vector2>(L, { self->x, self->y });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
                     switch (lua_tointeger(L, 2)) {
@@ -60,7 +60,7 @@ namespace API
             };
 
             static auto index_set = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
                 double new_value = luaL_checknumber(L, 3);
 
                 if (lua_isnumber(L, 2)) {
@@ -83,7 +83,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 std::stringstream result;
                 result << "{ " << self->x << ", " << self->y << " }";
@@ -93,60 +93,60 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
-                const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
+                const auto target = lhelper::get_object<Vector2>(L, "Vector2", 2);
 
                 lua_pushboolean(L, ((self->x == target->x) && (self->y == target->y)));
                 return 1;
             };
 
             static auto add = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
                     float number = lua_tonumber(L, 2);
-                    lua_push_object<Vector2>(L, { self->x + number, self->y + number });
+                    lhelper::push_object<Vector2>(L, { self->x + number, self->y + number });
                 }
                 else {
-                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
-                    lua_push_object<Vector2>(L, { self->x + target->x, self->y + target->y });
+                    const auto target = lhelper::get_object<Vector2>(L, "Vector2", 2);
+                    lhelper::push_object<Vector2>(L, { self->x + target->x, self->y + target->y });
                 }
 
                 return 1;
             };
 
             static auto sub = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
                     float number = lua_tonumber(L, 2);
-                    lua_push_object<Vector2>(L, { self->x - number, self->y - number });
+                    lhelper::push_object<Vector2>(L, { self->x - number, self->y - number });
                 }
                 else {
-                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
-                    lua_push_object<Vector2>(L, { self->x - target->x, self->y - target->y });
+                    const auto target = lhelper::get_object<Vector2>(L, "Vector2", 2);
+                    lhelper::push_object<Vector2>(L, { self->x - target->x, self->y - target->y });
                 }
 
                 return 1;
             };
 
             static auto mul = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
                 
                 if (lua_isnumber(L, 2)) {
                     float number = lua_tonumber(L, 2);
-                    lua_push_object<Vector2>(L, { self->x * number, self->y * number });
+                    lhelper::push_object<Vector2>(L, { self->x * number, self->y * number });
                 }
                 else {
-                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
-                    lua_push_object<Vector2>(L, { self->x * target->x, self->y * target->y });
+                    const auto target = lhelper::get_object<Vector2>(L, "Vector2", 2);
+                    lhelper::push_object<Vector2>(L, { self->x * target->x, self->y * target->y });
                 }
 
                 return 1;
             };
 
             static auto div = [](lua_State* L) {
-                const auto self = lua_get_object<Vector2>(L, "Vector2", 1);
+                const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
                     float number = lua_tonumber(L, 2);
@@ -154,21 +154,21 @@ namespace API
                     if (number == 0)
                         throw_error("[Vector2:div] Division by zero!");
 
-                    lua_push_object<Vector2>(L, { self->x / number, self->y / number });
+                    lhelper::push_object<Vector2>(L, { self->x / number, self->y / number });
                 }
                 else {
-                    const auto target = lua_get_object<Vector2>(L, "Vector2", 2);
+                    const auto target = lhelper::get_object<Vector2>(L, "Vector2", 2);
 
                     if (target->x == 0 || target->y == 0)
                         throw_error("[Vector2:div] Division by zero!");
 
-                    lua_push_object<Vector2>(L, { self->x / target->x, self->y / target->y });
+                    lhelper::push_object<Vector2>(L, { self->x / target->x, self->y / target->y });
                 }
 
                 return 1;
             };
 
-            lua_setmethods(L, "Vector2", {
+            lhelper::set_methods(L, "Vector2", {
                 { "__gc", destructor },
                 { "__len", get_len },
                 { "__index", index_get },

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Vector2.hpp"
@@ -19,31 +19,31 @@ namespace API
         const std::string get_path() const;
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<Sprite>(L);
+            lhelper::new_class<Sprite>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<Sprite>(L, "Sprite", 1);
+                delete lhelper::get_object<Sprite>(L, "Sprite", 1);
                 return 0;
             };
 
             static auto set_color = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-                const auto color = lua_get_object<Color>(L, "Color", 2);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
+                const auto color = lhelper::get_object<Color>(L, "Color", 2);
 
                 self->setColor(*color);
                 return 0;
             };
 
             static auto get_color = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Color color = self->getColor();
 
-                lua_push_object<Color>(L, { color.r, color.g, color.b, color.a });
+                lhelper::push_object<Color>(L, { color.r, color.g, color.b, color.a });
                 return 1;
             };
 
             static auto set_pos = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 size_t x = std::round(luaL_checknumber(L, 2));
                 size_t y = std::round(luaL_checknumber(L, 3));
 
@@ -54,15 +54,15 @@ namespace API
             };
 
             static auto get_pos = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f pos = self->getPosition();
 
-                lua_push_object<Vector2>(L, { pos.x, pos.y });
+                lhelper::push_object<Vector2>(L, { pos.x, pos.y });
                 return 1;
             };
 
             static auto set_rotation = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double angle = luaL_checknumber(L, 2);
 
                 self->setRotation(angle);
@@ -70,14 +70,14 @@ namespace API
             };
 
             static auto get_rotation = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
                 lua_pushnumber(L, self->getRotation());
                 return 1;
             };
 
             static auto set_scale = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double factor_x = luaL_checknumber(L, 2);
                 double factor_y = luaL_checknumber(L, 3);
 
@@ -86,15 +86,15 @@ namespace API
             };
 
             static auto get_scale = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f scale = self->getScale();
 
-                lua_push_object<Vector2>(L, { scale.x, scale.y });
+                lhelper::push_object<Vector2>(L, { scale.x, scale.y });
                 return 1;
             };
 
             static auto set_origin = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double x = luaL_checknumber(L, 2);
                 double y = luaL_checknumber(L, 3);
 
@@ -103,15 +103,15 @@ namespace API
             };
 
             static auto get_origin = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f origin = self->getOrigin();
 
-                lua_push_object<Vector2>(L, { origin.x, origin.y });
+                lhelper::push_object<Vector2>(L, { origin.x, origin.y });
                 return 1;
             };
 
             static auto set_size = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 int w = std::round(luaL_checknumber(L, 2));
                 int h = std::round(luaL_checknumber(L, 3));
 
@@ -124,16 +124,16 @@ namespace API
             };
 
             static auto get_size = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double w = self->getGlobalBounds().width;
                 double h = self->getGlobalBounds().height;
 
-                lua_push_object<Vector2>(L, { w, h });
+                lhelper::push_object<Vector2>(L, { w, h });
                 return 1;
             };
 
             static auto rotate = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double angle = luaL_checknumber(L, 2);
 
                 self->rotate(angle);
@@ -141,7 +141,7 @@ namespace API
             };
 
             static auto scale = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double factor_x = luaL_checknumber(L, 2);
                 double factor_y = luaL_checknumber(L, 3);
 
@@ -150,7 +150,7 @@ namespace API
             };
 
             static auto move = [](lua_State* L) {
-                auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double x_offset = luaL_checknumber(L, 2);
                 double y_offset = luaL_checknumber(L, 3);
 
@@ -161,7 +161,7 @@ namespace API
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
                 sf::IntRect rect = self->getTextureRect();
                 size_t t_x = rect.left;
@@ -171,12 +171,12 @@ namespace API
                 float w = self->getScale().x * t_w;
                 float h = self->getScale().y * t_h;
 
-                lua_push_object<Sprite>(L, { self->get_path(), w, h, t_x, t_y, t_w, t_h });
+                lhelper::push_object<Sprite>(L, { self->get_path(), w, h, t_x, t_y, t_w, t_h });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
@@ -207,7 +207,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Vector2f pos = self->getPosition();
 
                 std::stringstream result;
@@ -218,8 +218,8 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<Sprite>(L, "Sprite", 1);
-                const auto target = lua_get_object<Sprite>(L, "Sprite", 2);
+                const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
+                const auto target = lhelper::get_object<Sprite>(L, "Sprite", 2);
 
                 lua_pushboolean(L, (
                     self->get_path() == target->get_path() &&
@@ -231,7 +231,7 @@ namespace API
                 return 1;
             };
 
-            lua_setmethods(L, "Sprite", {
+            lhelper::set_methods(L, "Sprite", {
                 { "__gc", destructor },
                 { "__index", index_get },
                 { "__tostring", to_string },

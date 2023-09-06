@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include <string>
 #include <sstream>
@@ -18,29 +18,29 @@ namespace API
         sf::Text::Style get_style() const;
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<Font>(L);
+            lhelper::new_class<Font>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<Font>(L, "Font", 1);
+                delete lhelper::get_object<Font>(L, "Font", 1);
                 return 0;
             };
 
             static auto get_family = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 lua_pushstring(L, self->getInfo().family.c_str());
                 return 1;
             };
 
             static auto get_size = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 lua_pushinteger(L, self->get_size());
                 return 1;
             };
 
             static auto get_style = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
                 const ushort_t styles = self->get_style();
                 std::string result;
 
@@ -64,14 +64,14 @@ namespace API
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
-                lua_push_object<Font>(L, { self->getInfo().family, self->get_size() });
+                lhelper::push_object<Font>(L, { self->getInfo().family, self->get_size() });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
@@ -90,7 +90,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 std::stringstream result;
                 result << "{ " << self->getInfo().family << ", " << self->get_size() << ", " << self->get_style() << " }";
@@ -100,8 +100,8 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<Font>(L, "Font", 1);
-                const auto target = lua_get_object<Font>(L, "Font", 2);
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
+                const auto target = lhelper::get_object<Font>(L, "Font", 2);
 
                 lua_pushboolean(L, (
                     self->getInfo().family == target->getInfo().family &&
@@ -112,7 +112,7 @@ namespace API
                 return 1;
             };
 
-            lua_setmethods(L, "Font", {
+            lhelper::set_methods(L, "Font", {
                 { "__gc", destructor },
                 { "__index", index_get },
                 { "__tostring", to_string },

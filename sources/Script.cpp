@@ -38,8 +38,8 @@ void Script::open(std::string_view path) {
     main_thread->detach();
 }
 
-__forceinline void Script::open_API() {
-    lua_register_table(lua_state, "render", {
+void Script::open_API() {
+    lhelper::register_table(lua_state, "render", {
         std::make_pair("text", API::render_text),
         std::make_pair("sprite", API::render_sprite),
         std::make_pair("measure_text", API::render_measure_text),
@@ -49,7 +49,7 @@ __forceinline void Script::open_API() {
         std::make_pair("polygon", API::render_polygon)
     });
 
-    lua_register_table(lua_state, "window", {
+    lhelper::register_table(lua_state, "window", {
         std::make_pair("get_size", API::window_get_size),
         std::make_pair("set_size", API::window_set_size),
         std::make_pair("display", API::window_display),
@@ -78,9 +78,9 @@ __forceinline void Script::open_API() {
     SFML_KEYS.emplace_back(std::make_pair("Semicolon", 48));
     SFML_KEYS.emplace_back(std::make_pair("Return", 58));
 
-    lua_register_table(lua_state, "key", SFML_KEYS);
+    lhelper::register_table(lua_state, "key", SFML_KEYS);
 
-    lua_register_table(lua_state, "keyboard", {
+    lhelper::register_table(lua_state, "keyboard", {
         std::make_pair("get_pressed", API::keyboard_get_pressed),
         std::make_pair("is_pressed", API::keyboard_is_pressed),
     });
@@ -91,22 +91,22 @@ __forceinline void Script::open_API() {
     for (size_t i = 0, size = SFML_BUTTONS_NAME.size(); i < size; ++i)
         SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
 
-    lua_register_table(lua_state, "button", SFML_BUTTONS);
+    lhelper::register_table(lua_state, "button", SFML_BUTTONS);
 
-    lua_register_table(lua_state, "mouse", {
+    lhelper::register_table(lua_state, "mouse", {
         std::make_pair("get_pressed", API::mouse_get_pressed),
         std::make_pair("is_pressed", API::mouse_is_pressed),
         std::make_pair("is_scrolling_up", API::mouse_is_scrolling_up),
         std::make_pair("is_scrolling_down", API::mouse_is_scrolling_down),
     });
 
-    lua_register_table(lua_state, "cursor", {
+    lhelper::register_table(lua_state, "cursor", {
         std::make_pair("get_pos", API::cursor_get_pos),
         std::make_pair("is_bound", API::cursor_is_bound),
         std::make_pair("in_window", API::cursor_in_window),
     });
 
-    lua_register_table(lua_state, "file", {
+    lhelper::register_table(lua_state, "file", {
         std::make_pair("read", API::file_read),
         std::make_pair("write", API::file_write),
         std::make_pair("download", API::file_download),
@@ -120,7 +120,7 @@ __forceinline void Script::open_API() {
         std::make_pair("get_list", API::file_get_list),
     });
 
-    lua_register_table(lua_state, "cmath", {
+    lhelper::register_table(lua_state, "cmath", {
         std::make_pair("rand_int", API::rand_int),
         std::make_pair("rand_double", API::rand_double),
         std::make_pair("lerp", API::lerp),
@@ -128,11 +128,11 @@ __forceinline void Script::open_API() {
         std::make_pair("round", API::round),
     });
 
-    lua_register_table(lua_state, "globalvars", {
+    lhelper::register_table(lua_state, "globalvars", {
         std::make_pair("get_executable_path", API::get_executable_path),
     });
 
-    lua_register_table(lua_state, "network", {
+    lhelper::register_table(lua_state, "network", {
         std::make_pair("bind", API::network_bind),
         std::make_pair("unbind", API::network_unbind),
         std::make_pair("send", API::network_send),
@@ -142,12 +142,12 @@ __forceinline void Script::open_API() {
 
     lua_register(lua_state, "print", API::print);
 
-    lua_register_class<API::Font>(lua_state, "Font");
-    lua_register_class<API::Vector2>(lua_state, "Vector2");
-    lua_register_class<API::Color>(lua_state, "Color");
-    lua_register_class<API::Sound>(lua_state, "Sound");
-    lua_register_class<API::Sprite>(lua_state, "Sprite");
-    lua_register_class<API::View>(lua_state, "View");
+    lhelper::register_class<API::Font>(lua_state, "Font");
+    lhelper::register_class<API::Vector2>(lua_state, "Vector2");
+    lhelper::register_class<API::Color>(lua_state, "Color");
+    lhelper::register_class<API::Sound>(lua_state, "Sound");
+    lhelper::register_class<API::Sprite>(lua_state, "Sprite");
+    lhelper::register_class<API::View>(lua_state, "View");
 }
 
 bool Script::is_open() const {

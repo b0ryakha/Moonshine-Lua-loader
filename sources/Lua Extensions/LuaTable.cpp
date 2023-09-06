@@ -58,11 +58,11 @@ LuaTable& LuaTable::operator=(LuaTable&& tmp) noexcept {
     return *this;
 }
 
-size_t LuaTable::size() const noexcept {
+size_t LuaTable::size() const {
     return elements.size();
 }
 
-size_t LuaTable::empty() const noexcept {
+size_t LuaTable::empty() const {
     return elements.empty();
 }
 
