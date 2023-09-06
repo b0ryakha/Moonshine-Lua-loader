@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 #include "API/Objects/Vector2.hpp"
 
 #include <mutex>
@@ -17,7 +17,7 @@ namespace API
         pos.x = std::min(static_cast<size_t>(std::max(pos.x, 0)), window_size.x);
         pos.y = std::min(static_cast<size_t>(std::max(pos.y, 0)), window_size.y);
 
-        lua_push_object<Vector2>(L, { pos.x, pos.y });
+        lhelper::push_object<Vector2>(L, { pos.x, pos.y });
         return 1;
 	}
 

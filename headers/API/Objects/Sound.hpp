@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include <SFML/Audio.hpp>
 #include <string>
@@ -20,29 +20,29 @@ namespace API
         void play(bool is_reset);
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<Sound>(L);
+            lhelper::new_class<Sound>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<Sound>(L, "Sound", 1);
+                delete lhelper::get_object<Sound>(L, "Sound", 1);
                 return 0;
             };
 
             static auto get_path = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 lua_pushstring(L, self->get_path().c_str());
                 return 1;
             };
 
             static auto get_volume = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 lua_pushinteger(L, self->getVolume());
                 return 1;
             };
 
             static auto set_volume = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
                 int volume = luaL_checkinteger(L, 2);
 
                 self->setVolume(volume);
@@ -50,14 +50,14 @@ namespace API
             };
 
             static auto get_loop = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 lua_pushboolean(L, self->getLoop());
                 return 1;
             };
 
             static auto set_loop = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
                 bool is_repeat = lua_toboolean(L, 2);
 
                 self->setLoop(is_repeat);
@@ -65,7 +65,7 @@ namespace API
             };
 
             static auto play = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
                 bool is_reset = lua_isboolean(L, 2) ? lua_toboolean(L, 2) : false;
 
                 self->play(is_reset);
@@ -73,21 +73,21 @@ namespace API
             };
 
             static auto stop = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 self->stop();
                 return 0;
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
-                lua_push_object<Sound>(L, { self->get_path(), self->getVolume(), self->getLoop() });
+                lhelper::push_object<Sound>(L, { self->get_path(), self->getVolume(), self->getLoop() });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
@@ -110,7 +110,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 std::stringstream result;
                 result << "{ \"" << self->get_path() << "\", " << self->getVolume() << "%, " << std::boolalpha << self->getLoop() << " }";
@@ -120,8 +120,8 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<Sound>(L, "Sound", 1);
-                const auto target = lua_get_object<Sound>(L, "Sound", 2);
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
+                const auto target = lhelper::get_object<Sound>(L, "Sound", 2);
 
                 lua_pushboolean(L, (
                     self->get_path() == target->get_path() &&
@@ -131,7 +131,7 @@ namespace API
                 return 1;
             };
 
-            lua_setmethods(L, "Sound", {
+            lhelper::set_methods(L, "Sound", {
                 { "__gc", destructor },
                 { "__index", index_get },
                 { "__tostring", to_string },

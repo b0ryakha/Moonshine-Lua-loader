@@ -1,6 +1,6 @@
 #include "misc_functions.hpp"
 
-void throw_error(std::string_view error) noexcept {
+void throw_error(std::string_view error) {
     sf::Font font;
 
     if (!font.loadFromFile(font_path + "arial.ttf")) {

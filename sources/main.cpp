@@ -11,11 +11,10 @@ sf::RenderWindow window;
 sf::Event main_event;
 std::string font_path;
 
-__forceinline void start_program(char* cmd_line) {
+void start_program(char* cmd_line) {
     window.create(sf::VideoMode(1400, 800), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
     
     Script lua;
-
     if (cmd_line[0] != '\0')
         lua.open(cmd_line);
 
@@ -28,7 +27,7 @@ __forceinline void start_program(char* cmd_line) {
     background_texture.loadFromMemory(res_background, sizeof(res_background));
 
     sf::Sprite background(background_texture);
-    background.setScale(0.73, 0.74);
+    background.setScale(0.74, 0.74);
 
     Label hint("Enter the path to the lua script ...", font_path + "arial.ttf", 25);
     hint.setPosition(sf::Vector2f(window.getSize().x / 2 - hint.getGlobalBounds().width / 2, window.getSize().y / 2 + 300));
@@ -42,11 +41,9 @@ __forceinline void start_program(char* cmd_line) {
     while (window.isOpen()) {
         if (!lua.is_open()) {
             window.clear();
-
             window.draw(background);
             window.draw(hint);
             textbox.draw(window);
-
             window.display();
         }
 

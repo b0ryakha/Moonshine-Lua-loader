@@ -1,6 +1,6 @@
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
-void lua_register_table(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements) {
+void lhelper::register_table(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements) {
 	lua_newtable(L);
 
 	for (const auto& element : elements) {
@@ -29,7 +29,7 @@ void lua_register_table(lua_State* L, std::string_view name, const std::vector<s
 	lua_setglobal(L, name.data());
 }
 
-void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements) {
+void lhelper::push_table(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements) {
 	lua_newtable(L);
 
 	for (const auto& element : elements) {
@@ -54,7 +54,7 @@ void lua_pushtable(lua_State* L, const std::vector<std::pair<std::string, LuaMul
 	}
 }
 
-void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue_t>& elements) {
+void lhelper::push_table(lua_State* L, const std::vector<LuaMultiValue_t>& elements) {
 	lua_newtable(L);
 
 	size_t index = 1;
@@ -82,7 +82,7 @@ void lua_pushtable(lua_State* L, const std::vector<LuaMultiValue_t>& elements) {
 	}
 }
 
-void lua_setmethods(lua_State* L, std::string_view name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
+void lhelper::set_methods(lua_State* L, std::string_view name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
 	luaL_newmetatable(L, name.data());
 
 	lua_pushstring(L, name.data());

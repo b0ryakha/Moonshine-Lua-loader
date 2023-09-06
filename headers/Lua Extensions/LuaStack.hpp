@@ -14,7 +14,7 @@ private:
     std::string linked_func_name;
     mutable size_t counter_of_get = 0u;
 
-    __forceinline void check_errors(LuaMultiValue expected_type, size_t index) const {
+    void check_errors(LuaMultiValue expected_type, size_t index) const {
         if (index < 0u || index >= elements.size())
             throw_error("[Stack assert] Out of range, index = " + std::to_string(index) + ", size = " + std::to_string(elements.size()) + ".");
 
@@ -30,11 +30,11 @@ public:
     LuaStack& operator=(const LuaStack& other);
     LuaStack& operator=(LuaStack&& tmp) noexcept;
 
-    size_t size() const noexcept;
-    size_t empty() const noexcept;
+    size_t size() const;
+    size_t empty() const;
     LuaMultiValue get_type(size_t index) const;
     
-    __forceinline void error(const std::string& error) const noexcept {
+    void error(const std::string& error) const {
         throw_error("[" + linked_func_name + "] " + error);
     }
 
@@ -125,18 +125,18 @@ public:
         return get<T>(elements.size() - counter_of_get--);
     }
 
-    template<typename T, typename Class>
-    Class get(size_t index) const {
+    template<typename T, typename APIStruct>
+    APIStruct get(size_t index) const {
         if (!std::is_same_v<T, LuaUserdata>)
-            throw_error("[Stack assert] Unknown type for get<T, Class>!");
+            throw_error("[Stack assert] Unknown type for get<LuaUserdata, APIStruct>!");
 
         check_errors(LuaMultiValue::Userdata, index);
 
-        return *(*static_cast<Class**>(std::get<LuaUserdata>(elements[index])));
+        return *(*static_cast<APIStruct**>(std::get<LuaUserdata>(elements[index])));
     }
 
-    template<typename T, typename Class>
-    Class get() const {
-        return get<T, Class>(elements.size() - counter_of_get--);
+    template<typename T, typename APIStruct>
+    APIStruct get() const {
+        return get<T, APIStruct>(elements.size() - counter_of_get--);
     }
 };

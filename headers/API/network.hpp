@@ -4,7 +4,7 @@
 #include <optional>
 #include <unordered_map>
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 namespace API
 {
@@ -169,7 +169,7 @@ namespace API
             }
         }
 
-        lua_pushtable(L, result);
+        lhelper::push_table(L, result);
         return 1;
     }
 

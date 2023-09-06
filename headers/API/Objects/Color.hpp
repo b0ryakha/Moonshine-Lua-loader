@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 
 #include <sstream>
 #include <iomanip>
@@ -12,10 +12,10 @@ namespace API
         Color(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
-            lua_newclass<Color>(L);
+            lhelper::new_class<Color>(L);
 
             static auto destructor = [](lua_State* L) {
-                delete lua_get_object<Color>(L, "Color", 1);
+                delete lhelper::get_object<Color>(L, "Color", 1);
                 return 0;
             };
 
@@ -25,7 +25,7 @@ namespace API
             };
 
             static auto unpack = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
 
                 lua_pushinteger(L, self->r);
                 lua_pushinteger(L, self->g);
@@ -35,7 +35,7 @@ namespace API
             };
 
             static auto to_hex = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
                 size_t hex_color = (self->r << 24 | self->g << 16 | self->b << 8 | self->a);
 
                 std::stringstream result;
@@ -46,14 +46,14 @@ namespace API
             };
 
             static auto copy = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
 
-                lua_push_object<Color>(L, { self->r, self->g, self->b, self->a });
+                lhelper::push_object<Color>(L, { self->r, self->g, self->b, self->a });
                 return 1;
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
 
                 if (lua_isnumber(L, 2)) {
                     switch (lua_tointeger(L, 2)) {
@@ -93,7 +93,7 @@ namespace API
             };
 
             static auto index_set = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
                 int new_value = std::min(std::max(static_cast<int>(luaL_checkinteger(L, 3)), 0), 255);
 
                 if (lua_isnumber(L, 2)) {
@@ -124,7 +124,7 @@ namespace API
             };
 
             static auto to_string = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
 
                 std::string result;
                 result = "{ " + std::to_string(self->r) + ", " + std::to_string(self->g) + ", " + std::to_string(self->b) + ", " + std::to_string(self->a) + " }";
@@ -134,8 +134,8 @@ namespace API
             };
 
             static auto is_equal = [](lua_State* L) {
-                const auto self = lua_get_object<Color>(L, "Color", 1);
-                const auto target = lua_get_object<Color>(L, "Color", 2);
+                const auto self = lhelper::get_object<Color>(L, "Color", 1);
+                const auto target = lhelper::get_object<Color>(L, "Color", 2);
 
                 lua_pushboolean(L, (
                     (self->r == target->r) &&
@@ -146,7 +146,7 @@ namespace API
                 return 1;
             };
 
-            lua_setmethods(L, "Color", {
+            lhelper::set_methods(L, "Color", {
                 { "__gc", destructor },
                 { "__len", get_len },
                 { "__index", index_get },

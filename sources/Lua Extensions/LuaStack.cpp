@@ -50,11 +50,11 @@ LuaStack& LuaStack::operator=(LuaStack&& tmp) noexcept {
     return *this;
 }
 
-size_t LuaStack::size() const noexcept {
+size_t LuaStack::size() const {
     return elements.size();
 }
 
-size_t LuaStack::empty() const noexcept {
+size_t LuaStack::empty() const {
     return elements.empty();
 }
 

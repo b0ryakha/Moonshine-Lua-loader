@@ -13,6 +13,38 @@ void Label::setFont(const std::string& path) {
     sf::Text::setFont(font);
 }
 
+size_t Label::length() const {
+    return text.length();
+}
+
+bool Label::empty() const {
+    return text.empty();
+}
+
+void Label::clear() {
+    text.clear();
+    text.shrink_to_fit();
+    sf::Text::setString("");
+}
+
+std::string Label::getString() const {
+    return text;
+};
+
+void Label::setString(const std::string_view str) {
+    text = str;
+    sf::Text::setString(text);
+};
+
+std::string Label::subString(size_t off, size_t count) const {
+    return text.substr(off, count);
+}
+
+std::string& Label::erase(size_t off, size_t count) {
+    auto&& tmp = text.erase(off, count);
+    sf::Text::setString(tmp);
+    return tmp;
+}
 
 void Label::operator=(const char ch) {
     text = ch;

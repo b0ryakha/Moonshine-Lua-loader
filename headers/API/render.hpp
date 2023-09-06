@@ -1,6 +1,6 @@
 #pragma once
 
-#include "lua_extensions.hpp"
+#include "lua_helper.hpp"
 #include "SuperEllipse.hpp"
 
 #include "API/Objects/Vector2.hpp"
@@ -24,7 +24,7 @@ namespace API
         sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
         text.setStyle(font.get_style());
 
-        lua_push_object<Vector2>(L, {
+        lhelper::push_object<Vector2>(L, {
             text.getGlobalBounds().width,
             text.getGlobalBounds().height
         });
@@ -36,7 +36,7 @@ namespace API
         if (lua_gettop(L) != 1)
             throw_error("[render.sprite] Incorrect number of arguments!");
 
-        window.draw(*lua_get_object<Sprite>(L, "Sprite", 1));
+        window.draw(*lhelper::get_object<Sprite>(L, "Sprite", 1));
 
         return 0;
     }

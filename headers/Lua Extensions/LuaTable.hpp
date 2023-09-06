@@ -21,7 +21,7 @@ private:
     std::unordered_map<std::string_view, std::variant<lua_Number, lua_CFunction, std::string, LuaBoolean, std::shared_ptr<LuaTable>, LuaUserdata, LuaNil>> elements;
     mutable size_t counter_of_get = 0;
 
-    __forceinline void check_errors(LuaMultiValue expected_type, std::string_view key) const {
+    void check_errors(LuaMultiValue expected_type, std::string_view key) const {
         if (elements.find(key) == elements.end())
             throw_error("[Table assert] Out of range, key = '" + std::string(key) + "'.");
 
@@ -38,8 +38,8 @@ public:
     LuaTable& operator=(const LuaTable& other);
     LuaTable& operator=(LuaTable&& tmp) noexcept;
 
-    size_t size() const noexcept;
-    size_t empty() const noexcept;
+    size_t size() const;
+    size_t empty() const;
     LuaMultiValue get_type(std::string_view key) const;
 
     template<typename T>
@@ -129,16 +129,19 @@ public:
         return get<T>(std::to_string(1 + elements.size() - counter_of_get--));
     }
 
-    template<typename T, typename Class>
-    Class get(std::string_view key) const {
+    template<typename T, typename APIStruct>
+    APIStruct get(std::string_view key) const {
+        if (!std::is_same_v<T, LuaUserdata>)
+            throw_error("[Table assert] Unknown type for get<LuaUserdata, APIStruct>!");
+
         check_errors(LuaMultiValue::Userdata, key);
 
-        return *(*static_cast<Class**>(std::get<LuaUserdata>(elements.at(key))));
+        return *(*static_cast<APIStruct**>(std::get<LuaUserdata>(elements.at(key))));
     }
 
-    template<typename T, typename Class>
-    Class get() const {
-        return get<T, Class>(std::to_string(1 + elements.size() - counter_of_get--));
+    template<typename T, typename APIStruct>
+    APIStruct get() const {
+        return get<T, APIStruct>(std::to_string(1 + elements.size() - counter_of_get--));
     }
 };
 
