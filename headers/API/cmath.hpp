@@ -4,12 +4,28 @@
 #include "misc_functions.hpp"
 
 #include <random>
-#include <sstream>
 
 namespace API
 {
     static std::random_device rd;
     static std::mt19937 gen{ rd() };
+
+    namespace detail {
+        static const 
+            size_t number_len(double n) {
+            constexpr auto epsilon = 1E-3;
+            size_t result = std::ceil(std::log10(std::floor(n) + 1));
+            n -= std::round(n);
+
+            while (std::fabs(n) >= epsilon) {
+                n *= 10;
+                ++result;
+                n -= std::round(n);
+            }
+
+            return result;
+        }
+    }
 
     static int rand_int(lua_State* L) {
         LuaStack args(L, "cmath.rand_int");
@@ -32,19 +48,10 @@ namespace API
         if (args.size() != 2)
             args.error("Incorrect number of arguments!");
 
-        std::stringstream tmp;
         const double min = args.get<double>();
         const double max = args.get<double>();
 
-        tmp << std::abs(min);
-        int first = tmp.str().length();
-
-        tmp.clear();
-
-        tmp << std::abs(max);
-        int second = tmp.str().length();
-
-        int n = std::pow(10, std::max(first, second - 3));
+        int n = std::pow(10, std::max(detail::number_len(min), detail::number_len(max) - 3));
         std::uniform_real_distribution dist{ min, max };
 
         lua_pushnumber(L, std::round(dist(gen) * n) / n);

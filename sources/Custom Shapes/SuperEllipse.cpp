@@ -1,48 +1,45 @@
 #include "SuperEllipse.hpp"
 
-void SuperEllipse::init() {
-    std::vector<sf::Vector2f> sin_4;
-    constexpr double PREC = M_PI_2 / 15;
-
-    for (float i = 0; i < M_PI_2; i += PREC)
-        sin_4.push_back(std::move(sf::Vector2f(sinf(i) * m_radius, cosf(i) * m_radius)));
-
-    std::vector<sf::Vector2f> sin_4_reverse(sin_4.rbegin(), sin_4.rend());
-
-    const float WIDTH2 = m_rect.width - m_radius;
-    const float HEIGHT2 = m_rect.height - m_radius;
-
-    for (const auto& point : sin_4_reverse)
-        m_points.push_back(std::move(sf::Vector2f(WIDTH2 + point.x, HEIGHT2 + point.y)));
-
-    for (const auto& point : sin_4)
-        m_points.push_back(std::move(sf::Vector2f(m_radius - point.x, HEIGHT2 + point.y)));
-
-    for (const auto& point : sin_4_reverse)
-        m_points.push_back(std::move(sf::Vector2f(m_radius - point.x, m_radius - point.y)));
-
-    for (const auto& point : sin_4)
-        m_points.push_back(std::move(sf::Vector2f(WIDTH2 + point.x, m_radius - point.y)));
-}
-
-SuperEllipse::SuperEllipse() {};
-
-SuperEllipse::SuperEllipse(const sf::Rect<float>& rect, size_t rounding, const sf::Color& color) : m_rect(rect) {
-    rounding = std::min(std::max(rounding, 0u), 100u);
+SuperEllipse::SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color)
+    : rect({ x, y, w, h })
+{
+    rounding = std::min(std::max(rounding, 0), 100);
     const float max_rounding = std::min(rect.width, rect.height) / 2;
 
-    m_radius = (max_rounding * rounding) / 100;
+    radius = (max_rounding * rounding) / 100.f;
 
-    init();
+    std::vector<sf::Vector2f> sin_4;
+    constexpr float PI_2 = 3.14159265358979323846f / 2.0f;
+    constexpr float PREC = PI_2 / 15.f;
+
+    for (float i = 0.f; i < PI_2; i += PREC)
+        sin_4.emplace_back(sinf(i) * radius, cosf(i) * radius);
+
+    const float WIDTH = rect.width - radius;
+    const float HEIGHT = rect.height - radius;
+
+    for (auto it = sin_4.crbegin(), end = sin_4.crend(); it != end; ++it)
+        points.emplace_back(WIDTH + it->x, HEIGHT + it->y);
+
+    for (const auto& point : sin_4)
+        points.emplace_back(radius - point.x, HEIGHT + point.y);
+
+    for (auto it = sin_4.crbegin(), end = sin_4.crend(); it != end; ++it)
+        points.emplace_back(radius - it->x, radius - it->y);
+
+    for (const auto& point : sin_4)
+        points.emplace_back(WIDTH + point.x, radius - point.y);
+
     setPosition(rect.left, rect.top);
     setFillColor(color);
+
     sf::Shape::update();
 }
 
 size_t SuperEllipse::getPointCount() const {
-    return m_points.size();
+    return points.size();
 }
 
 sf::Vector2f SuperEllipse::getPoint(size_t index) const {
-    return m_points[index];
+    return points[index];
 }

@@ -32,6 +32,8 @@ namespace API
                 return 1;
             }
         }
+
+        return 0;
     }
 
     static int keyboard_is_pressed(lua_State* L) {

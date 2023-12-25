@@ -2,6 +2,8 @@
 
 #include "lua_helper.hpp"
 #include "API/Objects/Vector2.hpp"
+#include "API/Objects/Color.hpp"
+#include "API/Objects/Sprite.hpp"
 
 #include <thread>
 #include <chrono>
@@ -36,10 +38,10 @@ namespace API
         sf::Image image = screenshot.copyToImage();
 
         if (args.size() == 5) {
-            x = std::min(x, window.getSize().x);
-            y = std::min(y, window.getSize().y);
-            w = std::min(w, window.getSize().x);
-            h = std::min(h, window.getSize().y);
+            x = std::min(static_cast<unsigned>(x), window.getSize().x);
+            y = std::min(static_cast<unsigned>(y), window.getSize().y);
+            w = std::min(static_cast<unsigned>(w), window.getSize().x);
+            h = std::min(static_cast<unsigned>(h), window.getSize().y);
 
             sf::Image cropped;
             cropped.create(w, h);
@@ -66,7 +68,7 @@ namespace API
             window.clear();
         }
         else if (args.size() == 1) {
-            window.clear(args.get<LuaUserdata, Color>());
+            window.clear(args.get<LuaUserdata, API::Color>(0));
         }
         else {
             args.error("Incorrect number of arguments!");
@@ -97,7 +99,10 @@ namespace API
         if (args.size() != 2)
             args.error("Incorrect number of arguments!");
 
-        window.setSize(sf::Vector2u(args.get<size_t>(0), args.get<size_t>(1)));
+        const size_t width = args.get<size_t>();
+        const size_t height = args.get<size_t>();
+
+        window.setSize(sf::Vector2u(width, height));
 
         return 0;
     }
@@ -181,7 +186,7 @@ namespace API
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        sf::Sprite sprite = args.get<LuaUserdata, Sprite>();
+        sf::Sprite sprite = args.get<LuaUserdata, API::Sprite>();
         const sf::Texture* texture = sprite.getTexture();
 
         window.setIcon(texture->getSize().x, texture->getSize().y, texture->copyToImage().getPixelsPtr());

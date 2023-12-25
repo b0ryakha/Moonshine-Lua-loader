@@ -46,7 +46,8 @@ void Script::open_API() {
         std::make_pair("rectangle", API::render_rectangle),
         std::make_pair("circle", API::render_circle),
         std::make_pair("line", API::render_line),
-        std::make_pair("polygon", API::render_polygon)
+        std::make_pair("polygon", API::render_polygon),
+        //std::make_pair("blur", API::render_blur)
     });
 
     lhelper::register_table(lua_state, "window", {
@@ -109,7 +110,6 @@ void Script::open_API() {
     lhelper::register_table(lua_state, "file", {
         std::make_pair("read", API::file_read),
         std::make_pair("write", API::file_write),
-        std::make_pair("download", API::file_download),
         std::make_pair("create", API::file_create),
         std::make_pair("remove", API::file_remove),
         std::make_pair("copy", API::file_copy),

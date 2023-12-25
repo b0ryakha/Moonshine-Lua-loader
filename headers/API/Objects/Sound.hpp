@@ -115,7 +115,7 @@ namespace API
                 std::stringstream result;
                 result << "{ \"" << self->get_path() << "\", " << self->getVolume() << "%, " << std::boolalpha << self->getLoop() << " }";
 
-                lua_pushstring(L, result.str().c_str());
+                lua_pushstring(L, std::move(result).str().c_str());
                 return 1;
             };
 

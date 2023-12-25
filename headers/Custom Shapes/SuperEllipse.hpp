@@ -2,23 +2,18 @@
 
 #include <SFML/Graphics.hpp>
 
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 #include <vector>
 
 class SuperEllipse : public sf::ConvexShape {
 private:
-    sf::FloatRect m_rect = { 0, 0, 0, 0 };
-    sf::Vector2f m_position = { 0, 0 };
-    std::vector<sf::Vector2f> m_points;
-
-    float m_radius = 0.f;
-
-    void init();
+    sf::FloatRect rect;
+    std::vector<sf::Vector2f> points;
+    float radius = 0.f;
 
 public:
-    SuperEllipse();
-    SuperEllipse(const sf::Rect<float>& rect, size_t rounding, const sf::Color& color = sf::Color::White);
+    SuperEllipse() = default;
+    SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color = sf::Color::White);
 
     virtual size_t getPointCount() const;
     virtual sf::Vector2f getPoint(size_t index) const;

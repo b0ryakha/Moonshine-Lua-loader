@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <thread>
 #include <chrono>
+#include <cmath>
 
 using ushort_t = unsigned short;
 

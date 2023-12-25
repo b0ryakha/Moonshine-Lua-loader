@@ -63,7 +63,6 @@
   - [read()](#file.read)
   - [write()](#file.write)
   - [copy()](#file.copy)
-  - [download()](#file.download)
   - [create()](#file.create)
   - [remove()](#file.remove)
   - [exists()](#file.exists)
@@ -588,19 +587,6 @@ file.copy(path: string[, output_path: string])
 | output_path | ```string``` | Output file path, default = source |
 
 Copies the file.
-
----
-
-#### <a name="file.download"></a> ```download```
-```lua
-file.download(path: string, url: string)
-```
-| Name  | Type         | Description                               |
-| :---: | :---:        | :---:                                     |
-| path  | ```string``` | Path to file with its name and extension  |
-| url   | ```string``` | The url where the file will be downloaded |
-
-Downloads the file from the specified link to the specified path.
 
 ---
 

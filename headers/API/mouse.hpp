@@ -13,6 +13,8 @@ namespace API
                 return 1;
             }
         }
+
+        return 0;
     }
 
     static int mouse_is_pressed(lua_State* L) {

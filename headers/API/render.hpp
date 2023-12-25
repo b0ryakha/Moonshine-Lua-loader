@@ -2,6 +2,7 @@
 
 #include "lua_helper.hpp"
 #include "SuperEllipse.hpp"
+//#include "Blur.hpp"
 
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
@@ -9,6 +10,8 @@
 #include "API/Objects/Sprite.hpp"
 
 #include <string>
+
+extern sf::RenderWindow window;
 
 namespace API
 {
@@ -80,7 +83,7 @@ namespace API
         const auto conv_pos = window.mapPixelToCoords(sf::Vector2i(x, y));
         const auto conv_size = window.mapPixelToCoords(sf::Vector2i(w, h));
 
-        SuperEllipse rectangle(sf::Rect<float>(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y), rounding, color);
+        SuperEllipse rectangle(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y, rounding, color);
 
         window.draw(rectangle);
 
@@ -174,11 +177,32 @@ namespace API
             if (point.size() != 2)
                 args.error("Incorrect number of values!");
 
-            polygon.setPoint(i, window.mapPixelToCoords(sf::Vector2i(point.get<float>(), point.get<float>())));
+            polygon.setPoint(i, window.mapPixelToCoords(sf::Vector2i(point.get<int>(), point.get<int>())));
         }
 
         window.draw(polygon);
 
         return 0;
     }
+
+    //static int render_blur(lua_State* L) {
+    //    LuaStack args(L, "render.blur");
+    //
+    //    if (args.size() != 5 && args.size() != 6)
+    //        args.error("Incorrect number of arguments!");
+    //
+    //    size_t x = args.get<size_t>();
+    //    size_t y = args.get<size_t>();
+    //    size_t w = args.get<size_t>();
+    //    size_t h = args.get<size_t>();
+    //    size_t strength = args.get<size_t>();
+    //    size_t rounding = (args.size() == 6) ? args.get<size_t>() : 0;
+    //
+    //    Blur blur(x, y, w, h, strength, rounding);
+    //
+    //    render_buffer.display();
+    //    blur.draw(render_buffer);
+    //
+    //    return 0;
+    //}
 }

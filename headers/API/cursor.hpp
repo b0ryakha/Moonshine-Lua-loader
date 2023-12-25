@@ -14,8 +14,8 @@ namespace API
         sf::Vector2i pos = sf::Mouse::getPosition(window);
         const sf::Vector2u window_size = window.getSize();
 
-        pos.x = std::min(static_cast<size_t>(std::max(pos.x, 0)), window_size.x);
-        pos.y = std::min(static_cast<size_t>(std::max(pos.y, 0)), window_size.y);
+        pos.x = std::min(static_cast<unsigned>(std::max(pos.x, 0)), window_size.x);
+        pos.y = std::min(static_cast<unsigned>(std::max(pos.y, 0)), window_size.y);
 
         lhelper::push_object<Vector2>(L, { pos.x, pos.y });
         return 1;

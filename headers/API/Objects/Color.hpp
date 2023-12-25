@@ -36,12 +36,13 @@ namespace API
 
             static auto to_hex = [](lua_State* L) {
                 const auto self = lhelper::get_object<Color>(L, "Color", 1);
+                
                 size_t hex_color = (self->r << 24 | self->g << 16 | self->b << 8 | self->a);
 
                 std::stringstream result;
                 result << '#' << std::hex << std::uppercase << std::setfill('0') << std::setw(8) << hex_color;
 
-                lua_pushstring(L, result.str().c_str());
+                lua_pushstring(L, std::move(result).str().c_str());
                 return 1;
             };
 

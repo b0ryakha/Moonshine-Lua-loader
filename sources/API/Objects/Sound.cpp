@@ -13,7 +13,7 @@ API::Sound::Sound(const LuaStack& args) {
 
     setBuffer(buffer);
     setLoop(is_repeat);
-    setVolume(volume);
+    setVolume(static_cast<float>(volume));
 }
 
 const std::string API::Sound::get_path() const {

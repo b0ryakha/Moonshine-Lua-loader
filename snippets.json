@@ -3,49 +3,49 @@
         "prefix": "render.text",
         "body": [
           "render.text(x, y, font, text, color)"
-        ],
+        ]
     },
 
     "render.sprite": {
         "prefix": "render.sprite",
         "body": [
           "render.sprite(sprite)"
-        ],
+        ]
     },
 
 	"render.measure_text": {
 		"prefix": "render.measure_text",
 		"body": [
 		  "render.measure_text(font, text)"
-		],
+		]
 	},
 
 	"render.rectangle": {
 		"prefix": "render.rectangle",
 		"body": [
 		  "render.rectangle(x, y, w, h, color[, rounding])"
-		],
+		]
 	},
 
 	"render.circle": {
 		"prefix": "render.circle",
 		"body": [
 		  "render.circle(x, y, radius, color[, thickness, outline_color])"
-		],
+		]
 	},
 
 	"render.line": {
 		"prefix": "render.line",
 		"body": [
 		  "render.line(x1, y1, x2, y2, thickness, color)"
-		],
+		]
 	},
 
 	"render.polygon": {
 		"prefix": "render.polygon",
 		"body": [
 		  "render.polygon(points, color)"
-		],
+		]
 	},
 
 
@@ -54,98 +54,98 @@
 		"prefix": "window.display",
 		"body": [
 		  "window.display()"
-		],
+		]
 	},
 
 	"window.clear": {
 		"prefix": "window.clear",
 		"body": [
 		  "window.clear([color])"
-		],
+		]
 	},
 
 	"window.close": {
 		"prefix": "window.close",
 		"body": [
 		  "window.close()"
-		],
+		]
 	},
 
 	"window.capture": {
 		"prefix": "window.capture",
 		"body": [
 		  "window.capture(path[, x, y, w, h])"
-		],
+		]
 	},
 
 	"window.get_size": {
 		"prefix": "window.get_size",
 		"body": [
 		  "window.get_size()"
-		],
+		]
 	},
 
 	"window.set_size": {
 		"prefix": "window.set_size",
 		"body": [
 		  "window.set_size(width, height)"
-		],
+		]
 	},
 
 	"window.get_pos": {
 		"prefix": "window.get_pos",
 		"body": [
 		  "window.get_pos()"
-		],
+		]
 	},
 
 	"window.set_pos": {
 		"prefix": "window.set_pos",
 		"body": [
 		  "window.set_pos(x, y)"
-		],
+		]
 	},
 
 	"window.set_title": {
 		"prefix": "window.set_title",
 		"body": [
 		  "window.set_title(title)"
-		],
+		]
 	},
 
 	"window.set_vsync": {
 		"prefix": "window.set_vsync",
 		"body": [
 		  "window.set_vsync(state)"
-		],
+		]
 	},
 
 	"window.set_frame_limit": {
 		"prefix": "window.set_frame_limit",
 		"body": [
 		  "window.set_frame_limit(fps_max)"
-		],
+		]
 	},
 
 	"window.sleep": {
 		"prefix": "window.sleep",
 		"body": [
 		  "window.sleep(milliseconds)"
-		],
+		]
 	},
 
 	"window.await": {
 		"prefix": "window.await",
 		"body": [
 		  "window.await()"
-		],
+		]
 	},
 
 	"window.set_icon": {
 		"prefix": "window.set_icon",
 		"body": [
 		  "window.set_icon(icon)"
-		],
+		]
 	},
 
 
@@ -256,14 +256,14 @@
 		"prefix": "keyboard.get_pressed",
 		"body": [
 		  "keyboard.get_pressed([return_symbol])"
-		],
+		]
 	},
 
 	"keyboard.is_pressed": {
 		"prefix": "keyboard.is_pressed",
 		"body": [
 		  "keyboard.is_pressed(key_code)"
-		],
+		]
 	},
 
 
@@ -278,28 +278,28 @@
 		"prefix": "mouse.get_pressed",
 		"body": [
 		  "mouse.get_pressed()"
-		],
+		]
 	},
 
 	"mouse.is_pressed": {
 		"prefix": "mouse.is_pressed",
 		"body": [
 		  "mouse.is_pressed(button_code)"
-		],
+		]
 	},
 
 	"mouse.is_scrolling_up": {
 		"prefix": "mouse.is_scrolling_up",
 		"body": [
 		  "mouse.is_scrolling_up()"
-		],
+		]
 	},
 
 	"mouse.is_scrolling_down": {
 		"prefix": "mouse.is_scrolling_down",
 		"body": [
 		  "mouse.is_scrolling_down()"
-		],
+		]
 	},
 
 
@@ -308,21 +308,21 @@
 		"prefix": "cursor.get_pos",
 		"body": [
 		  "cursor.get_pos()"
-		],
+		]
 	},
 
 	"cursor.in_window": {
 		"prefix": "cursor.in_window",
 		"body": [
 		  "cursor.in_window()"
-		],
+		]
 	},
 
 	"cursor.is_bound": {
 		"prefix": "cursor.is_bound",
 		"body": [
 		  "cursor.is_bound(x, y, w, h)"
-		],
+		]
 	},
 
 
@@ -331,77 +331,70 @@
 		"prefix": "file.read",
 		"body": [
 		  "file.read(path[, line_number])"
-		],
+		]
 	},
 
 	"file.write": {
 		"prefix": "file.write",
 		"body": [
 		  "file.write(path, content[, is_rewrite])"
-		],
+		]
 	},
 	
 	"file.copy": {
 		"prefix": "file.copy",
 		"body": [
 		  "file.copy(path[, output_path])"
-		],
-	},
-
-	"file.download": {
-		"prefix": "file.download",
-		"body": [
-		  "file.download(path, url)"
-		],
+		]
 	},
 
 	"file.create": {
 		"prefix": "file.create",
 		"body": [
 		  "file.create(path)"
-		],
+		]
 	},
 
 	"file.remove": {
 		"prefix": "file.remove",
 		"body": [
 		  "file.remove(path)"
-		],
+		]
 	},
 
 	"file.exists": {
 		"prefix": "file.exists",
 		"body": [
 		  "file.exists(path)"
-		],
+		]
 	},
 
 	"file.line_count": {
 		"prefix": "file.line_count",
 		"body": [
 		  "file.line_count(path)"
-		],
+		]
 	},
 
 	"file.clear": {
 		"prefix": "file.clear",
 		"body": [
 		  "file.clear(path)"
-		],
+		]
 	},
 
 	"file.rename": {
 		"prefix": "file.rename",
 		"body": [
 		  "file.rename(path, new_name)"
-		],
+		]
 	},
 	
 	"file.get_list": {
 		"prefix": "file.get_list",
 		"body": [
 		  "file.get_list(path)"
-		],
+		]
 	},
 
 
@@ -410,35 +403,35 @@
 		"prefix": "cmath.rand_int",
 		"body": [
 		  "cmath.rand_int(min, max)"
-		],
+		]
 	},
 
 	"cmath.rand_double": {
 		"prefix": "cmath.rand_double",
 		"body": [
 		  "cmath.rand_double(min, max)"
-		],
+		]
 	},
 
 	"cmath.lerp": {
 		"prefix": "cmath.lerp",
 		"body": [
 		  "cmath.lerp(start, end, time)"
-		],
+		]
 	},
 
 	"cmath.clamp": {
 		"prefix": "cmath.clamp",
 		"body": [
 		  "cmath.clamp(number, lower, upper)"
-		],
+		]
 	},
 
 	"cmath.round": {
 		"prefix": "cmath.round",
 		"body": [
 		  "cmath.round(number)"
-		],
+		]
 	},
 
 
@@ -447,7 +440,7 @@
 		"prefix": "globalvars.get_executable_path",
 		"body": [
 		  "globalvars.get_executable_path()"
-		],
+		]
 	},
 
 
@@ -456,35 +449,35 @@
 		"prefix": "network.bind",
 		"body": [
 		  "network.bind(port, socket_type)"
-		],
+		]
 	},
 
 	"network.unbind": {
 		"prefix": "network.unbind",
 		"body": [
 		  "network.unbind()"
-		],
+		]
 	},
 
 	"network.send": {
 		"prefix": "network.send",
 		"body": [
 		  "network.send([ip, port, ]packet)"
-		],
+		]
 	},
 
 	"network.receive": {
 		"prefix": "network.receive",
 		"body": [
 		  "network.receive()"
-		],
+		]
 	},
 
 	"network.get_local_address": {
 		"prefix": "network.get_local_address",
 		"body": [
 		  "network.get_local_address()"
-		],
+		]
 	},
 
 
@@ -494,7 +487,7 @@
 		"prefix": "Sound:new",
 		"body": [
 		  "Sound:new(path, volume[, is_repeat])"
-		],
+		]
 	},
 	
 
@@ -503,7 +496,7 @@
 		"prefix": "Vector2:new",
 		"body": [
 		  "Vector2:new(x, y)"
-		],
+		]
 	},
 	
 
@@ -512,7 +505,7 @@
 		"prefix": "Font:new",
 		"body": [
 		  "Font:new(name, size)"
-		],
+		]
 	},
 	
 
@@ -521,7 +514,7 @@
 		"prefix": "Color:new",
 		"body": [
 		  "Color:new(r, g, b[, a] | hex)"
-		],
+		]
 	},
 	
 
@@ -530,7 +523,7 @@
 		"prefix": "Sprite:new",
 		"body": [
 		  "Sprite:new(path, w, h[, t_x, t_y, t_w, t_h])"
-		],
+		]
 	},
 	
 
@@ -539,6 +532,6 @@
 		"prefix": "View:new",
 		"body": [
 		  "View:new([x, y, w, h])"
-		],
-	},
+		]
+	}
 }

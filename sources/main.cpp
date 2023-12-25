@@ -11,11 +11,11 @@ sf::RenderWindow window;
 sf::Event main_event;
 std::string font_path;
 
-void start_program(char* cmd_line) {
-    window.create(sf::VideoMode(1400, 800), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16));
-    
+void start_program(std::string_view cmd_line) {
+    window.create(sf::VideoMode(1400u, 800u), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0u, 0u, 16u));
+
     Script lua;
-    if (cmd_line[0] != '\0')
+    if (!cmd_line.empty())
         lua.open(cmd_line);
 
     sf::Image icon;
@@ -27,7 +27,7 @@ void start_program(char* cmd_line) {
     background_texture.loadFromMemory(res_background, sizeof(res_background));
 
     sf::Sprite background(background_texture);
-    background.setScale(0.74, 0.74);
+    background.setScale(0.74f, 0.74f);
 
     Label hint("Enter the path to the lua script ...", font_path + "arial.ttf", 25);
     hint.setPosition(sf::Vector2f(window.getSize().x / 2 - hint.getGlobalBounds().width / 2, window.getSize().y / 2 + 300));
@@ -78,16 +78,12 @@ void start_program(char* cmd_line) {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
     font_path = "C:/WINDOWS/Fonts/";
-
     start_program(lpCmdLine);
-    return 0;
 }
 
 #elif defined(__linux__)
 int main(int argc, char** argv) {
-    font_path = "/usr/share/fonts/";
-
-    start_program(argv[0]);
-    return 0;
+    font_path = "/usr/share/fonts/TTF/";
+    start_program(argc > 1 ? argv[1] : "");
 }
 #endif

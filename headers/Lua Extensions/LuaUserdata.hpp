@@ -8,6 +8,6 @@ public:
 
     template<typename T>
     constexpr operator T*() const {
-        return static_cast<T*>(self);
+        return reinterpret_cast<T*>(self);
     };
 };

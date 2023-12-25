@@ -3,6 +3,7 @@
 #include <SFML/Network.hpp>
 #include <optional>
 #include <unordered_map>
+#include <iterator>
 
 #include "lua_helper.hpp"
 
@@ -67,23 +68,23 @@ namespace API
         const LuaTable table = args.get<LuaTable>();
 
         sf::Packet packet;
-        packet << table.size();
+        packet << static_cast<int>(table.size());
 
         for (size_t i = 1, size = table.size(); i <= size; ++i) {
             const std::string key = std::to_string(i);
 
             switch (table.get_type(key)) {
                 case LuaMultiValue::Number:
-                    packet << static_cast<size_t>(LuaMultiValue::Number) << table.get<double>(key);
+                    packet << static_cast<int>(LuaMultiValue::Number) << table.get<double>(key);
                     break;
                 case LuaMultiValue::String:
-                    packet << static_cast<size_t>(LuaMultiValue::String) << table.get<std::string>(key);
+                    packet << static_cast<int>(LuaMultiValue::String) << table.get<std::string>(key);
                     break;
                 case LuaMultiValue::Boolean:
-                    packet << static_cast<size_t>(LuaMultiValue::Boolean) << table.get<bool>(key);
+                    packet << static_cast<int>(LuaMultiValue::Boolean) << table.get<bool>(key);
                     break;
                 default:
-                    packet << static_cast<size_t>(LuaMultiValue::Nil);
+                    packet << static_cast<int>(LuaMultiValue::Nil);
             }
         }
         
@@ -97,7 +98,7 @@ namespace API
 
                 if (l_socket->send(packet, it->second, it->first) == sf::Socket::Disconnected) {
                     it = clients.erase(it);
-                    --it;
+                    std::advance(it, -1);
                 }
             }
         }
@@ -126,7 +127,7 @@ namespace API
         if (socket_type == 's')
             clients[new_port] = std::move(new_ip);
 
-        size_t size;
+        int size;
         if (!(packet >> size)) {
             lua_pushnil(L);
             return 1;
@@ -135,8 +136,8 @@ namespace API
         std::vector<LuaMultiValue_t> result;
         result.reserve(size);
 
-        for (size_t i = 0; i < size; ++i) {
-            size_t type_id;
+        for (size_t i = 0; i < static_cast<size_t>(size); ++i) {
+            int type_id;
             if (!(packet >> type_id)) {
                 lua_pushnil(L);
                 return 1;

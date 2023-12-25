@@ -82,7 +82,7 @@ void lhelper::push_table(lua_State* L, const std::vector<LuaMultiValue_t>& eleme
 	}
 }
 
-void lhelper::set_methods(lua_State* L, std::string_view name, static const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
+void lhelper::set_methods(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, lua_CFunction>>& methods) {
 	luaL_newmetatable(L, name.data());
 
 	lua_pushstring(L, name.data());

@@ -9,49 +9,11 @@
 #include <iterator>
 #include <optional>
 #include <cstdio>
-#include <curl\curl.h>
 
 namespace fs = std::filesystem;
 
 namespace API
 {
-	static int file_download(lua_State* L) {
-		LuaStack args(L, "file.download");
-
-		if (args.size() != 2)
-			args.error("Incorrect number of arguments!");
-
-		fs::path path = args.get<std::string>();
-		const std::string_view url = args.get<std::string>();
-
-		if (fs::exists(path))
-			args.error("Such a file already exists!");
-
-		if (path.empty() || !path.has_extension())
-			args.error("You need to specify the name of the file with its extension!");
-
-		CURL* curl = curl_easy_init();
-		if (!curl)
-			args.error("Error during CURL initialization!");
-
-		FILE* data = fopen(path.string().c_str(), "wb");
-		if (!data)
-			args.error("Invalid file path!");
-
-		curl_easy_setopt(curl, CURLOPT_URL, url);
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, fwrite);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, data);
-
-		CURLcode error_id = curl_easy_perform(curl);
-		if (error_id != CURLM_OK)
-			args.error("Error while receiving binary code, error id: " + std::to_string(error_id));
-
-		curl_easy_cleanup(curl);
-		fclose(data);
-
-		return 0;
-	}
-
 	static int file_exists(lua_State* L) {
 		LuaStack args(L, "file.exists");
 
@@ -166,7 +128,7 @@ namespace API
 		if (!fs::exists(path))
 			args.error("File or folder does not exist!");
 
-		const std::string_view new_name = args.get<std::string>();
+		const std::string new_name = args.get<std::string>();
 
 		fs::rename(path, (path.parent_path()) / new_name);
 
@@ -187,7 +149,7 @@ namespace API
 			args.error("Path must be specified to the folder!");
 
 		std::ifstream file(path);
-		size_t length = std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1;
+		size_t length = static_cast<size_t>(std::count(std::istreambuf_iterator<char>(file), {}, '\n') + 1);
 
 		file.close();
 

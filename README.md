@@ -14,10 +14,37 @@ For comfortable use, recommended to download [snippets.json](snippets.json) (VS 
 ## Code examples
 You can view code examples using the API in [Examples.md](Examples.md) file
 
-## Built With
+## Building
+### Built with:
 - [SFML](https://www.sfml-dev.org) - Graphics and sound engine
-- [CURL](https://curl.se) - To download files
-- [LuaJIT](https://luajit.org/luajit.html) - For binding Lua and C++
+- [LuaJIT](https://luajit.org/luajit.html) - Binding Lua and C++
+
+#### Windows:
+##### For Windows used <u>static libraries</u>, so before building, change the library paths to your own in CMakeLists.txt:
+```cmake
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(LIB_PATH_LuaJIT "")
+    set(LIB_PATH_SFML "")
+...
+```
+##### Build:
+```sh
+cd Moonshine-Lua-loader
+cmake -B "build" -G "Visual Studio 17 2022" -A "Win32"
+cmake --build "build" --config Release
+```
+##### The build is complete, but don't forget to copy openal32.dll to the directory with the executable file.
+#### Arch Linux:
+##### For Linux used <u>dynamic libraries</u>, so install them and other dependencies via the console:
+```sh
+sudo pacman -S cmake pkg-config sfml luajit clang
+```
+##### Build:
+```sh
+cd Moonshine-Lua-loader
+cmake -B "build" -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
+cmake --build "build" --config Release
+```
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
