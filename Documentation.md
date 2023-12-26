@@ -84,6 +84,7 @@
 <details><summary>:mag: GlobalVars</summary>
 
   - [get_executable_path()](#globalvars.get_executable_path)
+  - [get_os_type()](#globalvars.get_os_type)
   </details>
   
 <details><summary>:speech_balloon: Misc</summary>
@@ -748,6 +749,15 @@ globalvars.get_executable_path(): string
 ```
 
 Returns the path of executable.
+
+---
+
+#### <a name="globalvars.get_os_type"></a> ```get_os_type```
+```lua
+globalvars.get_os_type(): string
+```
+
+Returns the os name.
 
 
 ### :speech_balloon: Misc

@@ -443,6 +443,13 @@
 		]
 	},
 
+	"globalvars.get_os_type": {
+		"prefix": "globalvars.get_os_type",
+		"body": [
+		  "globalvars.get_os_type()"
+		]
+	},
+
 
 
 	"network.bind": {
