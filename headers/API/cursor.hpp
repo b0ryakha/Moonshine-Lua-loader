@@ -17,7 +17,10 @@ namespace API
         pos.x = std::min(static_cast<unsigned>(std::max(pos.x, 0)), window_size.x);
         pos.y = std::min(static_cast<unsigned>(std::max(pos.y, 0)), window_size.y);
 
-        lhelper::push_object<Vector2>(L, { pos.x, pos.y });
+        lhelper::push_object<Vector2>(L, {
+            lua_Number(pos.x),
+            lua_Number(pos.y)
+        });
         return 1;
 	}
 
@@ -27,10 +30,10 @@ namespace API
         if (args.size() != 4)
             args.error("Incorrect number of arguments!");
 
-        const size_t x = args.get<size_t>();
-        const size_t y = args.get<size_t>();
-        const size_t w = args.get<size_t>();
-        const size_t h = args.get<size_t>();
+        const int x = args.get<int>();
+        const int y = args.get<int>();
+        const int w = args.get<int>();
+        const int h = args.get<int>();
 
         const sf::Vector2i m = sf::Mouse::getPosition(window);
 

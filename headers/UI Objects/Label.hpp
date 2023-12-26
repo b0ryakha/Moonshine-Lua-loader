@@ -4,8 +4,6 @@
 #include <string>
 #include <limits>
 
-#include "misc_functions.hpp"
-
 class Label final : public sf::Text {
 private:
     sf::Font font;

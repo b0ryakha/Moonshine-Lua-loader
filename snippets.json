@@ -443,10 +443,10 @@
 		]
 	},
 
-	"globalvars.get_os_type": {
-		"prefix": "globalvars.get_os_type",
+	"globalvars.get_os_name": {
+		"prefix": "globalvars.get_os_name",
 		"body": [
-		  "globalvars.get_os_type()"
+		  "globalvars.get_os_name()"
 		]
 	},
 

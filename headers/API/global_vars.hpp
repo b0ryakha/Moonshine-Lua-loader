@@ -10,7 +10,7 @@ namespace API
 		return 1;
 	}
 
-	static int get_os_type(lua_State* L) {
+	static int get_os_name(lua_State* L) {
 		#ifdef _WIN32
 			lua_pushstring(L, "Windows");
 		#elif defined(__linux__)

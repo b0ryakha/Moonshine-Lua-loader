@@ -82,7 +82,11 @@ namespace API
             static auto copy = [](lua_State* L) {
                 const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
-                lhelper::push_object<Sound>(L, { self->get_path(), self->getVolume(), self->getLoop() });
+                lhelper::push_object<Sound>(L, {
+                    self->get_path(),
+                    lua_Number(self->getVolume()),
+                    LuaBoolean(self->getLoop())
+                });
                 return 1;
             };
 
@@ -140,7 +144,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "Sound:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

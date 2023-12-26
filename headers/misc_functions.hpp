@@ -1,11 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <thread>
-#include <chrono>
 #include <cmath>
 
 using ushort_t = unsigned short;
+using uint_t = unsigned int;
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;

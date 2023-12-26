@@ -49,7 +49,12 @@ namespace API
             static auto copy = [](lua_State* L) {
                 const auto self = lhelper::get_object<Color>(L, "Color", 1);
 
-                lhelper::push_object<Color>(L, { self->r, self->g, self->b, self->a });
+                lhelper::push_object<Color>(L, {
+                    lua_Number(self->r),
+                    lua_Number(self->g),
+                    lua_Number(self->b),
+                    lua_Number(self->a)
+                });
                 return 1;
             };
 
@@ -160,7 +165,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "Color:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

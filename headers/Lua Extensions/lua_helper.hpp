@@ -30,7 +30,7 @@ namespace lhelper
 
 	template<typename APIStruct>
 	void push_object(lua_State* L, const std::vector<LuaMultiValue_t>& args) {
-		LuaStack old_stack(L, "");
+		LuaStack old_stack(L, "LuaStack:push_object");
 
 		if (!old_stack.empty())
 			lua_pop(L, static_cast<int>(old_stack.size()));

@@ -66,7 +66,10 @@ namespace API
             static auto copy = [](lua_State* L) {
                 const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
-                lhelper::push_object<Font>(L, { self->getInfo().family, self->get_size() });
+                lhelper::push_object<Font>(L, {
+                    self->getInfo().family,
+                    lua_Number(self->get_size())
+                });
                 return 1;
             };
 
@@ -123,7 +126,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "Font:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

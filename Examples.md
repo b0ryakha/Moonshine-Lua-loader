@@ -29,7 +29,7 @@ end
 
 ## Render text
 ```lua
-local font = Font:new("arial.ttf", 20)
+local font = Font:new("Arial.TTF", 20)
 local color = Color:new(100, 100, 50)
 
 while true do   -- main loop

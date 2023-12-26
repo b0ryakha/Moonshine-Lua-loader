@@ -4,10 +4,10 @@ class LuaUserdata final {
     void* self = nullptr;
 
 public:
-    LuaUserdata(void* userdata);
+    LuaUserdata(void* userdata) : self(userdata) {}
 
     template<typename T>
     constexpr operator T*() const {
         return reinterpret_cast<T*>(self);
-    };
+    }
 };

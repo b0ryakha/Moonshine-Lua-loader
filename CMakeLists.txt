@@ -74,7 +74,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         $<$<CONFIG:RELEASE>:
             -O3
         >
-        -Wall
         -Wextra
     )
 

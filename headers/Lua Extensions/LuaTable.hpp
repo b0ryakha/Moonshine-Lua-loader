@@ -43,7 +43,10 @@ public:
     LuaMultiValue get_type(std::string_view key) const;
 
     template<typename T>
-    T get(std::string_view key) const { throw_error("[Table assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+    T get(std::string_view key) const {
+        (void) key;
+        throw_error("[Table assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?");
+    }
 
     template<>
     short get<short>(std::string_view key) const {

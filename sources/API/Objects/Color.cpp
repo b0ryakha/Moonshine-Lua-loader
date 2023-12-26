@@ -22,7 +22,7 @@ API::Color::Color(const LuaStack& args) : sf::Color(0, 0, 0) {
         if (hex.length() != 9)
             hex += "FF";
 
-        if (std::sscanf(hex.c_str(), "#%02x%02x%02x%02x", &r, &g, &b, &a) != 4)
+        if (std::sscanf(hex.c_str(), "#%02x%02x%02x%02x", (uint_t*)&r, (uint_t*)&g, (uint_t*)&b, (uint_t*)&a) != 4)
             throw_error("[Color:new] Converting hex error!");
     }
 }

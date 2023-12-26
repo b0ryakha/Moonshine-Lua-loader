@@ -8,5 +8,5 @@ public:
 
     constexpr operator bool() const {
         return state;
-    };
+    }
 };

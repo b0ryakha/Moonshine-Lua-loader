@@ -104,7 +104,7 @@ namespace API
                 const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
-                    float number = lua_tonumber(L, 2);
+                    double number = lua_tonumber(L, 2);
                     lhelper::push_object<Vector2>(L, { self->x + number, self->y + number });
                 }
                 else {
@@ -119,7 +119,7 @@ namespace API
                 const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
-                    float number = lua_tonumber(L, 2);
+                    double number = lua_tonumber(L, 2);
                     lhelper::push_object<Vector2>(L, { self->x - number, self->y - number });
                 }
                 else {
@@ -134,7 +134,7 @@ namespace API
                 const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
                 
                 if (lua_isnumber(L, 2)) {
-                    float number = lua_tonumber(L, 2);
+                    double number = lua_tonumber(L, 2);
                     lhelper::push_object<Vector2>(L, { self->x * number, self->y * number });
                 }
                 else {
@@ -149,7 +149,7 @@ namespace API
                 const auto self = lhelper::get_object<Vector2>(L, "Vector2", 1);
 
                 if (lua_isnumber(L, 2)) {
-                    float number = lua_tonumber(L, 2);
+                    double number = lua_tonumber(L, 2);
 
                     if (number == 0)
                         throw_error("[Vector2:div] Division by zero!");
@@ -185,7 +185,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "Vector2:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

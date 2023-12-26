@@ -3,7 +3,7 @@
 void throw_error(std::string_view error) {
     sf::Font font;
 
-    if (!font.loadFromFile(font_path + "arial.ttf")) {
+    if (!font.loadFromFile(font_path + "Arial.TTF")) {
         window.close();
         std::exit(0);
     }
@@ -12,13 +12,13 @@ void throw_error(std::string_view error) {
     sf::Text info("Press any key to continue...\n\n [CTRL + C] copy the error.", font, 20);
 
     text.setPosition(window.mapPixelToCoords(sf::Vector2i(
-        window.getSize().x / 2 - text.getGlobalBounds().width / 2,
-        window.getSize().y / 2
+        std::round(window.getSize().x / 2.f - text.getGlobalBounds().width / 2.f),
+        std::round(window.getSize().y / 2.f)
     )));
     
     info.setPosition(window.mapPixelToCoords(sf::Vector2i(
-        window.getSize().x / 2 - info.getGlobalBounds().width / 2,
-        window.getSize().y / 2 + text.getGlobalBounds().height + 10
+        std::round(window.getSize().x / 2.f - info.getGlobalBounds().width / 2.f),
+        std::round(window.getSize().y / 2.f + text.getGlobalBounds().height + 10.f)
     )));
 
     text.setFillColor(sf::Color::Red);

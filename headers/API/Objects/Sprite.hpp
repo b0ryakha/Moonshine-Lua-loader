@@ -38,14 +38,19 @@ namespace API
                 const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 sf::Color color = self->getColor();
 
-                lhelper::push_object<Color>(L, { color.r, color.g, color.b, color.a });
+                lhelper::push_object<Color>(L, {
+                    lua_Number(color.r),
+                    lua_Number(color.g),
+                    lua_Number(color.b),
+                    lua_Number(color.a)
+                });
                 return 1;
             };
 
             static auto set_pos = [](lua_State* L) {
                 auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
-                size_t x = std::round(luaL_checknumber(L, 2));
-                size_t y = std::round(luaL_checknumber(L, 3));
+                int x = std::round(luaL_checknumber(L, 2));
+                int y = std::round(luaL_checknumber(L, 3));
 
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
 
@@ -151,8 +156,8 @@ namespace API
 
             static auto move = [](lua_State* L) {
                 auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
-                double x_offset = luaL_checknumber(L, 2);
-                double y_offset = luaL_checknumber(L, 3);
+                int x_offset = std::round(luaL_checknumber(L, 2));
+                int y_offset = std::round(luaL_checknumber(L, 3));
 
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
 
@@ -164,12 +169,12 @@ namespace API
                 const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
                 sf::IntRect rect = self->getTextureRect();
-                size_t t_x = rect.left;
-                size_t t_y = rect.top;
-                size_t t_w = rect.width;
-                size_t t_h = rect.height;
-                float w = self->getScale().x * t_w;
-                float h = self->getScale().y * t_h;
+                double t_x = rect.left;
+                double t_y = rect.top;
+                double t_w = rect.width;
+                double t_h = rect.height;
+                double w = self->getScale().x * t_w;
+                double h = self->getScale().y * t_h;
 
                 lhelper::push_object<Sprite>(L, { self->get_path(), w, h, t_x, t_y, t_w, t_h });
                 return 1;
@@ -240,7 +245,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "Sprite:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

@@ -84,7 +84,7 @@
 <details><summary>:mag: GlobalVars</summary>
 
   - [get_executable_path()](#globalvars.get_executable_path)
-  - [get_os_type()](#globalvars.get_os_type)
+  - [get_os_name()](#globalvars.get_os_name)
   </details>
   
 <details><summary>:speech_balloon: Misc</summary>
@@ -752,9 +752,9 @@ Returns the path of executable.
 
 ---
 
-#### <a name="globalvars.get_os_type"></a> ```get_os_type```
+#### <a name="globalvars.get_os_name"></a> ```get_os_name```
 ```lua
-globalvars.get_os_type(): string
+globalvars.get_os_name(): string
 ```
 
 Returns the os name.
@@ -1136,12 +1136,12 @@ Returns the color of the sprite.
 
 #### <a name="sprite.set_pos"></a> ```set_pos```
 ```lua
-sprite_object:set_pos(x: size_t, y: size_t)
+sprite_object:set_pos(x: int, y: int)
 ```
-| Name  | Type         | Description                 |
-| :---: | :---:        | :---:                       |
-| x     | ```size_t``` | New x coordinate for sprite |
-| y     | ```size_t``` | New y coordinate for sprite |
+| Name  | Type      | Description                 |
+| :---: | :---:     | :---:                       |
+| x     | ```int``` | New x coordinate for sprite |
+| y     | ```int``` | New y coordinate for sprite |
 
 Sets a new position for the sprite.
 

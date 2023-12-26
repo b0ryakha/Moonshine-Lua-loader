@@ -1,5 +1,27 @@
 #include "Script.hpp"
 
+#include "API/Objects/Vector2.hpp"
+#include "API/Objects/Color.hpp"
+#include "API/Objects/Font.hpp"
+#include "API/Objects/Sound.hpp"
+#include "API/Objects/Sprite.hpp"
+#include "API/Objects/View.hpp"
+
+#include "API/cmath.hpp"
+#include "API/cursor.hpp"
+#include "API/file.hpp"
+#include "API/global_vars.hpp"
+#include "API/keyboard.hpp"
+#include "API/misc.hpp"
+#include "API/mouse.hpp"
+#include "API/render.hpp"
+#include "API/window.hpp"
+#include "API/network.hpp"
+
+#include "misc_functions.hpp"
+
+#include <array>
+
 Script::Script(std::string_view path) {
     open(path);
 }
@@ -70,8 +92,8 @@ void Script::open_API() {
     std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_KEYS;
     constexpr std::array<std::string_view, 101> SFML_KEYS_NAME = { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Num0","Num1","Num2","Num3","Num4","Num5","Num6","Num7","Num8","Num9","Escape","LControl","LShift","LAlt","LSystem","RControl","RShift","RAlt","RSystem","Menu","LBracket","RBracket","Semicolon","Comma","Period","Quote","Slash","Backslash","Tilde","Equal","Hyphen","Space","Enter","Backspace","Tab","PageUp","PageDown","End","Home","Insert","Delete","Add","Subtract","Multiply","Divide","Left","Right","Up","Down","Numpad0","Numpad1","Numpad2","Numpad3","Numpad4","Numpad5","Numpad6","Numpad7","Numpad8","Numpad9","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","Pause" };
 
-    for (size_t i = 0, size = SFML_KEYS_NAME.size(); i < size; ++i)
-        SFML_KEYS.emplace_back(std::make_pair(SFML_KEYS_NAME[i], i));
+    for (int i = 0, size = SFML_KEYS_NAME.size(); i < size; ++i)
+        SFML_KEYS.emplace_back(std::make_pair(SFML_KEYS_NAME[i], lua_Number(i)));
 
     SFML_KEYS.emplace_back(std::make_pair("Dash", 56));
     SFML_KEYS.emplace_back(std::make_pair("BackSpace", 59));
@@ -89,8 +111,8 @@ void Script::open_API() {
     std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_BUTTONS;
     constexpr std::array<std::string_view, 5> SFML_BUTTONS_NAME = { "Left", "Right", "Middle", "XButton1", "XButton2" };
 
-    for (size_t i = 0, size = SFML_BUTTONS_NAME.size(); i < size; ++i)
-        SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], i));
+    for (int i = 0, size = SFML_BUTTONS_NAME.size(); i < size; ++i)
+        SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], lua_Number(i)));
 
     lhelper::register_table(lua_state, "button", SFML_BUTTONS);
 
@@ -130,7 +152,7 @@ void Script::open_API() {
 
     lhelper::register_table(lua_state, "globalvars", {
         std::make_pair("get_executable_path", API::get_executable_path),
-        std::make_pair("get_os_type", API::get_os_type),
+        std::make_pair("get_os_name", API::get_os_name),
     });
 
     lhelper::register_table(lua_state, "network", {

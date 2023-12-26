@@ -2,30 +2,9 @@
 
 #include <thread>
 #include <string>
-#include <array>
 #include <memory>
-#include <SFML/Graphics.hpp>
 
 #include "lua_helper.hpp"
-#include "misc_functions.hpp"
-
-#include "API/Objects/Vector2.hpp"
-#include "API/Objects/Color.hpp"
-#include "API/Objects/Font.hpp"
-#include "API/Objects/Sound.hpp"
-#include "API/Objects/Sprite.hpp"
-#include "API/Objects/View.hpp"
-
-#include "API/cmath.hpp"
-#include "API/cursor.hpp"
-#include "API/file.hpp"
-#include "API/global_vars.hpp"
-#include "API/keyboard.hpp"
-#include "API/misc.hpp"
-#include "API/mouse.hpp"
-#include "API/render.hpp"
-#include "API/window.hpp"
-#include "API/network.hpp"
 
 extern sf::RenderWindow window;
 

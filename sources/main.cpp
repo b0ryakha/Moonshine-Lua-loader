@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Script.hpp"
+#include "API/cursor.hpp"
 #include "images.hpp"
 
 #include "Label.hpp"
@@ -29,11 +30,11 @@ void start_program(std::string_view cmd_line) {
     sf::Sprite background(background_texture);
     background.setScale(0.74f, 0.74f);
 
-    Label hint("Enter the path to the lua script ...", font_path + "arial.ttf", 25);
+    Label hint("Enter the path to the lua script ...", font_path + "Arial.TTF", 25);
     hint.setPosition(sf::Vector2f(window.getSize().x / 2 - hint.getGlobalBounds().width / 2, window.getSize().y / 2 + 300));
     hint.setFillColor(sf::Color(55, 55, 55, 200));
 
-    TextBox textbox(font_path + "arial.ttf", window.getSize().x / 2 - 205, window.getSize().y / 2 - 21, 410, 42, false);
+    TextBox textbox(font_path + "Arial.TTF", window.getSize().x / 2 - 205, window.getSize().y / 2 - 21, 410, 42, false);
     textbox.setBlinkerColor(sf::Color::White);
     textbox.setTextColor(sf::Color::White);
     textbox.focus();

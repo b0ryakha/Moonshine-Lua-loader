@@ -2,9 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <cmath>
-#include <vector>
-
 class SuperEllipse : public sf::ConvexShape {
 private:
     sf::FloatRect rect;

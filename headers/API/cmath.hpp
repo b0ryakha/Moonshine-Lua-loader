@@ -63,9 +63,9 @@ namespace API
         if (args.size() != 3)
             args.error("Incorrect number of arguments!");
 
-        const float start = args.get<float>();
-        const float end = args.get<float>();
-        const float time = args.get<float>();
+        const double start = args.get<double>();
+        const double end = args.get<double>();
+        const double time = args.get<double>();
 
         lua_pushnumber(L, (start + time * (end - start)));
         return 1;
@@ -77,9 +77,9 @@ namespace API
         if (args.size() != 3)
             args.error("Incorrect number of arguments!");
 
-        const float number = args.get<float>();
-        const float lower = args.get<float>();
-        const float upper = args.get<float>();
+        const double number = args.get<double>();
+        const double lower = args.get<double>();
+        const double upper = args.get<double>();
         
         lua_pushnumber(L, std::clamp(number, lower, upper));
         return 1;
@@ -91,7 +91,7 @@ namespace API
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        const float number = args.get<float>();
+        const double number = args.get<double>();
 
         lua_pushinteger(L, std::round(number));
         return 1;

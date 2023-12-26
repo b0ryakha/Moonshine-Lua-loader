@@ -42,6 +42,7 @@ namespace API
     }
 
     static int network_unbind(lua_State* L) {
+        (void) L;
         if (socket_type == '\0')
             return 0;
 
@@ -161,7 +162,7 @@ namespace API
                 case LuaMultiValue::Boolean: {
                     bool tmp;
                     if (packet >> tmp)
-                        result.push_back(tmp);
+                        result.push_back(LuaBoolean(tmp));
 
                     break;
                 }

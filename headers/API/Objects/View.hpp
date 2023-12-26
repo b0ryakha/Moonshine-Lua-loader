@@ -28,8 +28,8 @@ namespace API
 
             static auto set_port = [](lua_State* L) {
                 auto self = lhelper::get_object<View>(L, "View", 1);
-                size_t x = round(luaL_checknumber(L, 2));
-                size_t y = round(luaL_checknumber(L, 3));
+                int x = std::round(luaL_checknumber(L, 2));
+                int y = std::round(luaL_checknumber(L, 3));
                 float w = luaL_checknumber(L, 4);
                 float h = luaL_checknumber(L, 5);
 
@@ -47,8 +47,8 @@ namespace API
 
             static auto set_center = [](lua_State* L) {
                 auto self = lhelper::get_object<View>(L, "View", 1);
-                size_t x = round(luaL_checknumber(L, 2));
-                size_t y = round(luaL_checknumber(L, 3));
+                int x = std::round(luaL_checknumber(L, 2));
+                int y = std::round(luaL_checknumber(L, 3));
 
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
 
@@ -59,8 +59,8 @@ namespace API
 
             static auto set_size = [](lua_State* L) {
                 auto self = lhelper::get_object<View>(L, "View", 1);
-                size_t w = round(luaL_checknumber(L, 2));
-                size_t h = round(luaL_checknumber(L, 3));
+                int w = std::round(luaL_checknumber(L, 2));
+                int h = std::round(luaL_checknumber(L, 3));
 
                 const auto converted = window.mapPixelToCoords(sf::Vector2i(w, h));
 
@@ -175,7 +175,7 @@ namespace API
         }
 
         static int reg(lua_State* L) {
-            LuaStack tmp(L, "");
+            LuaStack tmp(L, "View:register");
             lua_remove(L, -static_cast<int>(tmp.size()));
 
             return push_to_lua(L);

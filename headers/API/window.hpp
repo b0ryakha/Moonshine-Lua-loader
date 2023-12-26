@@ -15,6 +15,7 @@ extern sf::Vector2f print_offset;
 namespace API
 {
     static int window_close(lua_State* L) {
+        (void) L;
         window.close();
         return 0;
     }
@@ -80,14 +81,15 @@ namespace API
     }
 
     static int window_display(lua_State* L) {
+        (void) L;
         window.display();
         return 0;
     }
 
     static int window_get_size(lua_State* L) {
         lhelper::push_object<Vector2>(L, {
-            window.getSize().x,
-            window.getSize().y
+            lua_Number(window.getSize().x),
+            lua_Number(window.getSize().y)
         });
 
         return 1;
@@ -109,8 +111,8 @@ namespace API
 
     static int window_get_pos(lua_State* L) {
         lhelper::push_object<Vector2>(L, {
-            window.getPosition().x,
-            window.getPosition().y
+            lua_Number(window.getPosition().x),
+            lua_Number(window.getPosition().y)
         });
 
         return 1;
@@ -172,6 +174,7 @@ namespace API
     }
 
     static int window_await(lua_State* L) {
+        (void) L;
         while (window.isOpen()) {
             if (main_event.type == sf::Event::MouseButtonPressed || main_event.type == sf::Event::KeyPressed)
                 break;

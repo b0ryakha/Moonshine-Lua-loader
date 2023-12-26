@@ -1,5 +1,8 @@
 #include "SuperEllipse.hpp"
 
+#include <cmath>
+#include <vector>
+
 SuperEllipse::SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color)
     : rect({ x, y, w, h })
 {

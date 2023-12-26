@@ -37,7 +37,7 @@ namespace API
         }
 
         sf::Font font;
-        if (!font.loadFromFile(font_path + "arial.ttf"))
+        if (!font.loadFromFile(font_path + "Arial.TTF"))
             throw_error("[print] Failed to create the font face.");
 
         sf::Text text(sf::String::fromUtf8(result.begin(), result.end()), font, 20);

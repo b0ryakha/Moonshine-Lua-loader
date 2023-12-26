@@ -2,8 +2,6 @@
 
 #include <vector>
 #include <string>
-#include <array>
-#include <iterator>
 
 #include "misc_functions.hpp"
 #include "LuaTable.hpp"
@@ -39,7 +37,10 @@ public:
     }
 
     template<typename T>
-    T get(size_t index) const { throw_error("[Stack assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?"); }
+    T get(size_t index) const {
+        (void) index;
+        throw_error("[Stack assert] Unknown type for get<T>, mb you meant get<LuaUserdata, T>?");
+    }
 
     template<>
     short get<short>(size_t index) const {
