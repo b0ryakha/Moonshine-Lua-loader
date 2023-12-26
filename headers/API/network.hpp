@@ -166,7 +166,7 @@ namespace API
                     break;
                 }
                 default:
-                    result.push_back(std::move(LuaNil()));
+                    result.push_back(LuaNil());
             }
         }
 

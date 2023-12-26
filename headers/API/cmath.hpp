@@ -11,8 +11,7 @@ namespace API
     static std::mt19937 gen{ rd() };
 
     namespace detail {
-        static const 
-            size_t number_len(double n) {
+        static size_t number_len(double n) {
             constexpr auto epsilon = 1E-3;
             size_t result = std::ceil(std::log10(std::floor(n) + 1));
             n -= std::round(n);

@@ -87,8 +87,6 @@ namespace API
             };
 
             static auto index_get = [](lua_State* L) {
-                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
-
                 if (lua_isstring(L, 2)) {
                     const std::string_view key = luaL_checkstring(L, 2);
 

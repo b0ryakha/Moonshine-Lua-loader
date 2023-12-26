@@ -7,10 +7,10 @@ LuaStack::LuaStack(lua_State* lua_state, std::string_view func_name) {
     for (int i = 1; i <= lua_gettop(lua_state); ++i) {
         switch (lua_type(lua_state, i)) {
             case LUA_TTABLE:
-                elements.push_back(std::move(LuaTable(lua_state, i)));
+                elements.push_back(LuaTable(lua_state, i));
                 break;
             case LUA_TSTRING:
-                elements.push_back(std::move(std::string(lua_tostring(lua_state, i))));
+                elements.push_back(std::string(lua_tostring(lua_state, i)));
                 break;
             case LUA_TBOOLEAN:
                 elements.push_back(LuaBoolean(lua_toboolean(lua_state, i)));
