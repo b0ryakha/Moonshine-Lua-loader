@@ -3,6 +3,7 @@
    - The [Lua v5.1](https://www.lua.org/manual/5.1) is used.
    - The X, Y coordinate is the upper-left corner of any graphic object.
    - Arguments in square brackets are optional.
+   - Be careful with passing objects to function, most likely you expected to get a copy of it, use the copy() method.
 
 ---
 
