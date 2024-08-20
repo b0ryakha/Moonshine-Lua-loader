@@ -79,6 +79,13 @@ namespace API
                 return 0;
             };
 
+            static auto is_play = [](lua_State* L) {
+                const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
+
+                lua_pushboolean(L, self->getStatus() == sf::SoundSource::Status::Playing);
+                return 1;
+            };
+
             static auto copy = [](lua_State* L) {
                 const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
@@ -101,6 +108,7 @@ namespace API
                     else if (key == "set_loop") lua_pushcfunction(L, set_loop);
                     else if (key == "play") lua_pushcfunction(L, play);
                     else if (key == "stop") lua_pushcfunction(L, stop);
+                    else if (key == "is_play") lua_pushcfunction(L, is_play);
                     else if (key == "copy") lua_pushcfunction(L, copy);
                     else lua_pushnil(L);
                 }
@@ -128,7 +136,8 @@ namespace API
                 lua_pushboolean(L, (
                     self->get_path() == target->get_path() &&
                     self->getVolume() == target->getVolume() &&
-                    self->getLoop() == target->getLoop()
+                    self->getLoop() == target->getLoop() &&
+                    self->getStatus() == target->getStatus()
                 ));
                 return 1;
             };

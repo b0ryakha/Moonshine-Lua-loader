@@ -115,6 +115,7 @@
   - [get_volume()](#sound.get_volume)
   - [set_loop()](#sound.set_loop)
   - [get_loop()](#sound.get_loop)
+  - [is_play()](#sound.is_play)
   </details>
   
 <details><summary>:round_pushpin: Vector2</summary>
@@ -446,7 +447,7 @@ Sets a new icon for window.
 ### <a name="Keyboard"></a> :wrench: Keyboard
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
-local key_id = key.Left
+local key_id = key.W -- 'W' key on keyboard
 ```
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
@@ -475,7 +476,7 @@ Returns true if the key is pressed, else false.
 ### :mouse2: Mouse
 #### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
-local button_id = button.W
+local button_id = button.Left -- left mouse button
 ```
 
 #### <a name="mouse.get_pressed"></a> ```get_pressed```
@@ -798,7 +799,8 @@ Unbinds the socket from the port.
 
 #### <a name="network.send"></a> ```send```
 ```lua
-network.send([ip: string, port: int, ]packet: table)
+network.send(ip: string, port: int, packet: table)
+network.send(packet: table)
 ```
 | Name   | Type        | Description                                                    |
 | :---:  | :---:       | :---:                                                          |
@@ -925,6 +927,15 @@ sound_object:get_loop(): bool
 ```
 
 Returns true if the sound is looped, else false.
+
+---
+
+#### <a name="sound.is_play"></a> ```is_play```
+```lua
+sound_object:is_play(): bool
+```
+
+Returns true if the sound is playing, else false.
 
 
 ### :round_pushpin: Vector2
