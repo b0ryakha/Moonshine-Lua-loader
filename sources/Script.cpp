@@ -12,7 +12,6 @@
 #include "API/file.hpp"
 #include "API/global_vars.hpp"
 #include "API/keyboard.hpp"
-#include "API/misc.hpp"
 #include "API/mouse.hpp"
 #include "API/render.hpp"
 #include "API/window.hpp"
@@ -162,8 +161,6 @@ void Script::open_API() {
         std::make_pair("receive", API::network_receive),
         std::make_pair("get_local_address", API::network_get_local_address)
     });
-
-    lua_register(lua_state, "print", API::print);
 
     lhelper::register_class<API::Font>(lua_state, "Font");
     lhelper::register_class<API::Vector2>(lua_state, "Vector2");

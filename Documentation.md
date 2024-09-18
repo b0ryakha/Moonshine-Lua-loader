@@ -88,11 +88,6 @@
   - [get_os_name()](#globalvars.get_os_name)
   </details>
   
-<details><summary>:speech_balloon: Misc</summary>
-
-  - [print()](#print)
-  </details>
-  
 <details><summary>:satellite: Network</summary>
 
   - [bind()](#network.bind)
@@ -760,18 +755,6 @@ globalvars.get_os_name(): string
 ```
 
 Returns the os name.
-
-
-### :speech_balloon: Misc
-#### <a name="print"></a> ```print```
-```lua
-print(text: any, ...)
-```
-| Name  | Type     | Description |
-| :---: | :---:    | :---:       |
-| text  | ```any```| Text        |
-
-Printing text on screen.
 
 
 ### :satellite: Network

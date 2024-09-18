@@ -10,14 +10,23 @@
 
 sf::RenderWindow window;
 sf::Event main_event;
-std::string font_path;
 
-void start_program(std::string_view cmd_line) {
+#ifdef _WIN32
+    #include <windows.h>
+    std::string font_path = "C:/WINDOWS/Fonts/";
+#elif defined(__linux__)
+    std::string font_path = "/usr/share/fonts/TTF/";
+#endif
+
+int main(int argc, char** argv) {
+    #ifdef _WIN32
+        ShowWindow(GetConsoleWindow(), SW_HIDE);
+    #endif
+    
     window.create(sf::VideoMode(1400u, 800u), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0u, 0u, 16u));
 
     Script lua;
-    if (!cmd_line.empty())
-        lua.open(cmd_line);
+    if (argc > 1) lua.open(argv[1]);
 
     sf::Image icon;
     icon.loadFromMemory(res_icon, sizeof(res_icon));
@@ -73,18 +82,3 @@ void start_program(std::string_view cmd_line) {
         }
     }
 }
-
-#ifdef _WIN32
-#include <windows.h>
-
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
-    font_path = "C:/WINDOWS/Fonts/";
-    start_program(lpCmdLine);
-}
-
-#elif defined(__linux__)
-int main(int argc, char** argv) {
-    font_path = "/usr/share/fonts/TTF/";
-    start_program(argc > 1 ? argv[1] : "");
-}
-#endif

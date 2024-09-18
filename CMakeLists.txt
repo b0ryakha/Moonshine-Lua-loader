@@ -100,7 +100,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(CMAKE_SKIP_PACKAGE_ALL_DEPENDENCY true)
 
     set_target_properties(${PROJECT_NAME} PROPERTIES
-        VS_GLOBAL_KEYWORD "Win32Proj"
         OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/$<CONFIG>/"
         INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
     )
@@ -153,7 +152,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
             /OPT:ICF;
             /INCREMENTAL:NO
         >
-        /SUBSYSTEM:WINDOWS
         /DEBUG
     )
 

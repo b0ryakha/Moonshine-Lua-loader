@@ -10,7 +10,6 @@
 
 extern sf::RenderWindow window;
 extern sf::Event main_event;
-extern sf::Vector2f print_offset;
 
 namespace API
 {
@@ -74,8 +73,6 @@ namespace API
         else {
             args.error("Incorrect number of arguments!");
         }
-
-        print_offset = { 0.f, 0.f };
 
         return 0;
     }
