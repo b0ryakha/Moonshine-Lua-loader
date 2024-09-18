@@ -19,6 +19,12 @@ namespace API
         return 0;
     }
 
+    static int window_is_open(lua_State* L) {
+        (void) L;
+        lua_pushboolean(L, window.isOpen());
+        return 1;
+    }
+
     static int window_capture(lua_State* L) {
         LuaStack args(L, "window.capture");
 

@@ -2,7 +2,7 @@
 ```lua
 local fill_color = Color:new(255, 0, 0)
 
-while true do -- main loop
+while window.is_open() do -- main loop
     window.clear()
     render.circle(500, 500, 20, fill_color)
     window.display()
@@ -14,7 +14,7 @@ end
 local sound = Sound:new("./bell.wav", 20)
 -- ./bell.wav = loader dir + bell.wav
 
-while true do -- main loop
+while window.is_open() do -- main loop
     if mouse.is_pressed(button.Left) then
         sound:play()
     end
@@ -26,7 +26,7 @@ end
 local font = Font:new("Arial.TTF", 20)
 local color = Color:new(100, 100, 50)
 
-while true do -- main loop
+while window.is_open() do -- main loop
     window.clear()
     render.text(500, 500, font, "Test text!", color)
     window.display()
@@ -38,7 +38,7 @@ end
 local sprite = Sprite:new("./img.png", 100, 100)
 -- ./img.png = loader dir + img.png
 
-while true do -- main loop
+while window.is_open() do -- main loop
     window.clear()
     render.sprite(sprite)
     window.display()
@@ -49,7 +49,7 @@ end
 ```lua
 network.bind(54000, 's')
 
-while true do
+while window.is_open() do
     network.send({ "word", 100, nil, true })
     
     -- client sends { "hi!" }
@@ -68,7 +68,7 @@ local server_port = 54000
 local unique_port = 53002
 network.bind(unique_port, 'c')
 
-while true do
+while window.is_open() do
     -- server sends { "word", 100, nil, true }
     local data = network.receive()
     if not data then return end

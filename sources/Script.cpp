@@ -53,7 +53,8 @@ void Script::open(std::string_view path) {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(lua_tostring(lua_state, -1));
 
-        lua_pcall(lua_state, 0, 0, 0);
+        if (lua_isfunction(lua_state, -1))
+            lua_pcall(lua_state, 0, 0, 0);
     });
 
     main_thread->detach();
@@ -72,6 +73,7 @@ void Script::open_API() {
     });
 
     lhelper::register_table(lua_state, "window", {
+        std::make_pair("is_open", API::window_is_open),
         std::make_pair("get_size", API::window_get_size),
         std::make_pair("set_size", API::window_set_size),
         std::make_pair("display", API::window_display),

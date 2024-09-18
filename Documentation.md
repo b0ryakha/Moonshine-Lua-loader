@@ -22,6 +22,7 @@
   
 <details><summary>:computer: Window</summary>
 
+  - [is_open()](#window.is_open)
   - [display()](#window.display)
   - [clear()](#window.clear)
   - [close()](#window.close)
@@ -280,6 +281,16 @@ Render polygon on the screen.
 
 
 ### :computer: Window
+
+#### <a name="window.is_open"></a> ```is_open```
+```lua
+window.is_open(): boolean
+```
+
+Returns true if the window is open, else false.
+It is recommended to use as condition in loop for the correct termination.
+
+---
 
 #### <a name="window.display"></a> ```display```
 ```lua

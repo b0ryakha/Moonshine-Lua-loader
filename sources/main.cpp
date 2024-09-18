@@ -65,8 +65,9 @@ int main(int argc, char** argv) {
                     lua.open(textbox.getText());
             }
 
-            if (main_event.type == sf::Event::Closed)
+            if (main_event.type == sf::Event::Closed) {
                 window.close();
+            }
 
             if (main_event.type == sf::Event::MouseEntered) {
                 cursor_in_window_m.lock();
