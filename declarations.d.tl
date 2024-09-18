@@ -9,6 +9,7 @@ global record render
 end
 
 global record window
+	is_open: function(): boolean
     display: function()
     clear: function(Color | nil)
 	close: function()

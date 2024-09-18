@@ -50,6 +50,13 @@
 
 
 	
+	"window.is_open": {
+		"prefix": "window.is_open",
+		"body": [
+		  "window.is_open()"
+		]
+	},
+
 	"window.display": {
 		"prefix": "window.display",
 		"body": [
