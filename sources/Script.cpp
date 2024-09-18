@@ -29,6 +29,9 @@ void Script::open(std::string_view path) {
     if (is_open())
         return;
 
+    // hide cpp errors:
+    freopen("/dev/null", "w", stderr);
+
     lua_state = luaL_newstate();
 
     if (lua_state == nullptr)
