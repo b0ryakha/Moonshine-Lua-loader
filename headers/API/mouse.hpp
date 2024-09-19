@@ -7,9 +7,9 @@
 namespace API
 {
     static int mouse_get_pressed(lua_State* L) {
-        while (window.isOpen()) {
-            if (main_event.type == sf::Event::MouseButtonPressed) {
-                lua_pushinteger(L, static_cast<int>(main_event.mouseButton.button));
+        while (window->isOpen()) {
+            if (main_event->type == sf::Event::MouseButtonPressed) {
+                lua_pushinteger(L, static_cast<int>(main_event->mouseButton.button));
                 return 1;
             }
         }
@@ -30,8 +30,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_up(lua_State* L) {
-        if (main_event.type == sf::Event::MouseWheelScrolled && main_event.mouseWheelScroll.delta > 0.f) {
-            main_event.mouseWheelScroll.delta = 0.f;
+        if (main_event->type == sf::Event::MouseWheelScrolled && main_event->mouseWheelScroll.delta > 0.f) {
+            main_event->mouseWheelScroll.delta = 0.f;
 
             lua_pushboolean(L, true);
             return 1;
@@ -42,8 +42,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_down(lua_State* L) {
-        if (main_event.type == sf::Event::MouseWheelScrolled && main_event.mouseWheelScroll.delta < 0.f) {
-            main_event.mouseWheelScroll.delta = 0.f;
+        if (main_event->type == sf::Event::MouseWheelScrolled && main_event->mouseWheelScroll.delta < 0.f) {
+            main_event->mouseWheelScroll.delta = 0.f;
 
             lua_pushboolean(L, true);
             return 1;

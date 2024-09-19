@@ -11,8 +11,8 @@ inline std::mutex cursor_in_window_m;
 namespace API
 {
 	static int cursor_get_pos(lua_State* L) {
-        sf::Vector2i pos = sf::Mouse::getPosition(window);
-        const sf::Vector2u window_size = window.getSize();
+        sf::Vector2i pos = sf::Mouse::getPosition(*window);
+        const sf::Vector2u window_size = window->getSize();
 
         pos.x = std::min(static_cast<unsigned>(std::max(pos.x, 0)), window_size.x);
         pos.y = std::min(static_cast<unsigned>(std::max(pos.y, 0)), window_size.y);
@@ -35,7 +35,7 @@ namespace API
         const int w = args.get<int>();
         const int h = args.get<int>();
 
-        const sf::Vector2i m = sf::Mouse::getPosition(window);
+        const sf::Vector2i m = sf::Mouse::getPosition(*window);
 
         lua_pushboolean(L, (m.x >= x && m.x < x + w && m.y >= y && m.y < y + h));
         return 1;

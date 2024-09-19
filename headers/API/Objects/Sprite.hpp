@@ -52,7 +52,7 @@ namespace API
                 int x = std::round(luaL_checknumber(L, 2));
                 int y = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = window.mapPixelToCoords(sf::Vector2i(x, y));
+                const auto converted = window->mapPixelToCoords(sf::Vector2i(x, y));
 
                 self->setPosition(converted.x, converted.y);
                 return 0;
@@ -121,7 +121,7 @@ namespace API
                 int h = std::round(luaL_checknumber(L, 3));
 
                 sf::Vector2u texture_size = self->getTexture()->getSize();
-                const auto converted = window.mapPixelToCoords(sf::Vector2i(w, h));
+                const auto converted = window->mapPixelToCoords(sf::Vector2i(w, h));
 
                 self->setScale(converted.x / texture_size.x, converted.y / texture_size.y);
 
@@ -159,7 +159,7 @@ namespace API
                 int x_offset = std::round(luaL_checknumber(L, 2));
                 int y_offset = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = window.mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
+                const auto converted = window->mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
 
                 self->move(converted.x, converted.y);
                 return 0;

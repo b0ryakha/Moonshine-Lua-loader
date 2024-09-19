@@ -29,8 +29,9 @@ void Script::open(std::string_view path) {
     if (is_open())
         return;
 
-    // hide cpp errors:
-    freopen("/dev/null", "w", stderr);
+    #ifndef _DEBUG
+        freopen("/dev/null", "w", stderr);
+    #endif
 
     lua_state = luaL_newstate();
 
@@ -48,9 +49,9 @@ void Script::open(std::string_view path) {
     luaL_openlibs(lua_state);
     open_API();
 
-    window.clear();
-    window.display();
-    window.setActive(false);
+    window->clear();
+    window->display();
+    window->setActive(false);
 
     main_thread = std::make_unique<std::thread>([&] {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)

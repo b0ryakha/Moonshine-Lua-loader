@@ -11,8 +11,8 @@ API::View::View(const LuaStack& args) {
     size_t w = (args_size == 4) ? args.get<size_t>() : 0;
     size_t h = (args_size == 4) ? args.get<size_t>() : 0;
 
-    const auto conv_pos = window.mapPixelToCoords(sf::Vector2i(x, y));
-    const auto conv_size = window.mapPixelToCoords(sf::Vector2i(w, h));
+    const auto conv_pos = window->mapPixelToCoords(sf::Vector2i(x, y));
+    const auto conv_size = window->mapPixelToCoords(sf::Vector2i(w, h));
 
     reset(sf::FloatRect(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y));
 }

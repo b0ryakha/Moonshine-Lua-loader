@@ -6,7 +6,7 @@
 
 #include "lua_helper.hpp"
 
-extern sf::RenderWindow window;
+extern sf::RenderWindow* window;
 
 class Script final {
 private:

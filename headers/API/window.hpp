@@ -8,25 +8,25 @@
 #include <thread>
 #include <chrono>
 
-extern sf::RenderWindow window;
-extern sf::Event main_event;
+extern sf::RenderWindow* window;
+extern sf::Event* main_event;
 
 namespace API
 {
     static int window_close(lua_State* L) {
         (void) L;
-        window.close();
+        window->close();
         return 0;
     }
 
     static int window_is_open(lua_State* L) {
         (void) L;
-        lua_pushboolean(L, window.isOpen());
+        lua_pushboolean(L, window->isOpen());
         return 1;
     }
 
     static int window_capture(lua_State* L) {
-        LuaStack args(L, "window.capture");
+        LuaStack args(L, "window->capture");
 
         if (args.size() != 1 && args.size() != 5)
             args.error("Incorrect number of arguments!");
@@ -38,16 +38,16 @@ namespace API
         size_t h = args.size() == 5 ? args.get<size_t>() : 0u;
 
         sf::Texture screenshot;
-        screenshot.create(window.getSize().x, window.getSize().y);
-        screenshot.update(window);
+        screenshot.create(window->getSize().x, window->getSize().y);
+        screenshot.update(*window);
 
         sf::Image image = screenshot.copyToImage();
 
         if (args.size() == 5) {
-            x = std::min(static_cast<unsigned>(x), window.getSize().x);
-            y = std::min(static_cast<unsigned>(y), window.getSize().y);
-            w = std::min(static_cast<unsigned>(w), window.getSize().x);
-            h = std::min(static_cast<unsigned>(h), window.getSize().y);
+            x = std::min(static_cast<unsigned>(x), window->getSize().x);
+            y = std::min(static_cast<unsigned>(y), window->getSize().y);
+            w = std::min(static_cast<unsigned>(w), window->getSize().x);
+            h = std::min(static_cast<unsigned>(h), window->getSize().y);
 
             sf::Image cropped;
             cropped.create(w, h);
@@ -68,13 +68,13 @@ namespace API
     }
 
     static int window_clear(lua_State* L) {
-        LuaStack args(L, "window.clear");
+        LuaStack args(L, "window->clear");
 
         if (args.empty()) {
-            window.clear();
+            window->clear();
         }
         else if (args.size() == 1) {
-            window.clear(args.get<LuaUserdata, API::Color>(0));
+            window->clear(args.get<LuaUserdata, API::Color>(0));
         }
         else {
             args.error("Incorrect number of arguments!");
@@ -85,21 +85,21 @@ namespace API
 
     static int window_display(lua_State* L) {
         (void) L;
-        window.display();
+        window->display();
         return 0;
     }
 
     static int window_get_size(lua_State* L) {
         lhelper::push_object<Vector2>(L, {
-            lua_Number(window.getSize().x),
-            lua_Number(window.getSize().y)
+            lua_Number(window->getSize().x),
+            lua_Number(window->getSize().y)
         });
 
         return 1;
     }
 
     static int window_set_size(lua_State* L) {
-        LuaStack args(L, "window.set_size");
+        LuaStack args(L, "window->set_size");
 
         if (args.size() != 2)
             args.error("Incorrect number of arguments!");
@@ -107,66 +107,66 @@ namespace API
         const size_t width = args.get<size_t>();
         const size_t height = args.get<size_t>();
 
-        window.setSize(sf::Vector2u(width, height));
+        window->setSize(sf::Vector2u(width, height));
 
         return 0;
     }
 
     static int window_get_pos(lua_State* L) {
         lhelper::push_object<Vector2>(L, {
-            lua_Number(window.getPosition().x),
-            lua_Number(window.getPosition().y)
+            lua_Number(window->getPosition().x),
+            lua_Number(window->getPosition().y)
         });
 
         return 1;
     }
 
     static int window_set_pos(lua_State* L) {
-        LuaStack args(L, "window.set_pos");
+        LuaStack args(L, "window->set_pos");
 
         if (args.size() != 2)
             args.error("Incorrect number of arguments!");
 
-        window.setPosition(sf::Vector2i(args.get<int>(0), args.get<int>(1)));
+        window->setPosition(sf::Vector2i(args.get<int>(0), args.get<int>(1)));
 
         return 0;
     }
 
     static int window_set_title(lua_State* L) {
-        LuaStack args(L, "window.set_title");
+        LuaStack args(L, "window->set_title");
 
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        window.setTitle(args.get<std::string>());
+        window->setTitle(args.get<std::string>());
 
         return 0;
     }
 
     static int window_set_vsync(lua_State* L) {
-        LuaStack args(L, "window.set_vsync");
+        LuaStack args(L, "window->set_vsync");
 
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        window.setVerticalSyncEnabled(args.get<bool>());
+        window->setVerticalSyncEnabled(args.get<bool>());
 
         return 0;
     }
 
     static int window_set_frame_limit(lua_State* L) {
-        LuaStack args(L, "window.set_frame_limit");
+        LuaStack args(L, "window->set_frame_limit");
 
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        window.setFramerateLimit(args.get<size_t>());
+        window->setFramerateLimit(args.get<size_t>());
 
         return 0;
     }
 
     static int window_sleep(lua_State* L) {
-        LuaStack args(L, "window.sleep");
+        LuaStack args(L, "window->sleep");
 
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
@@ -178,8 +178,8 @@ namespace API
 
     static int window_await(lua_State* L) {
         (void) L;
-        while (window.isOpen()) {
-            if (main_event.type == sf::Event::MouseButtonPressed || main_event.type == sf::Event::KeyPressed)
+        while (window->isOpen()) {
+            if (main_event->type == sf::Event::MouseButtonPressed || main_event->type == sf::Event::KeyPressed)
                 break;
         }
 
@@ -187,7 +187,7 @@ namespace API
     }
 
     static int window_set_icon(lua_State* L) {
-        LuaStack args(L, "window.set_icon");
+        LuaStack args(L, "window->set_icon");
 
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
@@ -195,7 +195,7 @@ namespace API
         sf::Sprite sprite = args.get<LuaUserdata, API::Sprite>();
         const sf::Texture* texture = sprite.getTexture();
 
-        window.setIcon(texture->getSize().x, texture->getSize().y, texture->copyToImage().getPixelsPtr());
+        window->setIcon(texture->getSize().x, texture->getSize().y, texture->copyToImage().getPixelsPtr());
 
         return 0;
     }

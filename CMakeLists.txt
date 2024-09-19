@@ -6,6 +6,7 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Linux") AND NOT (CMAKE_SYSTEM_NAME STREQUAL 
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB SGHeaders "headers/*.hpp")
 source_group("Header Files" FILES ${SGHeaders})
@@ -89,102 +90,75 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        message(FATAL_ERROR "At the moment, the build configuration for Windows supports only \"MSVS\", platform x86")
+    set(LuaJIT_PATH "D:/C++ Libs/LuaJIT")
+    set(SFML_PATH "D:/C++ Libs/SFML")
+
+    if (CMAKE_CL_64)
+        set(CMAKE_GENERATOR_PLATFORM x64)
+    else()
+        set(CMAKE_GENERATOR_PLATFORM x86)
     endif()
 
-    set(LIB_PATH_LuaJIT "D:/C++ Libs/LuaJIT")
-    set(LIB_PATH_SFML "D:/C++ Libs/SFML")
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        message(WARNING "At the moment, the build configuration for Windows using clang supports only the x64 platform.")
+        set(CMAKE_GENERATOR_PLATFORM x64)
+    endif()
 
-    set(CMAKE_SUPPRESS_REGENERATION true)
     set(CMAKE_SKIP_PACKAGE_ALL_DEPENDENCY true)
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-        OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/$<CONFIG>/"
-        INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers"
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers/API"
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers/API/Objects"
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers/Custom Shapes"
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers/Lua Extensions"
+        "${CMAKE_CURRENT_SOURCE_DIR}/headers/UI Objects"
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources"
+        "${LuaJIT_PATH}/include"
+        "${SFML_PATH}/include"
     )
 
-    target_include_directories(${PROJECT_NAME} PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers/API;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers/API/Objects;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers/Custom Shapes;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers/Lua Extensions;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/headers/UI Objects;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/resources;"
-        "${LIB_PATH_LuaJIT}/include;"
-        "${LIB_PATH_SFML}/include"
+    target_link_directories(${PROJECT_NAME} PRIVATE
+        "${LuaJIT_PATH}/${CMAKE_GENERATOR_PLATFORM}/lib"
+        "${SFML_PATH}/${CMAKE_GENERATOR_PLATFORM}/lib"
     )
 
     target_compile_definitions(${PROJECT_NAME} PRIVATE
+        _CRT_SECURE_NO_WARNINGS
+        SFML_STATIC
+    )
+
+    target_link_libraries(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:Debug>:
-            _DEBUG
+            sfml-graphics-s-d
+            sfml-window-s-d
+            sfml-system-s-d
+            sfml-audio-s-d
+            sfml-network-s-d
         >
         $<$<CONFIG:Release>:
-            NDEBUG;
-            SFML_STATIC;
-            _CRT_SECURE_NO_WARNINGS
+            sfml-graphics-s
+            sfml-window-s
+            sfml-system-s
+            sfml-audio-s
+            sfml-network-s
         >
-        WIN32;
-        UNICODE;
-        _UNICODE
-    )
 
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Release>:
-            /O2;
-            /Gy
-        >
-        /permissive-;
-        /std:c++17;
-        /sdl;
-        /W3;
-        ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
-        ${DEFAULT_CXX_EXCEPTION_HANDLING}
-    )
-        
-    target_link_options(${PROJECT_NAME} PRIVATE
-        $<$<CONFIG:Debug>:
-            /INCREMENTAL
-        >
-        $<$<CONFIG:Release>:
-            /OPT:REF;
-            /OPT:ICF;
-            /INCREMENTAL:NO
-        >
-        /DEBUG
-    )
+        winmm
+        opengl32
+        freetype
+        gdi32
+        openal32
+        flac
+        vorbisenc
+        vorbisfile
+        vorbis
+        ogg
+        wldap32
+        ws2_32
+        crypt32
+        normaliz
 
-    set(ADDITIONAL_LIBRARY_DEPENDENCIES
-        $<$<CONFIG:Release>:
-            sfml-graphics-s;
-            sfml-window-s;
-            sfml-system-s;
-            sfml-audio-s;
-            sfml-network-s;
-            winmm;
-            opengl32;
-            freetype;
-            gdi32;
-            openal32;
-            flac;
-            vorbisenc;
-            vorbisfile;
-            vorbis;
-            ogg;
-            wldap32;
-            ws2_32;
-            crypt32;
-            normaliz;
-            lua51;
-            luajit
-        >
-    )
-
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${ADDITIONAL_LIBRARY_DEPENDENCIES})
-
-    target_link_directories(${PROJECT_NAME} PRIVATE
-        "${LIB_PATH_LuaJIT}/x86/lib;"
-        "${LIB_PATH_SFML}/x86/lib;"
+        lua51 luajit
     )
 endif()
