@@ -78,6 +78,7 @@ void Script::open_API() {
 
     lhelper::register_table(lua_state, "window", {
         std::make_pair("is_open", API::window_is_open),
+        std::make_pair("is_resized", API::window_is_resized),
         std::make_pair("get_size", API::window_get_size),
         std::make_pair("set_size", API::window_set_size),
         std::make_pair("display", API::window_display),

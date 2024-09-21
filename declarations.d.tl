@@ -10,6 +10,7 @@ end
 
 global record window
 	is_open: function(): boolean
+	is_resized: function(): boolean
     display: function()
     clear: function(Color | nil)
 	close: function()
@@ -194,38 +195,38 @@ end
 
 
 global type Sound = record
-    new: function(Sound, string, integer, boolean | nil): Sound
-    copy: function(Sound): Sound
-    play: function(Sound, boolean | nil)
-	stop: function(Sound)
-	get_path: function(Sound): string
-	set_volume: function(Sound, integer)
-	get_volume: function(Sound): integer
-	set_loop: function(Sound, boolean)
-	get_loop: function(Sound): boolean
-	is_play: function(Sound): boolean
+    new: function<Self>(Self, string, integer, boolean | nil): Self
+    copy: function<Self>(Self): Self
+    play: function<Self>(Self, boolean | nil)
+	stop: function<Self>(Self)
+	get_path: function<Self>(Self): string
+	set_volume: function<Self>(Self, integer)
+	get_volume: function<Self>(Self): integer
+	set_loop: function<Self>(Self, boolean)
+	get_loop: function<Self>(Self): boolean
+	is_play: function<Self>(Self): boolean
 end
 
 global type Vector2 = record
     x: number
     y: number
-    new: function(Vector2, number, number): Vector2
-    copy: function(Vector2): Vector2
-	metamethod __add: function(Vector2, Vector2 | number): Vector2
-	metamethod __sub: function(Vector2, Vector2 | number): Vector2
-	metamethod __mul: function(Vector2, Vector2 | number): Vector2
-	metamethod __div: function(Vector2, Vector2 | number): Vector2
-	metamethod __len: function(Vector2): integer
-	metamethod __index: function(Vector2, number): number
-	metamethod __newindex: function(Vector2, integer)
+    new: function<Self>(Self, number, number): Vector2
+    copy: function<Self>(Self): Vector2
+	metamethod __add: function<Self>(Self, Vector2 | number): Self
+	metamethod __sub: function<Self>(Self, Vector2 | number): Self
+	metamethod __mul: function<Self>(Self, Vector2 | number): Self
+	metamethod __div: function<Self>(Self, Vector2 | number): Self
+	metamethod __len: function<Self>(Self): integer
+	metamethod __index: function<Self>(Self, number): number
+	metamethod __newindex: function<Self>(Self, integer)
 end
 
 global type Font = record
-    new: function(Font, string, number, string | nil): Font
-    copy: function(Font): Font
-    get_family: function(Font): string
-    get_size: function(Font): integer
-    get_style: function(Font): string
+    new: function<Self>(Self, string, number, string | nil): Self
+    copy: function<Self>(Self): Self
+    get_family: function<Self>(Self): string
+    get_size: function<Self>(Self): integer
+    get_style: function<Self>(Self): string
 end
 
 global type Color = record
@@ -233,42 +234,42 @@ global type Color = record
     g: integer
     b: integer
     a: integer
-    new: function(Color, integer, integer, integer, integer | nil): Color
-    new: function(Color, string): Color
-    copy: function(Color): Color
-    unpack: function(Color): integer, integer, integer, integer
-    to_hex: function(Color): string
+    new: function<Self>(Self, integer, integer, integer, integer | nil): Self
+    new: function<Self>(Self, string): Self
+    copy: function<Self>(Self): Self
+    unpack: function<Self>(Self): integer, integer, integer, integer
+    to_hex: function<Self>(Self): string
 end
 
 global type Sprite = record
-    new: function(Sprite, string, integer, integer, integer | nil, integer | nil, integer | nil, integer | nil): Sprite
-    copy: function(Sprite): Sprite
-    set_color: function(Sprite, Color)
-    get_color: function(Sprite): Color
-    set_pos: function(Sprite, integer, integer)
-    get_pos: function(Sprite): Vector2
-    set_rotation: function(Sprite, number)
-    get_rotation: function(Sprite): number
-    set_scale: function(Sprite, number, number)
-    get_scale: function(Sprite): Vector2
-    set_origin: function(Sprite, number, number)
-    get_origin: function(Sprite): Vector2
-    set_size: function(Sprite, integer, integer)
-    get_size: function(Sprite): Vector2
-    scale: function(Sprite, number, number)
-    rotate: function(Sprite, number)
-    move: function(Sprite, number, number)
+    new: function<Self>(Self, string, integer, integer, integer | nil, integer | nil, integer | nil, integer | nil): Self
+    copy: function<Self>(Self): Self
+    set_color: function<Self>(Self, Color)
+    get_color: function<Self>(Self): Color
+    set_pos: function<Self>(Self, integer, integer)
+    get_pos: function<Self>(Self): Vector2
+    set_rotation: function<Self>(Self, number)
+    get_rotation: function<Self>(Self): number
+    set_scale: function<Self>(Self, number, number)
+    get_scale: function<Self>(Self): Vector2
+    set_origin: function<Self>(Self, number, number)
+    get_origin: function<Self>(Self): Vector2
+    set_size: function<Self>(Self, integer, integer)
+    get_size: function<Self>(Self): Vector2
+    scale: function<Self>(Self, number, number)
+    rotate: function<Self>(Self, number)
+    move: function<Self>(Self, number, number)
 end
 
 global type View = record
-	new: function(View, integer | nil, integer | nil, integer | nil, integer | nil): View
-	copy: function(View): View
-	active: function(View)
-	set_port: function(View, integer, integer, integer, integer)
-	set_center: function(View, integer, integer)
-	get_size: function(View): Vector2
-	set_size: function(View, integer, integer)
-	set_zoom: function(View, number)
-	get_rotation: function(View): number
-	set_rotation: function(View, number)
+	new: function<Self>(Self, integer | nil, integer | nil, integer | nil, integer | nil): Self
+	copy: function<Self>(Self): Self
+	active: function<Self>(Self)
+	set_port: function<Self>(Self, integer, integer, integer, integer)
+	set_center: function<Self>(Self, integer, integer)
+	get_size: function<Self>(Self): Vector2
+	set_size: function<Self>(Self, integer, integer)
+	set_zoom: function<Self>(Self, number)
+	get_rotation: function<Self>(Self): number
+	set_rotation: function<Self>(Self, number)
 end
