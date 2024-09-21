@@ -10,7 +10,6 @@ end
 
 global record window
 	is_open: function(): boolean
-	is_resized: function(): boolean
     display: function()
     clear: function(Color | nil)
 	close: function()

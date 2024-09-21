@@ -49,13 +49,6 @@
 	},
 
 
-	
-	"window.is_resized": {
-		"prefix": "window.is_resized",
-		"body": [
-		  "window.is_resized()"
-		]
-	},
 
 	"window.is_open": {
 		"prefix": "window.is_open",

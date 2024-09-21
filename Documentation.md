@@ -22,7 +22,6 @@
   
 <details><summary>:computer: Window</summary>
 
-  - [is_resized()](#window.is_resized)
   - [is_open()](#window.is_open)
   - [display()](#window.display)
   - [clear()](#window.clear)
@@ -282,15 +281,6 @@ Render polygon on the screen.
 
 
 ### :computer: Window
-
-#### <a name="window.is_resized"></a> ```is_resized```
-```lua
-window.is_resized(): boolean
-```
-
-Returns true if the window is change size, else false.
-
----
 
 #### <a name="window.is_open"></a> ```is_open```
 ```lua

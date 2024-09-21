@@ -19,12 +19,6 @@ namespace API
         return 0;
     }
 
-    static int window_is_resized(lua_State* L) {
-        (void) L;
-        lua_pushboolean(L, main_event->type == sf::Event::Resized);
-        return 1;
-    }
-
     static int window_is_open(lua_State* L) {
         (void) L;
         lua_pushboolean(L, window->isOpen());
