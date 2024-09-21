@@ -9,21 +9,22 @@ API::Font::Font(const LuaStack& args) {
 	
 	if (args.size() == 3) {
 		const std::string styles = args.get<std::string>();
+		if (!styles.empty()) {
+			if (styles.find('r') != std::string::npos)
+				this->styles |= sf::Text::Style::Regular;
 
-		if (styles.find('r') != std::string::npos)
-			this->styles |= sf::Text::Style::Regular;
+			if (styles.find('b') != std::string::npos)
+				this->styles |= sf::Text::Style::Bold;
 
-		if (styles.find('b') != std::string::npos)
-			this->styles |= sf::Text::Style::Bold;
+			if (styles.find('i') != std::string::npos)
+				this->styles |= sf::Text::Style::Italic;
 
-		if (styles.find('i') != std::string::npos)
-			this->styles |= sf::Text::Style::Italic;
+			if (styles.find('l') != std::string::npos)
+				this->styles |= sf::Text::Style::Underlined;
 
-		if (styles.find('l') != std::string::npos)
-			this->styles |= sf::Text::Style::Underlined;
-
-		if (styles.find('s') != std::string::npos)
-			this->styles |= sf::Text::Style::StrikeThrough;
+			if (styles.find('s') != std::string::npos)
+				this->styles |= sf::Text::Style::StrikeThrough;
+		}
 	}
 
 	if (!loadFromFile(font_path + family))
