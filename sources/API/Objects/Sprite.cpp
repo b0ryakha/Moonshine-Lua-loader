@@ -1,5 +1,8 @@
 #include "API/Objects/Sprite.hpp"
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
 API::Sprite::Sprite(const LuaStack& args) {
     const size_t args_size = args.size();
 
@@ -14,8 +17,8 @@ API::Sprite::Sprite(const LuaStack& args) {
     size_t t_w = (args_size == 7 ? args.get<size_t>() : 0);
     size_t t_h = (args_size == 7 ? args.get<size_t>() : 0);
 
-    if (!texture.loadFromFile(path))
-        throw_error("[Sprite:new] Texture by path '" + path + "' cannot be loaded!");
+    if (!fs::exists(path) || !texture.loadFromFile(path))
+        throw_error("[Sprite:new] Texture by path '" + path + "' cannot be loaded, check the path!");
 
     if (args_size == 3) {
         t_w = texture.getSize().x;
