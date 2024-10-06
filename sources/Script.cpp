@@ -20,48 +20,41 @@
 #include "misc_functions.hpp"
 
 #include <array>
+#include <future>
 
 Script::Script(std::string_view path) {
     open(path);
 }
 
 void Script::open(std::string_view path) {
-    if (is_open())
-        return;
+    if (is_open()) return;
 
     #ifndef _DEBUG
         freopen("/dev/null", "w", stderr);
     #endif
 
     lua_state = luaL_newstate();
-
-    if (lua_state == nullptr)
+    if (!lua_state)
         throw_error("Failed to create lua state.");
 
     lua_path = std::move(path);
 
-    if (!lua_path.empty() && lua_path[0] == '\"' && lua_path[lua_path.length() - 1] == '\"')
-        lua_path = std::string(lua_path.begin() + 1, lua_path.end() - 1);
-    
-    if (lua_path.find('/') == std::string::npos && lua_path.find('\\') == std::string::npos)
+    if (lua_path.size() >= 2 && lua_path.front() == '\"' && lua_path.back() == '\"')
+        lua_path = lua_path.substr(1, lua_path.size() - 2);
+
+    if (lua_path.find_first_of("/\\") == std::string::npos)
         lua_path = "./" + lua_path;
 
     luaL_openlibs(lua_state);
     open_API();
 
-    window->clear();
-    window->display();
-    window->setActive(false);
-
-    main_thread = std::make_unique<std::thread>([&] {
+    static auto f = std::async(std::launch::async, [&] {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(lua_tostring(lua_state, -1));
 
         if (lua_isfunction(lua_state, -1))
             lua_pcall(lua_state, 0, 0, 0);
     });
-
-    main_thread->detach();
 }
 
 void Script::open_API() {
@@ -177,5 +170,5 @@ void Script::open_API() {
 }
 
 bool Script::is_open() const {
-    return main_thread != nullptr;
+    return lua_state != nullptr;
 }
