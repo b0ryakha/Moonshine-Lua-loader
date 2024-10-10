@@ -45,6 +45,7 @@ cd Moonshine-Lua-loader
 cmake -B "build" -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
 cmake --build "build" --config Release
 ```
+##### The build is complete, but don't forget to install tf-ms-fonts for runtime.
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
