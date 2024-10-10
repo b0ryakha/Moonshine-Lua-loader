@@ -2,8 +2,8 @@ global record render
     text: function(integer, integer, Font, string, Color)
     sprite: function(Sprite)
     measure_text: function(Font, string): Vector2
-    rectangle: function(integer, integer, integer, integer, Color, integer | nil)
-    circle: function(integer, integer, integer, Color, number | nil, Color | nil)
+    rectangle: function(integer, integer, integer, integer, Color, ?integer)
+    circle: function(integer, integer, integer, Color, ?number, ?Color)
     line: function(integer, integer, integer, integer, number, Color)
     polygon: function({{integer}}, Color)
 end
@@ -11,9 +11,9 @@ end
 global record window
 	is_open: function(): boolean
     display: function()
-    clear: function(Color | nil)
+    clear: function(?Color)
 	close: function()
-	capture: function(string, integer | nil, integer | nil, integer | nil, integer | nil)
+	capture: function(string, ?integer, ?integer, ?integer, ?integer)
 	get_size: function(): Vector2
 	set_size: function(integer, integer)
 	get_pos: function(): Vector2
@@ -27,7 +27,7 @@ global record window
 end
 
 global record keyboard
-    get_pressed: function(boolean | nil): integer | string
+    get_pressed: function(?boolean): integer | string
 	is_pressed: function(integer): boolean
 end
 
@@ -157,10 +157,10 @@ global record cursor
 end
 
 global record file
-	read: function(string, integer | nil): {string}
-	write: function(string, {string}, boolean | nil)
-	write: function(string, string, boolean | nil)
-	copy: function(string, string | nil)
+	read: function(string, ?integer): {string}
+	write: function(string, {string}, ?boolean)
+	write: function(string, string, ?boolean)
+	copy: function(string, ?string)
 	create: function(string)
 	remove: function(string)
 	exists: function(string): boolean
@@ -194,9 +194,9 @@ end
 
 
 global type Sound = record
-    new: function<Self>(Self, string, integer, boolean | nil): Self
+    new: function<Self>(Self, string, integer, ?boolean): Self
     copy: function<Self>(Self): Self
-    play: function<Self>(Self, boolean | nil)
+    play: function<Self>(Self, ?boolean)
 	stop: function<Self>(Self)
 	get_path: function<Self>(Self): string
 	set_volume: function<Self>(Self, integer)
@@ -221,7 +221,7 @@ global type Vector2 = record
 end
 
 global type Font = record
-    new: function<Self>(Self, string, number, string | nil): Self
+    new: function<Self>(Self, string, number, ?string): Self
     copy: function<Self>(Self): Self
     get_family: function<Self>(Self): string
     get_size: function<Self>(Self): integer
@@ -233,7 +233,7 @@ global type Color = record
     g: integer
     b: integer
     a: integer
-    new: function<Self>(Self, integer, integer, integer, integer | nil): Self
+    new: function<Self>(Self, integer, integer, integer, ? integer): Self
     new: function<Self>(Self, string): Self
     copy: function<Self>(Self): Self
     unpack: function<Self>(Self): integer, integer, integer, integer
@@ -241,7 +241,7 @@ global type Color = record
 end
 
 global type Sprite = record
-    new: function<Self>(Self, string, integer, integer, integer | nil, integer | nil, integer | nil, integer | nil): Self
+    new: function<Self>(Self, string, integer, integer, ?integer, ?integer, ?integer, ?integer): Self
     copy: function<Self>(Self): Self
     set_color: function<Self>(Self, Color)
     get_color: function<Self>(Self): Color
@@ -261,7 +261,7 @@ global type Sprite = record
 end
 
 global type View = record
-	new: function<Self>(Self, integer | nil, integer | nil, integer | nil, integer | nil): Self
+	new: function<Self>(Self, ?integer, ?integer, ?integer, ?integer): Self
 	copy: function<Self>(Self): Self
 	active: function<Self>(Self)
 	set_port: function<Self>(Self, integer, integer, integer, integer)
