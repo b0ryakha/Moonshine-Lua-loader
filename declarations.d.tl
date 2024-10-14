@@ -3,6 +3,7 @@ global record render
     sprite: function(Sprite)
     measure_text: function(Font, string): Vector2
     rectangle: function(integer, integer, integer, integer, Color, ?integer)
+    outline_rectangle: function(integer, integer, integer, integer, integer, Color, ?integer)
     circle: function(integer, integer, integer, Color, ?number, ?Color)
     line: function(integer, integer, integer, integer, number, Color)
     polygon: function({{integer}}, Color)

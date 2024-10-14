@@ -15,6 +15,7 @@
   - [sprite()](#render.sprite)
   - [measure_text()](#render.measure_text)
   - [rectangle()](#render.rectangle)
+  - [outline_rectangle()](#outline_rectangle.rectangle)
   - [circle()](#render.circle)
   - [line()](#render.line)
   - [polygon()](#render.polygon)
@@ -231,6 +232,24 @@ render.rectangle(x: int, y: int, w: size_t, h: size_t, color: Color[, rounding: 
 | rounding | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
 
 Render rectangle on the screen.
+
+---
+
+#### <a name="render.outline_rectangle"></a> ```outline_rectangle```
+```lua
+render.outline_rectangle(x: int, y: int, w: size_t, h: size_t, thickness: float, color: Color[, rounding: size_t])
+```
+| Name      | Type        | Description                                   |
+| :---:     | :---:       | :---:                                         |
+| x         | ```int```   | X coordinate                                  |
+| y         | ```int```   | Y coordinate                                  |
+| w         | ```size_t```| Width                                         |
+| h         | ```size_t```| Height                                        |
+| thickness | ```float``` | Thickness of outline line                     |
+| color     | ```Color``` | Color for outline line                        |
+| rounding  | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
+
+Render rectangle consisting of 4 contour lines, empty inside.
 
 ---
 

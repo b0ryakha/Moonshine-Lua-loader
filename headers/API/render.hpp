@@ -90,6 +90,32 @@ namespace API
         return 0;
     }
 
+    static int render_outline_rectangle(lua_State* L) {
+        LuaStack args(L, "render.outline_rectangle");
+
+        if (args.size() != 6 && args.size() != 7)
+            args.error("Incorrect number of arguments!");
+
+        int x = args.get<int>();
+        int y = args.get<int>();
+        size_t w = args.get<size_t>();
+        size_t h = args.get<size_t>();
+        float thickness = args.get<float>();
+        sf::Color color = args.get<LuaUserdata, Color>();
+        size_t rounding = (args.size() == 7) ? args.get<size_t>() : 0;
+
+        const auto conv_pos = window->mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_size = window->mapPixelToCoords(sf::Vector2i(w, h));
+
+        SuperEllipse rectangle(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y, rounding, sf::Color::Transparent);
+        rectangle.setOutlineColor(color);
+        rectangle.setOutlineThickness(thickness);
+
+        window->draw(rectangle);
+
+        return 0;
+    }
+
     static int render_circle(lua_State* L) {
         LuaStack args(L, "render.circle");
 

@@ -27,6 +27,13 @@
 		]
 	},
 
+	"render.outline_rectangle": {
+		"prefix": "render.outline_rectangle",
+		"body": [
+		  "render.outline_rectangle(x, y, w, h, thickness, color[, rounding])"
+		]
+	},
+
 	"render.circle": {
 		"prefix": "render.circle",
 		"body": [
