@@ -10,7 +10,7 @@
 #include "API/cmath.hpp"
 #include "API/cursor.hpp"
 #include "API/file.hpp"
-#include "API/global_vars.hpp"
+#include "API/globalvars.hpp"
 #include "API/keyboard.hpp"
 #include "API/mouse.hpp"
 #include "API/render.hpp"

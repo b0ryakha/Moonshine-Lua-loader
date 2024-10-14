@@ -802,7 +802,7 @@ Returns the path of executable.
 globalvars.get_os_name(): string
 ```
 
-Returns the os name.
+Returns the os name ("Windows", "Linux", "Unknown").
 
 
 ### :satellite: Network
