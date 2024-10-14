@@ -339,6 +339,35 @@
 		]
 	},
 
+	"cursor_type.Arrow": { "prefix": "cursor_type.Arrow", "body": [ "cursor_type.Arrow" ] },
+	"cursor_type.ArrowWait": { "prefix": "cursor_type.ArrowWait", "body": [ "cursor_type.ArrowWait" ] },
+	"cursor_type.Wait": { "prefix": "cursor_type.Wait", "body": [ "cursor_type.Wait" ] },
+	"cursor_type.Text": { "prefix": "cursor_type.Text", "body": [ "cursor_type.Text" ] },
+	"cursor_type.Hand": { "prefix": "cursor_type.Hand", "body": [ "cursor_type.Hand" ] },
+	"cursor_type.SizeHorizontal": { "prefix": "cursor_type.SizeHorizontal", "body": [ "cursor_type.SizeHorizontal" ] },
+	"cursor_type.SizeVertical": { "prefix": "cursor_type.SizeVertical", "body": [ "cursor_type.SizeVertical" ] },
+	"cursor_type.SizeTopLeftBottomRight": { "prefix": "cursor_type.SizeTopLeftBottomRight", "body": [ "cursor_type.SizeTopLeftBottomRight" ] },
+	"cursor_type.SizeBottomLeftTopRight": { "prefix": "cursor_type.SizeBottomLeftTopRight", "body": [ "cursor_type.SizeBottomLeftTopRight" ] },
+	"cursor_type.SizeLeft": { "prefix": "cursor_type.SizeLeft", "body": [ "cursor_type.SizeLeft" ] },
+	"cursor_type.SizeRight": { "prefix": "cursor_type.SizeRight", "body": [ "cursor_type.SizeRight" ] },
+	"cursor_type.SizeTop": { "prefix": "cursor_type.SizeTop", "body": [ "cursor_type.SizeTop" ] },
+	"cursor_type.SizeBottom": { "prefix": "cursor_type.SizeBottom", "body": [ "cursor_type.SizeBottom" ] },
+	"cursor_type.SizeTopLeft": { "prefix": "cursor_type.SizeTopLeft", "body": [ "cursor_type.SizeTopLeft" ] },
+	"cursor_type.SizeTopRight": { "prefix": "cursor_type.SizeTopRight", "body": [ "cursor_type.SizeTopRight" ] },
+	"cursor_type.SizeBottomLeft": { "prefix": "cursor_type.SizeBottomLeft", "body": [ "cursor_type.SizeBottomLeft" ] },
+	"cursor_type.SizeBottomRight": { "prefix": "cursor_type.SizeBottomRight", "body": [ "cursor_type.SizeBottomRight" ] },
+	"cursor_type.SizeAll": { "prefix": "cursor_type.SizeAll", "body": [ "cursor_type.SizeAll" ] },
+	"cursor_type.Cross": { "prefix": "cursor_type.Cross", "body": [ "cursor_type.Cross" ] },
+	"cursor_type.Help": { "prefix": "cursor_type.Help", "body": [ "cursor_type.Help" ] },
+	"cursor_type.NotAllowed": { "prefix": "cursor_type.NotAllowed", "body": [ "cursor_type.NotAllowed" ] },
+
+	"cursor.change_type": {
+		"prefix": "cursor.change_type",
+		"body": [
+		  "cursor.change_type(cursor_type)"
+		]
+	},
+
 
 
 	"file.read": {

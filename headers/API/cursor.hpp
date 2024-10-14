@@ -45,4 +45,19 @@ namespace API
         lua_pushboolean(L, is_cursor_in_window);
         return 1;
     }
+
+    static int cursor_change_type(lua_State* L) {
+        LuaStack args(L, "cursor.change_type");
+
+        if (args.size() != 1)
+            args.error("Incorrect number of arguments!");
+
+        sf::Cursor c;
+        if (!c.loadFromSystem(static_cast<sf::Cursor::Type>(args.get<int>())))
+            args.error("Incorrect cursor type!");
+
+        window->setMouseCursor(c);
+
+        return 0;
+    }
 }

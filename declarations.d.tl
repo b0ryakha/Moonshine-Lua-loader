@@ -151,10 +151,35 @@ global record button
 	XButton2: integer
 end
 
+global record cursor_type
+	Arrow: integer
+	ArrowWait: integer
+	Wait: integer
+	Text: integer
+	Hand: integer
+	SizeHorizontal: integer
+	SizeVertical: integer
+	SizeTopLeftBottomRight: integer
+	SizeBottomLeftTopRight: integer
+	SizeLeft: integer
+	SizeRight: integer
+	SizeTop: integer
+	SizeBottom: integer
+	SizeTopLeft: integer
+	SizeTopRight: integer
+	SizeBottomLeft: integer
+	SizeBottomRight: integer
+	SizeAll: integer
+	Cross: integer
+	Help: integer
+	NotAllowed: integer
+end
+
 global record cursor
 	get_pos: function(): Vector2
 	in_window: function(): boolean
 	is_bound: function(integer, integer, integer, integer): boolean
+	change_type: function(integer)
 end
 
 global record file

@@ -59,6 +59,7 @@
   - [get_pos()](#cursor.get_pos)
   - [is_bound()](#cursor.is_bound)
   - [in_window()](#cursor.in_window)
+  - [change_type()](#cursor.change_type)
   </details>
     
 <details><summary>:file_folder: File</summary>
@@ -543,6 +544,11 @@ Returns true if scrolling down, else false.
 
 
 ### :video_game: Cursor
+#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.6.1/classsf_1_1Cursor.php)
+```lua
+local cursor_type_id = cursor_type.Arrow -- 'Arrow' type
+```
+
 #### <a name="cursor.get_pos"></a> ```get_pos```
 ```lua
 cursor.get_pos(): Vector2
@@ -573,6 +579,18 @@ cursor.is_bound(x: size_t, y: size_t, w: size_t, h: size_t)
 | h                | ```size_t```  | Height                                                                 |
 
 Returns true if cursor in bounds, else false.
+
+---
+
+#### <a name="cursor.change_type"></a> ```change_type```
+```lua
+cursor.change_type(type: SFML_enum)
+```
+| Name  | Type            | Description             |
+| :---: | :---:           | :---:                   |
+| type  | ```SFML_enum``` | SFML Enum - cursor_type |
+
+Changes the cursor state to the specified type.
 
 
 ### :file_folder: File

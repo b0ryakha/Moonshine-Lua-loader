@@ -122,10 +122,19 @@ void Script::open_API() {
         std::make_pair("is_scrolling_down", API::mouse_is_scrolling_down),
     });
 
+    std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_CURSORS;
+    constexpr std::array<std::string_view, 21> SFML_CURSORS_NAME = { "Arrow", "ArrowWait", "Wait", "Text", "Hand", "SizeHorizontal", "SizeVertical", "SizeTopLeftBottomRight", "SizeBottomLeftTopRight", "SizeLeft", "SizeRight", "SizeTop", "SizeBottom", "SizeTopLeft", "SizeBottomRight", "SizeBottomLeft", "SizeTopRight", "SizeAll", "Cross", "Help", "NotAllowed" };
+
+    for (int i = 0, size = SFML_CURSORS_NAME.size(); i < size; ++i)
+        SFML_CURSORS.emplace_back(std::make_pair(SFML_CURSORS_NAME[i], lua_Number(i)));
+
+    lhelper::register_table(lua_state, "cursor_type", SFML_CURSORS);
+
     lhelper::register_table(lua_state, "cursor", {
         std::make_pair("get_pos", API::cursor_get_pos),
         std::make_pair("is_bound", API::cursor_is_bound),
         std::make_pair("in_window", API::cursor_in_window),
+        std::make_pair("change_type", API::cursor_change_type),
     });
 
     lhelper::register_table(lua_state, "file", {
