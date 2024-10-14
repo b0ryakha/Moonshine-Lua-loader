@@ -1,5 +1,8 @@
 #include "API/Objects/Font.hpp"
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
 API::Font::Font(const LuaStack& args) {
 	if (args.size() != 2 && args.size() != 3)
 		throw_error("[Font:new] Incorrect number of arguments!");
@@ -27,7 +30,9 @@ API::Font::Font(const LuaStack& args) {
 		}
 	}
 
-	if (!loadFromFile(font_path + family))
+	const auto path = font_path + family;
+
+	if (!fs::exists(path) || !loadFromFile(path))
 		throw_error("[Font:new] Font '" + family + "' was not found or not installed!");
 }
 
