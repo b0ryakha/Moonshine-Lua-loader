@@ -153,7 +153,7 @@ end
 global record cursor
 	get_pos: function(): Vector2
 	in_window: function(): boolean
-	is_bound: function(integer, integer, integer, integer)
+	is_bound: function(integer, integer, integer, integer): boolean
 end
 
 global record file
