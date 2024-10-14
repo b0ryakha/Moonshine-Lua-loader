@@ -15,6 +15,15 @@ extern sf::RenderWindow* window;
 
 namespace API
 {
+    static int render_sprite(lua_State* L) {
+        if (lua_gettop(L) != 1)
+            throw_error("[render.sprite] Incorrect number of arguments!");
+
+        window->draw(*lhelper::get_object<Sprite>(L, "Sprite", 1));
+
+        return 0;
+    }
+
     static int render_measure_text(lua_State* L) {
         LuaStack args(L, "render.measure_text");
 
@@ -35,15 +44,6 @@ namespace API
         return 1;
     }
 
-    static int render_sprite(lua_State* L) {
-        if (lua_gettop(L) != 1)
-            throw_error("[render.sprite] Incorrect number of arguments!");
-
-        window->draw(*lhelper::get_object<Sprite>(L, "Sprite", 1));
-
-        return 0;
-    }
-
     static int render_text(lua_State* L) {
         LuaStack args(L, "render.text");
 
@@ -56,11 +56,14 @@ namespace API
         const std::string str = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, pixel_to_rcoord(font.get_size()));
+        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
         text.setStyle(font.get_style());
-
         text.setPosition(window->mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
         text.setFillColor(color);
+        text.setScale(
+            1400.f / static_cast<float>(window->getSize().x),
+            800.f / static_cast<float>(window->getSize().y)
+        );
 
         window->draw(text);
 
