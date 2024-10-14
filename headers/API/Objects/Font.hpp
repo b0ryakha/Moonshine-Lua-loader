@@ -9,6 +9,7 @@ namespace API
 {
     class Font final : public sf::Font {
     private:
+        std::string family;
         size_t size = 0;
         ushort_t styles = sf::Text::Style::Regular;
 
@@ -28,7 +29,7 @@ namespace API
             static auto get_family = [](lua_State* L) {
                 const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
-                lua_pushstring(L, self->getInfo().family.c_str());
+                lua_pushstring(L, self->family.c_str());
                 return 1;
             };
 
@@ -67,7 +68,7 @@ namespace API
                 const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 lhelper::push_object<Font>(L, {
-                    self->getInfo().family,
+                    self->family,
                     lua_Number(self->get_size())
                 });
                 return 1;
@@ -96,7 +97,7 @@ namespace API
                 const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
                 std::stringstream result;
-                result << "{ " << self->getInfo().family << ", " << self->get_size() << ", " << self->get_style() << " }";
+                result << "{ " << self->family << ", " << self->get_size() << ", " << self->get_style() << " }";
 
                 lua_pushstring(L, std::move(result).str().c_str());
                 return 1;
@@ -107,7 +108,7 @@ namespace API
                 const auto target = lhelper::get_object<Font>(L, "Font", 2);
 
                 lua_pushboolean(L, (
-                    self->getInfo().family == target->getInfo().family &&
+                    self->family == target->family &&
                     self->get_size() == target->get_size() &&
                     self->get_style() == target->get_style()
                 ));
