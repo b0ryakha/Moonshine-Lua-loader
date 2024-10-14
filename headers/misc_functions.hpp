@@ -17,7 +17,7 @@ float pixel_to_coord(T pixel) {
 
 template<typename T>
 int pixel_to_rcoord(T pixel) {
-	return static_cast<int>(std::round(window->mapPixelToCoords({ static_cast<int>(pixel), 0 }).x));
+	return static_cast<int>(std::round(pixel_to_coord(pixel)));
 }
 
 void throw_error(std::string_view error);
