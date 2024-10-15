@@ -422,7 +422,7 @@ window.set_vsync(state: bool)
 | :---: | :---:      | :---:                                     |
 | state | ```bool``` | Enable / disable vertical synchronization |
 
-Enables or disables the window's vsync.
+Enables or disables the window's vsync, enabled by default.
 
 ---
 

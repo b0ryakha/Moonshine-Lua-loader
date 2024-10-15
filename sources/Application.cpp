@@ -8,6 +8,8 @@
 Application::Application(int argc, char** argv)
     : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16))
 {
+    RenderWindow::setVerticalSyncEnabled(true);
+
     sf::Image icon;
     icon.loadFromMemory(res_icon, sizeof(res_icon));
     RenderWindow::setIcon(256, 256, icon.getPixelsPtr());
