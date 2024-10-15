@@ -15,7 +15,7 @@
   - [sprite()](#render.sprite)
   - [measure_text()](#render.measure_text)
   - [rectangle()](#render.rectangle)
-  - [outline_rectangle()](#outline_rectangle.rectangle)
+  - [outline_rectangle()](#outline.rectangle)
   - [circle()](#render.circle)
   - [line()](#render.line)
   - [polygon()](#render.polygon)
