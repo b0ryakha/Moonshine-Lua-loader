@@ -20,7 +20,6 @@
 #include "misc_functions.hpp"
 
 #include <array>
-#include <future>
 
 Script::Script(std::string_view path) {
     open(path);
@@ -48,7 +47,7 @@ void Script::open(std::string_view path) {
     luaL_openlibs(lua_state);
     open_API();
 
-    static auto f = std::async(std::launch::async, [&] {
+    future = std::async(std::launch::async, [&] {
         if (luaL_dofile(lua_state, lua_path.c_str()) != 0)
             throw_error(lua_tostring(lua_state, -1));
 
@@ -180,5 +179,6 @@ void Script::open_API() {
 }
 
 bool Script::is_open() const {
-    return lua_state != nullptr;
+    return lua_state != nullptr &&
+           future.wait_for(std::chrono::milliseconds(100)) != std::future_status::ready;
 }
