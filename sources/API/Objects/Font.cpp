@@ -3,6 +3,8 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+extern std::string font_path;
+
 API::Font::Font(const LuaStack& args) {
 	if (args.size() != 2 && args.size() != 3)
 		throw_error("[Font:new] Incorrect number of arguments!");

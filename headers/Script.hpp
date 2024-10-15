@@ -1,8 +1,7 @@
 #pragma once
+#include "lua_helper.hpp"
 
 #include <string>
-
-#include "lua_helper.hpp"
 
 class Script final {
 private:

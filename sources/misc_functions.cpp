@@ -1,37 +1,39 @@
 #include "misc_functions.hpp"
 
+#include "Application.hpp"
+extern Application* app;
+
+extern std::string font_path;
+
 void throw_error(std::string_view error) {
     sf::Font font;
-
-    if (!font.loadFromFile(font_path + "Arial.TTF")) {
-        window->close();
-        std::exit(0);
-    }
+    if (!font.loadFromFile(font_path + "Arial.TTF"))
+        app->close();
 
     sf::Text text(sf::String::fromUtf8(error.cbegin(), error.cend()), font, 20);
     sf::Text info("Press any key to continue...\n\n [CTRL + C] copy the error.", font, 20);
 
-    text.setPosition(window->mapPixelToCoords(sf::Vector2i(
-        std::round(window->getSize().x / 2.f - text.getGlobalBounds().width / 2.f),
-        std::round(window->getSize().y / 2.f)
+    text.setPosition(app->mapPixelToCoords(sf::Vector2i(
+        std::round(app->getSize().x / 2.f - text.getGlobalBounds().width / 2.f),
+        std::round(app->getSize().y / 2.f)
     )));
     
-    info.setPosition(window->mapPixelToCoords(sf::Vector2i(
-        std::round(window->getSize().x / 2.f - info.getGlobalBounds().width / 2.f),
-        std::round(window->getSize().y / 2.f + text.getGlobalBounds().height + 10.f)
+    info.setPosition(app->mapPixelToCoords(sf::Vector2i(
+        std::round(app->getSize().x / 2.f - info.getGlobalBounds().width / 2.f),
+        std::round(app->getSize().y / 2.f + text.getGlobalBounds().height + 10.f)
     )));
 
     text.setFillColor(sf::Color::Red);
     info.setFillColor(sf::Color::Red);
 
-    while (window->isOpen()) {
-        window->clear();
-        window->draw(text);
-        window->draw(info);
-        window->display();
+    while (app->isOpen()) {
+        app->clear();
+        app->draw(text);
+        app->draw(info);
+        app->display();
 
-        if (main_event->type == sf::Event::TextEntered) {
-            if (main_event->key.code != 3) // 3 = Ctrl + C
+        if (app->event.type == sf::Event::TextEntered) {
+            if (app->event.key.code != 3) // 3 = Ctrl + C
                 break;
                 
             info.setString("Press any key to continue...");
@@ -39,6 +41,5 @@ void throw_error(std::string_view error) {
         }
     }
     
-    window->close();
-    std::exit(0);
+    app->close();
 }

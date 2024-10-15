@@ -1,17 +1,15 @@
 #pragma once
-
 #include "lua_helper.hpp"
-#include "SuperEllipse.hpp"
-//#include "Blur.hpp"
-
 #include "API/Objects/Vector2.hpp"
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Font.hpp"
 #include "API/Objects/Sprite.hpp"
 
-#include <string>
+#include "SuperEllipse.hpp"
+//#include "Blur.hpp"
 
-extern sf::RenderWindow* window;
+#include "Application.hpp"
+extern Application* app;
 
 namespace API
 {
@@ -19,8 +17,7 @@ namespace API
         if (lua_gettop(L) != 1)
             throw_error("[render.sprite] Incorrect number of arguments!");
 
-        window->draw(*lhelper::get_object<Sprite>(L, "Sprite", 1));
-
+        app->draw(*lhelper::get_object<Sprite>(L, "Sprite", 1));
         return 0;
     }
 
@@ -58,15 +55,14 @@ namespace API
 
         sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
         text.setStyle(font.get_style());
-        text.setPosition(window->mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
+        text.setPosition(app->mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
         text.setFillColor(color);
         text.setScale(
-            1400.f / static_cast<float>(window->getSize().x),
-            800.f / static_cast<float>(window->getSize().y)
+            static_cast<float>(app->init_size.x) / static_cast<float>(app->getSize().x),
+            static_cast<float>(app->init_size.y) / static_cast<float>(app->getSize().y)
         );
 
-        window->draw(text);
-
+        app->draw(text);
         return 0;
     }
 
@@ -83,13 +79,12 @@ namespace API
         sf::Color color = args.get<LuaUserdata, Color>();
         size_t rounding = (args.size() == 6) ? args.get<size_t>() : 0;
 
-        const auto conv_pos = window->mapPixelToCoords(sf::Vector2i(x, y));
-        const auto conv_size = window->mapPixelToCoords(sf::Vector2i(w, h));
+        const auto conv_pos = app->mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_size = app->mapPixelToCoords(sf::Vector2i(w, h));
 
         SuperEllipse rectangle(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y, rounding, color);
 
-        window->draw(rectangle);
-
+        app->draw(rectangle);
         return 0;
     }
 
@@ -107,15 +102,14 @@ namespace API
         sf::Color color = args.get<LuaUserdata, Color>();
         size_t rounding = (args.size() == 7) ? args.get<size_t>() : 0;
 
-        const auto conv_pos = window->mapPixelToCoords(sf::Vector2i(x, y));
-        const auto conv_size = window->mapPixelToCoords(sf::Vector2i(w, h));
+        const auto conv_pos = app->mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_size = app->mapPixelToCoords(sf::Vector2i(w, h));
 
         SuperEllipse rectangle(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y, rounding, sf::Color::Transparent);
         rectangle.setOutlineColor(color);
         rectangle.setOutlineThickness(thickness);
 
-        window->draw(rectangle);
-
+        app->draw(rectangle);
         return 0;
     }
 
@@ -127,14 +121,15 @@ namespace API
 
         int x = args.get<int>();
         int y = args.get<int>();
-        float radius = pixel_to_coord(args.get<size_t>());
+        // TODO: fix radius
+        float radius = args.get<size_t>();
         sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
         sf::Color outline_color = (args.size() == 6) ? args.get<LuaUserdata, Color>() : sf::Color();
 
         sf::CircleShape circle(radius);
 
-        const auto conv_pos = window->mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_pos = app->mapPixelToCoords(sf::Vector2i(x, y));
 
         circle.setFillColor(color);
         circle.setPosition(sf::Vector2f(conv_pos.x - radius, conv_pos.y - radius));
@@ -144,8 +139,7 @@ namespace API
             circle.setOutlineColor(outline_color);
         }
 
-        window->draw(circle);
-
+        app->draw(circle);
         return 0;
     }
 
@@ -162,8 +156,8 @@ namespace API
         float thickness = args.get<float>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        const auto conv_pos1 = window->mapPixelToCoords(sf::Vector2i(x1, y1));
-        const auto conv_pos2 = window->mapPixelToCoords(sf::Vector2i(x2, y2));
+        const auto conv_pos1 = app->mapPixelToCoords(sf::Vector2i(x1, y1));
+        const auto conv_pos2 = app->mapPixelToCoords(sf::Vector2i(x2, y2));
 
         sf::Vertex line[2];
 
@@ -174,7 +168,7 @@ namespace API
             line[1].position = end;
             line[1].color = color;
 
-            window->draw(line, 2, sf::Lines);
+            app->draw(line, 2, sf::Lines);
         };
 
         for (int i = 0; i < floor(thickness / 2); ++i)
@@ -206,11 +200,10 @@ namespace API
             if (point.size() != 2)
                 args.error("Incorrect number of values!");
 
-            polygon.setPoint(i, window->mapPixelToCoords(sf::Vector2i(point.get<int>(), point.get<int>())));
+            polygon.setPoint(i, app->mapPixelToCoords(sf::Vector2i(point.get<int>(), point.get<int>())));
         }
 
-        window->draw(polygon);
-
+        app->draw(polygon);
         return 0;
     }
 

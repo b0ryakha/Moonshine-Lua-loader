@@ -1,9 +1,7 @@
 #pragma once
-
 #include "lua_helper.hpp"
 
 #include <SFML/Audio.hpp>
-#include <string>
 #include <sstream>
 
 namespace API
@@ -94,6 +92,7 @@ namespace API
                     lua_Number(self->getVolume()),
                     LuaBoolean(self->getLoop())
                 });
+
                 return 1;
             };
 
@@ -139,6 +138,7 @@ namespace API
                     self->getLoop() == target->getLoop() &&
                     self->getStatus() == target->getStatus()
                 ));
+                
                 return 1;
             };
 

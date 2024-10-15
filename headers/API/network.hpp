@@ -1,11 +1,10 @@
 #pragma once
+#include "lua_helper.hpp"
 
 #include <SFML/Network.hpp>
 #include <optional>
 #include <unordered_map>
 #include <iterator>
-
-#include "lua_helper.hpp"
 
 namespace API
 {
@@ -42,7 +41,6 @@ namespace API
     }
 
     static int network_unbind(lua_State* L) {
-        (void) L;
         if (socket_type == '\0')
             return 0;
 
@@ -51,7 +49,6 @@ namespace API
         l_socket.reset();
 
         clients.clear();
-
         return 0;
     }
 

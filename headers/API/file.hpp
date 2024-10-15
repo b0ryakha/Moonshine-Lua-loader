@@ -1,8 +1,6 @@
 #pragma once
-
 #include "lua_helper.hpp"
 
-#include <filesystem>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -10,6 +8,7 @@
 #include <optional>
 #include <cstdio>
 
+#include <filesystem>
 namespace fs = std::filesystem;
 
 namespace API
@@ -60,7 +59,6 @@ namespace API
 			args.error("File does not exist!");
 
 		fs::remove_all(path);
-
 		return 0;
 	}
 
@@ -91,7 +89,6 @@ namespace API
 		}
 
 		fs::copy_file(path, output_path, fs::copy_options::overwrite_existing);
-
 		return 0;
 	}
 
@@ -131,7 +128,6 @@ namespace API
 		const std::string new_name = args.get<std::string>();
 
 		fs::rename(path, (path.parent_path()) / new_name);
-
 		return 0;
 	}
 
@@ -235,7 +231,6 @@ namespace API
 		}
 
 		file.close();
-
 		return 0;
 	}
 

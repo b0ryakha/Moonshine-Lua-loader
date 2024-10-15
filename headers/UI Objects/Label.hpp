@@ -1,7 +1,5 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <string>
+#include <SFML/Graphics/Text.hpp>
 #include <limits>
 
 class Label final : public sf::Text {

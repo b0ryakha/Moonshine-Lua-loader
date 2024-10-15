@@ -1,10 +1,8 @@
 #pragma once
+#include "LuaStack.hpp"
 
 #include <vector>
 #include <string>
-
-#include "misc_functions.hpp"
-#include "LuaStack.hpp"
 
 namespace lhelper
 {

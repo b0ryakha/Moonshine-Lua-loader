@@ -1,10 +1,9 @@
 #pragma once
-
 #include "lua_helper.hpp"
 
+#include <SFML/Graphics/Color.hpp>
 #include <sstream>
 #include <iomanip>
-#include <iostream>
 
 namespace API
 {
@@ -31,6 +30,7 @@ namespace API
                 lua_pushinteger(L, self->g);
                 lua_pushinteger(L, self->b);
                 lua_pushinteger(L, self->a);
+                
                 return 4;
             };
 
@@ -55,6 +55,7 @@ namespace API
                     lua_Number(self->b),
                     lua_Number(self->a)
                 });
+
                 return 1;
             };
 

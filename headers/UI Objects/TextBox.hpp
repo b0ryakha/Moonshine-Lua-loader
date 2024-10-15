@@ -1,9 +1,8 @@
 #pragma once
+#include "Label.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <stack>
-
-#include "Label.hpp"
 
 class TextBox final {
 private:
@@ -34,8 +33,8 @@ private:
 public:
     TextBox(const std::string& font_path, float x, float y, float w, float h, bool background = true);
 
-    void draw(sf::RenderWindow* window);
-    void handleEvent(sf::Event* event);
+    void draw(sf::RenderWindow& window);
+    void handleEvent(sf::Event& event);
     std::string getText() const;
 
     void setSize(float w, float h);

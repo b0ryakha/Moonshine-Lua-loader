@@ -1,8 +1,7 @@
 #pragma once
-
 #include "lua_helper.hpp"
 
-#include <string>
+#include <SFML/Graphics.hpp>
 #include <sstream>
 
 namespace API
@@ -71,6 +70,7 @@ namespace API
                     self->family,
                     lua_Number(self->get_size())
                 });
+                
                 return 1;
             };
 

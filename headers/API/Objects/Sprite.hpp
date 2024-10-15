@@ -1,11 +1,11 @@
 #pragma once
-
 #include "lua_helper.hpp"
 
 #include "API/Objects/Color.hpp"
 #include "API/Objects/Vector2.hpp"
 
-#include <sstream>
+#include "Application.hpp"
+extern Application* app;
 
 namespace API
 {
@@ -44,6 +44,7 @@ namespace API
                     lua_Number(color.b),
                     lua_Number(color.a)
                 });
+
                 return 1;
             };
 
@@ -52,7 +53,7 @@ namespace API
                 int x = std::round(luaL_checknumber(L, 2));
                 int y = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = window->mapPixelToCoords(sf::Vector2i(x, y));
+                const auto converted = app->mapPixelToCoords(sf::Vector2i(x, y));
 
                 self->setPosition(converted.x, converted.y);
                 return 0;
@@ -121,10 +122,9 @@ namespace API
                 int h = std::round(luaL_checknumber(L, 3));
 
                 sf::Vector2u texture_size = self->getTexture()->getSize();
-                const auto converted = window->mapPixelToCoords(sf::Vector2i(w, h));
+                const auto converted = app->mapPixelToCoords(sf::Vector2i(w, h));
 
                 self->setScale(converted.x / texture_size.x, converted.y / texture_size.y);
-
                 return 0;
             };
 
@@ -159,7 +159,7 @@ namespace API
                 int x_offset = std::round(luaL_checknumber(L, 2));
                 int y_offset = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = window->mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
+                const auto converted = app->mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
 
                 self->move(converted.x, converted.y);
                 return 0;
@@ -231,6 +231,7 @@ namespace API
                     self->getTextureRect() == target->getTextureRect() &&
                     self->getColor() == target->getColor()
                 ));
+                
                 return 1;
             };
 

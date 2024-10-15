@@ -1,5 +1,4 @@
 #include "Label.hpp"
-
 #include "misc_functions.hpp"
 
 Label::Label(const std::string& str, const std::string& font_path, size_t size) {

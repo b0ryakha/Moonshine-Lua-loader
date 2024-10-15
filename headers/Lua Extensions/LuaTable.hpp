@@ -1,17 +1,16 @@
 #pragma once
-
-#include <variant>
-#include <string>
-#include <array>
-#include <unordered_map>
-#include <memory>
-
 #include "lua.hpp"
 #include "misc_functions.hpp"
 
 #include "LuaBoolean.hpp"
 #include "LuaUserdata.hpp"
 #include "LuaNil.hpp"
+
+#include <variant>
+#include <string>
+#include <array>
+#include <unordered_map>
+#include <memory>
 
 enum class LuaMultiValue : size_t { Number = 0, Function, String, Boolean, Table, Userdata, Nil };
 inline const std::array<std::string, 7> LuaMultiValue_s = { "Number", "Function", "String", "Boolean", "Table", "Userdata", "Nil" };

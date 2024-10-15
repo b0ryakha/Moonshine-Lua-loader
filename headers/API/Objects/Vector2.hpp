@@ -1,6 +1,8 @@
 #pragma once
-
 #include "lua_helper.hpp"
+
+#include "Application.hpp"
+extern Application* app;
 
 #include <sstream>
 
