@@ -26,6 +26,8 @@ void throw_error(std::string_view error) {
     text.setFillColor(sf::Color::Red);
     info.setFillColor(sf::Color::Red);
 
+    app->event.type = sf::Event::GainedFocus;
+
     while (app->isOpen()) {
         app->clear();
         app->draw(text);

@@ -121,17 +121,20 @@ namespace API
 
         int x = args.get<int>();
         int y = args.get<int>();
-        // TODO: fix radius
         float radius = args.get<size_t>();
         sf::Color color = args.get<LuaUserdata, Color>();
         float thickness = (args.size() == 6) ? args.get<float>() : 0.f;
         sf::Color outline_color = (args.size() == 6) ? args.get<LuaUserdata, Color>() : sf::Color();
 
         sf::CircleShape circle(radius);
+        circle.setPointCount(100);
+        circle.setFillColor(color);
+        circle.setScale(
+            static_cast<float>(app->init_size.x) / static_cast<float>(app->getSize().x),
+            static_cast<float>(app->init_size.y) / static_cast<float>(app->getSize().y)
+        );
 
         const auto conv_pos = app->mapPixelToCoords(sf::Vector2i(x, y));
-
-        circle.setFillColor(color);
         circle.setPosition(sf::Vector2f(conv_pos.x - radius, conv_pos.y - radius));
 
         if (args.size() == 6) {
