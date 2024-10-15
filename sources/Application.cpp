@@ -43,8 +43,8 @@ Application::~Application() {
 
 int Application::exec() {
     while (isOpen()) {
-        render();
         update();
+        render();
     }
 
     return 0;
