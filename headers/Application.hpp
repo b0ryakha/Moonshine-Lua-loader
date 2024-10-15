@@ -28,6 +28,12 @@ public:
     static inline sf::Vector2u init_size = { 1400, 800 };
     sf::Event event;
 
+#ifdef _WIN32
+    static inline std::string font_path = "C:/WINDOWS/Fonts/";
+#elif defined(__linux__)
+    static inline std::string font_path = "/usr/share/fonts/TTF/";
+#endif
+
     static Application* instance(int argc = 0, char** argv = nullptr);
     int exec();
 };

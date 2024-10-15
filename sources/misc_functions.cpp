@@ -3,11 +3,9 @@
 #include "Application.hpp"
 extern Application* app;
 
-extern std::string font_path;
-
 void throw_error(std::string_view error) {
     sf::Font font;
-    if (!font.loadFromFile(font_path + "Arial.TTF"))
+    if (!font.loadFromFile(app->font_path + "Arial.TTF"))
         app->close();
 
     sf::Text text(sf::String::fromUtf8(error.cbegin(), error.cend()), font, 20);

@@ -5,8 +5,6 @@
 
 #include "API/cursor.hpp"
 
-extern std::string font_path;
-
 Application::Application(int argc, char** argv)
     : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16))
 {
@@ -20,7 +18,7 @@ Application::Application(int argc, char** argv)
         return;
     }
 
-    const std::string arial = font_path + "Arial.TTF";
+    const auto arial = font_path + "Arial.TTF";
 
     static sf::Texture bg_texture;
     bg_texture.loadFromMemory(res_background, sizeof(res_background));
