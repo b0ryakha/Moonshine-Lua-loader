@@ -180,5 +180,5 @@ void Script::open_API() {
 
 bool Script::is_open() const {
     return lua_state != nullptr &&
-           future.wait_for(std::chrono::milliseconds(100)) != std::future_status::ready;
+           future.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready;
 }
