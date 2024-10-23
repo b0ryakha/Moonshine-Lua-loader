@@ -493,6 +493,13 @@
 		]
 	},
 
+	"globalvars.get_args": {
+		"prefix": "globalvars.get_args",
+		"body": [
+		  "globalvars.get_args()"
+		]
+	},
+
 
 
 	"network.bind": {

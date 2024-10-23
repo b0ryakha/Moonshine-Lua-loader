@@ -160,6 +160,7 @@ void Script::open_API() {
     lhelper::register_table(lua_state, "globalvars", {
         std::make_pair("get_executable_path", API::get_executable_path),
         std::make_pair("get_os_name", API::get_os_name),
+        std::make_pair("get_args", API::get_args),
     });
 
     lhelper::register_table(lua_state, "network", {

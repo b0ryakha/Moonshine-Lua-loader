@@ -4,6 +4,7 @@
 #include "TextBox.hpp"
 
 #include "API/cursor.hpp"
+#include "API/globalvars.hpp"
 
 Application::Application(int argc, char** argv)
     : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16))
@@ -13,6 +14,12 @@ Application::Application(int argc, char** argv)
     sf::Image icon;
     icon.loadFromMemory(res_icon, sizeof(res_icon));
     RenderWindow::setIcon(256, 256, icon.getPixelsPtr());
+
+    if (argc > 2) {
+        args.reserve(argc - 2);
+        for (int i = 2; i < argc; ++i)
+            args.emplace_back(std::string(argv[i]));
+    }
 
     if (argc > 1) {
         RenderWindow::setActive(false);

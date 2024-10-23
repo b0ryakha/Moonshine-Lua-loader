@@ -89,6 +89,7 @@
 
   - [get_executable_path()](#globalvars.get_executable_path)
   - [get_os_name()](#globalvars.get_os_name)
+  - [get_args()](#globalvars.get_args)
   </details>
   
 <details><summary>:satellite: Network</summary>
@@ -803,6 +804,15 @@ globalvars.get_os_name(): string
 ```
 
 Returns the os name ("Windows", "Linux", "Unknown").
+
+---
+
+#### <a name="globalvars.get_args"></a> ```get_args```
+```lua
+globalvars.get_args(): table<string>
+```
+
+Returns a list of arguments starting after the argument that is the main script.
 
 
 ### :satellite: Network

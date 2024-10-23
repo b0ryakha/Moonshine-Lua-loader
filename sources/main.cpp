@@ -11,6 +11,6 @@ int main(int argc, char** argv) {
     #endif
     
     app = Application::instance(argc, argv);
-
+    
     return app->exec();
 }

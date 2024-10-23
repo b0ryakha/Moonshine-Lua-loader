@@ -4,10 +4,17 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+inline std::vector<LuaMultiValue_t> args;
+
 namespace API
 {
 	static int get_executable_path(lua_State* L) {
 		lua_pushstring(L, fs::current_path().generic_string().c_str());
+		return 1;
+	}
+
+	static int get_args(lua_State* L) {
+		lhelper::push_table(L, args);
 		return 1;
 	}
 

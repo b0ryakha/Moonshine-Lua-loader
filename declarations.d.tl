@@ -207,6 +207,7 @@ end
 global record globalvars
     get_executable_path: function(): string
 	get_os_name: function(): string
+	get_args: function(): { string }
 end
 
 global record network
