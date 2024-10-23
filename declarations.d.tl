@@ -201,7 +201,7 @@ global record cmath
 	rand_double: function(number, number): number
 	lerp: function(number, number, number): number
 	clamp: function(number, number, number): number
-	round: function(number): number
+	round: function(number): integer
 end
 
 global record globalvars
