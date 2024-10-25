@@ -253,6 +253,7 @@ global type Font = record
     get_family: function<Self>(Self): string
     get_size: function<Self>(Self): integer
     get_style: function<Self>(Self): string
+    get_glyph: function<Self>(Self, string): Vector2
 end
 
 global type Color = record

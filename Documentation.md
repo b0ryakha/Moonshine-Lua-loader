@@ -130,6 +130,7 @@
   - [get_family()](#font.get_family)
   - [get_size()](#font.get_size)
   - [get_style()](#font.get_style)
+  - [get_glyph()](#font.get_glyph)
   </details>
   
 <details><summary>:rainbow: Color</summary>
@@ -1070,6 +1071,19 @@ font_object:get_style(): string
 ```
 
 Returns the font style, example: "r".
+
+---
+
+#### <a name="font.get_glyph"></a> ```get_glyph```
+```lua
+font_object:get_glyph(symbol: char): Vector2
+```
+```
+| Name   | Type       | Description                                 |
+| :---:  | :---:      | :---:                                       |
+| symbol | ```char``` | The character whose size will be calculated |
+
+Returns the measure of the font symbol.
 
 
 ### :rainbow: Color

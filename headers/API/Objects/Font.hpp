@@ -1,6 +1,8 @@
 #pragma once
 #include "lua_helper.hpp"
 
+#include "API/Objects/Vector2.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <sstream>
 
@@ -63,6 +65,25 @@ namespace API
                 return 1;
             };
 
+            static auto get_glyph = [](lua_State* L) {
+                const auto self = lhelper::get_object<Font>(L, "Font", 1);
+                const std::string_view symbol = luaL_checkstring(L, 2);
+
+                if (symbol.empty()) {
+                    lhelper::push_object<Vector2>(L, { 0, 0 });
+                    return 1;
+                }
+
+                sf::Glyph glyph = self->getGlyph(symbol[0], self->size, ((self->styles & sf::Text::Style::Italic) == sf::Text::Style::Italic));
+
+                lhelper::push_object<Vector2>(L, {
+                    glyph.bounds.width,
+                    glyph.bounds.height
+                });
+
+                return 1;
+            };
+
             static auto copy = [](lua_State* L) {
                 const auto self = lhelper::get_object<Font>(L, "Font", 1);
 
@@ -83,6 +104,7 @@ namespace API
                     if (key == "get_family") lua_pushcfunction(L, get_family);
                     else if (key == "get_size") lua_pushcfunction(L, get_size);
                     else if (key == "get_style") lua_pushcfunction(L, get_style);
+                    else if (key == "get_glyph") lua_pushcfunction(L, get_glyph);
                     else if (key == "copy") lua_pushcfunction(L, copy);
                     else lua_pushnil(L);
                 }
