@@ -83,8 +83,10 @@ void Application::update() {
         }
     }
 
-    if (event.type == sf::Event::Closed)
+    if (event.type == sf::Event::Closed) {
         RenderWindow::close();
+        std::exit(0);
+    }
 
     if (event.type == sf::Event::MouseEntered) {
         std::lock_guard<std::mutex> lock(cursor_in_window_m);
