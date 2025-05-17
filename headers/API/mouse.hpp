@@ -2,14 +2,13 @@
 #include "lua_helper.hpp"
 
 #include "Application.hpp"
-extern Application* app;
 
 namespace API
 {
     static int mouse_get_pressed(lua_State* L) {
-        while (app->isOpen()) {
-            if (app->event.type == sf::Event::MouseButtonPressed) {
-                lua_pushinteger(L, static_cast<int>(app->event.mouseButton.button));
+        while (Application::instance()->isOpen()) {
+            if (Application::instance()->event.type == sf::Event::MouseButtonPressed) {
+                lua_pushinteger(L, static_cast<int>(Application::instance()->event.mouseButton.button));
                 return 1;
             }
         }
@@ -30,8 +29,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_up(lua_State* L) {
-        if (app->event.type == sf::Event::MouseWheelScrolled && app->event.mouseWheelScroll.delta > 0.f) {
-            app->event.mouseWheelScroll.delta = 0.f;
+        if (Application::instance()->event.type == sf::Event::MouseWheelScrolled && Application::instance()->event.mouseWheelScroll.delta > 0.f) {
+            Application::instance()->event.mouseWheelScroll.delta = 0.f;
 
             lua_pushboolean(L, true);
             return 1;
@@ -42,8 +41,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_down(lua_State* L) {
-        if (app->event.type == sf::Event::MouseWheelScrolled && app->event.mouseWheelScroll.delta < 0.f) {
-            app->event.mouseWheelScroll.delta = 0.f;
+        if (Application::instance()->event.type == sf::Event::MouseWheelScrolled && Application::instance()->event.mouseWheelScroll.delta < 0.f) {
+            Application::instance()->event.mouseWheelScroll.delta = 0.f;
 
             lua_pushboolean(L, true);
             return 1;

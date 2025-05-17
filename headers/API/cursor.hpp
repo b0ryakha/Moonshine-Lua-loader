@@ -3,7 +3,6 @@
 #include "API/Objects/Vector2.hpp"
 
 #include "Application.hpp"
-extern Application* app;
 
 #include <mutex>
 
@@ -13,8 +12,8 @@ inline std::mutex cursor_in_window_m;
 namespace API
 {
 	static int cursor_get_pos(lua_State* L) {
-        sf::Vector2i pos = sf::Mouse::getPosition(*app);
-        const sf::Vector2u window_size = app->getSize();
+        sf::Vector2i pos = sf::Mouse::getPosition(*Application::instance());
+        const sf::Vector2u window_size = Application::instance()->getSize();
 
         pos.x = std::min(static_cast<unsigned>(std::max(pos.x, 0)), window_size.x);
         pos.y = std::min(static_cast<unsigned>(std::max(pos.y, 0)), window_size.y);
@@ -38,7 +37,7 @@ namespace API
         const int w = args.get<int>();
         const int h = args.get<int>();
 
-        const sf::Vector2i m = sf::Mouse::getPosition(*app);
+        const sf::Vector2i m = sf::Mouse::getPosition(*Application::instance());
 
         lua_pushboolean(L, (m.x >= x && m.x < x + w && m.y >= y && m.y < y + h));
         return 1;
@@ -59,7 +58,7 @@ namespace API
         if (!c.loadFromSystem(static_cast<sf::Cursor::Type>(args.get<int>())))
             args.error("Incorrect cursor type!");
 
-        app->setMouseCursor(c);
+        Application::instance()->setMouseCursor(c);
         return 0;
     }
 }

@@ -25,6 +25,7 @@ global record window
 	sleep: function(number)
 	await: function()
 	set_icon: function(Sprite)
+	set_style: function(integer)
 end
 
 global record keyboard

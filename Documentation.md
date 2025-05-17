@@ -38,6 +38,7 @@
   - [sleep()](#window.sleep)
   - [await()](#window.await)
   - [set_icon()](#window.set_icon)
+  - [set_style()](#window.set_style)
   </details>
   
 <details><summary>:wrench: Keyboard</summary>
@@ -470,6 +471,19 @@ window.set_icon(icon: Sprite)
 | icon | ```Sprite``` | Icon for window |
 
 Sets a new icon for window.
+
+---
+
+#### <a name="window.set_style"></a> ```set_style```
+```lua
+window.set_style(style_code: Style_enum)
+```
+| Name       | Type        | Description      |
+| :---:      | :---:       | :---:            |
+| style_code | ```Style``` | New window style |
+
+Sets the window a new style.
+P.S. Style_enum -> style.Default or style.Fullscreen
 
 
 ### <a name="Keyboard"></a> :wrench: Keyboard

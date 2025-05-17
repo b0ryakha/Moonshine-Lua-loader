@@ -7,7 +7,7 @@
 #include "API/globalvars.hpp"
 
 Application::Application(int argc, char** argv)
-    : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, sf::ContextSettings(0, 0, 16))
+    : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, settings)
 {
     RenderWindow::setVerticalSyncEnabled(true);
 
@@ -88,6 +88,14 @@ void Application::update() {
         std::exit(0);
     }
 
+    if (new_style != sf::Style::None) {
+        RenderWindow::create(new_mode, title, new_style, settings);
+        RenderWindow::setActive(false); // because window is using in another thread and it is active there.
+
+        std::lock_guard<std::mutex> lock(style_lock);
+        new_style = sf::Style::None;
+    }
+
     if (event.type == sf::Event::MouseEntered) {
         std::lock_guard<std::mutex> lock(cursor_in_window_m);
         is_cursor_in_window = true;
@@ -102,4 +110,34 @@ void Application::update() {
 Application* Application::instance(int argc, char** argv) {
     static auto instance = Application(argc, argv);
     return &instance;
+}
+
+void Application::setTitle(const sf::String& title) {
+    this->title = std::move(title);
+    RenderWindow::setTitle(this->title);
+}
+
+void Application::setSize(const sf::Vector2u& size) {
+    old_size = size;
+    RenderWindow::setSize(old_size);
+}
+
+sf::Vector2u Application::getOldSize() const {
+    return old_size;
+}
+
+sf::Vector2u Application::getInitSize() const {
+    return init_size;
+}
+
+void Application::setStyle(const sf::VideoMode& mode, sf::Uint32 style) {
+    style_lock.lock();
+    new_mode = mode;
+    new_style = style;
+    style_lock.unlock();
+
+    RenderWindow::setActive(false);
+
+    while (new_style != sf::Style::None) //wait main thread
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
 }

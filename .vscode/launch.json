@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [ "${workspaceFolder}/examples/window_style.lua" ],
+            "cwd": "${command:cmake.getLaunchTargetDirectory}"
+        }
+    ]
+}

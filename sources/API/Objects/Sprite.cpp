@@ -1,5 +1,7 @@
 #include "API/Objects/Sprite.hpp"
 
+#include "Application.hpp"
+
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -28,7 +30,7 @@ API::Sprite::Sprite(const LuaStack& args) {
         setTextureRect(sf::IntRect(t_x, t_y, t_w, t_h));
     }
 
-    const auto converted = app->mapPixelToCoords(sf::Vector2i(w, h));
+    const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
     setTexture(texture);
     setScale(sf::Vector2f(converted.x / t_w, converted.y / t_h));

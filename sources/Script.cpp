@@ -69,6 +69,14 @@ void Script::open_API() {
         //std::make_pair("blur", API::render_blur)
     });
 
+    std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_STYLES;
+    constexpr std::array<std::string_view, 2> SFML_STYLES_NAME = { "Default", "Fullscreen" };
+
+    for (int i = 0, size = SFML_STYLES_NAME.size(); i < size; ++i)
+        SFML_STYLES.emplace_back(std::make_pair(SFML_STYLES_NAME[i], lua_Number(i)));
+
+    lhelper::register_table(lua_state, "style", SFML_STYLES);
+
     lhelper::register_table(lua_state, "window", {
         std::make_pair("is_open", API::window_is_open),
         std::make_pair("get_size", API::window_get_size),
@@ -84,7 +92,8 @@ void Script::open_API() {
         std::make_pair("set_title", API::window_set_title),
         std::make_pair("set_vsync", API::window_set_vsync),
         std::make_pair("set_frame_limit", API::window_set_frame_limit),
-        std::make_pair("set_icon", API::window_set_icon)
+        std::make_pair("set_icon", API::window_set_icon),
+        std::make_pair("set_style", API::window_set_style)
     });
 
     std::vector<std::pair<std::string, LuaMultiValue_t>> SFML_KEYS;

@@ -1,9 +1,7 @@
 #pragma once
 #include "lua_helper.hpp"
 
-#include "Application.hpp"
-extern Application* app;
-
+#include <SFML/System/Vector2.hpp>
 #include <sstream>
 
 namespace API

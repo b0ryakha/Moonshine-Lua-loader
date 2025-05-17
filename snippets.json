@@ -162,6 +162,13 @@
 		]
 	},
 
+	"window.set_style": {
+		"prefix": "window.set_style",
+		"body": [
+		  "window.set_style(style)"
+		]
+	},
+
 
 
 	"key.A": { "prefix": "key.A", "body": [ "key.A" ] },

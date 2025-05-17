@@ -3,7 +3,6 @@
 #include "API/Objects/Vector2.hpp"
 
 #include "Application.hpp"
-extern Application* app;
 
 namespace API
 {
@@ -20,7 +19,7 @@ namespace API
 
             static auto active = [](lua_State* L) {
                 auto self = lhelper::get_object<View>(L, "View", 1);
-                app->setView(*self);
+                Application::instance()->setView(*self);
 
                 return 0;
             };
@@ -32,13 +31,13 @@ namespace API
                 float w = luaL_checknumber(L, 4);
                 float h = luaL_checknumber(L, 5);
 
-                const auto converted = app->mapPixelToCoords(sf::Vector2i(x, y));
+                const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
 
                 self->setViewport(sf::FloatRect(
-                    converted.x / app->getSize().x,
-                    converted.y / app->getSize().y,
-                    w / app->getSize().x,
-                    h / app->getSize().y
+                    converted.x / Application::instance()->getSize().x,
+                    converted.y / Application::instance()->getSize().y,
+                    w / Application::instance()->getSize().x,
+                    h / Application::instance()->getSize().y
                 ));
 
                 return 0;
@@ -49,7 +48,7 @@ namespace API
                 int x = std::round(luaL_checknumber(L, 2));
                 int y = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = app->mapPixelToCoords(sf::Vector2i(x, y));
+                const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
 
                 self->setCenter(converted.x, converted.y);
                 return 0;
@@ -60,7 +59,7 @@ namespace API
                 int w = std::round(luaL_checknumber(L, 2));
                 int h = std::round(luaL_checknumber(L, 3));
 
-                const auto converted = app->mapPixelToCoords(sf::Vector2i(w, h));
+                const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
                 self->setSize(converted.x, converted.y);
                 return 0;

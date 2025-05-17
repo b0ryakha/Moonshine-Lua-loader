@@ -20,11 +20,11 @@ namespace API
 
 	static int get_os_name(lua_State* L) {
 		#ifdef _WIN32
-			lua_pushstring(L, "Windows");
+		lua_pushstring(L, "Windows");
 		#elif defined(__linux__)
-			lua_pushstring(L, "Linux");
+		lua_pushstring(L, "Linux");
 		#else
-			lua_pushstring(L, "Unknown");
+		lua_pushstring(L, "Unknown");
 		#endif
 
 		return 1;

@@ -2,7 +2,6 @@
 #include "lua_helper.hpp"
 
 #include "Application.hpp"
-extern Application* app;
 
 namespace API
 {
@@ -14,18 +13,18 @@ namespace API
 
         const bool is_symbol = (args.size() == 1 ? args.get<bool>() : false);
 
-        while (app->isOpen()) {
+        while (Application::instance()->isOpen()) {
             if (is_symbol) {
-                if (app->event.type == sf::Event::TextEntered && app->event.text.unicode > 31 && app->event.text.unicode < 128) {
+                if (Application::instance()->event.type == sf::Event::TextEntered && Application::instance()->event.text.unicode > 31 && Application::instance()->event.text.unicode < 128) {
                     std::string tmp;
-                    tmp += static_cast<char>(app->event.text.unicode);
+                    tmp += static_cast<char>(Application::instance()->event.text.unicode);
 
                     lua_pushstring(L, tmp.c_str());
                     return 1;
                 }
             }
-            else if (app->event.type == sf::Event::KeyPressed) {
-                lua_pushinteger(L, static_cast<int>(app->event.key.code));
+            else if (Application::instance()->event.type == sf::Event::KeyPressed) {
+                lua_pushinteger(L, static_cast<int>(Application::instance()->event.key.code));
                 return 1;
             }
         }

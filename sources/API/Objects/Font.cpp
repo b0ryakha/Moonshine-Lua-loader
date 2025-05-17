@@ -1,7 +1,6 @@
 #include "API/Objects/Font.hpp"
 
 #include "Application.hpp"
-extern Application* app;
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -33,7 +32,7 @@ API::Font::Font(const LuaStack& args) {
 		}
 	}
 
-	const auto path = app->font_path + family;
+	const auto path = Application::instance()->font_path + family;
 
 	if (!fs::exists(path) || !loadFromFile(path))
 		throw_error("[Font:new] Font '" + family + "' was not found or not installed!");
