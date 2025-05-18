@@ -34,6 +34,13 @@
 		]
 	},
 
+	"render.gradient": {
+		"prefix": "render.gradient",
+		"body": [
+		  "render.gradient(x, y, w, h, top_left, top_right, bottom_left, bottom_right)"
+		]
+	},
+
 	"render.circle": {
 		"prefix": "render.circle",
 		"body": [

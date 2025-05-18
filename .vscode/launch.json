@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${command:cmake.launchTargetPath}",
-            "args": [ "${workspaceFolder}/examples/window_style.lua" ],
+            "args": [ "${workspaceFolder}/examples/gradient.lua" ],
             "cwd": "${command:cmake.getLaunchTargetDirectory}"
         }
     ]

@@ -112,6 +112,42 @@ namespace API
         return 0;
     }
 
+    static int render_gradient(lua_State* L) {
+        LuaStack args(L, "render.gradient");
+
+        if (args.size() != 8 && args.size() != 9)
+            args.error("Incorrect number of arguments!");
+
+        int x = args.get<int>();
+        int y = args.get<int>();
+        size_t w = args.get<size_t>();
+        size_t h = args.get<size_t>();
+        sf::Color top_left = args.get<LuaUserdata, Color>();
+        sf::Color top_right = args.get<LuaUserdata, Color>();
+        sf::Color bottom_left = args.get<LuaUserdata, Color>();
+        sf::Color bottom_right = args.get<LuaUserdata, Color>();
+
+        const auto conv_pos = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
+        const auto conv_size = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
+
+        sf::VertexArray gradient(sf::Quads, 4);
+
+        gradient[0].position = conv_pos;
+        gradient[0].color = top_left;
+
+        gradient[1].position = sf::Vector2f(conv_pos.x + conv_size.x, conv_pos.y);
+        gradient[1].color = top_right;
+
+        gradient[2].position = sf::Vector2f(conv_pos.x + conv_size.x, conv_pos.y + conv_size.y);
+        gradient[2].color = bottom_right;
+
+        gradient[3].position = sf::Vector2f(conv_pos.x, conv_pos.y + conv_size.y);
+        gradient[3].color = bottom_left;
+
+        Application::instance()->draw(gradient);
+        return 0;
+    }
+
     static int render_circle(lua_State* L) {
         LuaStack args(L, "render.circle");
 

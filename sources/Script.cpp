@@ -62,6 +62,7 @@ void Script::open_API() {
         std::make_pair("sprite", API::render_sprite),
         std::make_pair("measure_text", API::render_measure_text),
         std::make_pair("outline_rectangle", API::render_outline_rectangle),
+        std::make_pair("gradient", API::render_gradient),
         std::make_pair("rectangle", API::render_rectangle),
         std::make_pair("circle", API::render_circle),
         std::make_pair("line", API::render_line),

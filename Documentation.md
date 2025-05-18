@@ -15,7 +15,8 @@
   - [sprite()](#render.sprite)
   - [measure_text()](#render.measure_text)
   - [rectangle()](#render.rectangle)
-  - [outline_rectangle()](#outline.rectangle)
+  - [outline_rectangle()](#render.outline_rectangle)
+  - [gradient_rectangle()](#render.gradient_rectangle)
   - [circle()](#render.circle)
   - [line()](#render.line)
   - [polygon()](#render.polygon)
@@ -254,6 +255,25 @@ render.outline_rectangle(x: int, y: int, w: size_t, h: size_t, thickness: float,
 | rounding  | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
 
 Render rectangle consisting of 4 contour lines, empty inside.
+
+---
+
+#### <a name="render.gradient"></a> ```gradient```
+```lua
+render.gradient(x: int, y: int, w: size_t, h: size_t, top_left: Color, top_right: Color, bottom_left: Color, bottom_right: Color)
+```
+| Name         | Type        | Description                                   |
+| :---:        | :---:       | :---:                                         |
+| x            | ```int```   | X coordinate                                  |
+| y            | ```int```   | Y coordinate                                  |
+| w            | ```size_t```| Width                                         |
+| h            | ```size_t```| Height                                        |
+| top_left     | ```Color``` | Color of the top left rectangle position      |
+| top_right    | ```Color``` | Color of the top right rectangle position     |
+| bottom_left  | ```Color``` | Color of the bottom left rectangle position   |
+| bottom_right | ```Color``` | Color of the bottom right rectangle position  |
+
+Render gradient rectangle on the screen.
 
 ---
 
