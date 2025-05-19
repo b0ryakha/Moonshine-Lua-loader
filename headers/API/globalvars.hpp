@@ -13,6 +13,7 @@ namespace API
 		return 1;
 	}
 
+	// TODO: just improve _G.arg table.
 	static int get_args(lua_State* L) {
 		lhelper::push_table(L, args);
 		return 1;

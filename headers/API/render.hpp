@@ -197,24 +197,25 @@ namespace API
         const auto conv_pos1 = Application::instance()->mapPixelToCoords(sf::Vector2i(x1, y1));
         const auto conv_pos2 = Application::instance()->mapPixelToCoords(sf::Vector2i(x2, y2));
 
-        sf::Vertex line[2];
+        float angle = atan2(conv_pos2.y - conv_pos1.y, conv_pos2.x - conv_pos1.x);
+        float offsetX = thickness * 0.5f * sin(angle);
+        float offsetY = thickness * 0.5f * cos(angle);
 
-        auto draw_line = [&](const sf::Vector2f& start, const sf::Vector2f& end) {
-            line[0].position = start;
-            line[0].color = color;
+        sf::VertexArray line(sf::TrianglesStrip, 4);
 
-            line[1].position = end;
-            line[1].color = color;
+        line[0].position = sf::Vector2f(conv_pos1.x - offsetX, conv_pos1.y + offsetY);
+        line[0].color = color;
 
-            Application::instance()->draw(line, 2, sf::Lines);
-        };
+        line[1].position = sf::Vector2f(conv_pos1.x + offsetX, conv_pos1.y - offsetY);
+        line[1].color = color;
 
-        for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(conv_pos1.x, conv_pos1.y - i), sf::Vector2f(conv_pos2.x, conv_pos2.y - i));
+        line[2].position = sf::Vector2f(conv_pos2.x - offsetX, conv_pos2.y + offsetY);
+        line[2].color = color;
 
-        for (int i = 0; i < floor(thickness / 2); ++i)
-            draw_line(sf::Vector2f(conv_pos1.x, conv_pos1.y + i), sf::Vector2f(conv_pos2.x, conv_pos2.y + i));
+        line[3].position = sf::Vector2f(conv_pos2.x + offsetX, conv_pos2.y - offsetY);
+        line[3].color = color;
 
+        Application::instance()->draw(line);
         return 0;
     }
 
