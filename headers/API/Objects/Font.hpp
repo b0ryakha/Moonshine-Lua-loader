@@ -15,7 +15,7 @@ namespace API
         ushort_t styles = sf::Text::Style::Regular;
 
     public:
-        Font(const LuaStack& args);
+        explicit Font(const LuaStack& args);
         size_t get_size() const;
         sf::Text::Style get_style() const;
 
@@ -70,15 +70,15 @@ namespace API
                 const std::string_view symbol = luaL_checkstring(L, 2);
 
                 if (symbol.empty()) {
-                    lhelper::push_object<Vector2>(L, { 0, 0 });
+                    lhelper::push_object<Vector2>(L, { 0.f, 0.f });
                     return 1;
                 }
 
                 sf::Glyph glyph = self->getGlyph(symbol[0], self->size, ((self->styles & sf::Text::Style::Italic) == sf::Text::Style::Italic));
 
                 lhelper::push_object<Vector2>(L, {
-                    glyph.bounds.width,
-                    glyph.bounds.height
+                    glyph.bounds.size.x,
+                    glyph.bounds.size.y
                 });
 
                 return 1;

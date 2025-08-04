@@ -7,7 +7,7 @@
 namespace API
 {
     struct View final : public sf::View {
-        View(const LuaStack& args);
+        explicit View(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
             lhelper::new_class<View>(L);
@@ -34,10 +34,14 @@ namespace API
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
 
                 self->setViewport(sf::FloatRect(
-                    converted.x / Application::instance()->getSize().x,
-                    converted.y / Application::instance()->getSize().y,
-                    w / Application::instance()->getSize().x,
-                    h / Application::instance()->getSize().y
+                    {
+                        converted.x / Application::instance()->getSize().x,
+                        converted.y / Application::instance()->getSize().y
+                    },
+                    {
+                        w / Application::instance()->getSize().x,
+                        h / Application::instance()->getSize().y
+                    }
                 ));
 
                 return 0;
@@ -50,7 +54,7 @@ namespace API
 
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
 
-                self->setCenter(converted.x, converted.y);
+                self->setCenter(converted);
                 return 0;
             };
 
@@ -61,7 +65,7 @@ namespace API
 
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
-                self->setSize(converted.x, converted.y);
+                self->setSize(converted);
                 return 0;
             };
 
@@ -88,14 +92,14 @@ namespace API
                 auto self = lhelper::get_object<View>(L, "View", 1);
                 float angle = luaL_checknumber(L, 2);
 
-                self->setRotation(angle);
+                self->setRotation(sf::degrees(angle));
                 return 0;
             };
 
             static auto get_rotation = [](lua_State* L) {
                 auto self = lhelper::get_object<View>(L, "View", 1);
 
-                lua_pushnumber(L, self->getRotation());
+                lua_pushnumber(L, self->getRotation().asDegrees());
                 return 0;
             };
 

@@ -9,7 +9,7 @@ private:
 
 public:
     SuperEllipse() = default;
-    SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color = sf::Color::White);
+    explicit SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color = sf::Color::White);
 
     virtual size_t getPointCount() const;
     virtual sf::Vector2f getPoint(size_t index) const;

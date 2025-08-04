@@ -14,7 +14,7 @@ private:
 
 public:
 	Script() = default;
-	Script(std::string_view path);
+	explicit Script(std::string_view path);
 
 	void open(std::string_view path);
 	bool is_open() const;

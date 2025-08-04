@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <limits>
 
 class Label final : public sf::Text {
@@ -8,8 +9,8 @@ private:
     std::string text;
 
 public:
-    Label() = default;
-    Label(const std::string& str, const std::string& font_path, size_t size);
+    Label();
+    explicit Label(const std::string& str, const std::string& font_path, size_t size);
 
     void setFont(const std::string& path);
     

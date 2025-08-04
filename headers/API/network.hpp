@@ -8,10 +8,11 @@
 
 namespace API
 {
-    static std::unordered_map<ushort_t, sf::IpAddress> clients;
+    static std::unordered_map<ushort_t, std::string> clients;
 
     static std::optional<sf::UdpSocket> l_socket;
-    static const sf::IpAddress l_ip = sf::IpAddress::getLocalAddress();
+    //TODO: fix for 3.0.0
+    static const std::string l_ip = "";//sf::IpAddress::getLocalAddress().value().toString();
     static ushort_t l_port = 0;
 
     static char socket_type = '\0';
@@ -34,7 +35,7 @@ namespace API
         l_socket.emplace();
         l_socket->setBlocking(false);
 
-        if (l_socket->bind(l_port) != sf::Socket::Done)
+        if (l_socket->bind(l_port) != sf::Socket::Status::Done)
             args.error("Binding error!");
 
         return 0;
@@ -88,20 +89,20 @@ namespace API
         
         if (socket_type == 's') {
             if (recipient_port != 0)
-                clients[recipient_port] = std::move(recipient_ip);
+                clients[recipient_port] = recipient_ip;
 
             for (auto it = clients.begin(), end = clients.end(); it != end; ++it) {
                 if (it->first == l_port && it->second == l_ip)
                     continue;
 
-                if (l_socket->send(packet, it->second, it->first) == sf::Socket::Disconnected) {
+                if (l_socket->send(packet, sf::IpAddress::resolve(it->second).value(), it->first) == sf::Socket::Status::Disconnected) {
                     it = clients.erase(it);
                     std::advance(it, -1);
                 }
             }
         }
         else {
-            l_socket->send(packet, recipient_ip, recipient_port);
+            l_socket->send(packet, sf::IpAddress::resolve(recipient_ip).value(), recipient_port);
         }
 
         return 0;
@@ -114,16 +115,16 @@ namespace API
         }
 
         sf::Packet packet;
-        sf::IpAddress new_ip;
+        std::optional<sf::IpAddress> new_ip;
         ushort_t new_port;
 
-        if (l_socket->receive(packet, new_ip, new_port) != sf::Socket::Done) {
+        if (l_socket->receive(packet, new_ip, new_port) != sf::Socket::Status::Done || !new_ip.has_value()) {
             lua_pushnil(L);
             return 1;
         }
         
         if (socket_type == 's')
-            clients[new_port] = std::move(new_ip);
+            clients[new_port] = new_ip.value().toString();
 
         int size;
         if (!(packet >> size)) {
@@ -173,7 +174,7 @@ namespace API
     }
 
     static int network_get_local_address(lua_State* L) {
-        lua_pushstring(L, l_ip.toString().c_str());
+        lua_pushstring(L, l_ip.c_str());
         return 1;
     }
 }

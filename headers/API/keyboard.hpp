@@ -14,17 +14,25 @@ namespace API
         const bool is_symbol = (args.size() == 1 ? args.get<bool>() : false);
 
         while (Application::instance()->isOpen()) {
-            if (is_symbol) {
-                if (Application::instance()->event.type == sf::Event::TextEntered && Application::instance()->event.text.unicode > 31 && Application::instance()->event.text.unicode < 128) {
-                    std::string tmp;
-                    tmp += static_cast<char>(Application::instance()->event.text.unicode);
+            auto event = Application::instance()->pollEvent();
+            if (!event.has_value()) continue;
 
-                    lua_pushstring(L, tmp.c_str());
-                    return 1;
+            if (is_symbol) {
+                if (event->is<sf::Event::TextEntered>()) {
+                    auto unicode = event->getIf<sf::Event::TextEntered>()->unicode;
+                    if (unicode > 31 && unicode < 128) {
+                        std::string tmp;
+                        tmp += static_cast<char>(unicode);
+
+                        lua_pushstring(L, tmp.c_str());
+                        return 1;
+                    }
                 }
             }
-            else if (Application::instance()->event.type == sf::Event::KeyPressed) {
-                lua_pushinteger(L, static_cast<int>(Application::instance()->event.key.code));
+            else if (event->is<sf::Event::KeyPressed>()) {
+                auto code = event->getIf<sf::Event::KeyPressed>()->code;
+
+                lua_pushinteger(L, static_cast<int>(code));
                 return 1;
             }
         }

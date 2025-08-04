@@ -16,5 +16,5 @@ API::View::View(const LuaStack& args) {
     const auto conv_pos = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
     const auto conv_size = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
-    reset(sf::FloatRect(conv_pos.x, conv_pos.y, conv_size.x, conv_size.y));
+    sf::View::setViewport(sf::FloatRect(conv_pos, conv_size));
 }

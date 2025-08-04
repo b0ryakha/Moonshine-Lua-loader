@@ -4,10 +4,10 @@
 #include <vector>
 
 SuperEllipse::SuperEllipse(float x, float y, float w, float h, int rounding, const sf::Color& color)
-    : rect({ x, y, w, h })
+    : rect({ x, y }, { w, h })
 {
     rounding = std::min(std::max(rounding, 0), 100);
-    const float max_rounding = std::min(rect.width, rect.height) / 2;
+    const float max_rounding = std::min(rect.size.x, rect.size.y) / 2;
 
     radius = (max_rounding * rounding) / 100.f;
 
@@ -18,8 +18,8 @@ SuperEllipse::SuperEllipse(float x, float y, float w, float h, int rounding, con
     for (float i = 0.f; i < PI_2; i += PREC)
         sin_4.emplace_back(sinf(i) * radius, cosf(i) * radius);
 
-    const float WIDTH = rect.width - radius;
-    const float HEIGHT = rect.height - radius;
+    const float WIDTH = rect.size.x - radius;
+    const float HEIGHT = rect.size.y - radius;
 
     for (auto it = sin_4.crbegin(), end = sin_4.crend(); it != end; ++it)
         points.emplace_back(WIDTH + it->x, HEIGHT + it->y);
@@ -33,7 +33,7 @@ SuperEllipse::SuperEllipse(float x, float y, float w, float h, int rounding, con
     for (const auto& point : sin_4)
         points.emplace_back(WIDTH + point.x, radius - point.y);
 
-    setPosition(rect.left, rect.top);
+    setPosition(rect.position);
     setFillColor(color);
 
     sf::Shape::update();

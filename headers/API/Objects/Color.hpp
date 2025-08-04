@@ -8,7 +8,7 @@
 namespace API
 {
     struct Color final : public sf::Color {
-        Color(const LuaStack& args);
+        explicit Color(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
             lhelper::new_class<Color>(L);

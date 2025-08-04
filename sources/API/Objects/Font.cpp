@@ -34,7 +34,7 @@ API::Font::Font(const LuaStack& args) {
 
 	const auto path = Application::instance()->font_path + family;
 
-	if (!fs::exists(path) || !loadFromFile(path))
+	if (!fs::exists(path) || !openFromFile(path))
 		throw_error("[Font:new] Font '" + family + "' was not found or not installed!");
 }
 

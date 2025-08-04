@@ -4,7 +4,7 @@ class LuaUserdata final {
     void* self = nullptr;
 
 public:
-    LuaUserdata(void* userdata) : self(userdata) {}
+    explicit LuaUserdata(void* userdata) : self(userdata) {}
 
     template<typename T>
     constexpr operator T*() const {

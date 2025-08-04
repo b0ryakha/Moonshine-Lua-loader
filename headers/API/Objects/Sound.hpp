@@ -12,7 +12,7 @@ namespace API
         std::string path;
 
     public:
-        Sound(const LuaStack& args);
+        explicit Sound(const LuaStack& args);
         
         const std::string get_path() const;
         void play(bool is_reset);
@@ -50,7 +50,7 @@ namespace API
             static auto get_loop = [](lua_State* L) {
                 const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
-                lua_pushboolean(L, self->getLoop());
+                lua_pushboolean(L, self->isLooping());
                 return 1;
             };
 
@@ -58,7 +58,7 @@ namespace API
                 const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
                 bool is_repeat = lua_toboolean(L, 2);
 
-                self->setLoop(is_repeat);
+                self->setLooping(is_repeat);
                 return 0;
             };
 
@@ -90,7 +90,7 @@ namespace API
                 lhelper::push_object<Sound>(L, {
                     self->get_path(),
                     lua_Number(self->getVolume()),
-                    LuaBoolean(self->getLoop())
+                    LuaBoolean(self->isLooping())
                 });
 
                 return 1;
@@ -122,7 +122,7 @@ namespace API
                 const auto self = lhelper::get_object<Sound>(L, "Sound", 1);
 
                 std::stringstream result;
-                result << "{ \"" << self->get_path() << "\", " << self->getVolume() << "%, " << std::boolalpha << self->getLoop() << " }";
+                result << "{ \"" << self->get_path() << "\", " << self->getVolume() << "%, " << std::boolalpha << self->isLooping() << " }";
 
                 lua_pushstring(L, std::move(result).str().c_str());
                 return 1;
@@ -135,7 +135,7 @@ namespace API
                 lua_pushboolean(L, (
                     self->get_path() == target->get_path() &&
                     self->getVolume() == target->getVolume() &&
-                    self->getLoop() == target->getLoop() &&
+                    self->isLooping() == target->isLooping() &&
                     self->getStatus() == target->getStatus()
                 ));
                 

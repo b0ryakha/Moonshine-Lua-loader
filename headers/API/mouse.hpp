@@ -7,8 +7,13 @@ namespace API
 {
     static int mouse_get_pressed(lua_State* L) {
         while (Application::instance()->isOpen()) {
-            if (Application::instance()->event.type == sf::Event::MouseButtonPressed) {
-                lua_pushinteger(L, static_cast<int>(Application::instance()->event.mouseButton.button));
+            auto event = Application::instance()->pollEvent();
+            if (!event.has_value()) continue;
+
+            if (event->is<sf::Event::MouseButtonPressed>()) {
+                auto button = event->getIf<sf::Event::MouseButtonPressed>()->button;
+
+                lua_pushinteger(L, static_cast<int>(button));
                 return 1;
             }
         }
@@ -29,10 +34,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_up(lua_State* L) {
-        if (Application::instance()->event.type == sf::Event::MouseWheelScrolled && Application::instance()->event.mouseWheelScroll.delta > 0.f) {
-            Application::instance()->event.mouseWheelScroll.delta = 0.f;
-
-            lua_pushboolean(L, true);
+        if (auto mouseWheelScrolled = Application::instance()->pollEvent()->getIf<sf::Event::MouseWheelScrolled>()) {
+            lua_pushboolean(L, mouseWheelScrolled->delta > 0.f);
             return 1;
         }
 
@@ -41,10 +44,8 @@ namespace API
     }
 
     static int mouse_is_scrolling_down(lua_State* L) {
-        if (Application::instance()->event.type == sf::Event::MouseWheelScrolled && Application::instance()->event.mouseWheelScroll.delta < 0.f) {
-            Application::instance()->event.mouseWheelScroll.delta = 0.f;
-
-            lua_pushboolean(L, true);
+        if (auto mouseWheelScrolled = Application::instance()->pollEvent()->getIf<sf::Event::MouseWheelScrolled>()) {
+            lua_pushboolean(L, mouseWheelScrolled->delta < 0.f);
             return 1;
         }
 

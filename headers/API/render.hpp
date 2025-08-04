@@ -29,12 +29,12 @@ namespace API
         Font font = args.get<LuaUserdata, Font>();
         const std::string str = args.get<std::string>();
 
-        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
+        sf::Text text(font, sf::String::fromUtf8(str.cbegin(), str.cend()), font.get_size());
         text.setStyle(font.get_style());
 
         lhelper::push_object<Vector2>(L, {
-            text.getGlobalBounds().width,
-            text.getGlobalBounds().height
+            text.getGlobalBounds().size.x,
+            text.getGlobalBounds().size.y
         });
 
         return 1;
@@ -52,14 +52,14 @@ namespace API
         const std::string str = args.get<std::string>();
         sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
+        sf::Text text(font, sf::String::fromUtf8(str.cbegin(), str.cend()), font.get_size());
         text.setStyle(font.get_style());
-        text.setPosition(Application::instance()->mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().top)));
+        text.setPosition(Application::instance()->mapPixelToCoords(sf::Vector2i(x, y - text.getGlobalBounds().position.y)));
         text.setFillColor(color);
-        text.setScale(
+        text.setScale({
             static_cast<float>(Application::instance()->getInitSize().x) / static_cast<float>(Application::instance()->getSize().x),
             static_cast<float>(Application::instance()->getInitSize().y) / static_cast<float>(Application::instance()->getSize().y)
-        );
+        });
 
         Application::instance()->draw(text);
         return 0;
@@ -130,7 +130,7 @@ namespace API
         const auto conv_pos = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
         const auto conv_size = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
-        sf::VertexArray gradient(sf::Quads, 4);
+        sf::VertexArray gradient(sf::PrimitiveType::Points, 4);
 
         gradient[0].position = conv_pos;
         gradient[0].color = top_left;
@@ -164,10 +164,10 @@ namespace API
         sf::CircleShape circle(radius);
         circle.setPointCount(100);
         circle.setFillColor(color);
-        circle.setScale(
+        circle.setScale({
             static_cast<float>(Application::instance()->getInitSize().x) / static_cast<float>(Application::instance()->getSize().x),
             static_cast<float>(Application::instance()->getInitSize().y) / static_cast<float>(Application::instance()->getSize().y)
-        );
+        });
 
         const auto conv_pos = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
         circle.setPosition(sf::Vector2f(conv_pos.x - radius, conv_pos.y - radius));
@@ -201,7 +201,7 @@ namespace API
         float offsetX = thickness * 0.5f * sin(angle);
         float offsetY = thickness * 0.5f * cos(angle);
 
-        sf::VertexArray line(sf::TrianglesStrip, 4);
+        sf::VertexArray line(sf::PrimitiveType::TriangleStrip, 4);
 
         line[0].position = sf::Vector2f(conv_pos1.x - offsetX, conv_pos1.y + offsetY);
         line[0].color = color;

@@ -34,7 +34,7 @@ void TextBox::setSize(float w, float h) {
     inner_rect.setSize(sf::Vector2f(w - 2 * thickness, h - 2 * thickness));
     blinker.setSize(sf::Vector2f(1, h - 2 * thickness - 2));
     label.setCharacterSize(text_size);
-    label.setPosition(pos_x + thickness + 2, pos_y + thickness - 1);
+    label.setPosition(sf::Vector2f(pos_x + thickness + 2, pos_y + thickness - 1));
 }
 
 void TextBox::setPosition(float x, float y) {
@@ -43,7 +43,7 @@ void TextBox::setPosition(float x, float y) {
     outer_rect.setPosition(sf::Vector2f(x, y));
     inner_rect.setPosition(sf::Vector2f(x + thickness, y + thickness));
     blinker.setPosition(sf::Vector2f(x + thickness + 2, y + thickness + 1));
-    label.setPosition(x + thickness + 2, y + thickness - 1);
+    label.setPosition(sf::Vector2f(x + thickness + 2, y + thickness - 1));
 }
 
 void TextBox::setBorder(float t) {
@@ -62,29 +62,32 @@ std::string TextBox::getText() const {
     return text_input;
 }
 
-void TextBox::handleEvent(sf::Event& event) {
-    if (event.type == sf::Event::TextEntered && is_focus) {
+void TextBox::handleEvent(const sf::Event& event) {
+    if (event.is<sf::Event::TextEntered>() && is_focus) {
+        auto unicode = event.getIf<sf::Event::TextEntered>()->unicode;
+
         if ((label.findCharacterPos(focus_char).x + label.getScale().x * text_size) < (pos_x + width)) {
             std::string str;
 
-            if (event.text.unicode > 31 && event.text.unicode < 256) {
-                str += static_cast<char>(event.text.unicode);
+            if (unicode > 31 && unicode < 256) {
+                str += static_cast<char>(unicode);
             }
-            else if (event.key.code == 22) { // 22 = Ctrl + V
-                str = std::move(sf::Clipboard::getString());
-            }
-            else if (event.key.code == 26) { // 26 = Ctrl + Z
-                if (cache.size() > 1) {
-                    cache.pop();
-                    label = cache.top();
-                    focus_char = label.length();
-                }
-                else if (!cache.empty()) {
-                    label.clear();
-                    cache = std::stack<std::string>();
-                    focus_char = 0;
-                }
-            }
+            //TODO: impl for 3.0.0
+            //else if () { // 22 = Ctrl + V
+            //    str = std::move(sf::Clipboard::getString());
+            //}
+            //else if () { // 26 = Ctrl + Z
+            //    if (cache.size() > 1) {
+            //        cache.pop();
+            //        label = cache.top();
+            //        focus_char = label.length();
+            //    }
+            //    else if (!cache.empty()) {
+            //        label.clear();
+            //        cache = std::stack<std::string>();
+            //        focus_char = 0;
+            //    }
+            //}
 
             if (!str.empty()) {
                 if (focus_char == label.length())
@@ -98,8 +101,10 @@ void TextBox::handleEvent(sf::Event& event) {
         }
     }
 
-    if (event.type == sf::Event::KeyPressed && is_focus) {
-        if (event.key.code == sf::Keyboard::BackSpace) {
+    if (event.is<sf::Event::KeyPressed>() && is_focus) {
+        auto code = event.getIf<sf::Event::KeyPressed>()->code;
+
+        if (code == sf::Keyboard::Key::Backspace) {
             if (focus_char != 0) {
                 label.erase(focus_char - 1, 1);
                 cache.push(label.getString());
@@ -109,14 +114,14 @@ void TextBox::handleEvent(sf::Event& event) {
             }
         }
 
-        if (event.key.code == sf::Keyboard::Delete) {
+        if (code == sf::Keyboard::Key::Delete) {
             if (focus_char != label.length()) {
                 label.erase(focus_char, 1);
                 cache.push(label.getString());
             }
         }
 
-        if (event.key.code == sf::Keyboard::Enter) {
+        if (code == sf::Keyboard::Key::Enter) {
             if (!label.empty()) {
                 text_input = label.getString();
                 focus_char = 0;
@@ -125,31 +130,33 @@ void TextBox::handleEvent(sf::Event& event) {
             }
         }
 
-        if (event.key.code == sf::Keyboard::Left) {
+        if (code == sf::Keyboard::Key::Left) {
             if (focus_char > 0)
                 --focus_char;
         }
 
-        if (event.key.code == sf::Keyboard::Right) {
+        if (code == sf::Keyboard::Key::Right) {
             if (focus_char < label.length())
                 ++focus_char;
         }
     }
 
-    if (event.type == sf::Event::MouseButtonPressed) {
-        if (event.mouseButton.button == sf::Mouse::Left) {
+    if (event.is<sf::Event::MouseButtonPressed>()) {
+        auto mouse = event.getIf<sf::Event::MouseButtonPressed>();
+
+        if (mouse->button == sf::Mouse::Button::Left) {
             if (!label.empty()) {
                 if (char_width == 0)
                     char_width = label.findCharacterPos(1).x - label.findCharacterPos(0).x;
 
-                focus_char = std::min(label.length(), static_cast<size_t>((event.mouseButton.x - pos_x) / char_width));
+                focus_char = std::min(label.length(), static_cast<size_t>((mouse->position.x - pos_x) / char_width));
             }
 
             is_focus = (
-                event.mouseButton.x > pos_x &&
-                event.mouseButton.x < pos_x + width &&
-                event.mouseButton.y > pos_y &&
-                event.mouseButton.y < pos_y + height
+                mouse->position.x > pos_x &&
+                mouse->position.x < pos_x + width &&
+                mouse->position.y > pos_y &&
+                mouse->position.y < pos_y + height
             );
         }
     }
@@ -176,7 +183,7 @@ void TextBox::draw(sf::RenderWindow& window) {
     }
 
     if (focus_char == 0)
-        blinker.setPosition(pos_x + thickness + 2, pos_y + thickness + 1);
+        blinker.setPosition(sf::Vector2f(pos_x + thickness + 2, pos_y + thickness + 1));
     else
         blinker.setPosition(sf::Vector2f(label.findCharacterPos(focus_char).x, pos_y + thickness + 1));
 

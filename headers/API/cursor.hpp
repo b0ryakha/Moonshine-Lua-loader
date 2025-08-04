@@ -54,11 +54,11 @@ namespace API
         if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
-        sf::Cursor c;
-        if (!c.loadFromSystem(static_cast<sf::Cursor::Type>(args.get<int>())))
+        auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type(args.get<int>()));
+        if (!cursor.has_value())
             args.error("Incorrect cursor type!");
 
-        Application::instance()->setMouseCursor(c);
+        Application::instance()->setMouseCursor(cursor.value());
         return 0;
     }
 }

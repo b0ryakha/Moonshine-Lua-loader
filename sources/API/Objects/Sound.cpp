@@ -3,7 +3,9 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
-API::Sound::Sound(const LuaStack& args) {
+API::Sound::Sound(const LuaStack& args)
+    : sf::Sound((const sf::SoundBuffer&)sf::SoundBuffer())
+{
     if (args.size() != 2 && args.size() != 3)
         throw_error("[Sound:new] Incorrect number of arguments!");
 
@@ -15,7 +17,7 @@ API::Sound::Sound(const LuaStack& args) {
         throw_error("[Sound:new] Sound by path '" + path + "' cannot be loaded!");
 
     setBuffer(buffer);
-    setLoop(is_repeat);
+    setLooping(is_repeat);
     setVolume(static_cast<float>(volume));
 }
 

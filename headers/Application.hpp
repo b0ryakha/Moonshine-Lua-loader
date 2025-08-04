@@ -11,10 +11,10 @@ private:
     Script lua;
     sf::String title;
     static inline sf::Vector2u init_size = { 1400, 800 };
-    static inline sf::ContextSettings settings = sf::ContextSettings(0, 0, 16);
+    static inline sf::ContextSettings settings = { .antiAliasingLevel = 16 };
     sf::Vector2u old_size = init_size;
 
-    sf::Uint32 new_style = sf::Style::None;
+    int new_state = -1;
     sf::VideoMode new_mode;
     std::mutex style_lock;
 
@@ -26,14 +26,12 @@ private:
     void update();
 
 protected:
-    Application(int argc, char** argv);
+    explicit Application(int argc, char** argv);
 
 public:
     ~Application();
-	Application(Application& other) = delete;
+	explicit Application(Application& other) = delete;
     void operator=(const Application&) = delete;
-    
-    sf::Event event;
 
 #ifdef _WIN32
     static inline std::string font_path = "C:/WINDOWS/Fonts/";
@@ -48,5 +46,5 @@ public:
     sf::Vector2u getOldSize() const;
     sf::Vector2u getInitSize() const;
     void setSize(const sf::Vector2u& size);
-    void setStyle(const sf::VideoMode& mode, sf::Uint32 style);
+    void setState(const sf::VideoMode& mode, sf::State state);
 };

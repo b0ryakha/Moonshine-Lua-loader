@@ -16,8 +16,8 @@ You can view code examples using the API in [Examples.md](Examples.md) file
 
 ## Building
 ### Built with:
-- [SFML](https://www.sfml-dev.org) - Graphics and sound engine
-- [LuaJIT](https://luajit.org/luajit.html) - Binding Lua and C++
+- [SFML 3.0.0](https://www.sfml-dev.org) - Graphics and sound engine
+- [LuaJIT 2.1](https://luajit.org/luajit.html) - Binding Lua and C++
 
 #### Windows:
 ##### For Windows used <u>static libraries</u>, so before building, change the library paths to your own in CMakeLists.txt:
@@ -33,7 +33,6 @@ cd Moonshine-Lua-loader
 cmake -B "build" -G "Visual Studio 17 2022" -A "Win32"
 cmake --build "build" --config Release
 ```
-##### The build is complete, but don't forget to install [OpenAL](https://openal.org/downloads/oalinst.zip) for runtime.
 #### Arch Linux:
 ##### For Linux used <u>dynamic libraries</u>, so install them and other dependencies via the console:
 ```sh

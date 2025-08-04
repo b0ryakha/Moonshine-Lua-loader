@@ -37,6 +37,6 @@
 //    SuperEllipse shape;
 //
 //public:
-//    Blur(size_t x, size_t y, size_t w, size_t h, int blur_strength, size_t rounding = 0);
+//    explicit Blur(size_t x, size_t y, size_t w, size_t h, int blur_strength, size_t rounding = 0);
 //    void draw(sf::RenderTexture& render_buffer);
 //};

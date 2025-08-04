@@ -1,15 +1,19 @@
 #include "Label.hpp"
 #include "misc_functions.hpp"
 
-Label::Label(const std::string& str, const std::string& font_path, size_t size) {
+Label::Label()
+    : sf::Text((const sf::Font&)sf::Font(), "", 0) 
+{}
+
+Label::Label(const std::string& str, const std::string& font_path, size_t size)
+    : sf::Text((const sf::Font&)sf::Font(), str, size) 
+{
     setFont(font_path);
-    sf::Text::setString(str);
-    sf::Text::setCharacterSize(size);
 }
 
 void Label::setFont(const std::string& path) {
-    if (!font.loadFromFile(path))
-        throw_error("Failed to create the font face.");
+    if (!font.openFromFile(path))
+        throw_error("Failed to open font from \"" + path + "\".");
 
     sf::Text::setFont(font);
 }

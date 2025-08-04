@@ -148,7 +148,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
         opengl32
         freetype
         gdi32
-        openal32
         flac
         vorbisenc
         vorbisfile

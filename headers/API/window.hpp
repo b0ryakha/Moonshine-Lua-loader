@@ -34,8 +34,7 @@ namespace API
         size_t w = args.size() == 5 ? args.get<size_t>() : 0u;
         size_t h = args.size() == 5 ? args.get<size_t>() : 0u;
 
-        sf::Texture screenshot;
-        screenshot.create(Application::instance()->getSize().x, Application::instance()->getSize().y);
+        sf::Texture screenshot(Application::instance()->getSize());
         screenshot.update(*Application::instance());
 
         sf::Image image = screenshot.copyToImage();
@@ -46,12 +45,11 @@ namespace API
             w = std::min(static_cast<unsigned>(w), Application::instance()->getSize().x);
             h = std::min(static_cast<unsigned>(h), Application::instance()->getSize().y);
 
-            sf::Image cropped;
-            cropped.create(w, h);
+            sf::Image cropped(sf::Vector2u(w, h));
 
             for (size_t i = 0; i < h; ++i) {
                 for (size_t j = 0; j < w; ++j) {
-                    cropped.setPixel(j, i, image.getPixel(j + x, i + y));
+                    cropped.setPixel(sf::Vector2u(j, i), image.getPixel(sf::Vector2u(j + x, i + y)));
                 }
             }
 
@@ -168,7 +166,10 @@ namespace API
 
     static int window_await(lua_State* L) {
         while (Application::instance()->isOpen()) {
-            if (Application::instance()->event.type == sf::Event::MouseButtonPressed || Application::instance()->event.type == sf::Event::KeyPressed)
+            auto event = Application::instance()->pollEvent();
+            if (!event.has_value()) continue;
+            
+            if (event->is<sf::Event::MouseButtonPressed>() || event->is<sf::Event::KeyPressed>())
                 break;
         }
 
@@ -182,9 +183,8 @@ namespace API
             args.error("Incorrect number of arguments!");
 
         sf::Sprite sprite = args.get<LuaUserdata, API::Sprite>();
-        const sf::Texture* texture = sprite.getTexture();
 
-        Application::instance()->setIcon(texture->getSize().x, texture->getSize().y, texture->copyToImage().getPixelsPtr());
+        Application::instance()->setIcon(sprite.getTexture().copyToImage());
         return 0;
     }
 
@@ -196,10 +196,10 @@ namespace API
 
         if (args.get<int>() == 0) {
             auto old_size = Application::instance()->getOldSize();
-            Application::instance()->setStyle(sf::VideoMode(old_size.x, old_size.y), sf::Style::Default);
+            Application::instance()->setState(sf::VideoMode(old_size), sf::State::Windowed);
         }
         else {
-            Application::instance()->setStyle(sf::VideoMode::getDesktopMode(), sf::Style::Fullscreen);
+            Application::instance()->setState(sf::VideoMode::getDesktopMode(), sf::State::Fullscreen);
         }
         
         return 0;

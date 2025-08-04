@@ -7,7 +7,7 @@
 namespace API
 {
     struct Vector2 final : public sf::Vector2f {
-        Vector2(const LuaStack& args);
+        explicit Vector2(const LuaStack& args);
 
         static int push_to_lua(lua_State* L) {
             lhelper::new_class<Vector2>(L);

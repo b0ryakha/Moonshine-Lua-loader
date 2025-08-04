@@ -7,13 +7,13 @@
 #include "API/globalvars.hpp"
 
 Application::Application(int argc, char** argv)
-    : sf::RenderWindow(sf::VideoMode(init_size.x, init_size.y), "Moonshine - Lua loader", sf::Style::Default, settings)
+    : sf::RenderWindow(sf::VideoMode(init_size), "Moonshine - Lua loader", sf::State::Windowed, settings)
 {
     RenderWindow::setVerticalSyncEnabled(true);
 
     sf::Image icon;
     icon.loadFromMemory(res_icon, sizeof(res_icon));
-    RenderWindow::setIcon(256, 256, icon.getPixelsPtr());
+    RenderWindow::setIcon(sf::Image(sf::Vector2u(256, 256), icon.getPixelsPtr()));
 
     if (argc > 2) {
         args.reserve(argc - 2);
@@ -32,10 +32,10 @@ Application::Application(int argc, char** argv)
     static sf::Texture bg_texture;
     bg_texture.loadFromMemory(res_background, sizeof(res_background));
     background = new sf::Sprite(bg_texture);
-    background->setScale(0.74f, 0.74f);
+    background->setScale(sf::Vector2f(0.74f, 0.74f));
 
     hint = new Label("Enter the path to the lua script ...", arial, 25);
-    hint->setPosition(sf::Vector2f(init_size.x / 2.f - hint->getGlobalBounds().width / 2.f, init_size.y / 2.f + 300));
+    hint->setPosition(sf::Vector2f(init_size.x / 2.f - hint->getGlobalBounds().size.x / 2.f, init_size.y / 2.f + 300));
     hint->setFillColor(sf::Color(55, 55, 55, 200));
 
     textbox = new TextBox(arial, init_size.x / 2.f - 205.f, init_size.y / 2.f - 21.f, 410, 42, false);
@@ -70,40 +70,40 @@ void Application::render() {
 }
 
 void Application::update() {
-    if (!RenderWindow::pollEvent(event)) return;
+    while (const auto event = pollEvent()) {
+        if (!lua.is_open()) {
+            textbox->handleEvent(*event);
 
-    if (!lua.is_open()) {
-        textbox->handleEvent(event);
-
-        if (textbox->isEntered()) {
-            RenderWindow::clear();
-            RenderWindow::display();
-            RenderWindow::setActive(false);
-            lua.open(textbox->getText());
+            if (textbox->isEntered()) {
+                RenderWindow::clear();
+                RenderWindow::display();
+                RenderWindow::setActive(false);
+                lua.open(textbox->getText());
+            }
         }
-    }
 
-    if (event.type == sf::Event::Closed) {
-        RenderWindow::close();
-        std::exit(0);
-    }
+        if (event->is<sf::Event::Closed>()) {
+            RenderWindow::close();
+            std::exit(0);
+        }
 
-    if (new_style != sf::Style::None) {
-        RenderWindow::create(new_mode, title, new_style, settings);
-        RenderWindow::setActive(false); // because window is using in another thread and it is active there.
+        if (new_state != -1) {
+            RenderWindow::create(new_mode, title, sf::State(new_state), settings);
+            RenderWindow::setActive(false); // because window is using in another thread and it is active there.
 
-        std::lock_guard<std::mutex> lock(style_lock);
-        new_style = sf::Style::None;
-    }
+            std::lock_guard<std::mutex> lock(style_lock);
+            new_state = -1;
+        }
 
-    if (event.type == sf::Event::MouseEntered) {
-        std::lock_guard<std::mutex> lock(cursor_in_window_m);
-        is_cursor_in_window = true;
-    }
+        if (event->is<sf::Event::MouseEntered>()) {
+            std::lock_guard<std::mutex> lock(cursor_in_window_m);
+            is_cursor_in_window = true;
+        }
 
-    if (event.type == sf::Event::MouseLeft) {
-        std::lock_guard<std::mutex> lock(cursor_in_window_m);
-        is_cursor_in_window = false;
+        if (event->is<sf::Event::MouseLeft>()) {
+            std::lock_guard<std::mutex> lock(cursor_in_window_m);
+            is_cursor_in_window = false;
+        }
     }
 }
 
@@ -130,14 +130,14 @@ sf::Vector2u Application::getInitSize() const {
     return init_size;
 }
 
-void Application::setStyle(const sf::VideoMode& mode, sf::Uint32 style) {
+void Application::setState(const sf::VideoMode& mode, sf::State state) {
     style_lock.lock();
     new_mode = mode;
-    new_style = style;
+    new_state = (int)state;
     style_lock.unlock();
 
     RenderWindow::setActive(false);
 
-    while (new_style != sf::Style::None) //wait main thread
+    while (new_state != -1) //wait main thread
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
 }

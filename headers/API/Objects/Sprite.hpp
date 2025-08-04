@@ -14,7 +14,7 @@ namespace API
         std::string path;
 
     public:
-        Sprite(const LuaStack& args);
+        explicit Sprite(const LuaStack& args);
         const std::string get_path() const;
 
         static int push_to_lua(lua_State* L) {
@@ -54,7 +54,7 @@ namespace API
 
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
 
-                self->setPosition(converted.x, converted.y);
+                self->setPosition(converted);
                 return 0;
             };
 
@@ -70,14 +70,14 @@ namespace API
                 auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double angle = luaL_checknumber(L, 2);
 
-                self->setRotation(angle);
+                self->setRotation(sf::degrees(angle));
                 return 0;
             };
 
             static auto get_rotation = [](lua_State* L) {
                 const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
-                lua_pushnumber(L, self->getRotation());
+                lua_pushnumber(L, self->getRotation().asDegrees());
                 return 1;
             };
 
@@ -86,7 +86,7 @@ namespace API
                 double factor_x = luaL_checknumber(L, 2);
                 double factor_y = luaL_checknumber(L, 3);
 
-                self->setScale(factor_x, factor_y);
+                self->setScale(sf::Vector2f(factor_x, factor_y));
                 return 0;
             };
 
@@ -103,7 +103,7 @@ namespace API
                 double x = luaL_checknumber(L, 2);
                 double y = luaL_checknumber(L, 3);
 
-                self->setOrigin(x, y);
+                self->setOrigin(sf::Vector2f(x, y));
                 return 0;
             };
 
@@ -120,19 +120,17 @@ namespace API
                 int w = std::round(luaL_checknumber(L, 2));
                 int h = std::round(luaL_checknumber(L, 3));
 
-                sf::Vector2u texture_size = self->getTexture()->getSize();
+                sf::Vector2u texture_size = self->getTexture().getSize();
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(w, h));
 
-                self->setScale(converted.x / texture_size.x, converted.y / texture_size.y);
+                self->setScale({converted.x / texture_size.x, converted.y / texture_size.y});
                 return 0;
             };
 
             static auto get_size = [](lua_State* L) {
                 const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
-                double w = self->getGlobalBounds().width;
-                double h = self->getGlobalBounds().height;
 
-                lhelper::push_object<Vector2>(L, { w, h });
+                lhelper::push_object<Vector2>(L, { self->getGlobalBounds().size.x, self->getGlobalBounds().size.y });
                 return 1;
             };
 
@@ -140,7 +138,7 @@ namespace API
                 auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
                 double angle = luaL_checknumber(L, 2);
 
-                self->rotate(angle);
+                self->rotate(sf::degrees(angle));
                 return 0;
             };
 
@@ -149,7 +147,7 @@ namespace API
                 double factor_x = luaL_checknumber(L, 2);
                 double factor_y = luaL_checknumber(L, 3);
 
-                self->scale(factor_x, factor_y);
+                self->scale(sf::Vector2f(factor_x, factor_y));
                 return 0;
             };
 
@@ -160,7 +158,7 @@ namespace API
 
                 const auto converted = Application::instance()->mapPixelToCoords(sf::Vector2i(x_offset, y_offset));
 
-                self->move(converted.x, converted.y);
+                self->move(converted);
                 return 0;
             };
 
@@ -168,10 +166,10 @@ namespace API
                 const auto self = lhelper::get_object<Sprite>(L, "Sprite", 1);
 
                 sf::IntRect rect = self->getTextureRect();
-                double t_x = rect.left;
-                double t_y = rect.top;
-                double t_w = rect.width;
-                double t_h = rect.height;
+                double t_x = rect.position.x;
+                double t_y = rect.position.y;
+                double t_w = rect.size.x;
+                double t_h = rect.size.y;
                 double w = self->getScale().x * t_w;
                 double h = self->getScale().y * t_h;
 
@@ -226,7 +224,7 @@ namespace API
                 lua_pushboolean(L, (
                     self->get_path() == target->get_path() &&
                     self->getPosition() == target->getPosition() &&
-                    self->getTexture() == target->getTexture() &&
+                    self->getTexture().getNativeHandle() == target->getTexture().getNativeHandle() &&
                     self->getTextureRect() == target->getTextureRect() &&
                     self->getColor() == target->getColor()
                 ));
