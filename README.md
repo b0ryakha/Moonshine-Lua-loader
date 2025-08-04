@@ -33,7 +33,7 @@ cd Moonshine-Lua-loader
 cmake -B "build" -G "Visual Studio 17 2022" -A "Win32"
 cmake --build "build" --config Release
 ```
-##### The build is complete, but don't forget to copy openal32.dll to the directory with the executable file.
+##### The build is complete, but don't forget to install [OpenAL](https://openal.org/downloads/oalinst.zip) for runtime.
 #### Arch Linux:
 ##### For Linux used <u>dynamic libraries</u>, so install them and other dependencies via the console:
 ```sh
