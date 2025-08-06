@@ -45,6 +45,7 @@ void Script::open(std::string_view path) {
         lua_path = "./" + lua_path;
 
     luaL_openlibs(lua_state);
+    resolve_path();
     open_API();
 
     future = std::async(std::launch::async, [&] {
@@ -54,6 +55,21 @@ void Script::open(std::string_view path) {
         if (lua_isfunction(lua_state, -1))
             lua_pcall(lua_state, 0, 0, 0);
     });
+}
+
+void Script::resolve_path() {
+    lua_getglobal(lua_state, "package");
+
+    lua_getfield(lua_state, -1, "path");
+    std::string path = lua_tostring(lua_state, -1);
+    lua_pop(lua_state, 1);
+
+    for (const auto& dir : { "./build", "./scripts", "./src", "./sources", "./source" })
+        path += std::move(path + ";" + dir + "/?.lua");
+
+    lua_pushstring(lua_state, path.c_str());
+    lua_setfield(lua_state, -2, "path");
+    lua_pop(lua_state, 1);
 }
 
 void Script::open_API() {

@@ -11,6 +11,7 @@ private:
 	std::string lua_path;
 
 	void open_API();
+	void resolve_path();
 
 public:
 	Script() = default;
