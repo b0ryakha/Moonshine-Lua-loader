@@ -184,12 +184,12 @@
 
 #### <a name="render.text"></a> ```text```
 ```lua
-render.text(x: int, y: int, font: Font, text: string, color: Color)
+render.text(x: integer, y: integer, font: Font, text: string, color: Color)
 ```
 | Name      | Type        | Description        |
 | :---:     | :---:       | :---:              |
-| x         | ```int```   | X coordinate       |
-| y         | ```int```   | Y coordinate       |
+| x         | ```integer```   | X coordinate       |
+| y         | ```integer```   | Y coordinate       |
 | font      | ```Font```  | Font for text      |
 | text      | ```string```| Text for render    |
 | color     | ```Color``` | Color for text     |
@@ -225,16 +225,16 @@ Returns the measured [size](#vector2.new) of the text.
 
 #### <a name="render.rectangle"></a> ```rectangle```
 ```lua
-render.rectangle(x: int, y: int, w: size_t, h: size_t, color: Color[, rounding: size_t])
+render.rectangle(x: integer, y: integer, w: integer, h: integer, color: Color[, rounding: integer])
 ```
 | Name     | Type        | Description                                   |
 | :---:    | :---:       | :---:                                         |
-| x        | ```int```   | X coordinate                                  |
-| y        | ```int```   | Y coordinate                                  |
-| w        | ```size_t```| Width                                         |
-| h        | ```size_t```| Height                                        |
+| x        | ```integer```   | X coordinate                                  |
+| y        | ```integer```   | Y coordinate                                  |
+| w        | ```integer```| Width                                         |
+| h        | ```integer```| Height                                        |
 | color    | ```Color``` | Color for filling the rectangle               |
-| rounding | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
+| rounding | ```integer```| Percentage of rounding [0 - 100], default = 0 |
 
 Render rectangle on the screen.
 
@@ -242,17 +242,17 @@ Render rectangle on the screen.
 
 #### <a name="render.outline_rectangle"></a> ```outline_rectangle```
 ```lua
-render.outline_rectangle(x: int, y: int, w: size_t, h: size_t, thickness: float, color: Color[, rounding: size_t])
+render.outline_rectangle(x: integer, y: integer, w: integer, h: integer, thickness: number, color: Color[, rounding: integer])
 ```
 | Name      | Type        | Description                                   |
 | :---:     | :---:       | :---:                                         |
-| x         | ```int```   | X coordinate                                  |
-| y         | ```int```   | Y coordinate                                  |
-| w         | ```size_t```| Width                                         |
-| h         | ```size_t```| Height                                        |
-| thickness | ```float``` | Thickness of outline line                     |
+| x         | ```integer```   | X coordinate                                  |
+| y         | ```integer```   | Y coordinate                                  |
+| w         | ```integer```| Width                                         |
+| h         | ```integer```| Height                                        |
+| thickness | ```number``` | Thickness of outline line                     |
 | color     | ```Color``` | Color for outline line                        |
-| rounding  | ```size_t```| Percentage of rounding [0 - 100], default = 0 |
+| rounding  | ```integer```| Percentage of rounding [0 - 100], default = 0 |
 
 Render rectangle consisting of 4 contour lines, empty inside.
 
@@ -260,14 +260,14 @@ Render rectangle consisting of 4 contour lines, empty inside.
 
 #### <a name="render.gradient"></a> ```gradient```
 ```lua
-render.gradient(x: int, y: int, w: size_t, h: size_t, top_left: Color, top_right: Color, bottom_left: Color, bottom_right: Color)
+render.gradient(x: integer, y: integer, w: integer, h: integer, top_left: Color, top_right: Color, bottom_left: Color, bottom_right: Color)
 ```
 | Name         | Type        | Description                                   |
 | :---:        | :---:       | :---:                                         |
-| x            | ```int```   | X coordinate                                  |
-| y            | ```int```   | Y coordinate                                  |
-| w            | ```size_t```| Width                                         |
-| h            | ```size_t```| Height                                        |
+| x            | ```integer```   | X coordinate                                  |
+| y            | ```integer```   | Y coordinate                                  |
+| w            | ```integer```| Width                                         |
+| h            | ```integer```| Height                                        |
 | top_left     | ```Color``` | Color of the top left rectangle position      |
 | top_right    | ```Color``` | Color of the top right rectangle position     |
 | bottom_left  | ```Color``` | Color of the bottom left rectangle position   |
@@ -279,15 +279,15 @@ Render gradient rectangle on the screen.
 
 #### <a name="render.circle"></a> ```circle```
 ```lua
-render.circle(x: int, y: int, radius: size_t, color: Color[, thickness: float, outline_color: Color])
+render.circle(x: integer, y: integer, radius: integer, color: Color[, thickness: number, outline_color: Color])
 ```
 | Name          | Type        | Description                                 |
 | :---:         | :---:       | :---:                                       |
-| x             | ```int```   | X coordinate                                |
-| y             | ```int```   | Y coordinate                                |
-| radius        | ```size_t```| Circle radius                               |
+| x             | ```integer```   | X coordinate                                |
+| y             | ```integer```   | Y coordinate                                |
+| radius        | ```integer```| Circle radius                               |
 | color         | ```Color``` | Color for filling the circle                |
-| thickness     | ```float``` | Thickness of outline line, default = 0      |
+| thickness     | ```number``` | Thickness of outline line, default = 0      |
 | outline_color | ```Color``` | Color for filling the circle, default = nil |
 
 Render circle on the screen.
@@ -296,15 +296,15 @@ Render circle on the screen.
 
 #### <a name="render.line"></a> ```line```
 ```lua
-render.line(x1: int, y1: int, x2: int, y2: int, thickness: float, color: Color)
+render.line(x1: integer, y1: integer, x2: integer, y2: integer, thickness: number, color: Color)
 ```
 | Name      | Type        | Description          |
 | :---:     | :---:       | :---:                |
-| x1        | ```int```   | Initial X coordinate |
-| y1        | ```int```   | Initial Y coordinate |
-| x2        | ```int```   | Finite X coordinate  |
-| y2        | ```int```   | Finite Y coordinate  |
-| thickness | ```float``` | Thickness of line    |
+| x1        | ```integer```   | Initial X coordinate |
+| y1        | ```integer```   | Initial Y coordinate |
+| x2        | ```integer```   | Finite X coordinate  |
+| y2        | ```integer```   | Finite Y coordinate  |
+| thickness | ```number``` | Thickness of line    |
 | color     | ```Color``` | Color for line       |
 
 Render line on the screen.
@@ -313,17 +313,22 @@ Render line on the screen.
 
 #### <a name="render.polygon"></a> ```polygon```
 ```lua
-render.polygon(points: vector<array<int, 2>>, color: Color)
+render.polygon(points: table<array<integer, 2>>, color: Color)
 ```
-| Name   | Type                          | Description                                                 |
-| :---:  | :---:                         | :---:                                                       |
-| points | ```vector<array<int, 2>>```   | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
-| color  | ```Color```                   | Color for polygon                                           |
+| Name   | Type                           | Description                                                 |
+| :---:  | :---:                          | :---:                                                       |
+| points | ```table<array<integer, 2>>``` | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
+| color  | ```Color```                    | Color for polygon                                           |
 
 Render polygon on the screen.
 
 
 ### :computer: Window
+#### :star: styles
+```lua
+local default = styles.Default
+local fullscreen = styles.Fullscreen
+```
 
 #### <a name="window.is_open"></a> ```is_open```
 ```lua
@@ -367,15 +372,15 @@ Closes the window and destroy all the attached resources.
 
 #### <a name="window.capture"></a> ```capture```
 ```lua
-window.capture(path: string[, x: size_t, y: size_t, w: size_t, h: size_t])
+window.capture(path: string[, x: integer, y: integer, w: integer, h: integer])
 ```
 | Name  | Type         | Description                           |
 | :---: | :---:        | :---:                                 |
 | path  | ```string``` | Screenshot output path with file name |
-| x     | ```size_t``` | X coordinate, default = 0             |
-| y     | ```size_t``` | Y coordinate, default = 0             |
-| w     | ```size_t``` | Width, default = window width         |
-| h     | ```size_t``` | Height, default = window height       |
+| x     | ```integer``` | X coordinate, default = 0             |
+| y     | ```integer``` | Y coordinate, default = 0             |
+| w     | ```integer``` | Width, default = window width         |
+| h     | ```integer``` | Height, default = window height       |
 
 Takes a screenshot of the window and saves it (make sure the screen has not been updated by window.display).
 
@@ -392,12 +397,12 @@ Returns the window [size](#vector2.new.new).
 
 #### <a name="window.set_size"></a> ```set_size```
 ```lua
-window.set_size(width: size_t, height: size_t)
+window.set_size(width: integer, height: integer)
 ```
 | Name   | Type         | Description       |
 | :---:  | :---:        | :---:             |
-| width  | ```size_t``` | New window width  |
-| height | ```size_t``` | New window height |
+| width  | ```integer``` | New window width  |
+| height | ```integer``` | New window height |
 
 Sets the window a new [size](#vector2.new).
 
@@ -414,12 +419,12 @@ Returns the window [position](#vector2.new).
 
 #### <a name="window.set_pos"></a> ```set_pos```
 ```lua
-window.set_pos(x: int, y: int)
+window.set_pos(x: integer, y: integer)
 ```
 | Name  | Type      | Description           |
 | :---: | :---:     | :---:                 |
-| x     | ```int``` | New window x position |
-| y     | ```int``` | New window y position |
+| x     | ```integer``` | New window x position |
+| y     | ```integer``` | New window y position |
 
 Sets the window a new position.
 
@@ -439,11 +444,11 @@ Sets the window a new title.
 
 #### <a name="window.set_vsync"></a> ```set_vsync```
 ```lua
-window.set_vsync(state: bool)
+window.set_vsync(state: boolean)
 ```
 | Name  | Type       | Description                               |
 | :---: | :---:      | :---:                                     |
-| state | ```bool``` | Enable / disable vertical synchronization |
+| state | ```boolean``` | Enable / disable vertical synchronization |
 
 Enables or disables the window's vsync, enabled by default.
 
@@ -451,11 +456,11 @@ Enables or disables the window's vsync, enabled by default.
 
 #### <a name="window.set_frame_limit"></a> ```set_frame_limit```
 ```lua
-window.set_frame_limit(fps_max: size_t)
+window.set_frame_limit(fps_max: integer)
 ```
 | Name    | Type         | Description       |
 | :---:   | :---:        | :---:             |
-| fps_max | ```size_t``` | Frames per second |
+| fps_max | ```integer``` | Frames per second |
 
 Sets the window frame limit.
 
@@ -463,11 +468,11 @@ Sets the window frame limit.
 
 #### <a name="window.sleep"></a> ```sleep```
 ```lua
-window.sleep(milliseconds: size_t)
+window.sleep(milliseconds: integer)
 ```
 | Name         | Type         | Description                    |
 | :---:        | :---:        | :---:                          |
-| milliseconds | ```size_t``` | Time for delay in milliseconds |
+| milliseconds | ```integer``` | Time for delay in milliseconds |
 
 Freezes the process for the specified time.
 
@@ -496,67 +501,66 @@ Sets a new icon for window.
 
 #### <a name="window.set_style"></a> ```set_style```
 ```lua
-window.set_style(style_code: Style_enum)
+window.set_style(style_code: styles)
 ```
-| Name       | Type        | Description      |
-| :---:      | :---:       | :---:            |
-| style_code | ```Style``` | New window style |
+| Name       | Type         | Description              |
+| :---:      | :---:        | :---:                    |
+| style_code | ```styles``` | style from 'styles' enum |
 
 Sets the window a new style.
-P.S. Style_enum -> style.Default or style.Fullscreen
 
 
 ### <a name="Keyboard"></a> :wrench: Keyboard
-#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
+#### :star: [keys](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php)
 ```lua
-local key_id = key.W -- 'W' key on keyboard
+local key_id = keys.W -- 'W' key on keyboard
 ```
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
 ```lua
-keyboard.get_pressed([return_symbol]): SFML_enum / char
+keyboard.get_pressed([return_symbol]): keys | char
 ```
 | Name          | Type       | Description                                        |
 | :---:         | :---:      | :---:                                              |
-| return_symbol | ```bool``` | If true then function return char, default = false |
+| return_symbol | ```boolean``` | If true then function return char, default = false |
 
-Awaiting for pressing key and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) / char.
+Awaiting for pressing key and return [key](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Keyboard.php) / char.
 
 ---
 
 #### <a name="keyboard.is_pressed"></a> ```is_pressed```
 ```lua
-keyboard.is_pressed(key_code: SFML_enum): bool
+keyboard.is_pressed(key_code: keys): boolean
 ```
-| Name     | Type            | Description          |
-| :---:    | :---:           | :---:                |
-| key_code | ```SFML_enum``` | SFML Enum - key code |
+| Name     | Type       | Description          |
+| :---:    | :---:      | :---:                |
+| key_code | ```keys``` | key from 'keys' enum |
 
 Returns true if the key is pressed, else false.
 
 
 ### :mouse2: Mouse
-#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
+#### :star: [buttons](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90)
 ```lua
-local button_id = button.Left -- left mouse button
+local button_id = buttons.Left -- left mouse button
 ```
 
 #### <a name="mouse.get_pressed"></a> ```get_pressed```
 ```lua
-mouse.get_pressed(): SFML_enum
+mouse.get_pressed(): buttons
 ```
 
-Awaiting for pressing button and return [enum](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90).
+Awaiting for pressing button and return [button](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Mouse.php#a4fb128be433f9aafe66bc0c605daaa90).
 
 ---
 
 #### <a name="mouse.is_pressed"></a> ```is_pressed```
 ```lua
-mouse.is_pressed(button_code: SFML_enum): bool
+mouse.is_pressed(button_code: buttons): boolean
 ```
-| Name        | Type            | Description             |
-| :---:       | :---:           | :---:                   |
-| button_code | ```SFML_enum``` | SFML Enum - button code |
+| Name        | Type          | Description                |
+| :---:       | :---:         | :---:                      |
+| button_code | ```buttons``` | button from 'buttons' enum |
 
 Returns true if the button is pressed, else false.
 
@@ -564,7 +568,7 @@ Returns true if the button is pressed, else false.
 
 #### <a name="mouse.is_scrolling_up"></a> ```is_scrolling_up```
 ```lua
-mouse.is_scrolling_up(): bool
+mouse.is_scrolling_up(): boolean
 ```
 
 Returns true if scrolling up, else false.
@@ -573,16 +577,16 @@ Returns true if scrolling up, else false.
 
 #### <a name="mouse.is_scrolling_down"></a> ```is_scrolling_down```
 ```lua
-mouse.is_scrolling_down(): bool
+mouse.is_scrolling_down(): boolean
 ```
 
 Returns true if scrolling down, else false.
 
 
 ### :video_game: Cursor
-#### :star: [ENUMS](https://www.sfml-dev.org/documentation/2.6.1/classsf_1_1Cursor.php)
+#### :star: [cursors](https://www.sfml-dev.org/documentation/2.6.1/classsf_1_1Cursor.php)
 ```lua
-local cursor_type_id = cursor_type.Arrow -- 'Arrow' type
+local cursor_type_id = cursors.Arrow -- 'Arrow' type
 ```
 
 #### <a name="cursor.get_pos"></a> ```get_pos```
@@ -596,7 +600,7 @@ Returns the cursor [position](#vector2.new).
 
 #### <a name="cursor.in_window"></a> ```in_window```
 ```lua
-cursor.in_window(): bool
+cursor.in_window(): boolean
 ```
 
 Returns true if cursor in window, else false.
@@ -605,14 +609,14 @@ Returns true if cursor in window, else false.
 
 #### <a name="cursor.is_bound"></a> ```is_bound```
 ```lua
-cursor.is_bound(x: size_t, y: size_t, w: size_t, h: size_t)
+cursor.is_bound(x: integer, y: integer, w: integer, h: integer)
 ```
 | Name             | Type          | Description                                                            |
 | :---:            | :---:         | :---:                                                                  |
-| x                | ```size_t```  | X position                                                             |
-| y                | ```size_t```  | Y position                                                             |
-| w                | ```size_t```  | Width                                                                  |
-| h                | ```size_t```  | Height                                                                 |
+| x                | ```integer```  | X position                                                             |
+| y                | ```integer```  | Y position                                                             |
+| w                | ```integer```  | Width                                                                  |
+| h                | ```integer```  | Height                                                                 |
 
 Returns true if cursor in bounds, else false.
 
@@ -620,11 +624,11 @@ Returns true if cursor in bounds, else false.
 
 #### <a name="cursor.change_type"></a> ```change_type```
 ```lua
-cursor.change_type(type: SFML_enum)
+cursor.change_type(cursor: cursors)
 ```
-| Name  | Type            | Description             |
-| :---: | :---:           | :---:                   |
-| type  | ```SFML_enum``` | SFML Enum - cursor_type |
+| Name    | Type          | Description                     |
+| :---:   | :---:         | :---:                           |
+| cursor  | ```cursors``` | cursor type from 'cursors' enum |
 
 Changes the cursor state to the specified type.
 
@@ -633,12 +637,12 @@ Changes the cursor state to the specified type.
 
 #### <a name="file.read"></a> ```read```
 ```lua
-file.read(path: string[, line_number: size_t]): table<string>
+file.read(path: string[, line_number: integer]): table<string>
 ```
 | Name        | Type         | Description                                          |
 | :---:       | :---:        | :---:                                                |
 | path        | ```string``` | Path to file                                         |
-| line_number | ```size_t``` | Number of the line to be read, default read all file |
+| line_number | ```integer``` | Number of the line to be read, default read all file |
 
 Reads the file and writes it to the string table.
 
@@ -646,14 +650,14 @@ Reads the file and writes it to the string table.
 
 #### <a name="file.write"></a> ```write```
 ```lua
-file.write(path: string, content: table<string>[, is_rewrite: bool])
-file.write(path: string, content: string[, is_rewrite: bool])
+file.write(path: string, content: table<string>[, is_rewrite: boolean])
+file.write(path: string, content: string[, is_rewrite: boolean])
 ```
 | Name       | Type                              | Description                                                                |
 | :---:      | :---:                             | :---:                                                                      |
 | path       | ```string```                      | Path to file                                                               |
 | content    | ```table<string>``` / ```string```| Content that will be written to a file                                     |
-| is_rewrite | ```bool```                        | If the value is true, file will be cleared before writing, default = false |
+| is_rewrite | ```boolean```                        | If the value is true, file will be cleared before writing, default = false |
 
 Writes the specified content to a file.
 
@@ -698,7 +702,7 @@ Deletes a file or folder at the specified path.
 
 #### <a name="file.exists"></a> ```exists```
 ```lua
-file.exists(path: string): bool
+file.exists(path: string): boolean
 ```
 | Name  | Type         | Description                          |
 | :---: | :---:        | :---:                                |
@@ -710,7 +714,7 @@ Returns true if the file is found, else false.
 
 #### <a name="file.line_count"></a> ```line_count```
 ```lua
-file.line_count(path: string): size_t
+file.line_count(path: string): integer
 ```
 | Name  | Type         | Description                          |
 | :---: | :---:        | :---:                                |
@@ -760,12 +764,12 @@ Returns a list of names of all files in the specified folder.
 
 #### <a name="cmath.rand_int"></a> ```rand_int```
 ```lua
-cmath.rand_int(min: int, max: int): int
+cmath.rand_int(min: integer, max: integer): integer
 ```
 | Name  | Type     | Description          |
 | :---: | :---:    | :---:                |
-| min   | ```int```| Minimum random value |
-| max   | ```int```| Maximum random value |
+| min   | ```integer```| Minimum random value |
+| max   | ```integer```| Maximum random value |
 
 Returns the random integer number [min, max].
 
@@ -773,12 +777,12 @@ Returns the random integer number [min, max].
 
 #### <a name="cmath.rand_double"></a> ```rand_double```
 ```lua
-cmath.rand_double(min: double, max: double): double
+cmath.rand_double(min: number, max: number): number
 ```
 | Name  | Type        | Description          |
 | :---: | :---:       | :---:                |
-| min   | ```double```| Minimum random value |
-| max   | ```double```| Maximum random value |
+| min   | ```number```| Minimum random value |
+| max   | ```number```| Maximum random value |
 
 Returns the random point floating number [min, max].
 
@@ -786,13 +790,13 @@ Returns the random point floating number [min, max].
 
 #### <a name="cmath.lerp"></a> ```lerp```
 ```lua
-cmath.lerp(start: float, end: float, time: float): float
+cmath.lerp(start_v: number, end_v: number, time: number): number
 ```
-| Name  | Type       | Description |
-| :---: | :---:      | :---:       |
-| start | ```float```| Start value |
-| end   | ```float```| End value   |
-| time  | ```float```| Step value  |
+| Name    | Type       | Description |
+| :---:   | :---:      | :---:       |
+| start_v | ```number```| Start value |
+| end_v   | ```number```| End value   |
+| time    | ```number```| Step value  |
 
 Returns the linear interpolation.
 
@@ -800,13 +804,13 @@ Returns the linear interpolation.
 
 #### <a name="cmath.clamp"></a> ```clamp```
 ```lua
-cmath.clamp(number: float, lower: float, upper: float): float
+cmath.clamp(number: number, lower: number, upper: number): number
 ```
 | Name   | Type       | Description    |
 | :---:  | :---:      | :---:          |
-| number | ```float```| Value to clamp |
-| lower  | ```float```| Lower bound    |
-| upper  | ```float```| Upper bound    |
+| number | ```number```| Value to clamp |
+| lower  | ```number```| Lower bound    |
+| upper  | ```number```| Upper bound    |
 
 Returns the clumped value.
 
@@ -814,11 +818,11 @@ Returns the clumped value.
 
 #### <a name="cmath.round"></a> ```round```
 ```lua
-cmath.round(number: float): size_t
+cmath.round(number: number): integer
 ```
 | Name   | Type       | Description       |
 | :---:  | :---:      | :---:             |
-| number | ```float```| Value to rounding |
+| number | ```number```| Value to rounding |
 
 Returns the rounded value.
 
@@ -853,11 +857,11 @@ Returns a list of arguments starting after the argument that is the main script.
 ### :satellite: Network
 #### <a name="network.bind"></a> ```bind```
 ```lua
-network.bind(port: int, socket_type: char)
+network.bind(port: integer, socket_type: char)
 ```
 | Name         | Type       | Description                                  |
 | :---:        | :---:      | :---:                                        |
-| port         | ```int```  | Valid port                                   |
+| port         | ```integer```  | Valid port                                   |
 | socket_type  | ```char``` | Socket type ('s' for server, 'c' for client) |
 
 Binds a local socket to a port over UDP.
@@ -875,13 +879,13 @@ Unbinds the socket from the port.
 
 #### <a name="network.send"></a> ```send```
 ```lua
-network.send(ip: string, port: int, packet: table)
+network.send(ip: string, port: integer, packet: table)
 network.send(packet: table)
 ```
 | Name   | Type        | Description                                                    |
 | :---:  | :---:       | :---:                                                          |
 | ip     | ```string```| Recipient's IP address                                         |
-| port   | ```int```   | Recipient's port                                               |
+| port   | ```integer```   | Recipient's port                                               |
 | packet | ```table``` | Data to send (table include only number, string, boolean, nil) |
 
 Sends data to a specific address or to all binded clients.
@@ -913,13 +917,13 @@ sound == sound    -- true
 
 #### <a name="sound.new"></a> ```new```
 ```lua
-Sound:new(path: string, volume: size_t[, is_repeat: bool]): Sound&
+Sound:new(path: string, volume: integer[, is_repeat: boolean]): Sound&
 ```
 | Name      | Type         | Description                                        |
 | :---:     | :---:        | :---:                                              |
 | path      | ```string``` | Path to sound file [WAV, OGG, FLAC]                |
-| volume    | ```size_t``` | Volume of sound [0 - 100]                          |
-| is_repeat | ```bool```   | If true then sound will be looped, default = false |
+| volume    | ```integer``` | Volume of sound [0 - 100]                          |
+| is_repeat | ```boolean```   | If true then sound will be looped, default = false |
 
 Returns the sound reference.
 
@@ -936,11 +940,11 @@ Returns the sound copy.
 
 #### <a name="sound.play"></a> ```play```
 ```lua
-sound_object:play([is_reset: bool])
+sound_object:play([is_reset: boolean])
 ```
 | Name     | Type        | Description                                                                      |
 | :---:    | :---:       | :---:                                                                            |
-| is_reset | ```bool```  | If true, the sound will be played every time from the beginning, default = false |
+| is_reset | ```boolean```  | If true, the sound will be played every time from the beginning, default = false |
 
 Plays [sound](#sound.new).
 
@@ -966,11 +970,11 @@ Returns the [sound](#sound.new) file path.
 
 #### <a name="sound.set_volume"></a> ```set_volume```
 ```lua
-sound_object:set_volume(volume: size_t)
+sound_object:set_volume(volume: integer)
 ```
 | Name   | Type         | Description               |
 | :---:  | :---:        | :---:                     |
-| volume | ```size_t``` | Volume of sound [0 - 100] |
+| volume | ```integer``` | Volume of sound [0 - 100] |
 
 Sets the [sound](#sound.new) a new volume.
 
@@ -978,7 +982,7 @@ Sets the [sound](#sound.new) a new volume.
 
 #### <a name="sound.get_volume"></a> ```get_volume```
 ```lua
-sound_object:get_volume(): size_t
+sound_object:get_volume(): integer
 ```
 
 Returns the [sound](#sound.new) volume.
@@ -987,11 +991,11 @@ Returns the [sound](#sound.new) volume.
 
 #### <a name="sound.set_loop"></a> ```set_loop```
 ```lua
-sound_object:set_loop(is_repeat: bool)
+sound_object:set_loop(is_repeat: boolean)
 ```
 | Name      | Type        | Description                           |
 | :---:     | :---:       | :---:                                 |
-| is_repeat | ```bool```  | If true then the sound will be looped |
+| is_repeat | ```boolean```  | If true then the sound will be looped |
 
 Sets the [sound](#sound.new) a new loop.
 
@@ -999,7 +1003,7 @@ Sets the [sound](#sound.new) a new loop.
 
 #### <a name="sound.get_loop"></a> ```get_loop```
 ```lua
-sound_object:get_loop(): bool
+sound_object:get_loop(): boolean
 ```
 
 Returns true if the sound is looped, else false.
@@ -1008,7 +1012,7 @@ Returns true if the sound is looped, else false.
 
 #### <a name="sound.is_play"></a> ```is_play```
 ```lua
-sound_object:is_play(): bool
+sound_object:is_play(): boolean
 ```
 
 Returns true if the sound is playing, else false.
@@ -1033,12 +1037,12 @@ vec / number     -- new vec
 
 #### <a name="vector2.new"></a> ```new```
 ```lua
-Vector2:new(x: double, y: double): Vector2&
+Vector2:new(x: number, y: number): Vector2&
 ```
 | Name  | Type         | Description  |
 | :---: | :---:        | :---:        |
-| x     | ```double``` | X coordinate |
-| y     | ```double``` | Y coordinate |
+| x     | ```number``` | X coordinate |
+| y     | ```number``` | Y coordinate |
 
 Returns the vector2 reference.
 
@@ -1060,12 +1064,12 @@ font == font     -- true
 
 #### <a name="font.new"></a> ```new```
 ```lua
-Font:new(name: string, size: size_t[, style: string]): Font&
+Font:new(name: string, size: integer[, style: string]): Font&
 ```
 | Name  | Type         | Description                                                                                                                     |
 | :---: | :---:        | :---:                                                                                                                           |
 | name  | ```string``` | Name of font, with file extension                                                                                               |
-| size  | ```size_t``` | Size of font                                                                                                                    |
+| size  | ```integer``` | Size of font                                                                                                                    |
 | style | ```string``` | Style of font, can store symbols: 'r' - Regular, 'b' - Bold, 'i' - Italic, 'l' - Underlined, 's' - StrikeThrough, default = "r" |
 
 Returns the font reference.
@@ -1092,7 +1096,7 @@ Returns the font family.
 
 #### <a name="font.get_size"></a> ```get_size```
 ```lua
-font_object:get_size(): size_t
+font_object:get_size(): integer
 ```
 
 Returns the font size.
@@ -1131,15 +1135,15 @@ color == color                           -- true
 
 #### <a name="color.new"></a> ```new```
 ```lua
-Color:new(r: int, g: int, b: int[, a: int]): Color&
+Color:new(r: integer, g: integer, b: integer[, a: integer]): Color&
 Color:new(hex: string): Color&
 ```
 | Name  | Type         | Description                  |
 | :---: | :---:        | :---:                        |
-| r     | ```int```    | Red [0 - 255]                |
-| g     | ```int```    | Green [0 - 255]              |
-| b     | ```int```    | Blue [0 - 255]               |
-| a     | ```int```    | Alpha [0 - 255], default 255 |
+| r     | ```integer```    | Red [0 - 255]                |
+| g     | ```integer```    | Green [0 - 255]              |
+| b     | ```integer```    | Blue [0 - 255]               |
+| a     | ```integer```    | Alpha [0 - 255], default 255 |
 
 | Name  | Type         | Description                  |
 | :---: | :---:        | :---:                        |
@@ -1160,7 +1164,7 @@ Returns the color copy.
 
 #### <a name="color.unpack"></a> ```unpack```
 ```lua
-color_object:unpack(color: Color): size_t, size_t, size_t, size_t
+color_object:unpack(color: Color): integer, integer, integer, integer
 ```
 | Name  | Type        | Description         |
 | :---: | :---:       | :---:               |
@@ -1189,17 +1193,17 @@ sprite == sprite   -- true
 
 #### <a name="sprite.new"></a> ```new```
 ```lua
-Sprite:new(path: string, w: int, h: int[, t_x: size_t, t_y: size_t, t_w: size_t, t_h: size_t]): Sprite&
+Sprite:new(path: string, w: integer, h: integer[, t_x: integer, t_y: integer, t_w: integer, t_h: integer]): Sprite&
 ```
 | Name  | Type         | Description                                     |
 | :---: | :---:        | :---:                                           |
 | path  | ```string``` | Image location directory                        |
-| w     | ```int```    | Width of image                                  |
-| h     | ```int```    | Height of image                                 |
-| t_x   | ```size_t``` | X coordinate of areas in the image, default = 0 |
-| t_y   | ```size_t``` | Y coordinate of areas in the image, default = 0 |
-| t_w   | ```size_t``` | Width of areas in the image, default = w        |
-| t_h   | ```size_t``` | Height of areas in the image, default = h       |
+| w     | ```integer```    | Width of image                                  |
+| h     | ```integer```    | Height of image                                 |
+| t_x   | ```integer``` | X coordinate of areas in the image, default = 0 |
+| t_y   | ```integer``` | Y coordinate of areas in the image, default = 0 |
+| t_w   | ```integer``` | Width of areas in the image, default = w        |
+| t_h   | ```integer``` | Height of areas in the image, default = h       |
 
 Returns the sprite reference.
 
@@ -1237,12 +1241,12 @@ Returns the color of the sprite.
 
 #### <a name="sprite.set_pos"></a> ```set_pos```
 ```lua
-sprite_object:set_pos(x: int, y: int)
+sprite_object:set_pos(x: integer, y: integer)
 ```
 | Name  | Type      | Description                 |
 | :---: | :---:     | :---:                       |
-| x     | ```int``` | New x coordinate for sprite |
-| y     | ```int``` | New y coordinate for sprite |
+| x     | ```integer``` | New x coordinate for sprite |
+| y     | ```integer``` | New y coordinate for sprite |
 
 Sets a new position for the sprite.
 
@@ -1259,11 +1263,11 @@ Returns the position of the sprite.
 
 #### <a name="sprite.set_rotation"></a> ```set_rotation```
 ```lua
-sprite_object:set_rotation(angle: double)
+sprite_object:set_rotation(angle: number)
 ```
 | Name  | Type         | Description                   |
 | :---: | :---:        | :---:                         |
-| angle | ```double``` | New rotation angle for sprite |
+| angle | ```number``` | New rotation angle for sprite |
 
 Sets a new rotation angle for the sprite.
 
@@ -1271,7 +1275,7 @@ Sets a new rotation angle for the sprite.
 
 #### <a name="sprite.get_rotation"></a> ```get_rotation```
 ```lua
-sprite_object:get_rotation(): double
+sprite_object:get_rotation(): number
 ```
 
 Returns the rotation angle of the sprite.
@@ -1280,12 +1284,12 @@ Returns the rotation angle of the sprite.
 
 #### <a name="sprite.set_scale"></a> ```set_scale```
 ```lua
-sprite_object:set_scale(x_factor: double, y_factor: double)
+sprite_object:set_scale(x_factor: number, y_factor: number)
 ```
 | Name     | Type         | Description                   |
 | :---:    | :---:        | :---:                         |
-| x_factor | ```double``` | New x scale factor for sprite |
-| y_factor | ```double``` | New y scale factor for sprite |
+| x_factor | ```number``` | New x scale factor for sprite |
+| y_factor | ```number``` | New y scale factor for sprite |
 
 Sets a new scale for the sprite.
 
@@ -1302,12 +1306,12 @@ Returns the scale of the sprite.
 
 #### <a name="sprite.set_origin"></a> ```set_origin```
 ```lua
-sprite_object:set_origin(x: double, y: double)
+sprite_object:set_origin(x: number, y: number)
 ```
 | Name  | Type         | Description             |
 | :---: | :---:        | :---:                   |
-| x     | ```double``` | New x origin for sprite |
-| y     | ```double``` | New y origin for sprite |
+| x     | ```number``` | New x origin for sprite |
+| y     | ```number``` | New y origin for sprite |
 
 Sets a new origin for the sprite.
 
@@ -1324,12 +1328,12 @@ Returns the origin of the sprite.
 
 #### <a name="sprite.set_size"></a> ```set_size```
 ```lua
-sprite_object:set_size(w: int, h: int)
+sprite_object:set_size(w: integer, h: integer)
 ```
 | Name  | Type      | Description                  |
 | :---: | :---:     | :---:                        |
-| w     | ```int``` | New width for sprite         |
-| h     | ```int``` | New heigth origin for sprite |
+| w     | ```integer``` | New width for sprite         |
+| h     | ```integer``` | New heigth origin for sprite |
 
 Sets a new size for the sprite.
 
@@ -1346,12 +1350,12 @@ Returns the size of the sprite.
 
 #### <a name="sprite.scale"></a> ```scale```
 ```lua
-sprite_object:scale(x_factor: double, y_factor: double)
+sprite_object:scale(x_factor: number, y_factor: number)
 ```
 | Name     | Type         | Description               |
 | :---:    | :---:        | :---:                     |
-| x_factor | ```double``` | X scale factor for sprite |
-| y_factor | ```double``` | Y scale factor for sprite |
+| x_factor | ```number``` | X scale factor for sprite |
+| y_factor | ```number``` | Y scale factor for sprite |
 
 Scales the sprite.
 
@@ -1359,11 +1363,11 @@ Scales the sprite.
 
 #### <a name="sprite.rotate"></a> ```rotate```
 ```lua
-sprite_object:rotate(angle: double)
+sprite_object:rotate(angle: number)
 ```
 | Name  | Type         | Description                |
 | :---: | :---:        | :---:                      |
-| angle | ```double``` | Rotations angle for sprite |
+| angle | ```number``` | Rotations angle for sprite |
 
 Rotates the sprite.
 
@@ -1371,12 +1375,12 @@ Rotates the sprite.
 
 #### <a name="sprite.move"></a> ```move```
 ```lua
-sprite_object:move(x_offset: double, y_offset: double)
+sprite_object:move(x_offset: number, y_offset: number)
 ```
 | Name     | Type         | Description                       |
 | :---:    | :---:        | :---:                             |
-| x_offset | ```double``` | X offset of coordinate for sprite |
-| y_offset | ```double``` | Y offset of coordinate for sprite |
+| x_offset | ```number``` | X offset of coordinate for sprite |
+| y_offset | ```number``` | Y offset of coordinate for sprite |
 
 Moves the sprite.
 
@@ -1389,14 +1393,14 @@ view == view     -- true
 
 #### <a name="view.new"></a> ```new```
 ```lua
-View:new([x: size_t, y: size_t, w: size_t, h: size_t]): View&
+View:new([x: integer, y: integer, w: integer, h: integer]): View&
 ```
 | Name   | Type        | Description             |
 | :---:  | :---:       | :---:                   |
-| x      | ```size_t```| X position, default = 0 |
-| y      | ```size_t```| Y position, default = 0 |
-| w      | ```size_t```| Width, default = 0      |
-| h      | ```size_t```| Height, default = 0     |
+| x      | ```integer```| X position, default = 0 |
+| y      | ```integer```| Y position, default = 0 |
+| w      | ```integer```| Width, default = 0      |
+| h      | ```integer```| Height, default = 0     |
 
 Returns the view reference.
 
@@ -1423,14 +1427,14 @@ Activates the view.
 
 #### <a name="view.set_port"></a> ```set_port```
 ```lua
-view_object:set_port(x: size_t, y: size_t, w: size_t, h: size_t)
+view_object:set_port(x: integer, y: integer, w: integer, h: integer)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| x     | ```size_t```| X position  |
-| y     | ```size_t```| Y position  |
-| w     | ```size_t```| Width       |
-| h     | ```size_t```| Height      |
+| x     | ```integer```| X position  |
+| y     | ```integer```| Y position  |
+| w     | ```integer```| Width       |
+| h     | ```integer```| Height      |
 
 Sets the view a new view port.
 
@@ -1438,12 +1442,12 @@ Sets the view a new view port.
 
 #### <a name="view.set_center"></a> ```set_center```
 ```lua
-view_object:set_center(x: size_t, y: size_t)
+view_object:set_center(x: integer, y: integer)
 ```
 | Name  | Type        | Description |
 | :---: | :---:       | :---:       |
-| x     | ```size_t```| X position  |
-| y     | ```size_t```| Y position  |
+| x     | ```integer```| X position  |
+| y     | ```integer```| Y position  |
 
 Sets the view a new center position.
 
@@ -1460,12 +1464,12 @@ Returns [size](#vector2.new) of view.
 
 #### <a name="view.set_size"></a> ```set_size```
 ```lua
-view_object:set_size(w: size_t, h: size_t)
+view_object:set_size(w: integer, h: integer)
 ```
 | Name  | Type         | Description |
 | :---: | :---:        | :---:       |
-| w     | ```size_t``` | Width       |
-| h     | ```size_t``` | Height      |
+| w     | ```integer``` | Width       |
+| h     | ```integer``` | Height      |
 
 Sets the view a new size.
 
@@ -1473,11 +1477,11 @@ Sets the view a new size.
 
 #### <a name="view.set_zoom"></a> ```set_zoom```
 ```lua
-view_object:set_zoom(zoom_factor: float)
+view_object:set_zoom(zoom_factor: number)
 ```
 | Name        | Type        | Description |
 | :---:       | :---:       | :---:       |
-| zoom_factor | ```float``` | Zoom degree |
+| zoom_factor | ```number``` | Zoom degree |
 
 Zooms view.
 
@@ -1485,7 +1489,7 @@ Zooms view.
 
 #### <a name="view.get_rotation"></a> ```get_rotation```
 ```lua
-view_object:get_rotation(): float
+view_object:get_rotation(): number
 ```
 
 Returns a view rotation.
@@ -1494,10 +1498,10 @@ Returns a view rotation.
 
 #### <a name="view.set_rotation"></a> ```set_rotation```
 ```lua
-view_object:set_rotation(angle: float)
+view_object:set_rotation(angle: number)
 ```
 | Name  | Type        | Description              |
 | :---: | :---:       | :---:                    |
-| angle | ```float``` | Rotation angle [0 - 360] |
+| angle | ```number``` | Rotation angle [0 - 360] |
 
 Sets the view a new rotation angle.

@@ -9,15 +9,15 @@ The API includes the ability to render, interact with files, window, sound, etc.
 
 ## API documentation
 For information about the API, see [Documentation.md](Documentation.md) file.  
-For comfortable use, recommended to download [snippets.json](snippets.json) (VS Code).
+For comfortable use, recommended to download [Lua extension by sumneko](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) & [declarations.lua](declarations.lua) (VSCode).
 
 ## Code examples
 You can view code examples using the API in [Examples.md](Examples.md) file
 
 ## Building
 ### Built with:
-- [SFML](https://www.sfml-dev.org) - Graphics and sound engine
-- [LuaJIT](https://luajit.org/luajit.html) - Binding Lua and C++
+- [SFML 2.5.1](https://www.sfml-dev.org) - Graphics and sound engine
+- [LuaJIT 2.1.1](https://luajit.org/luajit.html) - Binding Lua and C++
 
 #### Windows:
 ##### For Windows used <u>static libraries</u>, so before building, change the library paths to your own in CMakeLists.txt:

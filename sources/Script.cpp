@@ -92,7 +92,7 @@ void Script::open_API() {
     for (int i = 0, size = SFML_STYLES_NAME.size(); i < size; ++i)
         SFML_STYLES.emplace_back(std::make_pair(SFML_STYLES_NAME[i], lua_Number(i)));
 
-    lhelper::register_table(lua_state, "style", SFML_STYLES);
+    lhelper::register_table(lua_state, "styles", SFML_STYLES);
 
     lhelper::register_table(lua_state, "window", {
         std::make_pair("is_open", API::window_is_open),
@@ -125,7 +125,7 @@ void Script::open_API() {
     SFML_KEYS.emplace_back(std::make_pair("Semicolon", 48));
     SFML_KEYS.emplace_back(std::make_pair("Return", 58));
 
-    lhelper::register_table(lua_state, "key", SFML_KEYS);
+    lhelper::register_table(lua_state, "keys", SFML_KEYS);
 
     lhelper::register_table(lua_state, "keyboard", {
         std::make_pair("get_pressed", API::keyboard_get_pressed),
@@ -138,7 +138,7 @@ void Script::open_API() {
     for (int i = 0, size = SFML_BUTTONS_NAME.size(); i < size; ++i)
         SFML_BUTTONS.emplace_back(std::make_pair(SFML_BUTTONS_NAME[i], lua_Number(i)));
 
-    lhelper::register_table(lua_state, "button", SFML_BUTTONS);
+    lhelper::register_table(lua_state, "buttons", SFML_BUTTONS);
 
     lhelper::register_table(lua_state, "mouse", {
         std::make_pair("get_pressed", API::mouse_get_pressed),
@@ -153,7 +153,7 @@ void Script::open_API() {
     for (int i = 0, size = SFML_CURSORS_NAME.size(); i < size; ++i)
         SFML_CURSORS.emplace_back(std::make_pair(SFML_CURSORS_NAME[i], lua_Number(i)));
 
-    lhelper::register_table(lua_state, "cursor_type", SFML_CURSORS);
+    lhelper::register_table(lua_state, "cursors", SFML_CURSORS);
 
     lhelper::register_table(lua_state, "cursor", {
         std::make_pair("get_pos", API::cursor_get_pos),
