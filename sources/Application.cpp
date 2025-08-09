@@ -15,13 +15,20 @@ Application::Application(int argc, char** argv)
     icon.loadFromMemory(res_icon, sizeof(res_icon));
     RenderWindow::setIcon(256, 256, icon.getPixelsPtr());
 
-    if (argc > 2) {
-        args.reserve(argc - 2);
+    if (argc > 1) {
+        args.reserve(argc - 1);
+
+        std::string script = argv[1];
+        
+        auto index = script.find_last_of("/\\");
+        if (index != std::string::npos)
+            script = std::move(script.substr(index + 1));
+
+        args.emplace_back(script);
+
         for (int i = 2; i < argc; ++i)
             args.emplace_back(std::string(argv[i]));
-    }
 
-    if (argc > 1) {
         RenderWindow::setActive(false);
         lua.open(argv[1]);
         return;
