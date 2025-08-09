@@ -224,6 +224,9 @@ window = {}
 ---@enum styles
 styles = { Default = nil, Fullscreen = nil }
 
+---@param is_visible boolean
+function window.set_visible(is_visible) end
+
 ---@return boolean
 function window.is_open() end
 

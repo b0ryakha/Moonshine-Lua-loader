@@ -12,6 +12,18 @@
 
 namespace API
 {
+    static int window_set_visible(lua_State* L) {
+        LuaStack args(L, "window.set_visible");
+
+        if (args.size() != 1)
+            args.error("Incorrect number of arguments!");
+
+        bool is_visible = args.get<bool>();
+
+        Application::instance()->setVisible(is_visible);
+        return 0;
+    }
+
     static int window_close(lua_State* L) {
         Application::instance()->close();
         return 0;

@@ -95,6 +95,7 @@ void Script::open_API() {
     lhelper::register_table(lua_state, "styles", SFML_STYLES);
 
     lhelper::register_table(lua_state, "window", {
+        std::make_pair("set_visible", API::window_set_visible),
         std::make_pair("is_open", API::window_is_open),
         std::make_pair("get_size", API::window_get_size),
         std::make_pair("set_size", API::window_set_size),

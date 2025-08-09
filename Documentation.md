@@ -24,6 +24,8 @@
   
 <details><summary>:computer: Window</summary>
 
+  - [hide()](#window.hide)
+  - [show()](#window.show)
   - [is_open()](#window.is_open)
   - [display()](#window.display)
   - [clear()](#window.clear)
@@ -329,6 +331,18 @@ Render polygon on the screen.
 local default = styles.Default
 local fullscreen = styles.Fullscreen
 ```
+
+#### <a name="window.set_visible"></a> ```set_visible```
+```lua
+window.set_visible(is_visible: boolean)
+```
+| Name       | Type          | Description                |
+| :---:      | :---:         | :---:                      |
+| is_visible | ```boolean``` | Will the window be visible |
+
+Allows hide or show the window.
+
+---
 
 #### <a name="window.is_open"></a> ```is_open```
 ```lua
