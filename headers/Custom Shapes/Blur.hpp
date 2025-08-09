@@ -3,7 +3,7 @@
 //#include <SFML/Graphics.hpp>
 //
 //#include "SuperEllipse.hpp"
-//#include "misc_functions.hpp"
+//#include "error_handler.hpp"
 //
 //namespace shader_src {
 //    constexpr char vertex[] =

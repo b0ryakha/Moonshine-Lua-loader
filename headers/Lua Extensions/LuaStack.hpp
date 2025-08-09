@@ -1,6 +1,6 @@
 #pragma once
 #include "LuaTable.hpp"
-#include "misc_functions.hpp"
+#include "error_handler.hpp"
 
 #include <vector>
 #include <string>

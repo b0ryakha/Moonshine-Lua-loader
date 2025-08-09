@@ -1,6 +1,7 @@
 #pragma once
 #include "lua.hpp"
-#include "misc_functions.hpp"
+#include "globals.hpp"
+#include "error_handler.hpp"
 
 #include "LuaBoolean.hpp"
 #include "LuaUserdata.hpp"

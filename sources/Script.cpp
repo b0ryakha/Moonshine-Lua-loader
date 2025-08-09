@@ -17,7 +17,7 @@
 #include "API/window.hpp"
 #include "API/network.hpp"
 
-#include "misc_functions.hpp"
+#include "error_handler.hpp"
 
 #include <array>
 

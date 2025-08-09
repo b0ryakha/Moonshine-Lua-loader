@@ -1,5 +1,5 @@
 #include "Label.hpp"
-#include "misc_functions.hpp"
+#include "error_handler.hpp"
 
 Label::Label(const std::string& str, const std::string& font_path, size_t size) {
     setFont(font_path);
