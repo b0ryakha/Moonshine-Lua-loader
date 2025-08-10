@@ -29,12 +29,19 @@ namespace API
         Font font = args.get<LuaUserdata, Font>();
         const std::string str = args.get<std::string>();
 
-        sf::Text text(sf::String::fromUtf8(str.cbegin(), str.cend()), font, font.get_size());
-        text.setStyle(font.get_style());
+        float total_width = 0.0f;
+        float total_height = 0.0f;
+        bool is_bold = (font.get_style() & sf::Text::Style::Bold) == sf::Text::Style::Bold;
+
+        for (char c : str) {
+            auto glyph = font.getGlyph(c, font.get_size(), false);
+            total_width += glyph.advance;
+            total_height = std::max(total_height, glyph.bounds.height);
+        }
 
         lhelper::push_object<Vector2>(L, {
-            text.getGlobalBounds().width,
-            text.getGlobalBounds().height
+            total_width,
+            total_height
         });
 
         return 1;
@@ -60,6 +67,8 @@ namespace API
             static_cast<float>(Application::instance()->getInitSize().x) / static_cast<float>(Application::instance()->getSize().x),
             static_cast<float>(Application::instance()->getInitSize().y) / static_cast<float>(Application::instance()->getSize().y)
         );
+
+        auto width = font.getGlyph('A', font.get_size(), false).bounds.width;
 
         Application::instance()->draw(text);
         return 0;

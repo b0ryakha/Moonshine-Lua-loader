@@ -70,7 +70,7 @@ function Font:get_style() end
 
 ---@param symbol string -> symbol
 ---@return Vector2
-function Font:get_glyph(symbol) end
+function Font:get_bounds(symbol) end
 
 
 ---@class (exact) Sprite

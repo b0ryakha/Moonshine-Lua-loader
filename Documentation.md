@@ -134,7 +134,7 @@
   - [get_family()](#font.get_family)
   - [get_size()](#font.get_size)
   - [get_style()](#font.get_style)
-  - [get_glyph()](#font.get_glyph)
+  - [get_bounds()](#font.get_bounds)
   </details>
   
 <details><summary>:rainbow: Color</summary>
@@ -1126,9 +1126,9 @@ Returns the font style, example: "r".
 
 ---
 
-#### <a name="font.get_glyph"></a> ```get_glyph```
+#### <a name="font.get_bounds"></a> ```get_bounds```
 ```lua
-font_object:get_glyph(symbol: char): Vector2
+font_object:get_bounds(symbol: char): Vector2
 ```
 ```
 | Name   | Type       | Description                                 |
