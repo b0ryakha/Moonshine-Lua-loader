@@ -173,13 +173,9 @@ namespace API
         sf::CircleShape circle(radius);
         circle.setPointCount(100);
         circle.setFillColor(color);
-        circle.setScale(
-            static_cast<float>(Application::instance()->getInitSize().x) / static_cast<float>(Application::instance()->getSize().x),
-            static_cast<float>(Application::instance()->getInitSize().y) / static_cast<float>(Application::instance()->getSize().y)
-        );
 
         const auto conv_pos = Application::instance()->mapPixelToCoords(sf::Vector2i(x, y));
-        circle.setPosition(sf::Vector2f(conv_pos.x - radius, conv_pos.y - radius));
+        circle.setPosition(conv_pos.x - radius, conv_pos.y - radius);
 
         if (args.size() == 6) {
             circle.setOutlineThickness(thickness);
