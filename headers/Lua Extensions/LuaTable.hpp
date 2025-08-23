@@ -41,6 +41,7 @@ public:
     size_t size() const;
     size_t empty() const;
     LuaMultiValue get_type(std::string_view key) const;
+    std::vector<std::string> keys() const;
 
     template<typename T>
     T get(std::string_view key) const {

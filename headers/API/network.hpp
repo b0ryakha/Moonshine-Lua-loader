@@ -68,9 +68,7 @@ namespace API
         sf::Packet packet;
         packet << static_cast<int>(table.size());
 
-        for (size_t i = 1, size = table.size(); i <= size; ++i) {
-            const std::string key = std::to_string(i);
-
+        for (const auto& key : table.keys()) {
             switch (table.get_type(key)) {
                 case LuaMultiValue::Number:
                     packet << static_cast<int>(LuaMultiValue::Number) << table.get<double>(key);

@@ -640,3 +640,14 @@ function mouse.is_scrolling_up() end
 
 ---@return boolean
 function mouse.is_scrolling_down() end
+
+
+hotreload = {}
+
+---@return table<string, any>
+function hotreload.get_state() end
+
+---@param state table<string, any>
+function hotreload.set_state(state) end
+
+function hotreload.reload() end

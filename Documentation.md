@@ -105,6 +105,13 @@
   - [get_local_address()](#network.get_local_address)
   </details>
   
+<details><summary>:fire: HotReload</summary>
+
+  - [get_state()](#hotreload.get_state)
+  - [set_state()](#hotreload.set_state)
+  - [reload()](#hotreload.reload)
+  </details>
+
   
 #### Objects:
 <details><summary>:musical_note: Sound</summary>
@@ -921,6 +928,37 @@ network.get_local_address(): string
 ```
 
 Returns the local ip address.
+
+
+### :fire: HotReload
+#### <a name="hotreload.set_state"></a> ```set_state```
+```lua
+hotreload.set_state(state: table<string, any>)
+```
+| Name  | Type                     | Description |
+| :---: | :---:                    | :---:       |
+| state | ```table<string, any>``` | Data table  |
+
+Sets data that will be saved after restarting scripts.
+
+---
+
+#### <a name="hotreload.get_state"></a> ```get_state```
+```lua
+hotreload.get_state(): table<string, any>
+```
+
+Returns data that was saved before scripts was reloaded.
+
+---
+
+#### <a name="hotreload.reload"></a> ```reload```
+```lua
+hotreload.reload()
+```
+
+Restarts all scripts without closing the main window.
+If you save and restore state correctly, reload will not be noticeable.
 
 
 ### :musical_note: Sound

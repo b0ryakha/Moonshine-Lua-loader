@@ -9,6 +9,10 @@ class TextBox;
 class Application final : public sf::RenderWindow {
 private:
     Script lua;
+    bool is_main_menu = true;
+    bool need_reload = false;
+    bool need_close = false;
+
     sf::String title;
     static inline sf::Vector2u init_size = { 1400, 800 };
     static inline sf::ContextSettings settings = sf::ContextSettings(0, 0, 16);
@@ -43,6 +47,8 @@ public:
 
     static Application* instance(int argc = 0, char** argv = nullptr);
     int exec();
+    void setNeedReload();
+    void setNeedClose();
 
     void setTitle(const sf::String& title);
     sf::Vector2u getOldSize() const;

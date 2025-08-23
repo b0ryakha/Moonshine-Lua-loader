@@ -2,11 +2,11 @@ local fill_color = Color:new(0, 255, 0)
 local is_fullscreen = false
 
 while window.is_open() do -- main loop
-    if keyboard.is_pressed(key.F11) then
+    if keyboard.is_pressed(keys.F11) then
         if is_fullscreen then
-            window.set_style(style.Default)
+            window.set_style(styles.Default)
         else
-            window.set_style(style.Fullscreen)
+            window.set_style(styles.Fullscreen)
         end
 
         is_fullscreen = not is_fullscreen

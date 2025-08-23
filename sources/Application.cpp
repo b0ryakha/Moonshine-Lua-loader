@@ -30,6 +30,7 @@ Application::Application(int argc, char** argv)
             args.emplace_back(std::string(argv[i]));
 
         RenderWindow::setActive(false);
+        is_main_menu = false;
         lua.open(argv[1]);
         return;
     }
@@ -58,7 +59,7 @@ Application::~Application() {
 }
 
 int Application::exec() {
-    while (isOpen()) {
+    while (sf::RenderWindow::isOpen()) {
         update();
         render();
     }
@@ -66,8 +67,22 @@ int Application::exec() {
     return 0;
 }
 
+void Application::setNeedReload() {
+    // make sure that script will be closed from API
+    RenderWindow::setActive(false);
+    need_reload = true;
+    IS_SCRIPT_CLOSE = true;
+}
+
+void Application::setNeedClose() {
+    // make sure that script will be closed from API
+    RenderWindow::setActive(false);
+    need_close = true;
+    IS_SCRIPT_CLOSE = true;
+}
+
 void Application::render() {
-    if (lua.is_open()) return;
+    if (!is_main_menu || lua.is_open()) return;
 
     RenderWindow::clear();
     RenderWindow::draw(*background);
@@ -79,7 +94,7 @@ void Application::render() {
 void Application::update() {
     if (!RenderWindow::pollEvent(event)) return;
 
-    if (!lua.is_open()) {
+    if (is_main_menu && !lua.is_open()) {
         textbox->handleEvent(event);
 
         if (textbox->isEntered()) {
@@ -87,10 +102,15 @@ void Application::update() {
             RenderWindow::display();
             RenderWindow::setActive(false);
             lua.open(textbox->getText());
+            is_main_menu = false;
         }
     }
 
-    if (event.type == sf::Event::Closed) {
+    if (need_reload && lua.reload()) {
+        need_reload = false;
+    }
+
+    if (need_close || event.type == sf::Event::Closed) {
         RenderWindow::close();
         std::exit(0);
     }

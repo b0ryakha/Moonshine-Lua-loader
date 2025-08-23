@@ -7,7 +7,7 @@
 namespace lhelper
 {
 	void register_table(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
-	void push_table(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements);
+	void push_table(lua_State* L, const LuaTable& elements);
 	void push_table(lua_State* L, const std::vector<LuaMultiValue_t>& elements);
 	void set_methods(lua_State* L, std::string_view name, const std::vector<std::pair<std::string, lua_CFunction>>& methods);
 

@@ -1,8 +1,12 @@
 #include "error_handler.hpp"
-
 #include "Application.hpp"
 
 void throw_error(std::string error) {
+    if (IS_SCRIPT_CLOSE) {
+        IS_SCRIPT_CLOSE = false;
+        return;
+    }
+
     sf::Font font;
     if (!font.loadFromFile(Application::instance()->font_path + "Arial.TTF"))
         Application::instance()->close();

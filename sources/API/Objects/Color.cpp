@@ -16,6 +16,7 @@ API::Color::Color(const LuaStack& args) : sf::Color(0, 0, 0) {
     if (args.size() == 1) {
         std::string hex = args.get<std::string>();
 
+        //TODO: to vscode format
         if (hex.empty() || hex[0] != '#' || (hex.length() != 7 && hex.length() != 9))
             throw_error("[Color:new] Incorrect hex format!");
 

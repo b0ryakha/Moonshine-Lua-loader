@@ -25,7 +25,8 @@ namespace API
     }
 
     static int window_close(lua_State* L) {
-        Application::instance()->close();
+        Application::instance()->setNeedClose();
+        luaL_error(L, "");
         return 0;
     }
 

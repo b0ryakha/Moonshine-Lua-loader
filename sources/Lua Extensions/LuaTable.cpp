@@ -72,3 +72,13 @@ LuaMultiValue LuaTable::get_type(std::string_view key) const {
 
     return static_cast<LuaMultiValue>(elements.at(key).index());
 }
+
+std::vector<std::string> LuaTable::keys() const {
+    std::vector<std::string> keys;
+    keys.reserve(elements.size());
+
+    for (const auto& pair : elements)
+        keys.emplace_back(pair.first);
+
+    return keys;
+}

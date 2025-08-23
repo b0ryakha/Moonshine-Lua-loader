@@ -16,6 +16,7 @@
 #include "API/render.hpp"
 #include "API/window.hpp"
 #include "API/network.hpp"
+#include "API/hotreload.hpp"
 
 #include "error_handler.hpp"
 
@@ -25,16 +26,15 @@ Script::Script(std::string_view path) {
     open(path);
 }
 
-void Script::open(std::string_view path) {
-    if (is_open()) return;
+bool Script::open(std::string_view path) {
+    if (is_open()) return false;
 
     #ifndef _DEBUG
         freopen("/dev/null", "w", stderr);
     #endif
 
     lua_state = luaL_newstate();
-    if (!lua_state)
-        throw_error("Failed to create lua state.");
+    if (!lua_state) return false;
 
     lua_path = std::move(path);
 
@@ -55,6 +55,16 @@ void Script::open(std::string_view path) {
         if (lua_isfunction(lua_state, -1))
             lua_pcall(lua_state, 0, 0, 0);
     });
+
+    return true;
+}
+
+bool Script::is_open() const {
+    return lua_state && future.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready;
+}
+
+bool Script::reload() {
+    return open(lua_path);
 }
 
 void Script::resolve_path() {
@@ -183,7 +193,7 @@ void Script::open_API() {
         std::make_pair("clamp", API::clamp),
         std::make_pair("round", API::round),
     });
-
+    
     lhelper::register_table(lua_state, "globalvars", {
         std::make_pair("get_executable_path", API::get_executable_path),
         std::make_pair("get_os_name", API::get_os_name),
@@ -198,15 +208,16 @@ void Script::open_API() {
         std::make_pair("get_local_address", API::network_get_local_address)
     });
 
+    lhelper::register_table(lua_state, "hotreload", {
+        std::make_pair("get_state", API::get_state),
+        std::make_pair("set_state", API::set_state),
+        std::make_pair("reload", API::reload),
+    });
+
     lhelper::register_class<API::Font>(lua_state, "Font");
     lhelper::register_class<API::Vector2>(lua_state, "Vector2");
     lhelper::register_class<API::Color>(lua_state, "Color");
     lhelper::register_class<API::Sound>(lua_state, "Sound");
     lhelper::register_class<API::Sprite>(lua_state, "Sprite");
     lhelper::register_class<API::View>(lua_state, "View");
-}
-
-bool Script::is_open() const {
-    return lua_state != nullptr &&
-           future.wait_for(std::chrono::milliseconds(1)) != std::future_status::ready;
 }

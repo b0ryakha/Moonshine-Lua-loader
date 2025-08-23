@@ -29,28 +29,25 @@ void lhelper::register_table(lua_State* L, std::string_view name, const std::vec
 	lua_setglobal(L, name.data());
 }
 
-void lhelper::push_table(lua_State* L, const std::vector<std::pair<std::string, LuaMultiValue_t>>& elements) {
+void lhelper::push_table(lua_State* L, const LuaTable& elements) {
 	lua_newtable(L);
 
-	for (const auto& element : elements) {
-		switch (element.second.index()) {
-			case 0:
-				lua_pushnumber(L, std::get<lua_Number>(element.second));
+	for (const auto& key : elements.keys()) {
+		switch (elements.get_type(key)) {
+			case LuaMultiValue::Number:
+				lua_pushnumber(L, elements.get<double>(key));
 				break;
-			case 1:
-				lua_pushcfunction(L, std::get<lua_CFunction>(element.second));
+			case LuaMultiValue::String:
+				lua_pushstring(L, elements.get<std::string>(key).c_str());
 				break;
-			case 2:
-				lua_pushstring(L, std::get<std::string>(element.second).c_str());
-				break;
-			case 3:
-				lua_pushboolean(L, std::get<LuaBoolean>(element.second));
+			case LuaMultiValue::Boolean:
+				lua_pushboolean(L, elements.get<bool>(key));
 				break;
 			default:
 				lua_pushnil(L);
 		}
 
-		lua_setfield(L, -2, element.first.c_str());
+		lua_setfield(L, -2, key.c_str());
 	}
 }
 
