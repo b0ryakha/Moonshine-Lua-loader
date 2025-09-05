@@ -10,6 +10,8 @@
 
 #include "Application.hpp"
 
+#include <algorithm>
+
 namespace API
 {
     static int render_sprite(lua_State* L) {
@@ -227,24 +229,31 @@ namespace API
     static int render_polygon(lua_State* L) {
         LuaStack args(L, "render.polygon");
 
-        if (args.size() != 2)
+        if (args.size() != 1)
             args.error("Incorrect number of arguments!");
 
         LuaTable points = args.get<LuaTable>();
-        sf::Color color = args.get<LuaUserdata, Color>();
 
-        sf::ConvexShape polygon;
+        sf::VertexArray polygon(sf::TrianglesFan);
 
-        polygon.setFillColor(color);
-        polygon.setPointCount(points.size());
+        static constexpr auto has = [](const std::vector<std::string>& keys, std::string_view key) -> bool {
+            return std::find(keys.begin(), keys.end(), key) != keys.end();
+        };
 
         for (size_t i = 0, size = points.size(); i < size; ++i) {
-            LuaTable point = points.get<LuaTable>();
+            LuaTable point = points.get<LuaTable>(std::to_string(i + 1));
+            const auto keys = point.keys();
 
-            if (point.size() != 2)
-                args.error("Incorrect number of values!");
+            if (point.size() != 2 || !has(keys, "pos") || !has(keys, "color"))
+                args.error("Bad argument #" + std::to_string(i) + " (Point expected)!");
 
-            polygon.setPoint(i, Application::instance()->mapPixelToCoords(sf::Vector2i(point.get<int>(), point.get<int>())));
+            const auto pos = point.get<LuaUserdata, API::Vector2>("pos");
+            const auto color = point.get<LuaUserdata, API::Color>("color");
+
+            polygon.append(sf::Vertex(
+                Application::instance()->mapPixelToCoords(sf::Vector2i(pos.x, pos.y)),
+                color
+            ));
         }
 
         Application::instance()->draw(polygon);

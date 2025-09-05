@@ -339,9 +339,12 @@ function render.circle(x, y, radius, color, thickness, outlineColor) end
 ---@param color Color
 function render.line(x1, y1, x2, y2, thickness, color) end
 
----@param points table<number, number[]>
----@param color Color
-function render.polygon(points, color) end
+---@class (exact) Point
+---@field pos Vector2
+---@field color Color
+
+---@param points table<integer, Point>
+function render.polygon(points) end
 
 
 globalvars = {}

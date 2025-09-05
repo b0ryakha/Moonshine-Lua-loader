@@ -322,12 +322,11 @@ Render line on the screen.
 
 #### <a name="render.polygon"></a> ```polygon```
 ```lua
-render.polygon(points: table<array<integer, 2>>, color: Color)
+render.polygon(points: table<integer, Point>)
 ```
-| Name   | Type                           | Description                                                 |
-| :---:  | :---:                          | :---:                                                       |
-| points | ```table<array<integer, 2>>``` | Table of coords pairs, example: { { x, y }, { x, y }, ... } |
-| color  | ```Color```                    | Color for polygon                                           |
+| Name   | Type                        | Description                                                                                     |
+| :---:  | :---:                       | :---:                                                                                           |
+| points | ```table<integer, Point>``` | Table of points, where each ```Point``` consists of pos (```Vector2```) and color (```Color```) |
 
 Render polygon on the screen.
 
