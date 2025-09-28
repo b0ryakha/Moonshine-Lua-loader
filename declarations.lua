@@ -615,8 +615,8 @@ keys = {
 ---@return keys | string -> key | symbol
 function keyboard.get_pressed(return_symbol) end
 
----@param key keys
----@return boolean
+---@param key? keys
+---@return boolean | string -> boolean | symbol
 function keyboard.is_pressed(key) end
 
 

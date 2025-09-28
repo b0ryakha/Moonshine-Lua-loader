@@ -538,7 +538,7 @@ local key_id = keys.W -- 'W' key on keyboard
 
 #### <a name="keyboard.get_pressed"></a> ```get_pressed```
 ```lua
-keyboard.get_pressed([return_symbol]): keys | char
+keyboard.get_pressed([return_symbol: boolean]): keys | char
 ```
 | Name          | Type       | Description                                        |
 | :---:         | :---:      | :---:                                              |
@@ -550,13 +550,14 @@ Awaiting for pressing key and return [key](https://www.sfml-dev.org/documentatio
 
 #### <a name="keyboard.is_pressed"></a> ```is_pressed```
 ```lua
-keyboard.is_pressed(key_code: keys): boolean
+keyboard.is_pressed([key_code: keys]): boolean | char
 ```
 | Name     | Type       | Description          |
 | :---:    | :---:      | :---:                |
 | key_code | ```keys``` | key from 'keys' enum |
 
-Returns true if the key is pressed, else false.
+Returns true if the specified key is pressed;
+if no key is provided, the function will return true for any key that is pressed, else false.
 
 
 ### :mouse2: Mouse
